@@ -1,0 +1,69 @@
+﻿@model HlidacStatu.NasiPolitici.ViewModels.PolitikViewModel
+@using HlidacStatu.NasiPolitici.ViewComponents;
+@{
+    ViewData["Title"] = "Informace o politikovi";
+
+    var statDescription =
+        HlidacStatu.Util.InfoFact.RenderInfoFacts(
+            Model.Osoba.GetInfoFacts().Where(i => i.Level != HlidacStatu.Util.InfoFact.ImportanceLevel.Stat).ToArray()
+                , 4, true, true, "", "<p>{0}</p>");
+}
+
+<div class="row">
+    <div class="card sm-12">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img src="@Model.Osoba.GetPhotoUrl()" class="card-img" alt="@Model.Osoba.GetFullName()">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Osoba.GetFullNameWithYear()</h5>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3>Základní informace</h3>
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-muted">Ve zkratce</h5>
+                <p class="card-text">
+                    @await Component.InvokeAsync(nameof(LowBoxVC), new { width = 180, content = statDescription })
+                    
+
+
+                </p>
+                <a href="#" class="card-link">Další podrobnosti</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-muted">Role</h5>
+                <p class="card-text">
+                    @await Component.InvokeAsync(nameof(LowBoxVC), new { width = 180, content = Model.Osoba._FunkceOsoba })
+                </p>
+                <a href="#" class="card-link">Další podrobnosti</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-muted">Demagog</h5>
+                <p class="card-text">
+                    <br />
+                    Demagog
+                    <br />
+                </p>
+                <a href="#" class="card-link">Další podrobnosti</a>
+            </div>
+        </div>
+    </div>
+
+</div>
