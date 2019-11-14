@@ -3,6 +3,13 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Vítejte na hackatonu</h1>
+    <ul>
+        <li>
+            @Html.ActionLink("Agent Bureš", "politik", "politik", new { id = "agent-bures" })
+        </li>
+        <li>
+            @Html.ActionLink("Richard Brabec", "politik", "politik", new { id = "richard-brabec" })
+        </li>
+    </ul>
 </div>

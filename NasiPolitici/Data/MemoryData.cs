@@ -25,10 +25,10 @@ namespace HlidacStatu.NasiPolitici.Data
                             Jmeno = "Andrej",
                             Prijmeni = "Babiš",
                             NameId = "agent-bures",
-                            Narozeni = new DateTime(1954),
-                            _SummaryInfoFact = "tady je summary info fact",
-                            _AngazovanostInfoFact = "lorem i psům",
-                            _SponzorInfoFact = "sponzoruje pouze ANO a stát + EU sponzorují Bureše",
+                            Narozeni = new DateTime(1954,1,1),
+                            _SummaryInfoFact = "Andrej Babiš (*1954 ),poslanec (od 2017) - Poslanecká sněmovna PČR (2017 - 2021) poslanec (od 2013 do 2017) - Poslanecká sněmovna PČR (2013 - 2017).",
+                            _AngazovanostInfoFact = "205 firem, ve kterých se angažuje, v roce 2019 získaly zakázky za celkem 17 mld. Kč.",
+                            _SponzorInfoFact = "Andrej Babiš mezi roky 2012-18 sponzoroval 2 polit. strany v celkové výši 19 mil. Kč. Nejvyšší sponzorský dar byl ve výši 3 mil. Kč.",
                             _StatInfoFact = "Angažoval se v 2 státních firmách. Angažoval se také v 205 soukr.firmách, tyto firmy získaly od státu od 2016 celkem 5069 smluv v celkové výši 53 mld. Kč.",
                             _FunkceOsoba = @"poslanec (od 2017) - Poslanecká sněmovna PČR (2017 - 2021)<br />
                                 poslanec (od 2013 do 2017) - Poslanecká sněmovna PČR (2013 - 2017)<br />
@@ -51,7 +51,6 @@ namespace HlidacStatu.NasiPolitici.Data
                                 Sponzor ANO v 2017, hodnota daru 5 082 Kč (<a target=""_blank"" href=""https://udhpsh.cz/5290-2/""><span class=""text-muted"" title=""Jedná se o peněžní nebo nepeněžní dar"" alt=""Jedná se o peněžní nebo nepeněžní dar""><span class=""glyphicon glyphicon-link"" aria-hidden=""true""></span> zdroj</span></a>) <br />
                                 Sponzor ANO v 2017, hodnota daru 50 000 Kč (<a target=""_blank"" href=""https://udhpsh.cz/5290-2/""><span class=""text-muted"" title=""Jedná se o peněžní nebo nepeněžní dar"" alt=""Jedná se o peněžní nebo nepeněžní dar""><span class=""glyphicon glyphicon-link"" aria-hidden=""true""></span> zdroj</span></a>) <br />
                                 Sponzor ANO 2011 v 2016, hodnota daru 50 000 Kč (<a target=""_blank"" href=""https://www.hlidacstatu.cz/ucty/transakce/E0240468669B1CB5493A2475DA477597""><span class=""text-muted"" title=""Jedná se o peněžní nebo nepeněžní dar"" alt=""Jedná se o peněžní nebo nepeněžní dar""><span class=""glyphicon glyphicon-link"" aria-hidden=""true""></span> zdroj</span></a>) <br />",
-                            //_Majetek = "",
                             _InsolvenceOsoba = new List<Insolvence>(),
                             _InsolvenceFirma = new List<Insolvence>
                             {
@@ -106,8 +105,6 @@ namespace HlidacStatu.NasiPolitici.Data
                                     Funkce = "místostarosta / zástupce starosty, člen Rady"
                                 }
                             }
-
-
                         },
                         new Osoba
                         {
@@ -115,7 +112,7 @@ namespace HlidacStatu.NasiPolitici.Data
                             Jmeno = "Richard",
                             Prijmeni = "Brabec",
                             NameId = "richard-brabec",
-                            Narozeni = new DateTime(1954),
+                            Narozeni = new DateTime(1966,1,1),
                             _SummaryInfoFact = "Richard Brabec (*1966 ),poslanec (od 2017) - Poslanecká sněmovna PČR (2017 - 2021) poslanec (od 2013 do 2017) - Poslanecká sněmovna PČR (2013 - 2017).",
                             _SponzorInfoFact = "Richard Brabec mezi roky 2012-17 sponzoroval ANO 2011 v celkové výši 6 mil. Kč. Nejvyšší sponzorský dar byl ve výši 6 mil. Kč.",
                             _FunkceOsoba = @"poslanec (od 2017) - Poslanecká sněmovna PČR (2017 - 2021)<br />
@@ -143,7 +140,6 @@ namespace HlidacStatu.NasiPolitici.Data
                                 Sponzor ANO 2011 v 2016, hodnota daru 50 000 Kč <a target=""_blank"" href=""https://www.hlidacstatu.cz/ucty/transakce/7C36B39977B6999EF0B15BC669A54074""><span class=""text-muted"" title=""Jedná se o peněžní nebo nepeněžní dar"" alt=""Jedná se o peněžní nebo nepeněžní dar"">(<span class=""glyphicon glyphicon-link"" aria-hidden=""true""></span>zdroj</span>)</a> <br />
                                 Sponzor ANO 2011 v 2015, hodnota daru 50 000 Kč <br />
                                 Lovochemie, a.s. sponzor ANO 2011 (R. Brabec člen dozorčí rady 14. 7. 2011 - 31. 1. 2014) v 2012, hodnota daru 6 000 000 Kč <a target=""_blank"" href=""http://www.politickefinance.cz/www/data_load/donations.csv#37072""><span class=""text-muted"" title=""Jedná se o peněžní nebo nepeněžní dar"" alt=""Jedná se o peněžní nebo nepeněžní dar"">(<span class=""glyphicon glyphicon-link"" aria-hidden=""true""></span>zdroj</span>)</a> <br />",
-                            //_Majetek = "",
                             _InsolvenceOsoba = new List<Insolvence>(),
                             _InsolvenceFirma = new List<Insolvence>(),
                             _Oznameni = new List<Oznameni>
