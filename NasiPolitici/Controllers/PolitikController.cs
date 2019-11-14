@@ -29,7 +29,11 @@ namespace HlidacStatu.NasiPolitici.Controllers
 
             PolitikViewModel viewModel = new PolitikViewModel();
 
-            viewModel.Osoba = await _context.Osoby.Where(os => os.NameId == id).FirstOrDefaultAsync();
+            viewModel.Osoba = await _context.Osoby
+                .Include(os => os._InsolvenceOsoba)
+                .Include(os => os._InsolvenceFirma)
+                .Include(os => os._Oznameni)
+                .Where(os => os.NameId == id).FirstOrDefaultAsync();
 
 
             return View(viewModel);

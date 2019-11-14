@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using static HlidacStatu.Util.Constants;
@@ -85,6 +86,49 @@ namespace HlidacStatu.Util
             return ret;
 
 
+        }
+
+        public static string GetCzechPlural(int number, string val)
+        {
+            string[] plural = val.Split(';');
+            if (plural.Length != 4)
+                throw new ArgumentException("Invalid czech resource. The resource string  " + val + " doesn't contains 3 options.");
+
+            if (number == 0)
+                return FormatString(plural[0], number);
+
+            if (number == 1)
+                return FormatString(plural[1], number);
+
+            if (number > 1 && number < 5)
+                return FormatString(plural[2], number);
+
+            return FormatString(plural[3], number);
+        }
+
+        private static string FormatString(string text, int number)
+        {
+            if (text.Contains("{") && text.Contains("}"))
+                return string.Format(text, number);
+            else
+                return text;
+        }
+
+        public static string RemoveDiacritics(this string text)
+        {
+            var normalizedString = text.Normalize(NormalizationForm.FormD);
+            var stringBuilder = new StringBuilder();
+
+            foreach (var c in normalizedString)
+            {
+                var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
+                if (unicodeCategory != UnicodeCategory.NonSpacingMark)
+                {
+                    stringBuilder.Append(c);
+                }
+            }
+
+            return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
         }
     }
 }

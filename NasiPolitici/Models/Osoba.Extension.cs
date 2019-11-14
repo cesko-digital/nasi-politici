@@ -41,11 +41,11 @@ namespace HlidacStatu.NasiPolitici.Models
         }
         public string GetPhotoUrl()
         {
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "faces");
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "faces", $"{NameId}.jpg");
             if (File.Exists(path))
-                return $"~/images/faces/{NameId}";
+                return $"/images/faces/{NameId}.jpg";
             else
-                return "~/images/faces/personNoPhoto.png";
+                return "/images/faces/personNoPhoto.png";
         }
 
         public InfoFact[] GetInfoFacts()

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace HlidacStatu.NasiPolitici.Models
@@ -33,6 +34,11 @@ namespace HlidacStatu.NasiPolitici.Models
         public string _SponzorInfoFact { get; set; }
         public string _AngazovanostInfoFact { get; set; }
         public string _FunkceOsoba { get; set; }
+        public string _Sponzoring { get; set; }
+        public string _Majetek { get; set; }
+        public List<Insolvence> _InsolvenceOsoba { get; set; }
+        public List<Insolvence> _InsolvenceFirma { get; set; }
+        public List<Oznameni> _Oznameni { get; set; }
 
     }
 }
