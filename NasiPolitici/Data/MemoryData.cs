@@ -152,6 +152,116 @@ namespace HlidacStatu.NasiPolitici.Data
                                     Funkce = "poslanec, člen vlády"
                                 }
                             }
+                        },
+                        new Osoba
+                        {
+                            InternalId = 3,
+                            Jmeno = "Milan",
+                            Prijmeni = "Feranec",
+                            NameId = "milan-feranec",
+                            Narozeni = new DateTime(1964, 1, 1),
+                            _SummaryInfoFact = "Milan Feranec (*1964 )",
+                            _AngazovanostInfoFact = "3 firem, ve kterých se angažuje, v roce 2019 získaly zakázky za celkem 33 mil. Kč.",
+                            _SponzorInfoFact = "Milan Feranec mezi roky 2014-18 sponzoroval 2 polit. strany v celkové výši 505 000 Kč. Nejvyšší sponzorský dar byl ve výši 99 000 Kč.",
+                            _StatInfoFact = "Angažoval se v 2 státních firmách. Angažoval se také v 205 soukr.firmách, tyto firmy získaly od státu od 2016 celkem 5069 smluv v celkové výši 53 mld. Kč.",
+                            _Sponzoring = @"Sponzor ANO v 2018, hodnota daru 99 000 Kč (<a target=""_blank"" href=""https://udhpsh.cz/5290-2/""><span class=""text-muted"" title=""Jedná se o peněžní nebo nepeněžní dar"" alt=""Jedná se o peněžní nebo nepeněžní dar""><span class=""glyphicon glyphicon-link"" aria-hidden=""true""></span> zdroj</span></a>) <br />
+                                Sponzor ANO v 2018, hodnota daru 90 000 Kč (<a target=""_blank"" href=""https://udhpsh.cz/5290-2/""><span class=""text-muted"" title=""Jedná se o peněžní nebo nepeněžní dar"" alt=""Jedná se o peněžní nebo nepeněžní dar""><span class=""glyphicon glyphicon-link"" aria-hidden=""true""></span> zdroj</span></a>) <br />
+                                Sponzor ANO v 2018, hodnota daru 60 000 Kč (<a target=""_blank"" href=""https://udhpsh.cz/5290-2/""><span class=""text-muted"" title=""Jedná se o peněžní nebo nepeněžní dar"" alt=""Jedná se o peněžní nebo nepeněžní dar""><span class=""glyphicon glyphicon-link"" aria-hidden=""true""></span> zdroj</span></a>) <br />
+                                Sponzor ANO v 2018, hodnota daru 20 000 Kč (<a target=""_blank"" href=""https://udhpsh.cz/5290-2/""><span class=""text-muted"" title=""Jedná se o peněžní nebo nepeněžní dar"" alt=""Jedná se o peněžní nebo nepeněžní dar""><span class=""glyphicon glyphicon-link"" aria-hidden=""true""></span> zdroj</span></a>) <br />
+                                Sponzor ANO v 2017, hodnota daru 90 000 Kč (<a target=""_blank"" href=""https://udhpsh.cz/5290-2/""><span class=""text-muted"" title=""Jedná se o peněžní nebo nepeněžní dar"" alt=""Jedná se o peněžní nebo nepeněžní dar""><span class=""glyphicon glyphicon-link"" aria-hidden=""true""></span> zdroj</span></a>) <br />
+                                Sponzor ANO v 2017, hodnota daru 51 000 Kč (<a target=""_blank"" href=""https://udhpsh.cz/5290-2/""><span class=""text-muted"" title=""Jedná se o peněžní nebo nepeněžní dar"" alt=""Jedná se o peněžní nebo nepeněžní dar""><span class=""glyphicon glyphicon-link"" aria-hidden=""true""></span> zdroj</span></a>) <br />",
+                            _InsolvenceOsoba = new List<Insolvence>(),
+                            _InsolvenceFirma = new List<Insolvence>
+                            {
+                                new Insolvence
+                                {
+                                    Id = 3,
+                                    Key = "věřitel",
+                                    Value = 767
+                                }
+                            },
+                            _Oznameni = new List<Oznameni>
+                            {
+                                new Oznameni
+                                {
+                                    Id = "4a8fbee9-2075-477d-b224-fb3c5fa5a1d9",
+                                    Osoba = @"<a href=""https://cs.wikipedia.org/wiki/Milan_Feranec"">Mgr. Milan Feranec</a>",
+                                    Organizace = "Kancelář Poslanecké sněmovny Parlamentu České republiky, Statutární město Olomouc, Ministerstvo dopravy",
+                                    Funkce = "poslanec, člen Rady, náměstek pro řízení sekce"
+                                },
+                                new Oznameni
+                                {
+                                    Id = "d8046e45-1520-47e6-b389-f58c92039b94",
+                                    Osoba = "Bc. Miroslav Petřík",
+                                    Organizace = "Statutární město Olomouc",
+                                    Funkce = "člen Rady"
+                                },
+                                new Oznameni
+                                {
+                                    Id = "9ec64af1-202b-452b-ac1d-e275e32e179d",
+                                    Osoba = "Jiří Švachula",
+                                    Organizace = "Statutární město Brno MČ Brno-střed, Úřad městské části Brno-střed",
+                                    Funkce = "místostarosta / zástupce starosty, člen zastupitelstva"
+                                },
+                                new Oznameni
+                                {
+                                    Id = "49d45fcf-f813-41da-8f66-5abf74fb8b67",
+                                    Osoba = "Mgr. Roman Zarzycký",
+                                    Organizace = "Plzeň, statutární město, Městský obvod Plzeň 1",
+                                    Funkce = "člen zastupitelstva, místostarosta / zástupce starosty, člen Rady"
+                                },
+                                new Oznameni
+                                {
+                                    Id = "d93aef47-f922-4687-b8cc-6f9d028217ae",
+                                    Osoba = "Jan  Nečas",
+                                    Organizace = "Jihomoravský kraj, Regionální rada regionu soudržnosti Jihovýchod",
+                                    Funkce = "člen zastupitelstva, člen řídícího orgánu"
+                                }
+                            }
+                        },
+                        new Osoba
+                        {
+                            InternalId = 4,
+                            Jmeno = "Miroslav",
+                            Prijmeni = "Kalousek",
+                            NameId = "miroslav-kalousek",
+                            Narozeni = new DateTime(1960, 1, 1),
+                            _SummaryInfoFact = "Miroslav Kalousek(*1960), poslanec (od 2013) - Poslanecká sněmovna PČR (2013 - 2017) poslanec (od 2010 do 2013) - Poslanecká sněmovna PČR (2010 - 2013).",
+                            _SponzorInfoFact = "Miroslav Kalousek mezi roky 2014-17 sponzoroval TOP 09 v celkové výši 400 000 Kč. Nejvyšší sponzorský dar byl ve výši 300 000 Kč.",
+                            _FunkceOsoba = @"poslanec (od 2013) - Poslanecká sněmovna PČR (2013 - 2017)<br />
+                                poslanec (od 2010 do 2013) - Poslanecká sněmovna PČR (2010 - 2013)<br />
+                                poslanec (od 2006 do 2010) - Poslanecká sněmovna PČR (2006 - 2010)<br />
+                                zastupitel (od 2006 do 2010) - Zastupitelstvo města Bechyně<br />
+                                poslanec (od 2002 do 2006) - Poslanecká sněmovna PČR (2002 - 2006)<br />
+                                poslanec (od 1998 do 2002) - Poslanecká sněmovna PČR (1998 - 2002)<br />
+                                ministr (od 2010 do 2013) - Vláda ČR (min. předseda Petr Nečas) - Ministerstvo financí<br />
+                                ministr (od 2007 do 2009) - Vláda ČR (min. předseda Mirek Topolánek) - Ministerstvo financí<br />
+                                předseda (od 2015 do 2017) - TOP 09<br />
+                                kandidát (od 2014) - Nezávislí a TOP 09<br />
+                                kandidát (od 2013) - TOP 09<br />
+                                předseda (od 2013) - Poslanecký klub TOP 09 a Starostové<br />
+                                kandidát (od 2010) - TOP 09 (ve spolupráci se Starosty a nezávislými)<br />
+                                člen (od 2010 do 2013) - Poslanecký klub TOP 09 a Starostové<br />
+                                člen (od 2009) - TOP 09<br />
+                                1. místopředseda (od 2009 do 2015) - Předsednictvo<br />
+                                1. místopředseda (od 2009 do 2015) - TOP 09<br />
+                                kandidát (od 2009) - TOP 09 (ve spolupráci s hnutím Starostové a nezávislí)<br />
+                                předseda (od 2006) - Poslanecký klub Křesťanské a demokratické unie-Československé strany lidové<br />
+                                člen (od 2006 do 2009) - Poslanecký klub Křesťanské a demokratické unie-Československé strany lidové<br />",
+                            _Sponzoring = @"Sponzor TOP 09 v 2017, hodnota daru 300 000 Kč (<a target=""_blank"" href=""https://udhpsh.cz/5290-2/""><span class=""text-muted"" title=""Jedná se o peněžní nebo nepeněžní dar"" alt=""Jedná se o peněžní nebo nepeněžní dar""><span class=""glyphicon glyphicon-link"" aria-hidden=""true""></span> zdroj</span></a>) <br />
+                                Sponzor TOP 09 v 2014, hodnota daru 100 000 Kč (<a target=""_blank"" href=""https://udhpsh.cz/5290-2/""><span class=""text-muted"" title=""Jedná se o peněžní nebo nepeněžní dar"" alt=""Jedná se o peněžní nebo nepeněžní dar""><span class=""glyphicon glyphicon-link"" aria-hidden=""true""></span> zdroj</span></a>) <br />",
+                            _InsolvenceOsoba = new List<Insolvence>(),
+                            _InsolvenceFirma = new List<Insolvence>(),
+                            _Oznameni = new List<Oznameni>
+                            {
+                                new Oznameni
+                                {
+                                    Id = "9593b9a2-db48-48b6-84d6-34e1727a47f2",
+                                    Osoba = @"<a href=""https://cs.wikipedia.org/wiki/Miroslav_Kalousek"">Miroslav Kalousek</a>",
+                                    Organizace ="Kancelář Poslanecké sněmovny Parlamentu České republiky",
+                                    Funkce = "poslanec"
+                                }
+                            }
                         });
                 }
 
