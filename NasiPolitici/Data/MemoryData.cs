@@ -24,7 +24,7 @@ namespace HlidacStatu.NasiPolitici.Data
                             InternalId = 1,
                             Jmeno = "Andrej",
                             Prijmeni = "Babiš",
-                            NameId = "agent-bures",
+                            NameId = "andrej-babis",
                             Narozeni = new DateTime(1954,1,1),
                             _SummaryInfoFact = "Andrej Babiš (*1954 ),poslanec (od 2017) - Poslanecká sněmovna PČR (2017 - 2021) poslanec (od 2013 do 2017) - Poslanecká sněmovna PČR (2013 - 2017).",
                             _AngazovanostInfoFact = "205 firem, ve kterých se angažuje, v roce 2019 získaly zakázky za celkem 17 mld. Kč.",

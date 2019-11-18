@@ -3,9 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29411.108
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NasiPolitici", "NasiPolitici\NasiPolitici.csproj", "{68EA3107-69E6-4247-BD93-1415BF1D42B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NasiPolitici", "NasiPolitici\NasiPolitici.csproj", "{68EA3107-69E6-4247-BD93-1415BF1D42B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Util", "Util\Util.csproj", "{0005F8E8-A9B4-4AA9-979A-FCCD043E20B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Util", "Util\Util.csproj", "{0005F8E8-A9B4-4AA9-979A-FCCD043E20B6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitFiles", "GitFiles", "{A17763CD-3A34-4209-804A-A3A1E290CA39}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
