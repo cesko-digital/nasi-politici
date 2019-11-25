@@ -1,0 +1,9 @@
+﻿@model (string content, int width)
+
+
+<div class="low-box" style="max-height:@(Model.width)px">
+    <div class="low-box-line" style="top:@(Model.width - 55)px"><a href="#" class="more"></a></div>
+    <div class="low-box-content">
+        @Html.Raw(Model.content)
+    </div>
+</div>
