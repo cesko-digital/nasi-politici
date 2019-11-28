@@ -6,11 +6,11 @@ import FlagOutlined from '@material-ui/icons/FlagOutlined';
 import Link from '@material-ui/icons/Link';
 
 interface DetailCardProps {
-    title: string,
-    tag: string,
-    link: string,
-    content: any,
-    footer?: any,
+  title: string,
+  tag: string,
+  link: string,
+  content: JSX.Element,
+  footer?: JSX.Element,
 }
 
 const TitleElement = styled.span`
@@ -37,19 +37,19 @@ const DetailCard = ({ title, tag, link, content, footer }: DetailCardProps) => {
       <CardHeaderElement>
         <TitleElement>{title}</TitleElement>
         <div>
-            <Chip
-                icon={<Link />}
-                label={tag}
-                clickable
-                onClick={()=> window.open(link, "_blank")}
-            />
-            {// ts-ignore
-                <CircleChipElement icon={<FlagOutlined />} clickable />
-            }
+          <Chip
+            icon={<Link />}
+            label={tag}
+            clickable
+            onClick={() => window.open(link, "_blank")}
+          />
+          {// ts-ignore
+            <CircleChipElement icon={<FlagOutlined />} clickable />
+          }
         </div>
       </CardHeaderElement>
       <CardContent>
-          {content}
+        {content}
       </CardContent>
       {footer && footer}
     </Card>
