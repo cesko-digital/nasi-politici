@@ -5,7 +5,7 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import { Home, PoliticianDetail, SearchResults } from '../components/pages';
+import { About,Media, Home, PoliticianDetail, SearchResults } from '../components/pages';
 import { getQueryParams } from '../utils';
 
 const Router = () => {
@@ -13,6 +13,12 @@ const Router = () => {
     return (
         <ReactRouter>
             <Switch>
+                <Route exact path="/about">
+                   <About />
+                </Route>
+                <Route exact path="/media">
+                   <Media />
+                </Route>
                 <Route exact path="/">
                     {query
                         ? (
