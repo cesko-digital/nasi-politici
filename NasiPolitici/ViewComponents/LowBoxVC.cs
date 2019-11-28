@@ -8,7 +8,7 @@ namespace HlidacStatu.NasiPolitici.ViewComponents
 {
     public class LowBoxVC : ViewComponent
     {
-        public async Task<IViewComponentResult> InvokeAsync(
+        public Task<IViewComponentResult> InvokeAsync(
         int width, string content, string gaPageEventId = null)
         {
             if (gaPageEventId == null)
@@ -17,9 +17,7 @@ namespace HlidacStatu.NasiPolitici.ViewComponents
             }
 
             (string content, int width) model = (content, width);
-            return View(model);
+            return Task.FromResult(View(model) as IViewComponentResult);
         }
-
-
     }
 }
