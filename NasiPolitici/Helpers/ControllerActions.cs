@@ -6,11 +6,16 @@ namespace HlidacStatu.NasiPolitici.Helpers
 {
     public static class ControllerActions
     {
-        public static async Task<ActionResult> WithErrorHandlingAsync<TResult>(Func<Task<TResult>> action)
+        public static async Task<ActionResult> WithErrorHandlingAsync<TResult>(Func<Task<TResult>> func)
         {
             try
             {
-                return new ActionResult(HttpStatusCode.OK, await action());
+                var result = await func();
+                if (result == null)
+                {
+                    return new ActionResult(HttpStatusCode.NotFound, null);    
+                }
+                return new ActionResult(HttpStatusCode.OK, result);
             }
             catch (Exception e)
             {
