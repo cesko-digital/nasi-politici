@@ -18,6 +18,22 @@ namespace HlidacStatu.NasiPolitici.Controllers
 
         public PersonSearchResult Search(string query)
         {
+            return cache.GetOrCreate<PersonSearchResult>($"query_{query}", entry =>
+            {
+                entry.SetAbsoluteExpiration(TimeSpan.FromSeconds(5));
+                return new PersonSearchResult
+                {
+                    Persons = new List<PersonSummary>
+                    {
+                        new PersonSummary
+                        {
+                            FirstName = "sdfsdf",
+                            BirthDate = DateTime.UtcNow
+                        }
+                    }
+                };
+            });
+
             return new PersonSearchResult
             {
                 Persons = new List<PersonSummary>
