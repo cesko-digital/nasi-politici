@@ -2,6 +2,8 @@ using HlidacStatu.NasiPolitici.Data;
 using HlidacStatu.NasiPolitici.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using System;
+using System.Threading.Tasks;
 
 namespace HlidacStatu.NasiPolitici.Controllers
 {

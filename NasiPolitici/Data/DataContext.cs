@@ -14,7 +14,8 @@ namespace HlidacStatu.NasiPolitici.Data
     {
         private const string ApiUrl = "https://www.hlidacstatu.cz/api/v1/nasipolitici_";
         private const string AuthenticationToken = "2b5eb6327814415ab88d71234fb3cc0a";
-        
+        private static readonly Lazy<HttpClient> client = new Lazy<HttpClient>(InitializeHttpClient);
+                             
         public async Task<PersonSearchResult> SearchPersons(string text)
         {
             var url = $"{ApiUrl}find?query={HttpUtility.UrlEncode(text)}";
@@ -31,22 +32,25 @@ namespace HlidacStatu.NasiPolitici.Data
             var person = await GetDataAsync<Dto.Person>(url);
             return Transform(person);
         }
+
+        private static HttpClient InitializeHttpClient()
+        {
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", AuthenticationToken);
+            return client;
+        }
         
         private async Task<T> GetDataAsync<T>(string endpoint)
-        {
-            using (var client = new HttpClient())
+        {            
+            using (var response = await client.Value.GetAsync(endpoint))
             {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", AuthenticationToken);
-                using (var response = await client.GetAsync(endpoint))
+                response.EnsureSuccessStatusCode();
+                using (var content = response.Content)
                 {
-                    response.EnsureSuccessStatusCode();
-                    using (var content = response.Content)
-                    {
-                        var result = await content.ReadAsStringAsync();
-                        return JsonConvert.DeserializeObject<T>(result);
-                    }    
-                }
-            }
+                    var result = await content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<T>(result);
+                }    
+            }            
         }
 
         private PersonSummary Transform(Dto.PersonSummary summary)
