@@ -1,3 +1,5 @@
+using System;
+using System.Threading.Tasks;
 using HlidacStatu.NasiPolitici.Data;
 using HlidacStatu.NasiPolitici.Models;
 using Microsoft.AspNetCore.Mvc;

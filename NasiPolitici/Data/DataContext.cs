@@ -6,18 +6,25 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
 using HlidacStatu.NasiPolitici.Models;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
 namespace HlidacStatu.NasiPolitici.Data
 {
     public class DataContext : IDataContext
     {
-        private const string ApiUrl = "https://www.hlidacstatu.cz/api/v1/nasipolitici_";
-        private const string AuthenticationToken = "2b5eb6327814415ab88d71234fb3cc0a";
+        private readonly string apiUrl;
+        private readonly string authenticationToken;
+
+        public DataContext(IConfiguration configuration)
+        {
+            apiUrl = configuration["ApiUrl"];
+            authenticationToken = configuration["AuthenticationToken"];
+        }
         
         public async Task<PersonSearchResult> SearchPersons(string text)
         {
-            var url = $"{ApiUrl}find?query={HttpUtility.UrlEncode(text)}";
+            var url = $"find?query={HttpUtility.UrlEncode(text)}";
             var results = await GetDataAsync<List<Dto.PersonSummary>>(url);
             return new PersonSearchResult
             {
@@ -27,7 +34,7 @@ namespace HlidacStatu.NasiPolitici.Data
 
         public async Task<Person> GetPerson(string id)
         {
-            var url = $"{ApiUrl}getdata?id={HttpUtility.UrlEncode(id)}";
+            var url = $"getdata?id={HttpUtility.UrlEncode(id)}";
             var person = await GetDataAsync<Dto.Person>(url);
             return Transform(person);
         }
@@ -36,8 +43,8 @@ namespace HlidacStatu.NasiPolitici.Data
         {
             using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", AuthenticationToken);
-                using (var response = await client.GetAsync(endpoint))
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", authenticationToken);
+                using (var response = await client.GetAsync($"{apiUrl}{endpoint}"))
                 {
                     response.EnsureSuccessStatusCode();
                     using (var content = response.Content)
