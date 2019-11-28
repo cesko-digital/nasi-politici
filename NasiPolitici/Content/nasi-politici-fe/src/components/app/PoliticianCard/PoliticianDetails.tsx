@@ -16,8 +16,8 @@ const PoliticianDetails: React.FC<PoliticianDetailsProps> = ({ firstName, lastNa
     <Box display="flex">
       <PoliticianAvatar image={photoUrl} />
       <Box ml={2}>
-        <Typography variant='h6'>{`${firstName} ${lastName}`}</Typography>
-        {desktop && <Typography>{description}</Typography>}
+        <Typography variant='h1'>{`${firstName} ${lastName}`}</Typography>
+        {desktop && <Typography variant='h3'>{description}</Typography>}
       </Box>
     </Box>
   )
