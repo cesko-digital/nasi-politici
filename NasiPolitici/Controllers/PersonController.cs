@@ -1,18 +1,19 @@
-﻿using HlidacStatu.NasiPolitici.Data;
-using HlidacStatu.NasiPolitici.Models;
+using HlidacStatu.NasiPolitici.Data;
+using HlidacStatu.NasiPolitici.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using System;
+using System.Threading.Tasks;
 
 namespace HlidacStatu.NasiPolitici.Controllers
 {
     [Route("person")]
     public class PersonController : Controller
     {
+        private static readonly TimeSpan CacheDuration = TimeSpan.FromHours(1);
+
         private readonly IDataContext dataContext;
         private readonly IMemoryCache cache;
-
-        private static readonly TimeSpan CacheDuration = TimeSpan.FromHours(1);
 
         public PersonController(IDataContext dataContext, IMemoryCache cache)
         {
@@ -21,23 +22,26 @@ namespace HlidacStatu.NasiPolitici.Controllers
         }
 
         [Route("search/{query}")]
-        public PersonSearchResult Search(string query)
+        public Task<ObjectResult> Search(string query)
         {
-            return cache.GetOrCreate($"search_{query}", entry =>
-            {
-                entry.SetAbsoluteExpiration(CacheDuration);
-                return dataContext.SearchPersons(query);
-            });
+            return CachedAsync(() => dataContext.SearchPersons(query));
         }
 
         [Route("detail/{id}")]
-        public Person Detail(string id)
+        public Task<ObjectResult> Detail(string id)
         {
-            return cache.GetOrCreate($"detail_{id}", entry =>
+            return CachedAsync(() => dataContext.GetPerson(id));
+        }
+
+        private async Task<ObjectResult> CachedAsync<TResult>(Func<Task<TResult>> func)
+        {
+            var actionResult = await ControllerActions.WithErrorHandlingAsync(() => cache.GetOrCreateAsync(Request.Path, entry =>
             {
                 entry.SetAbsoluteExpiration(CacheDuration);
-                return dataContext.GetPerson(id);
-            });
+                return func();
+            }));
+
+            return StatusCode((int)actionResult.StatusCode, actionResult.Body);
         }
     }
 }

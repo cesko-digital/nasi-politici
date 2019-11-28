@@ -1,29 +1,37 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-import Avatar from '@material-ui/core/Avatar';
-import { IconButton, Typography, Link } from '@material-ui/core';
-import PoliticianTitle from './PoliticianTitle';
+import PoliticianDetails from './PoliticianDetails';
+import { Grid, Link } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
 
-const PoliticianCard: React.FC = () => {
+interface PoliticianCardProps {
+  person: {
+    id: string,
+    firstName: string,
+    lastName: string,
+    description: string,
+    birthDate: number,
+    photoUrl: string,
+  }
+}
+
+const PoliticianCard: React.FC<PoliticianCardProps> = ({ person: { firstName, lastName, description, photoUrl } }) => {
 
   return (
     <Card>
-
-      <CardHeader
-        avatar={
-          <Avatar>
-            R
-          </Avatar>
-        }
-        title={<PoliticianTitle />}
-        subheader="*1960 - TOP09"
-      />
-      <Link>show profile</Link>
-      {/* <CardContent>
-      </CardContent> */}
+      <CardContent>
+        <Grid container>
+          <Grid item lg={10}>
+            <PoliticianDetails firstName={firstName} lastName={lastName} photoUrl={photoUrl} description={description} />
+          </Grid>
+          <Grid item lg={2} sm={12} >
+            <Box display='flex' flexGrow={1} justifyContent="flex-end">
+              <Link>show profile</Link>
+            </Box>
+          </Grid>
+        </Grid>
+      </CardContent>
     </Card>
   );
 }
