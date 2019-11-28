@@ -1,4 +1,6 @@
-﻿using HlidacStatu.NasiPolitici.Data;
+using HlidacStatu.NasiPolitici.Data;
+using System;
+using System.Threading.Tasks;
 using HlidacStatu.NasiPolitici.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
@@ -26,7 +28,7 @@ namespace HlidacStatu.NasiPolitici.Controllers
             return cache.GetOrCreate($"search_{query}", entry =>
             {
                 entry.SetAbsoluteExpiration(CacheDuration);
-                return dataContext.SearchPersons(query);
+                return dataContext.SearchPersons(query).Result;
             });
         }
 
@@ -36,7 +38,7 @@ namespace HlidacStatu.NasiPolitici.Controllers
             return cache.GetOrCreate($"detail_{id}", entry =>
             {
                 entry.SetAbsoluteExpiration(CacheDuration);
-                return dataContext.GetPerson(id);
+                return dataContext.GetPerson(id).Result;
             });
         }
     }
