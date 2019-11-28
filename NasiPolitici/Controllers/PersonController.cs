@@ -1,6 +1,5 @@
 ﻿using HlidacStatu.NasiPolitici.Data;
 using HlidacStatu.NasiPolitici.Helpers;
-using HlidacStatu.NasiPolitici.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using System;
@@ -11,10 +10,10 @@ namespace HlidacStatu.NasiPolitici.Controllers
     [Route("person")]
     public class PersonController : Controller
     {
+        private static readonly TimeSpan CacheDuration = TimeSpan.FromHours(1);
+
         private readonly IDataContext dataContext;
         private readonly IMemoryCache cache;
-
-        private static readonly TimeSpan CacheDuration = TimeSpan.FromHours(1);
 
         public PersonController(IDataContext dataContext, IMemoryCache cache)
         {
@@ -25,18 +24,18 @@ namespace HlidacStatu.NasiPolitici.Controllers
         [Route("search/{query}")]
         public Task<ObjectResult> Search(string query)
         {
-            return CacheableAsync<PersonSearchResult>(() => dataContext.SearchPersons(query));
+            return CachedAsync(() => dataContext.SearchPersons(query));
         }
 
         [Route("detail/{id}")]
         public Task<ObjectResult> Detail(string id)
         {
-            return CacheableAsync<Person>(() => dataContext.GetPerson(id));
+            return CachedAsync(() => dataContext.GetPerson(id));
         }
 
-        private async Task<ObjectResult> CacheableAsync<TResult>(Func<Task<TResult>> func)
+        private async Task<ObjectResult> CachedAsync<TResult>(Func<Task<TResult>> func)
         {
-            var actionResult = await ControllerActions.WithErrorHandling(async () => await cache.GetOrCreateAsync(Request.Path, async entry =>
+            var actionResult = await ControllerActions.WithErrorHandlingAsync(async () => await cache.GetOrCreateAsync(Request.Path, async entry =>
             {
                 entry.SetAbsoluteExpiration(CacheDuration);
                 return await func();
