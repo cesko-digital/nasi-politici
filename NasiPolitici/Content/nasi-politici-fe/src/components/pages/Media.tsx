@@ -4,14 +4,9 @@ import Header from '../ui/shared/header';
 import LocalizedStrings from 'react-localization';
 import { Typography } from '@material-ui/core';
  
-let strings = new LocalizedStrings({
- en:{
-  media:"For media",
-},
- cs: {
+let strings = {
   media:"Pro médiá",
- }
-});
+ };
 
 export const Media = () => {
     return (

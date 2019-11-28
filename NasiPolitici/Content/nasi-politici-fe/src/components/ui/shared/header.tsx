@@ -6,16 +6,10 @@ import Button from '@material-ui/core/Button';
 
 import LocalizedStrings from 'react-localization';
  
-let strings = new LocalizedStrings({
- en:{
-  about:"About",
-  media:"For media",
-},
- cs: {
+let strings = {
   about:"O projektu",
   media:"Pro médiá",
- }
-});
+};
 
 export default class Header extends Component {
   
