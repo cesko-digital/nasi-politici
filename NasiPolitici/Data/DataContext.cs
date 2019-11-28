@@ -14,7 +14,7 @@ namespace HlidacStatu.NasiPolitici.Data
     {
         private const string ApiUrl = "https://www.hlidacstatu.cz/api/v1/nasipolitici_";
         private const string AuthenticationToken = "2b5eb6327814415ab88d71234fb3cc0a";
-        private static readonly Lazy<HttpClient> client = new Lazy<HttpClient>(InitializeHttpClient);
+        private static readonly Lazy<HttpClient> client = new Lazy<HttpClient>(() => new HttpClient());
                              
         public async Task<PersonSearchResult> SearchPersons(string text)
         {
@@ -34,16 +34,20 @@ namespace HlidacStatu.NasiPolitici.Data
         }
 
         private async Task<T> GetDataAsync<T>(string endpoint)
-        {            
-            using (var response = await client.Value.GetAsync(endpoint))
+        {
+            using (var request = new HttpRequestMessage(HttpMethod.Get, endpoint))
             {
-                response.EnsureSuccessStatusCode();
-                using (var content = response.Content)
+                request.Headers.Authorization = new AuthenticationHeaderValue("Token", AuthenticationToken);
+                using (var response = await client.Value.SendAsync(request))
                 {
-                    var result = await content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<T>(result);
-                }    
-            }            
+                    response.EnsureSuccessStatusCode();
+                    using (var content = response.Content)
+                    {
+                        var result = await content.ReadAsStringAsync();
+                        return JsonConvert.DeserializeObject<T>(result);
+                    }
+                }
+            }
         }
 
         private PersonSummary Transform(Dto.PersonSummary summary)
@@ -124,13 +128,6 @@ namespace HlidacStatu.NasiPolitici.Data
                     Url = insolvency.BailiffLink
                 }
             };
-        }
-
-        private static HttpClient InitializeHttpClient()
-        {
-            var client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", AuthenticationToken);
-            return client;
         }
     }
 }
