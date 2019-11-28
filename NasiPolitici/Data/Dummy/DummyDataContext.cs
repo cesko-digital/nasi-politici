@@ -75,7 +75,42 @@ namespace HlidacStatu.NasiPolitici.Data.Dummy
                         Origin = null
                     }
                 },
-                Insolvencies = new List<Insolvency>()
+                PersonalInsolvency = new Insolvency
+                {
+                    Debtor = new InsolvencyActor
+                    {
+                        Count = 2,
+                        Url = "https://www.hlidacstatu.cz/insolvence/hledat?Q=dluznici.osobaId:andrej-babis"
+                    },
+                    Creditor = new InsolvencyActor
+                    {
+                        Count = 4,
+                        Url = "https://www.hlidacstatu.cz/insolvence/hledat?Q=veritele.osobaId:andrej-babis"
+                    },
+                    Bailiff = new InsolvencyActor
+                    {
+                        Count = 6,
+                        Url = "https://www.hlidacstatu.cz/insolvence/hledat?Q=spravci.osobaId:andrej-babis"
+                    }
+                },
+                CompanyInsolvency = new Insolvency
+                {
+                    Debtor = new InsolvencyActor
+                    {
+                        Count = 12,
+                        Url = "https://www.hlidacstatu.cz/insolvence/hledat?Q=dluznici.osobaId:andrej-babis"
+                    },
+                    Creditor = new InsolvencyActor
+                    {
+                        Count = 14,
+                        Url = "https://www.hlidacstatu.cz/insolvence/hledat?Q=veritele.osobaId:andrej-babis"
+                    },
+                    Bailiff = new InsolvencyActor
+                    {
+                        Count = 61,
+                        Url = "https://www.hlidacstatu.cz/insolvence/hledat?Q=spravci.osobaId:andrej-babis"
+                    }
+                }
             });
         }
     }

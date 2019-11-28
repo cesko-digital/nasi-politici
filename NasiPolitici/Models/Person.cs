@@ -12,6 +12,7 @@ namespace HlidacStatu.NasiPolitici.Models
         public string LastName { get; set; }
         public string Status { get; set; }
         public string Description { get; set; }
+        public string CompanyConnection { get; set; }
 
         public DateTime BirthDate { get; set; }
         public DateTime? DeathDate { get; set; }
@@ -21,6 +22,7 @@ namespace HlidacStatu.NasiPolitici.Models
 
         public List<Role> Roles { get; set; }
         public List<Donation> Donations { get; set; }
-        public List<Insolvency> Insolvencies { get; set; }
+        public Insolvency PersonalInsolvency { get; set; }
+        public Insolvency CompanyInsolvency { get; set; }
     }
 }
