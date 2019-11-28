@@ -8,7 +8,7 @@ interface RowProps {
 }
 
 interface TableProps {
-    rows: [RowProps],
+    rows: Array<RowProps>,
     sectionName: string,
 }
 
