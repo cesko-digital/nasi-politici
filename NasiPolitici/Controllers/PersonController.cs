@@ -34,7 +34,7 @@ namespace HlidacStatu.NasiPolitici.Controllers
 
         private JsonResult Cacheable<TInput, TResult>(TInput input, Func<TInput, string> cacheKeyBuilder, Func<TInput, TResult> func)
         {
-            return Json(Actions.Do(() => cache.GetOrCreate(cacheKeyBuilder(input), entry =>
+            return Json(ControllerActions.WithErrorHandling(() => cache.GetOrCreate(cacheKeyBuilder(input), entry =>
             {
                 entry.SetAbsoluteExpiration(CacheDuration);
                 return func(input);
