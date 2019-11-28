@@ -22,7 +22,7 @@ namespace HlidacStatu.NasiPolitici.Controllers
             return cache.GetOrCreate($"query_{query}", entry =>
             {
                 entry.SetAbsoluteExpiration(TimeSpan.FromSeconds(5));
-                return dataContext.Search(query);
+                return dataContext.SearchPersons(query);
             });
         }
 
@@ -31,7 +31,7 @@ namespace HlidacStatu.NasiPolitici.Controllers
             return cache.GetOrCreate($"detail_{id}", entry =>
             {
                 entry.SetAbsoluteExpiration(TimeSpan.FromSeconds(5));
-                return dataContext.GetPoliticianData(id);
+                return dataContext.GetPerson(id);
             });
         }
     }
