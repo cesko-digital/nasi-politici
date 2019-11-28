@@ -1,15 +1,17 @@
 import React from 'react'
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const PoliticianTitle: React.FC = () => {
   return (
-    <div>
+    <TitleWrapper>
       <h1>title</h1>
-      <a href="">link</a>
-    </div>
+      <span>subtitle</span>
+    </TitleWrapper>
   )
 }
 
-const TitleWrapper = styled.div``
+const TitleWrapper = styled.div`
+
+`;
 
 export default PoliticianTitle

@@ -4,13 +4,14 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
-import { IconButton, Typography } from '@material-ui/core';
+import { IconButton, Typography, Link } from '@material-ui/core';
 import PoliticianTitle from './PoliticianTitle';
 
 const PoliticianCard: React.FC = () => {
 
   return (
     <Card>
+
       <CardHeader
         avatar={
           <Avatar>
@@ -20,8 +21,7 @@ const PoliticianCard: React.FC = () => {
         title={<PoliticianTitle />}
         subheader="*1960 - TOP09"
       />
-      <CardMedia
-      />
+      <Link>show profile</Link>
       {/* <CardContent>
       </CardContent> */}
     </Card>
