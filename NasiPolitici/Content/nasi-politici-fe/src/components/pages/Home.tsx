@@ -1,7 +1,11 @@
 import React from 'react';
+import Header from '../shared/header';
 
 export const Home = () => {
     return (
-        <div>I am home</div>
+        <div>
+            <Header/>
+            I am home
+        </div>
     );
 }
