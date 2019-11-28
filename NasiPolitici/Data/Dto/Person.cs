@@ -12,6 +12,7 @@ namespace HlidacStatu.NasiPolitici.Data.Dto
         public string Surname { get; set; }
         public string Status { get; set; }
         public string Description { get; set; }
+        public string CompanyConnection { get; set; }
 
         public DateTime BirthDate { get; set; }
         public DateTime? DeathDate { get; set; }
