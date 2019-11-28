@@ -33,13 +33,6 @@ namespace HlidacStatu.NasiPolitici.Data
             return Transform(person);
         }
 
-        private static HttpClient InitializeHttpClient()
-        {
-            var client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", AuthenticationToken);
-            return client;
-        }
-        
         private async Task<T> GetDataAsync<T>(string endpoint)
         {            
             using (var response = await client.Value.GetAsync(endpoint))
@@ -131,6 +124,13 @@ namespace HlidacStatu.NasiPolitici.Data
                     Url = insolvency.BailiffLink
                 }
             };
+        }
+
+        private static HttpClient InitializeHttpClient()
+        {
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", AuthenticationToken);
+            return client;
         }
     }
 }
