@@ -1,6 +1,6 @@
-﻿using HlidacStatu.NasiPolitici.Models;
+﻿using System;
+using HlidacStatu.NasiPolitici.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using Microsoft.Extensions.Caching.Memory;
 using HlidacStatu.NasiPolitici.Data;
 
