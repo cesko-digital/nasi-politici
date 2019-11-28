@@ -1,6 +1,7 @@
 import React from 'react';
 import { getQueryParams } from '../../utils';
 import PoliticianCard from '../app/PoliticianCard/PoliticianCard';
+import Header from '../ui/shared/header';
 
 const person = {
     "id": "miroslav-kalousek",
@@ -15,6 +16,7 @@ export const SearchResults = () => {
     const { query } = getQueryParams();
     return (
         <React.Fragment>
+            <Header />
             <div>I am search results for {query}</div>
             <PoliticianCard person={person} />
         </React.Fragment>
