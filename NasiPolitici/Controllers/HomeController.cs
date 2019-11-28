@@ -19,6 +19,11 @@ namespace HlidacStatu.NasiPolitici.Controllers
             _logger = logger;
         }
 
+        public ActionResult App()
+        {
+            return View();
+        }
+
         public IActionResult Index()
         {
             return View();
