@@ -37,10 +37,15 @@ namespace HlidacStatu.NasiPolitici.Data
         {
             var url = $"nasipolitici_getdata?id={HttpUtility.UrlEncode(id)}";
             var person = await GetDataAsync<Dto.Person>(url);
+            if (person == null)
+            {
+                return null;
+            }
             return Transform(person);
         }
 
         private async Task<T> GetDataAsync<T>(string endpoint)
+            where T : class
         {
             using (var request = new HttpRequestMessage(HttpMethod.Get, $"{apiUrl}{endpoint}"))
             {
@@ -49,9 +54,26 @@ namespace HlidacStatu.NasiPolitici.Data
                 {
                     response.EnsureSuccessStatusCode();
                     var result = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<T>(result);                    
+                    if (IsNotFound(result))
+                    {
+                        return null;
+                    }
+                    return JsonConvert.DeserializeObject<T>(result);
                 }
             }
+        }
+
+        private bool IsNotFound(string responseContent)
+        {
+            var errorResponse = JsonConvert.DeserializeObject<Dto.ErrorResponse>(responseContent);
+            var errorExists = errorResponse != null && !errorResponse.Valid && errorResponse.Error != null;
+            var error = errorResponse?.Error;
+
+            if (errorExists && error.Number != 404)
+            {
+                throw new Exception($"Exception in API: Code '{error.Number}', message: '{error.Description}'.");
+            }
+            return errorExists;
         }
 
         private PersonSummary Transform(Dto.PersonSummary summary)
