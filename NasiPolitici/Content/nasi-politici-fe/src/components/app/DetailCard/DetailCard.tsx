@@ -1,15 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Card, Chip } from '@material-ui/core';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
 import FlagOutlined from '@material-ui/icons/FlagOutlined';
 import Link from '@material-ui/icons/Link';
 
@@ -18,16 +10,17 @@ interface DetailCardProps {
     tag: string,
     link: string,
     content: any,
+    footer?: any,
 }
 
 const TitleElement = styled.span`
-    font-weight: 700;
+    font-weight: 600;
 `;
 
 const CardHeaderElement = styled.div`
     display: flex;
     justify-content: space-between;
-    padding: 16px;
+    padding: 16px 16px 16px 32px;
 `;
 
 const CircleChipElement = styled(Chip)`
@@ -38,7 +31,7 @@ const CircleChipElement = styled(Chip)`
     }
 `;
 
-const DetailCard = ({ title, tag, link, content }: DetailCardProps) => {
+const DetailCard = ({ title, tag, link, content, footer }: DetailCardProps) => {
   return (
     <Card>
       <CardHeaderElement>
@@ -58,27 +51,7 @@ const DetailCard = ({ title, tag, link, content }: DetailCardProps) => {
       <CardContent>
           {content}
       </CardContent>
-      <CardActions disableSpacing>
-        {/* <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton> */}
-        {/* <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton> */}
-      </CardActions>
-        <CardContent>
-            <Typography paragraph>Method:</Typography>
-        </CardContent>
+      {footer && footer}
     </Card>
   );
 }
