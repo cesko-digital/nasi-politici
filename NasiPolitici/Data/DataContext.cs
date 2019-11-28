@@ -57,7 +57,7 @@ namespace HlidacStatu.NasiPolitici.Data
                 FirstName = summary.Name,
                 LastName = summary.Surname,
                 Description = summary.Description,
-                BirthDate = new DateTime(summary.BirthYear, 1, 1),
+                BirthYear = summary.BirthYear,
                 PhotoUrl = summary.Photo
             };
         }
@@ -85,14 +85,14 @@ namespace HlidacStatu.NasiPolitici.Data
             };
         }
 
-        private Role Transform(Dto.Role role)
+        private Role Transform(Dto.PersonalRole personalRole)
         {
             return new Role
             {
-                Name = role.Name,
-                Organization = role.Organization,
-                StartDate = role.StartDate,
-                EndDate = role.EndDate
+                Name = personalRole.Role,
+                Organization = personalRole.Organisation,
+                StartDate = personalRole.DateFrom,
+                EndDate = personalRole.DateTo
             };
         }
 
@@ -101,9 +101,9 @@ namespace HlidacStatu.NasiPolitici.Data
             return new Donation
             {
                 Party = donation.Party,
-                Origin = donation.Origin,
-                Value = donation.Value,
-                Date = donation.Date
+                Source = donation.Source,
+                Value = donation.DonatedAmount,
+                Year = donation.Year
             };
         }
 

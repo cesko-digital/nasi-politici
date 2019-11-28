@@ -18,7 +18,7 @@ namespace HlidacStatu.NasiPolitici.Data.Dummy
                         Id = "miroslav-kalousek",
                         FirstName = "Miroslav",
                         LastName = "Kalousek",
-                        BirthDate = new DateTime(1960, 1, 1),
+                        BirthYear = 1960,
                         PhotoUrl = "https://www.hlidacstatu.cz/Content/Img/personNoPhoto.png",
                         Description = "\u003cp\u003eMiroslav Kalousek (*1960 ),poslanec (od 2013)  - Poslanecká sněmovna PČR (2013 - 2017)\nposlanec (od 2010 do 2013)  - Poslanecká sněmovna PČR (2010 - 2013).\u003c/p\u003e\u003cp\u003eMiroslav Kalousek mezi roky 2014-17 sponzoroval TOP 09 v celkové výši 400 000  Kč. Nejvyšší sponzorský dar byl ve výši 300 000  Kč.\u003c/p\u003e"
                     }
@@ -64,15 +64,15 @@ namespace HlidacStatu.NasiPolitici.Data.Dummy
                     {
                         Party = "ANO 2011",
                         Value = 50000m,
-                        Date = new DateTime(2015, 1, 1),
-                        Origin = null
+                        Year = 2015,
+                        Source = null
                     },
                     new Donation
                     {
                         Party = "ANO 2011",
                         Value = 50000m,
-                        Date = new DateTime(2014, 1, 1),
-                        Origin = null
+                        Year = 2014,
+                        Source = null
                     }
                 },
                 PersonalInsolvency = new Insolvency
