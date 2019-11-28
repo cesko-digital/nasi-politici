@@ -328,3 +328,5 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+NasiPolitici/Content/nasi-politici-fe/package-lock.json
+NasiPolitici/Content/nasi-politici-fe/yarn.lock
