@@ -4,8 +4,8 @@ namespace HlidacStatu.NasiPolitici.Data
 {
     public interface IDataContext
     {
-        PersonSearchResult Search(string text);
+        PersonSearchResult SearchPersons(string text);
         
-        Person GetPoliticianData(string id);
+        Person GetPerson(string id);
     }
 }
