@@ -9,15 +9,15 @@ namespace HlidacStatu.NasiPolitici.Helpers
 {
     public static class ControllerActions
     {
-        public static async Task<(HttpStatusCode StatusCode, object Body)> WithErrorHandling<TResult>(Func<Task<TResult>> action)
+        public static async Task<ActionResult> WithErrorHandling<TResult>(Func<Task<TResult>> action)
         {
             try
             {
-                return (HttpStatusCode.OK, await action());
+                return new ActionResult(HttpStatusCode.OK, await action());
             }
             catch (Exception e)
             {
-                return (HttpStatusCode.InternalServerError, new
+                return new ActionResult(HttpStatusCode.InternalServerError, new
                 {
                     Error = e.Message
                 });

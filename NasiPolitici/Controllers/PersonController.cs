@@ -36,13 +36,13 @@ namespace HlidacStatu.NasiPolitici.Controllers
 
         private async Task<ObjectResult> CacheableAsync<TResult>(Func<Task<TResult>> func)
         {
-            var (statusCode, body) = await ControllerActions.WithErrorHandling(async () => await cache.GetOrCreateAsync(Request.Path, async entry =>
+            var actionResult = await ControllerActions.WithErrorHandling(async () => await cache.GetOrCreateAsync(Request.Path, async entry =>
             {
                 entry.SetAbsoluteExpiration(CacheDuration);
                 return await func();
             }));
 
-            return StatusCode((int) statusCode, body);
+            return StatusCode((int) actionResult.StatusCode, actionResult.Body);
         }
     }
 }
