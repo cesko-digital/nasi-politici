@@ -24,23 +24,25 @@ namespace HlidacStatu.NasiPolitici.Controllers
 
     public class PersonController : Controller
     {
-        private readonly IDataProvider dataProvider;
-        private IMemoryCache cache;
+        private readonly IMemoryCache cache;
 
         public PersonController(IMemoryCache cache)
-        {
-            this.cache = cache;
+        {        
+            this.cache = cache;            
         }
 
         public PersonSearchResult Search(string query)
         {
-            var searchResult = dataProvider.Search(query);
             return new PersonSearchResult
             {
-                Persons = searchResult.Items.Select(p => new PersonSummary
+                Persons = new[]
                 {
-                    FirstName = "Karel"
-                }).ToList()
+                    new PersonSummary
+                    {
+                        FirstName = "sdfsdf",
+                        BirthDate = DateTime.UtcNow
+                    }
+                }.ToList()
             };
         }
 
