@@ -4,7 +4,6 @@ import { ThemeProvider, DefaultTheme } from "styled-components";
 import { GlobalStyle } from "./style";
 import { MainLayout } from "./components";
 import { createMuiTheme } from "@material-ui/core/styles";
-import { UiPlayground } from "./components/ui/search-input";
 
 const defaultTheme: DefaultTheme = createMuiTheme();
 

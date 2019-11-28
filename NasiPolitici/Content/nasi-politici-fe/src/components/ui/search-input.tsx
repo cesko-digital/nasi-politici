@@ -33,10 +33,9 @@ export const SearchSubmitButton = styled.button`
   white-space: nowrap;
 
   font-weight: 600;
-  font-size: 21px;
   line-height: 100%;
 
-  padding: 20px 18px 19px 18px;
+  padding: 0px 18px;
 `;
 
 export const SearchInput: React.FunctionComponent = props => {
