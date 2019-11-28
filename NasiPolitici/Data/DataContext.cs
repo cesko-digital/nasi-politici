@@ -15,12 +15,13 @@ namespace HlidacStatu.NasiPolitici.Data
     {
         private readonly string apiUrl;
         private readonly string authenticationToken;
-        private static readonly Lazy<HttpClient> client = new Lazy<HttpClient>(() => new HttpClient());
-
-        public DataContext(IConfiguration configuration)
+        private readonly HttpClient client;
+        
+        public DataContext(IConfiguration configuration, HttpClient httpClient)
         {
             apiUrl = configuration["ApiUrl"];
             authenticationToken = configuration["AuthenticationToken"];
+            client = httpClient;
         }
                              
         public async Task<PersonSearchResult> SearchPersons(string text)
@@ -45,7 +46,7 @@ namespace HlidacStatu.NasiPolitici.Data
             using (var request = new HttpRequestMessage(HttpMethod.Get, $"{apiUrl}{endpoint}"))
             {
                 request.Headers.Authorization = new AuthenticationHeaderValue("Token", authenticationToken);
-                using (var response = await client.Value.SendAsync(request))
+                using (var response = await client.SendAsync(request))
                 {
                     response.EnsureSuccessStatusCode();
                     var result = await response.Content.ReadAsStringAsync();
