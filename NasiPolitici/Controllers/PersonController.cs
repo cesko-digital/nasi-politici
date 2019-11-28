@@ -19,6 +19,7 @@ namespace HlidacStatu.NasiPolitici.Controllers
             this.cache = cache;            
         }
 
+        [Route("Person/Search/{query}")]
         public PersonSearchResult Search(string query)
         {
             return cache.GetOrCreate($"search_{query}", entry =>
@@ -28,6 +29,7 @@ namespace HlidacStatu.NasiPolitici.Controllers
             });
         }
 
+        [Route("Person/Detail/{id}")]
         public Person Detail(string id)
         {
             return cache.GetOrCreate($"detail_{id}", entry =>
