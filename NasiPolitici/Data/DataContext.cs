@@ -15,13 +15,14 @@ namespace HlidacStatu.NasiPolitici.Data
     {
         private readonly string apiUrl;
         private readonly string authenticationToken;
+        private static readonly Lazy<HttpClient> client = new Lazy<HttpClient>(() => new HttpClient());
 
         public DataContext(IConfiguration configuration)
         {
             apiUrl = configuration["ApiUrl"];
             authenticationToken = configuration["AuthenticationToken"];
         }
-        
+                             
         public async Task<PersonSearchResult> SearchPersons(string text)
         {
             var url = $"find?query={HttpUtility.UrlEncode(text)}";
@@ -38,20 +39,20 @@ namespace HlidacStatu.NasiPolitici.Data
             var person = await GetDataAsync<Dto.Person>(url);
             return Transform(person);
         }
-        
+
         private async Task<T> GetDataAsync<T>(string endpoint)
         {
-            using (var client = new HttpClient())
+            using (var request = new HttpRequestMessage(HttpMethod.Get, $"{apiUrl}{endpoint}"))
             {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", authenticationToken);
-                using (var response = await client.GetAsync($"{apiUrl}{endpoint}"))
+                request.Headers.Authorization = new AuthenticationHeaderValue("Token", authenticationToken);
+                using (var response = await client.Value.SendAsync(request))
                 {
                     response.EnsureSuccessStatusCode();
                     using (var content = response.Content)
                     {
                         var result = await content.ReadAsStringAsync();
                         return JsonConvert.DeserializeObject<T>(result);
-                    }    
+                    }
                 }
             }
         }

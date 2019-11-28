@@ -1,19 +1,19 @@
-using System;
-using System.Threading.Tasks;
 using HlidacStatu.NasiPolitici.Data;
-using HlidacStatu.NasiPolitici.Models;
+using HlidacStatu.NasiPolitici.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using System;
+using System.Threading.Tasks;
 
 namespace HlidacStatu.NasiPolitici.Controllers
 {
     [Route("person")]
     public class PersonController : Controller
     {
+        private static readonly TimeSpan CacheDuration = TimeSpan.FromHours(1);
+
         private readonly IDataContext dataContext;
         private readonly IMemoryCache cache;
-
-        private static readonly TimeSpan CacheDuration = TimeSpan.FromHours(1);
 
         public PersonController(IDataContext dataContext, IMemoryCache cache)
         {
@@ -22,23 +22,26 @@ namespace HlidacStatu.NasiPolitici.Controllers
         }
 
         [Route("search/{query}")]
-        public Task<PersonSearchResult> Search(string query)
+        public Task<ObjectResult> Search(string query)
         {
-            return cache.GetOrCreateAsync($"search_{query}", async entry =>
-            {
-                entry.SetAbsoluteExpiration(CacheDuration);
-                return await dataContext.SearchPersons(query);
-            });
+            return CachedAsync(() => dataContext.SearchPersons(query));
         }
 
         [Route("detail/{id}")]
-        public Task<Person> Detail(string id)
+        public Task<ObjectResult> Detail(string id)
         {
-            return cache.GetOrCreateAsync($"detail_{id}", async entry =>
+            return CachedAsync(() => dataContext.GetPerson(id));
+        }
+
+        private async Task<ObjectResult> CachedAsync<TResult>(Func<Task<TResult>> func)
+        {
+            var actionResult = await ControllerActions.WithErrorHandlingAsync(async () => await cache.GetOrCreateAsync(Request.Path, async entry =>
             {
                 entry.SetAbsoluteExpiration(CacheDuration);
-                return await dataContext.GetPerson(id);
-            });
+                return await func();
+            }));
+
+            return StatusCode((int) actionResult.StatusCode, actionResult.Body);
         }
     }
 }
