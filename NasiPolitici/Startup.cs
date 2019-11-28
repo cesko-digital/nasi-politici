@@ -1,10 +1,11 @@
 using HlidacStatu.NasiPolitici.Data;
-using HlidacStatu.NasiPolitici.Data.Dummy;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using System.IO;
 
 namespace HlidacStatu.NasiPolitici
 {
@@ -20,7 +21,7 @@ namespace HlidacStatu.NasiPolitici
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton(typeof(IDataContext), typeof(DummyDataContext));
+            services.AddSingleton(typeof(IDataContext), typeof(DataContext));
             services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation();
         }
@@ -39,11 +40,15 @@ namespace HlidacStatu.NasiPolitici
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}");
+            });
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Content")),
+                RequestPath = "/Content"
             });
         }
     }

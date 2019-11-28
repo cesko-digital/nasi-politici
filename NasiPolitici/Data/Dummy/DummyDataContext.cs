@@ -1,14 +1,15 @@
 ﻿using HlidacStatu.NasiPolitici.Models;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace HlidacStatu.NasiPolitici.Data.Dummy
 {
     public class DummyDataContext : IDataContext
     {
-        public PersonSearchResult SearchPersons(string text)
+        public Task<PersonSearchResult> SearchPersons(string text)
         {
-            return new PersonSearchResult
+            return Task.FromResult(new PersonSearchResult
             {
                 Persons = new List<PersonSummary>
                 {
@@ -22,12 +23,12 @@ namespace HlidacStatu.NasiPolitici.Data.Dummy
                         Description = "\u003cp\u003eMiroslav Kalousek (*1960 ),poslanec (od 2013)  - Poslanecká sněmovna PČR (2013 - 2017)\nposlanec (od 2010 do 2013)  - Poslanecká sněmovna PČR (2010 - 2013).\u003c/p\u003e\u003cp\u003eMiroslav Kalousek mezi roky 2014-17 sponzoroval TOP 09 v celkové výši 400 000  Kč. Nejvyšší sponzorský dar byl ve výši 300 000  Kč.\u003c/p\u003e"
                     }
                 }
-            };
+            });
         }
 
-        public Person GetPerson(string id)
+        public Task<Person> GetPerson(string id)
         {
-            return new Person
+            return Task.FromResult(new Person
             {
                 Id = "andrej-babis",
                 TitlePrefix = null,
@@ -74,8 +75,43 @@ namespace HlidacStatu.NasiPolitici.Data.Dummy
                         Origin = null
                     }
                 },
-                Insolvencies = new List<Insolvency>()
-            };
+                PersonalInsolvency = new Insolvency
+                {
+                    Debtor = new InsolvencyActor
+                    {
+                        Count = 2,
+                        Url = "https://www.hlidacstatu.cz/insolvence/hledat?Q=dluznici.osobaId:andrej-babis"
+                    },
+                    Creditor = new InsolvencyActor
+                    {
+                        Count = 4,
+                        Url = "https://www.hlidacstatu.cz/insolvence/hledat?Q=veritele.osobaId:andrej-babis"
+                    },
+                    Bailiff = new InsolvencyActor
+                    {
+                        Count = 6,
+                        Url = "https://www.hlidacstatu.cz/insolvence/hledat?Q=spravci.osobaId:andrej-babis"
+                    }
+                },
+                CompanyInsolvency = new Insolvency
+                {
+                    Debtor = new InsolvencyActor
+                    {
+                        Count = 12,
+                        Url = "https://www.hlidacstatu.cz/insolvence/hledat?Q=dluznici.osobaId:andrej-babis"
+                    },
+                    Creditor = new InsolvencyActor
+                    {
+                        Count = 14,
+                        Url = "https://www.hlidacstatu.cz/insolvence/hledat?Q=veritele.osobaId:andrej-babis"
+                    },
+                    Bailiff = new InsolvencyActor
+                    {
+                        Count = 61,
+                        Url = "https://www.hlidacstatu.cz/insolvence/hledat?Q=spravci.osobaId:andrej-babis"
+                    }
+                }
+            });
         }
     }
 }

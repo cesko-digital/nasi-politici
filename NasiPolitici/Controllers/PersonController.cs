@@ -1,8 +1,7 @@
-﻿using HlidacStatu.NasiPolitici.Data;
+using HlidacStatu.NasiPolitici.Data;
 using HlidacStatu.NasiPolitici.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
-using System;
 
 namespace HlidacStatu.NasiPolitici.Controllers
 {
@@ -21,22 +20,22 @@ namespace HlidacStatu.NasiPolitici.Controllers
         }
 
         [Route("search/{query}")]
-        public PersonSearchResult Search(string query)
+        public Task<PersonSearchResult> Search(string query)
         {
-            return cache.GetOrCreate($"search_{query}", entry =>
+            return cache.GetOrCreateAsync($"search_{query}", async entry =>
             {
                 entry.SetAbsoluteExpiration(CacheDuration);
-                return dataContext.SearchPersons(query);
+                return await dataContext.SearchPersons(query);
             });
         }
 
         [Route("detail/{id}")]
-        public Person Detail(string id)
+        public Task<Person> Detail(string id)
         {
-            return cache.GetOrCreate($"detail_{id}", entry =>
+            return cache.GetOrCreateAsync($"detail_{id}", async entry =>
             {
                 entry.SetAbsoluteExpiration(CacheDuration);
-                return dataContext.GetPerson(id);
+                return await dataContext.GetPerson(id);
             });
         }
     }
