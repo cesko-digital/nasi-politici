@@ -12,9 +12,12 @@ namespace HlidacStatu.NasiPolitici.Data
 {
     public class DataContext : IDataContext
     {
+        private const string ApiUrl = "https://www.hlidacstatu.cz/api/v1/nasipolitici_";
+        private const string AuthenticationToken = "2b5eb6327814415ab88d71234fb3cc0a";
+        
         public async Task<PersonSearchResult> SearchPersons(string text)
         {
-            var url = $"https://www.hlidacstatu.cz/api/v1/nasipolitici_find?query={HttpUtility.UrlEncode(text)}";
+            var url = $"{ApiUrl}find?query={HttpUtility.UrlEncode(text)}";
             var results = await GetDataAsync<List<Dto.PersonSummary>>(url);
             return new PersonSearchResult
             {
@@ -24,7 +27,7 @@ namespace HlidacStatu.NasiPolitici.Data
 
         public async Task<Person> GetPerson(string id)
         {
-            var url = $"https://www.hlidacstatu.cz/api/v1/nasipolitici_getdata?id={HttpUtility.UrlEncode(id)}";
+            var url = $"{ApiUrl}getdata?id={HttpUtility.UrlEncode(id)}";
             var person = await GetDataAsync<Dto.Person>(url);
             return Transform(person);
         }
@@ -33,7 +36,7 @@ namespace HlidacStatu.NasiPolitici.Data
         {
             using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", "2b5eb6327814415ab88d71234fb3cc0a");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", AuthenticationToken);
                 using (var response = await client.GetAsync(endpoint))
                 {
                     response.EnsureSuccessStatusCode();
@@ -70,12 +73,15 @@ namespace HlidacStatu.NasiPolitici.Data
                 LastName = person.Surname,
                 Status = person.Status,
                 Description = person.Description,
+                CompanyConnection = person.CompanyConnection,
                 BirthDate = person.BirthDate,
                 DeathDate = person.DeathDate,
                 PhotoUrl = person.Photo,
                 SourceUrl = person.Source,
                 Roles = person.Roles.Select(Transform).ToList(),
-                Donations = person.Sponsor.Select(Transform).ToList()
+                Donations = person.Sponsor.Select(Transform).ToList(),
+                PersonalInsolvency = Transform(person.InsolvencyPerson),
+                CompanyInsolvency = Transform(person.InsolvencyCompany)
             };
         }
 
@@ -103,7 +109,24 @@ namespace HlidacStatu.NasiPolitici.Data
 
         private Insolvency Transform(Dto.Insolvency insolvency)
         {
-            return new Insolvency();
+            return new Insolvency
+            {
+                Debtor = new InsolvencyActor
+                {
+                    Count = insolvency.DebtorCount,
+                    Url = insolvency.DebtorLink
+                },
+                Creditor = new InsolvencyActor
+                {
+                    Count = insolvency.CreditorCount,
+                    Url = insolvency.CreditorLink
+                },
+                Bailiff = new InsolvencyActor
+                {
+                    Count = insolvency.BailiffCount,
+                    Url = insolvency.BailiffLink
+                }
+            };
         }
     }
 }

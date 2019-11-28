@@ -1,8 +1,10 @@
 ﻿using HlidacStatu.NasiPolitici.Data;
 using HlidacStatu.NasiPolitici.Helpers;
+using HlidacStatu.NasiPolitici.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using System;
+using System.Threading.Tasks;
 
 namespace HlidacStatu.NasiPolitici.Controllers
 {
@@ -21,24 +23,26 @@ namespace HlidacStatu.NasiPolitici.Controllers
         }
 
         [Route("search/{query}")]
-        public JsonResult Search(string query)
+        public Task<ObjectResult> Search(string query)
         {
-            return Cacheable(() => dataContext.SearchPersons(query));
+            return CacheableAsync<PersonSearchResult>(() => dataContext.SearchPersons(query));
         }
 
         [Route("detail/{id}")]
-        public JsonResult Detail(string id)
+        public Task<ObjectResult> Detail(string id)
         {
-            return Cacheable(() => dataContext.GetPerson(id));
+            return CacheableAsync<Person>(() => dataContext.GetPerson(id));
         }
 
-        private JsonResult Cacheable<TResult>(Func<TResult> func)
+        private async Task<ObjectResult> CacheableAsync<TResult>(Func<Task<TResult>> func)
         {
-            return Json(ControllerActions.WithErrorHandling(() => cache.GetOrCreate(Request.Path, entry =>
+            var (statusCode, body) = await ControllerActions.WithErrorHandling(async () => await cache.GetOrCreateAsync(Request.Path, async entry =>
             {
                 entry.SetAbsoluteExpiration(CacheDuration);
-                return func();
-            })));
+                return await func();
+            }));
+
+            return StatusCode((int) statusCode, body);
         }
     }
 }
