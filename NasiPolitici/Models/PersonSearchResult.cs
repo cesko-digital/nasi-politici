@@ -2,7 +2,7 @@
 
 namespace HlidacStatu.NasiPolitici.Models
 {
-    public class PersonSearchResult
+    public sealed class PersonSearchResult
     {
         public List<PersonSummary> Persons { get; set; }
     }

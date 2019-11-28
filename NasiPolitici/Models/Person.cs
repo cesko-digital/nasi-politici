@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HlidacStatu.NasiPolitici.Models
 {
-    public class Person
+    public sealed class Person
     {
         public string Id { get; set; }
         public string TitlePrefix { get; set; }
