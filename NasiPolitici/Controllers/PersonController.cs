@@ -1,5 +1,5 @@
 ﻿using HlidacStatu.NasiPolitici.Data;
-using HlidacStatu.NasiPolitici.Models;
+using HlidacStatu.NasiPolitici.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using System;
@@ -20,24 +20,25 @@ namespace HlidacStatu.NasiPolitici.Controllers
             this.cache = cache;
         }
 
-        [Route("search/{query}")]
-        public PersonSearchResult Search(string query)
+        private JsonResult Cacheable<TInput, TResult>(TInput input, Func<TInput, string> cacheKeyBuilder, Func<TInput, TResult> func)
         {
-            return cache.GetOrCreate($"search_{query}", entry =>
+            return Json(Actions.Do(() => cache.GetOrCreate(cacheKeyBuilder(input), entry =>
             {
                 entry.SetAbsoluteExpiration(CacheDuration);
-                return dataContext.SearchPersons(query);
-            });
+                return func(input);
+            })));
+        }
+
+        [Route("search/{query}")]
+        public JsonResult Search(string query)
+        {
+            return Cacheable(query, q => $"search_{q}", dataContext.SearchPersons);
         }
 
         [Route("detail/{id}")]
-        public Person Detail(string id)
+        public JsonResult Detail(string id)
         {
-            return cache.GetOrCreate($"detail_{id}", entry =>
-            {
-                entry.SetAbsoluteExpiration(CacheDuration);
-                return dataContext.GetPerson(id);
-            });
+            return Cacheable(id, i => $"detail_{i}", dataContext.GetPerson);
         }
     }
 }
