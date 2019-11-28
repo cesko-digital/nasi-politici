@@ -1,5 +1,5 @@
 export * from './Home';
-export * from './PoliticianDetail';
+export * from './PersonDetail';
 export * from './SearchResults';
 export * from './MainLayout';
 export * from './Media';

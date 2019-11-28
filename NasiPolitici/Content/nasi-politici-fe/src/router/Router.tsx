@@ -5,7 +5,7 @@ import {
     About,
     Media,
     Home,
-    PoliticianDetail,
+    PersonDetail,
     SearchResults,
     MainLayout
 } from '../components/pages';
@@ -28,7 +28,7 @@ const Router = () => {
                         {query ? <SearchResults /> : <Home />}
                     </Route>
                     <Route path={`${POLITIC_DETAIL_ROUTE}/:id`}>
-                        <PoliticianDetail />
+                        <PersonDetail />
                     </Route>
                 </MainLayout>
             </Switch>
