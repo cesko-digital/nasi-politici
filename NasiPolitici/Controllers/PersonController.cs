@@ -20,15 +20,6 @@ namespace HlidacStatu.NasiPolitici.Controllers
             this.cache = cache;
         }
 
-        private JsonResult Cacheable<TInput, TResult>(TInput input, Func<TInput, string> cacheKeyBuilder, Func<TInput, TResult> func)
-        {
-            return Json(Actions.Do(() => cache.GetOrCreate(cacheKeyBuilder(input), entry =>
-            {
-                entry.SetAbsoluteExpiration(CacheDuration);
-                return func(input);
-            })));
-        }
-
         [Route("search/{query}")]
         public JsonResult Search(string query)
         {
@@ -39,6 +30,15 @@ namespace HlidacStatu.NasiPolitici.Controllers
         public JsonResult Detail(string id)
         {
             return Cacheable(id, i => $"detail_{i}", dataContext.GetPerson);
+        }
+
+        private JsonResult Cacheable<TInput, TResult>(TInput input, Func<TInput, string> cacheKeyBuilder, Func<TInput, TResult> func)
+        {
+            return Json(Actions.Do(() => cache.GetOrCreate(cacheKeyBuilder(input), entry =>
+            {
+                entry.SetAbsoluteExpiration(CacheDuration);
+                return func(input);
+            })));
         }
     }
 }

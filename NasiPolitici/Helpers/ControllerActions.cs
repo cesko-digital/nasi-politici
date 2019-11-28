@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace HlidacStatu.NasiPolitici.Helpers
 {
-    public static class Actions
+    public static class ControllerActions
     {
-        public static object Do<TResult>(Func<TResult> action)
+        public static object WithErrorHandling<TResult>(Func<TResult> action)
         {
             try
             {
