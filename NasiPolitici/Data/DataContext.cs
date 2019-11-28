@@ -25,7 +25,7 @@ namespace HlidacStatu.NasiPolitici.Data
                              
         public async Task<PersonSearchResult> SearchPersons(string text)
         {
-            var url = $"find?query={HttpUtility.UrlEncode(text)}";
+            var url = $"nasipolitici_find?query={HttpUtility.UrlEncode(text)}";
             var results = await GetDataAsync<List<Dto.PersonSummary>>(url);
             return new PersonSearchResult
             {
@@ -35,7 +35,7 @@ namespace HlidacStatu.NasiPolitici.Data
 
         public async Task<Person> GetPerson(string id)
         {
-            var url = $"getdata?id={HttpUtility.UrlEncode(id)}";
+            var url = $"nasipolitici_getdata?id={HttpUtility.UrlEncode(id)}";
             var person = await GetDataAsync<Dto.Person>(url);
             return Transform(person);
         }
