@@ -14,7 +14,8 @@ namespace HlidacStatu.NasiPolitici.Data
     {
         private const string ApiUrl = "https://www.hlidacstatu.cz/api/v1/nasipolitici_";
         private const string AuthenticationToken = "2b5eb6327814415ab88d71234fb3cc0a";
-        
+        private static readonly Lazy<HttpClient> client = new Lazy<HttpClient>(() => new HttpClient());
+                             
         public async Task<PersonSearchResult> SearchPersons(string text)
         {
             var url = $"{ApiUrl}find?query={HttpUtility.UrlEncode(text)}";
@@ -31,20 +32,20 @@ namespace HlidacStatu.NasiPolitici.Data
             var person = await GetDataAsync<Dto.Person>(url);
             return Transform(person);
         }
-        
+
         private async Task<T> GetDataAsync<T>(string endpoint)
         {
-            using (var client = new HttpClient())
+            using (var request = new HttpRequestMessage(HttpMethod.Get, endpoint))
             {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", AuthenticationToken);
-                using (var response = await client.GetAsync(endpoint))
+                request.Headers.Authorization = new AuthenticationHeaderValue("Token", AuthenticationToken);
+                using (var response = await client.Value.SendAsync(request))
                 {
                     response.EnsureSuccessStatusCode();
                     using (var content = response.Content)
                     {
                         var result = await content.ReadAsStringAsync();
                         return JsonConvert.DeserializeObject<T>(result);
-                    }    
+                    }
                 }
             }
         }
@@ -57,7 +58,7 @@ namespace HlidacStatu.NasiPolitici.Data
                 FirstName = summary.Name,
                 LastName = summary.Surname,
                 Description = summary.Description,
-                BirthDate = new DateTime(summary.BirthYear, 1, 1),
+                BirthYear = summary.BirthYear,
                 PhotoUrl = summary.Photo
             };
         }
@@ -85,14 +86,14 @@ namespace HlidacStatu.NasiPolitici.Data
             };
         }
 
-        private Role Transform(Dto.Role role)
+        private Role Transform(Dto.PersonalRole personalRole)
         {
             return new Role
             {
-                Name = role.Name,
-                Organization = role.Organization,
-                StartDate = role.StartDate,
-                EndDate = role.EndDate
+                Name = personalRole.Role,
+                Organization = personalRole.Organisation,
+                StartDate = personalRole.DateFrom,
+                EndDate = personalRole.DateTo
             };
         }
 
@@ -101,9 +102,9 @@ namespace HlidacStatu.NasiPolitici.Data
             return new Donation
             {
                 Party = donation.Party,
-                Origin = donation.Origin,
-                Value = donation.Value,
-                Date = donation.Date
+                Source = donation.Source,
+                Value = donation.DonatedAmount,
+                Year = donation.Year
             };
         }
 
