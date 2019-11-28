@@ -41,11 +41,8 @@ namespace HlidacStatu.NasiPolitici.Data
                 using (var response = await client.Value.SendAsync(request))
                 {
                     response.EnsureSuccessStatusCode();
-                    using (var content = response.Content)
-                    {
-                        var result = await content.ReadAsStringAsync();
-                        return JsonConvert.DeserializeObject<T>(result);
-                    }
+                    var result = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<T>(result);                    
                 }
             }
         }
