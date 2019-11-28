@@ -23,21 +23,21 @@ namespace HlidacStatu.NasiPolitici.Controllers
         [Route("search/{query}")]
         public JsonResult Search(string query)
         {
-            return Cacheable(query, q => $"search_{q}", dataContext.SearchPersons);
+            return Cacheable(() => dataContext.SearchPersons(query));
         }
 
         [Route("detail/{id}")]
         public JsonResult Detail(string id)
         {
-            return Cacheable(id, i => $"detail_{i}", dataContext.GetPerson);
+            return Cacheable(() => dataContext.GetPerson(id));
         }
 
-        private JsonResult Cacheable<TInput, TResult>(TInput input, Func<TInput, string> cacheKeyBuilder, Func<TInput, TResult> func)
+        private JsonResult Cacheable<TResult>(Func<TResult> func)
         {
-            return Json(ControllerActions.WithErrorHandling(() => cache.GetOrCreate(cacheKeyBuilder(input), entry =>
+            return Json(ControllerActions.WithErrorHandling(() => cache.GetOrCreate(Request.Path, entry =>
             {
                 entry.SetAbsoluteExpiration(CacheDuration);
-                return func(input);
+                return func();
             })));
         }
     }
