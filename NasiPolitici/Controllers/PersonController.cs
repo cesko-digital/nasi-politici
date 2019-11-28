@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 ﻿using HlidacStatu.NasiPolitici.Data;
 using HlidacStatu.NasiPolitici.Helpers;
+=======
+using HlidacStatu.NasiPolitici.Data;
+using System;
+using System.Threading.Tasks;
+using HlidacStatu.NasiPolitici.Models;
+>>>>>>> origin
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using System;
