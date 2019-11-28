@@ -1,8 +1,12 @@
 import React from 'react';
-import PoliticianCard from '../app/PoliticianCard/PoliticianCard';
+import Header from '../ui/shared/header';
+
 
 export const Home = () => {
     return (
-        <div>I'm home</div>
+        <div>
+            <Header />
+            I am home
+        </div>
     );
 }
