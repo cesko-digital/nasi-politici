@@ -34,12 +34,14 @@ namespace HlidacStatu.NasiPolitici.Data.Dummy
                 TitleSuffix = null,
                 FirstName = "Andrej",
                 LastName = "Babiš",
+                Status = "Politik",
+                Description = "\u003cp\u003eAndrej Babiš (*1963 - ✝1951),poslanec (od 2017)  - Poslanecká sněmovna PČR (2017 - 2021)\nposlanec (od 2013 do 2017)  - Poslanecká sněmovna PČR (2013 - 2017).\u003c/p\u003e\u003cp\u003e205 firem, ve kterých se angažuje, v roce 2019 získaly zakázky za celkem 9 mld. Kč.\u003c/p\u003e\u003cp\u003eAndrej Babiš mezi roky 2012-18 sponzoroval 2 polit. strany v celkové výši 19 mil. Kč. Nejvyšší sponzorský dar byl ve výši 3 mil. Kč.\u003c/p\u003e",
                 BirthDate = new DateTime(1957, 1, 1),
                 DeathDate = null,
-                Status = "Politik",
                 PhotoUrl = "https://www.hlidacstatu.cz/Content/Img/personNoPhoto.png",
-                Description = "\u003cp\u003eAndrej Babiš (*1963 - ✝1951),poslanec (od 2017)  - Poslanecká sněmovna PČR (2017 - 2021)\nposlanec (od 2013 do 2017)  - Poslanecká sněmovna PČR (2013 - 2017).\u003c/p\u003e\u003cp\u003e205 firem, ve kterých se angažuje, v roce 2019 získaly zakázky za celkem 9 mld. Kč.\u003c/p\u003e\u003cp\u003eAndrej Babiš mezi roky 2012-18 sponzoroval 2 polit. strany v celkové výši 19 mil. Kč. Nejvyšší sponzorský dar byl ve výši 3 mil. Kč.\u003c/p\u003e",
-                Roles = new List<Role> {
+                SourceUrl = "https://www.hlidacstatu.cz/osoba/andrej-babis",
+                Roles = new List<Role>
+                {
                     new Role
                     {
                         Name = "člen",
@@ -55,8 +57,6 @@ namespace HlidacStatu.NasiPolitici.Data.Dummy
                         Organization = "KSC"
                     },
                 },
-                Insolvencies = new List<Insolvency>(),
-                SourceUrl = "https://www.hlidacstatu.cz/osoba/andrej-babis",
                 Donations = new List<Donation>
                 {
                     new Donation
@@ -73,7 +73,8 @@ namespace HlidacStatu.NasiPolitici.Data.Dummy
                         Date = new DateTime(2014, 1, 1),
                         Origin = null
                     }
-                }
+                },
+                Insolvencies = new List<Insolvency>()
             };
         }
     }
