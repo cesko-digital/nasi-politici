@@ -1,5 +1,9 @@
 import React from 'react';
+import { useParams } from 'react-router';
 
-export const PoliticianDetail = () => (
-    <div>I am politican detail</div>
-);
+export const PoliticianDetail = () => {
+    let { id } = useParams();
+    return (
+        <div>I am politican detail {id}</div>
+    )
+};
