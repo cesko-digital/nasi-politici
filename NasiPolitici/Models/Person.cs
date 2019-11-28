@@ -21,6 +21,6 @@ namespace HlidacStatu.NasiPolitici.Models
 
         public List<object> Roles { get; set; }
         public List<Donation> Donations { get; set; }
-        public List<object> Insolvencies { get; set; }
+        public List<Insolvency> Insolvencies { get; set; }
     }
 }
