@@ -5,6 +5,10 @@
     <RootNamespace>HlidacStatu.NasiPolitici</RootNamespace>
     <CopyRazorGenerateFilesToPublishDirectory>true</CopyRazorGenerateFilesToPublishDirectory>
   </PropertyGroup>
+  
+  <PropertyGroup>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+  </PropertyGroup>
 
   <ItemGroup>
     <Folder Include="wwwroot\images\faces\" />

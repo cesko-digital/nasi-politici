@@ -67,9 +67,15 @@ namespace HlidacStatu.NasiPolitici.Data
             };
         }
         
-        private Role Transform(ExternalApiData.Dto.Role summary)
+        private Role Transform(ExternalApiData.Dto.Role role)
         {
-            return new Role();
+            return new Role
+            {
+                Name = role.Name,
+                Organization = role.Organization,
+                StartDate = role.StartDate,
+                EndDate = role.EndDate
+            };
         }
         
         private Donation Transform(ExternalApiData.Dto.Donation donation)
@@ -83,7 +89,7 @@ namespace HlidacStatu.NasiPolitici.Data
             };
         }
         
-        private Insolvency Transform(ExternalApiData.Dto.Insolvency summary)
+        private Insolvency Transform(ExternalApiData.Dto.Insolvency insolvency)
         {
             return new Insolvency();
         }

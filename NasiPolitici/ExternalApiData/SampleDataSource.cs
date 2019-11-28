@@ -39,24 +39,20 @@ namespace HlidacStatu.NasiPolitici.ExternalApiData
                 PhotoUrl = "https://www.hlidacstatu.cz/Content/Img/personNoPhoto.png",
                 Description = "\u003cp\u003eAndrej Babiš (*1963 - ✝1951),poslanec (od 2017)  - Poslanecká sněmovna PČR (2017 - 2021)\nposlanec (od 2013 do 2017)  - Poslanecká sněmovna PČR (2013 - 2017).\u003c/p\u003e\u003cp\u003e205 firem, ve kterých se angažuje, v roce 2019 získaly zakázky za celkem 9 mld. Kč.\u003c/p\u003e\u003cp\u003eAndrej Babiš mezi roky 2012-18 sponzoroval 2 polit. strany v celkové výši 19 mil. Kč. Nejvyšší sponzorský dar byl ve výši 3 mil. Kč.\u003c/p\u003e",
                 Roles = new List<Role> {
-//                    {
-//                        "role": "člen",
-//                        "datumOd": "\/Date(315529200000)\/",
-//                        "datumDo": null,
-//                        "organizace": "KSČ"
-//                    },
-//                    {
-//                        "role": "člen",
-//                        "datumOd": "\/Date(315529200000)\/",
-//                        "datumDo": null,
-//                        "organizace": "Komunistická strana Slovenska"
-//                    },
-//                    {
-//                        "role": "zakladatel",
-//                        "datumOd": "\/Date(1293836400000)\/",
-//                        "datumDo": null,
-//                        "organizace": "ANO 2011, o.s."
-//                    }
+                    new Role
+                    {
+                        Name = "člen",
+                        StartDate = new DateTime(2018, 2, 4),
+                        EndDate = null,
+                        Organization = "ANO 2011"
+                    },
+                    new Role
+                    {
+                        Name = "člen",
+                        StartDate = new DateTime(1968, 2, 4),
+                        EndDate = new DateTime(2018, 10, 4),
+                        Organization = "KSC"
+                    },
                 },
                 Insolvencies = new List<Insolvency>(),
                 SourceUrl = "https://www.hlidacstatu.cz/osoba/andrej-babis",
