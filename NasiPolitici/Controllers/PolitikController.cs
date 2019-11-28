@@ -13,30 +13,12 @@ namespace HlidacStatu.NasiPolitici.Controllers
     public class PolitikController: Controller
     {
         private readonly ILogger<PolitikController> _logger;
-        private readonly DataContext _context;
+        private readonly IDataContext _context;
 
-        public PolitikController(ILogger<PolitikController> logger, DataContext context )
+        public PolitikController(ILogger<PolitikController> logger, IDataContext context)
         {
             _logger = logger;
             _context = context;
-        }
-
-        public async Task<IActionResult> Politik(string id)
-        {
-            
-            if (string.IsNullOrWhiteSpace(id))
-                return NotFound();
-
-            PolitikViewModel viewModel = new PolitikViewModel();
-
-            viewModel.Osoba = await _context.Osoby
-                .Include(os => os._InsolvenceOsoba)
-                .Include(os => os._InsolvenceFirma)
-                .Include(os => os._Oznameni)
-                .Where(os => os.NameId == id).FirstOrDefaultAsync();
-
-
-            return View(viewModel);
         }
     }
 }

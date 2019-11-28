@@ -16,16 +16,6 @@ namespace HlidacStatu.NasiPolitici
         public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
-
-            // hack to populate inMemoryDb
-            using (var scope = host.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-                var context = services.GetRequiredService<DataContext>();
-
-                MemoryData.Initialize(services);
-            }
-
             host.Run();
         }
 
