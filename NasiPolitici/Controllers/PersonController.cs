@@ -10,6 +10,8 @@ namespace HlidacStatu.NasiPolitici.Controllers
     {
         private readonly IDataContext dataContext;
         private readonly IMemoryCache cache;
+        
+        private static readonly TimeSpan CacheDuration = TimeSpan.FromHours(1);
 
         public PersonController(IDataContext dataContext, IMemoryCache cache)
         {
@@ -19,9 +21,9 @@ namespace HlidacStatu.NasiPolitici.Controllers
 
         public PersonSearchResult Search(string query)
         {
-            return cache.GetOrCreate($"query_{query}", entry =>
+            return cache.GetOrCreate($"search_{query}", entry =>
             {
-                entry.SetAbsoluteExpiration(TimeSpan.FromSeconds(5));
+                entry.SetAbsoluteExpiration(CacheDuration);
                 return dataContext.SearchPersons(query);
             });
         }
@@ -30,7 +32,7 @@ namespace HlidacStatu.NasiPolitici.Controllers
         {
             return cache.GetOrCreate($"detail_{id}", entry =>
             {
-                entry.SetAbsoluteExpiration(TimeSpan.FromSeconds(5));
+                entry.SetAbsoluteExpiration(CacheDuration);
                 return dataContext.GetPerson(id);
             });
         }
