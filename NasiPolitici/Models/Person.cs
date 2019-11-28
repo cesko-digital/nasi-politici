@@ -19,7 +19,7 @@ namespace HlidacStatu.NasiPolitici.Models
         public string PhotoUrl { get; set; }
         public string SourceUrl { get; set; }
 
-        public List<object> Roles { get; set; }
+        public List<Role> Roles { get; set; }
         public List<Donation> Donations { get; set; }
         public List<Insolvency> Insolvencies { get; set; }
     }
