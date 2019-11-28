@@ -1,7 +1,6 @@
-using System;
-using System.Collections.Generic;
+﻿using System;
 
-namespace HlidacStatu.NasiPolitici.Models
+namespace HlidacStatu.NasiPolitici.ExternalApiData.Dto
 {
     public sealed class Role
     {

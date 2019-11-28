@@ -1,4 +1,5 @@
 using HlidacStatu.NasiPolitici.Data;
+using HlidacStatu.NasiPolitici.ExternalApiData;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -21,8 +22,8 @@ namespace HlidacStatu.NasiPolitici
         public void ConfigureServices(IServiceCollection services)
         {
             //Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-            services.AddDbContext<DataContext>(options =>
-                options.UseInMemoryDatabase("whatever"));
+            services.AddSingleton(typeof(IDataContext), typeof(CachedDataContext));
+            services.AddSingleton(typeof(IDataSource), typeof(SampleDataSource));
             services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation();
         }

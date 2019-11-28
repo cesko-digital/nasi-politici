@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace HlidacStatu.NasiPolitici.Models
+namespace HlidacStatu.NasiPolitici.ExternalApiData.Dto
 {
     public sealed class Person
     {
