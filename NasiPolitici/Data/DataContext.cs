@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
+using HlidacStatu.NasiPolitici.Helpers;
 using HlidacStatu.NasiPolitici.Models;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -66,7 +67,7 @@ namespace HlidacStatu.NasiPolitici.Data
 
         private bool IsNotFound(string responseContent)
         {
-            var errorResponse = JsonConvert.DeserializeObject<Dto.ErrorResponse>(responseContent);
+            var errorResponse = JsonHelpers.DeserializeSafe<Dto.ErrorResponse>(responseContent);
             var errorExists = errorResponse != null && !errorResponse.Valid && errorResponse.Error != null;
             var error = errorResponse?.Error;
 
