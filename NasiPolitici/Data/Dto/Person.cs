@@ -20,7 +20,7 @@ namespace HlidacStatu.NasiPolitici.Data.Dto
         public string Photo { get; set; }
         public string Source { get; set; }
 
-        public List<Role> Roles { get; set; }
+        public List<PersonalRole> Roles { get; set; }
         public List<Donation> Sponsor { get; set; }
         
         public Insolvency InsolvencyPerson { get; set; }

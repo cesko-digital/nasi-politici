@@ -9,7 +9,7 @@ namespace HlidacStatu.NasiPolitici.Models
         public string LastName { get; set; }
         public string Description { get; set; }
 
-        public DateTime BirthDate { get; set; }
+        public int BirthYear { get; set; }
 
         public string PhotoUrl { get; set; }
     }
