@@ -1,14 +1,15 @@
-﻿using System;
+﻿using HlidacStatu.NasiPolitici.Models;
+using System;
 using System.Collections.Generic;
-using HlidacStatu.NasiPolitici.ExternalApiData.Dto;
 
-namespace HlidacStatu.NasiPolitici.ExternalApiData
+namespace HlidacStatu.NasiPolitici.Data.Dummy
 {
-    public class SampleDataSource : IDataSource
+    public class DummyDataContext : IDataContext
     {
-        public PersonSearchResult Search(string text)
+        public PersonSearchResult SearchPersons(string text)
         {
-            return new PersonSearchResult {
+            return new PersonSearchResult
+            {
                 Persons = new List<PersonSummary>
                 {
                     new PersonSummary
@@ -23,8 +24,8 @@ namespace HlidacStatu.NasiPolitici.ExternalApiData
                 }
             };
         }
-        
-        public Person GetPoliticianData(string id)
+
+        public Person GetPerson(string id)
         {
             return new Person
             {

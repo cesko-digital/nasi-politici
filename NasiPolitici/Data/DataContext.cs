@@ -1,39 +1,21 @@
-﻿using System.Linq;
-using HlidacStatu.NasiPolitici.ExternalApiData;
-using HlidacStatu.NasiPolitici.Models;
+﻿using HlidacStatu.NasiPolitici.Models;
+using System.Linq;
 
 namespace HlidacStatu.NasiPolitici.Data
 {
-    public class CachedDataContext : IDataContext
+    public class DataContext : IDataContext
     {
-        private IDataSource dataSource;
-        
-        public CachedDataContext()
+        public PersonSearchResult SearchPersons(string text)
         {
-            dataSource = new SampleDataSource();
-        }
-        
-        public PersonSearchResult Search(string text)
-        {
-            var data = dataSource.Search(text);
-            return Transform(data);
+            return null;
         }
 
-        public Person GetPoliticianData(string id)
+        public Person GetPerson(string id)
         {
-            var data = dataSource.GetPoliticianData(id);
-            return Transform(data);
+            return null;
         }
 
-        private PersonSearchResult Transform(ExternalApiData.Dto.PersonSearchResult searchResult)
-        {
-            return new PersonSearchResult
-            {
-                Persons = searchResult.Persons.Select(Transform).ToList()
-            };
-        }
-        
-        private PersonSummary Transform(ExternalApiData.Dto.PersonSummary summary)
+        private PersonSummary Transform(Dto.PersonSummary summary)
         {
             return new PersonSummary
             {
@@ -45,8 +27,8 @@ namespace HlidacStatu.NasiPolitici.Data
                 PhotoUrl = summary.PhotoUrl
             };
         }
-        
-        private Person Transform(ExternalApiData.Dto.Person person)
+
+        private Person Transform(Dto.Person person)
         {
             return new Person
             {
@@ -66,8 +48,8 @@ namespace HlidacStatu.NasiPolitici.Data
                 Insolvencies = person.Insolvencies.Select(Transform).ToList()
             };
         }
-        
-        private Role Transform(ExternalApiData.Dto.Role role)
+
+        private Role Transform(Dto.Role role)
         {
             return new Role
             {
@@ -77,8 +59,8 @@ namespace HlidacStatu.NasiPolitici.Data
                 EndDate = role.EndDate
             };
         }
-        
-        private Donation Transform(ExternalApiData.Dto.Donation donation)
+
+        private Donation Transform(Dto.Donation donation)
         {
             return new Donation
             {
@@ -88,8 +70,8 @@ namespace HlidacStatu.NasiPolitici.Data
                 Date = donation.Date
             };
         }
-        
-        private Insolvency Transform(ExternalApiData.Dto.Insolvency insolvency)
+
+        private Insolvency Transform(Dto.Insolvency insolvency)
         {
             return new Insolvency();
         }

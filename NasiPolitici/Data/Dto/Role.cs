@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HlidacStatu.NasiPolitici.ExternalApiData.Dto
+namespace HlidacStatu.NasiPolitici.Data.Dto
 {
     public sealed class Role
     {
