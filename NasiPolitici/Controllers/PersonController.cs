@@ -7,21 +7,6 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace HlidacStatu.NasiPolitici.Controllers
 {
-    public class ExternalSearchResult
-    {
-        public List<object> Items { get; }
-    }
-    public class ExternalDetail
-    {
-
-    }
-
-    public interface IDataProvider
-    {
-        ExternalSearchResult Search(string query);
-        ExternalDetail GetDetail(string id);
-    }
-
     public class PersonController : Controller
     {
         private readonly IMemoryCache cache;
@@ -35,14 +20,14 @@ namespace HlidacStatu.NasiPolitici.Controllers
         {
             return new PersonSearchResult
             {
-                Persons = new[]
+                Persons = new List<PersonSummary>
                 {
                     new PersonSummary
                     {
                         FirstName = "sdfsdf",
                         BirthDate = DateTime.UtcNow
                     }
-                }.ToList()
+                }
             };
         }
 
