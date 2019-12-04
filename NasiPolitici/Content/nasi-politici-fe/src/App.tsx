@@ -14,7 +14,7 @@ const App: React.FC = () => {
                     <Router />
                 </ThemeProvider>
             </MuiThemeProvider>
-        </React.Fragment>
+    </React.Fragment>
     );
 };
 

@@ -13,11 +13,6 @@ interface RowProps {
     data: string,
 }
 
-interface TableProps {
-    rows: [RowProps],
-    sectionName: string,
-}
-
 export const WrapperListItem = styled(ListItem)`
     flex-wrap: wrap;
     flex: 1 1 50%;
