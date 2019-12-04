@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import styled from 'styled-components';
+import { AppBar } from '../../ui/AppBar';
 
 interface MainLayoutProps {
     children: ReactNode;
@@ -15,8 +16,7 @@ const FullHeightGrid = styled(Grid)`
 const MainLayout = ({ children }: MainLayoutProps) => (
     <FullHeightGrid container justify="space-between">
         <Grid item xs={12}>
-            {/* Navbar */}
-            <Paper>xs=12</Paper>
+            <AppBar />        
         </Grid>
         <FullHeightGrid container justify="center" alignItems="center">
             <Grid item xs={6}>
