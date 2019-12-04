@@ -12,6 +12,7 @@ interface PoliticianDetailsProps {
 
 const PoliticianDetails: React.FC<PoliticianDetailsProps> = ({ firstName, lastName, photoUrl, description }) => {
   const isDesktop = useDesktop();
+
   return (
     <Box display="flex">
       <PoliticianAvatar image={photoUrl} />
