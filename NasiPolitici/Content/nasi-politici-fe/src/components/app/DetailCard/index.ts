@@ -1,1 +1,1 @@
-export { default as PoliticianDetails } from './PoliticianDetails';
+export { default as DetailCard } from './DetailCard';
