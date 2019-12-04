@@ -19,7 +19,7 @@ const MainLayout = ({ children }: MainLayoutProps) => (
             <AppBar />        
         </Grid>
         <FullHeightGrid container justify="center" alignItems="center">
-            <Grid item xs={6}>
+            <Grid item xs={10} lg={6}>
                 {children}
             </Grid>
         </FullHeightGrid>

@@ -25,7 +25,7 @@ const Router = () => {
                         <Media />
                     </Route>
                     <Route exact path="/">
-                        {query ? <SearchResults /> : <Home />}
+                        {!query ? <SearchResults /> : <Home />}
                     </Route>
                     <Route path={`${POLITIC_DETAIL_ROUTE}/:id`}>
                         <PoliticianDetail />

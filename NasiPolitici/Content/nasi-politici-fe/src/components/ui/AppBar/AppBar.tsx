@@ -23,7 +23,7 @@ const LeftAppBarSide = styled.div`
 
 const AppBar = () => {
     const isDesktop = useDesktop();
-
+    console.log(isDesktop);
         return (
             <MuiAppBar color="default">
                 <Toolbar>

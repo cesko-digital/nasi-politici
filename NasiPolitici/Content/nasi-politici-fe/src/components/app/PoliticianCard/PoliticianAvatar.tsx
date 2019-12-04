@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { withTheme } from 'styled-components'
 import { Theme } from '@material-ui/core/styles'
+
 interface PoliticianAvatarProps {
   image: string,
   theme: Theme,
