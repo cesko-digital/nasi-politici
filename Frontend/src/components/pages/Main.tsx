@@ -30,14 +30,16 @@ class Main extends Component<RouteComponentProps, IState> {
       id: search
     })
       .then(response => {
-        response.json().then(json => {
-          console.log("json", json);
-          this.data = json;
+        if (response !== undefined) {
+          response.json().then(json => {
+            console.log("json", json);
+            this.data = json;
 
-          this.setState(prevState => ({
-            loaded: true
-          }));
-        });
+            this.setState(prevState => ({
+              loaded: true
+            }));
+          });
+        }
       })
       .catch(e => console.log("error: ", e));
   }

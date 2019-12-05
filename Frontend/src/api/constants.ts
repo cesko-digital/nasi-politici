@@ -1,6 +1,7 @@
 export enum Entities {
     SearchResult = 'searchResult',
-    Person = 'person'
+    Person = 'person',
+    News = 'news'
 };
 
 export const BASE_URL = 'http://localhost:5000';
