@@ -89,6 +89,8 @@ class Person extends React.Component<RouteComponentProps, IState> {
           className="list-group-item list-group-item-action"
           key={data.web}
           href={data.web}
+          target="_blank"
+          rel="noopener noreferrer"
         >
           <Moment format="DD.MM." date={dateToFormat}/>
           &nbsp;
