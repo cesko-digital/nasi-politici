@@ -1,6 +1,4 @@
-# NasiPolitici-Hackaton
-
-Projekt vytvořený pro účel Česko.Digital Hackday (2019/11/28)
+# NasiPolitici
 
 ## Predispozice
 
@@ -10,19 +8,31 @@ Pokud chcete upravovat projekt, tak poté bude zapotřebí si nainstalovat [.NET
 
 ## Způsob spuštění
 
+- Naklonovat git repo
+
+### Build
+
+`dotnet publish` v rootu
+
+vystup zobrazi cestu, kam to vybuildil.
+
 ### Windows
 
-- naklonovat Git Repo
-- ve složce `_publish` spustit `NasiPolitici.exe`
+- ve složce viz vyse spustit `NasiPolitici.exe`
 
-### Linux
+### Linux/Mac
 
-- naklonovat Git Repo
-- ve složce `_publish` spustit příkazem `dotnet NasiPolitici.dll`
+- ve složce viz vyse spustit příkazem `dotnet NasiPolitici.dll`
 
 ## Zobrazení stránek
 
 V browseru pak stačí zadat následující adresu http://localhost:5000/
+
+priklad:
+
+search `https://localhost:5001/person/search/babis`
+
+detail `https://localhost:5001/person/detail/andrej-babis`
 
 ## Způsob otevření projektu
 
