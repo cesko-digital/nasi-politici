@@ -9,6 +9,8 @@ const typographyColors = {
     fourd: '#1A1A1A'
 };
 
+export const theme = createMuiTheme();
+
 const overrides = {
     MuiTypography: {
         h1: {
@@ -16,14 +18,23 @@ const overrides = {
             fontSize: '33px',
             lineHeight: 1.2,
             color: typographyColors.primary,
-            fontWeight: 600
+            fontWeight: 600,
+            [theme.breakpoints.down('sm')]: {
+                fontSize: '17px',
+                lineHeight: 1.5,
+                fontWeight: 600,
+            },
         },
         h3: {
             fontFamily: 'Source Serif Pro',
             fontSize: '17px',
             lineHeight: 1.4,
-            color: typographyColors.third
-        },
+            color: typographyColors.third,
+            [theme.breakpoints.down('sm')]: {
+               fontSize: '17px',
+                lineHeight: 1.4,
+            },
+        }, 
         h4: {
             fontFamily: 'Source Serif Pro',
             fontSize: '17px',
@@ -36,7 +47,12 @@ const overrides = {
             fontSize: '21px',
             lineHeight: 1,
             color: typographyColors.fourd,
-            fontWeight: 500
+            fontWeight: 500,
+            textTransform: 'uppercase',
+            [theme.breakpoints.down('sm')]: {
+                fontSize: '17px',
+                lineHeight: 1,
+             },
         },
         subtitle1: {
             fontFamily: 'Source Serif Pro',
@@ -59,6 +75,8 @@ const overrides = {
     }
 };
 
+// @ts-ignore
 export const DEFAULT_THEME: DefaultTheme = createMuiTheme({
     overrides
 });
+

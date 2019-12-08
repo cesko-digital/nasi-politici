@@ -23,6 +23,7 @@ namespace HlidacStatu.NasiPolitici
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpClient<IDataContext, DataContext>();
+            services.AddHttpClient<INewsDataContext, NewsDataContext>();
             services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation();
         }

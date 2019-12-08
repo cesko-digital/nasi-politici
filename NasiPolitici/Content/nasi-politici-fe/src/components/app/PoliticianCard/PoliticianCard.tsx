@@ -2,8 +2,7 @@ import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import PoliticianDetails from './PoliticianDetails';
-import { Grid, Link } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
+import { Grid} from '@material-ui/core';
 
 interface PoliticianCardProps {
   person: {
@@ -13,22 +12,18 @@ interface PoliticianCardProps {
     description: string,
     birthDate: number,
     photoUrl: string,
+    politicalParty: string;
   }
 }
 
-const PoliticianCard: React.FC<PoliticianCardProps> = ({ person: { firstName, lastName, description, photoUrl } }) => {
+const PoliticianCard: React.FC<PoliticianCardProps> = ({ person }) => {
 
   return (
     <Card>
       <CardContent>
         <Grid container>
-          <Grid item lg={10}>
-            <PoliticianDetails firstName={firstName} lastName={lastName} photoUrl={photoUrl} description={description} />
-          </Grid>
-          <Grid item lg={2} sm={12} >
-            <Box display='flex' flexGrow={1} justifyContent="flex-end">
-              <Link>show profile</Link>
-            </Box>
+          <Grid item sm={10}>
+            <PoliticianDetails {...person} />
           </Grid>
         </Grid>
       </CardContent>
