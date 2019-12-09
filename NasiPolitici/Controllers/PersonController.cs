@@ -10,7 +10,7 @@ namespace HlidacStatu.NasiPolitici.Controllers
     [Route("person")]
     public class PersonController : Controller
     {
-        private static readonly TimeSpan CacheDuration = TimeSpan.FromHours(1);
+        private static readonly TimeSpan CacheDuration = TimeSpan.FromHours(4);
 
         private readonly IDataContext dataContext;
         private readonly INewsDataContext newsDataContext;

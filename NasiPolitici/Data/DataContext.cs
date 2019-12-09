@@ -87,7 +87,9 @@ namespace HlidacStatu.NasiPolitici.Data
                 LastName = summary.Surname,
                 Description = summary.Description,
                 BirthYear = summary.BirthYear,
-                PhotoUrl = summary.Photo
+                PhotoUrl = summary.Photo,
+                CurrentParty = summary.CurrentParty
+               
             };
         }
 
@@ -110,7 +112,8 @@ namespace HlidacStatu.NasiPolitici.Data
                 Roles = person.Roles.Select(Transform).ToList(),
                 Donations = person.Sponsor.Select(Transform).ToList(),
                 PersonalInsolvency = Transform(person.InsolvencyPerson),
-                CompanyInsolvency = Transform(person.InsolvencyCompany)
+                CompanyInsolvency = Transform(person.InsolvencyCompany),
+                CurrentParty = person.CurrentParty
             };
         }
 

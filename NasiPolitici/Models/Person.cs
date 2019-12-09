@@ -24,5 +24,6 @@ namespace HlidacStatu.NasiPolitici.Models
         public List<Donation> Donations { get; set; }
         public Insolvency PersonalInsolvency { get; set; }
         public Insolvency CompanyInsolvency { get; set; }
+        public string CurrentParty { get; set; }
     }
 }

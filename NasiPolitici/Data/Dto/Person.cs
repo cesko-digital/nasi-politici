@@ -25,5 +25,7 @@ namespace HlidacStatu.NasiPolitici.Data.Dto
         
         public Insolvency InsolvencyPerson { get; set; }
         public Insolvency InsolvencyCompany { get; set; }
+
+        public string CurrentParty { get; set; }
     }
 }

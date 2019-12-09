@@ -12,5 +12,6 @@ namespace HlidacStatu.NasiPolitici.Models
         public int BirthYear { get; set; }
 
         public string PhotoUrl { get; set; }
+        public string CurrentParty { get; set; }
     }
 }
