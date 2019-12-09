@@ -2,15 +2,21 @@ import React from "react";
 import styled from "styled-components";
 import { Box, Input, InputAdornment } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
+import { RouteComponentProps, withRouter } from "react-router";
 
-const SearchInputContainer = styled(Box)`
+const texts = {
+  defaultPlaceholder: "Kalousek",
+  defaultButtonLabel: "Hledat politika/čku"
+};
+
+const Container = styled(Box)`
   display: flex;
   flex-direction: row;
   font-size: 17px;
   height: 40px;
 `;
 
-export const SearchInputText = styled(Input)`
+export const TextInput = styled(Input)`
   background: #ffffff;
   border: 1px solid #b3b3b3;
   box-sizing: border-box;
@@ -18,9 +24,10 @@ export const SearchInputText = styled(Input)`
   border-radius: 20px 0px 0px 20px;
   max-height: 100%;
   padding-left: 10px;
+  flex-grow: 1;
 `;
 
-SearchInputText.defaultProps = {
+TextInput.defaultProps = {
   disableUnderline: true,
   placeholder: "Kalousek",
   startAdornment: (
@@ -30,7 +37,7 @@ SearchInputText.defaultProps = {
   )
 };
 
-export const SearchInputButton = styled.button`
+export const SearchButton = styled.button`
   border-radius: 0px 20px 20px 0px;
   border: none;
   color: white;
@@ -40,11 +47,23 @@ export const SearchInputButton = styled.button`
   max-height: 100%;
 `;
 
-export const SearchInput: React.FunctionComponent = props => {
+type ISearchInputProps = RouteComponentProps<{}> & {
+  buttonLabel?: string;
+  inputPlaceholder?: string;
+  value?: string | null | undefined;
+};
+
+export const SearchInputImpl: React.FunctionComponent<ISearchInputProps> = ({
+  buttonLabel = texts.defaultButtonLabel,
+  inputPlaceholder = texts.defaultPlaceholder,
+  value = ""
+}) => {
   return (
-    <SearchInputContainer>
-      <SearchInputText />
-      <SearchInputButton>Hledat&nbsp;politika/čku</SearchInputButton>
-    </SearchInputContainer>
+    <Container>
+      <TextInput placeholder={inputPlaceholder} value={value} />
+      <SearchButton>{buttonLabel}</SearchButton>
+    </Container>
   );
 };
+
+export const SearchInput = withRouter(SearchInputImpl);
