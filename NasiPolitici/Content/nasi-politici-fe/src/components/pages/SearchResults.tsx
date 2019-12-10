@@ -2,6 +2,7 @@ import React from "react";
 import { getQueryParams } from "../../utils";
 import PoliticianCard from "../app/PoliticianCard/PoliticianCard";
 import { SearchInput } from "../ui/SearchInput";
+import styled from "styled-components";
 
 const person = {
   id: "miroslav-kalousek",
@@ -14,6 +15,10 @@ const person = {
   photoUrl: "https://www.hlidacstatu.cz/Content/Img/personNoPhoto.png"
 };
 
+const QueryWrapper = styled.div`
+  margin-top: 20px;
+`;
+
 export const SearchResults = () => {
   const query = getQueryParams().query as string;
   return (
@@ -21,7 +26,8 @@ export const SearchResults = () => {
       <div>
         <SearchInput value={query} />
       </div>
-      <div>I am search results for {query}</div>
+
+      <QueryWrapper>I am search results for {query}</QueryWrapper>
       <PoliticianCard person={person} />
     </React.Fragment>
   );

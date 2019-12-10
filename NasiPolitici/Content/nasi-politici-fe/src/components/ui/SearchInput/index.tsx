@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Box, Input, InputAdornment } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { RouteComponentProps, withRouter } from "react-router";
+import { useDesktop } from "../../../hooks";
+import { If } from "../../If";
 
 const texts = {
   defaultPlaceholder: "Kalousek",
@@ -16,7 +18,7 @@ const Container = styled(Box)`
   height: 40px;
 `;
 
-export const TextInput = styled(Input)`
+const DesktopTextInput = styled(Input)`
   background: #ffffff;
   border: 1px solid #b3b3b3;
   box-sizing: border-box;
@@ -27,14 +29,18 @@ export const TextInput = styled(Input)`
   flex-grow: 1;
 `;
 
-TextInput.defaultProps = {
+DesktopTextInput.defaultProps = {
   disableUnderline: true,
-  placeholder: "Kalousek",
   startAdornment: (
     <InputAdornment position="start">
       <SearchIcon />
     </InputAdornment>
   )
+};
+
+const MobileTextInput = styled(DesktopTextInput)``;
+MobileTextInput.defaultProps = {
+  startAdornment: null
 };
 
 export const SearchButton = styled.button`
@@ -58,10 +64,24 @@ export const SearchInputImpl: React.FunctionComponent<ISearchInputProps> = ({
   inputPlaceholder = texts.defaultPlaceholder,
   value = ""
 }) => {
+  const [inputValue, setInputValue] = useState(value || "");
+  const isDesktop = useDesktop();
+  const TextInputComponent = isDesktop ? DesktopTextInput : MobileTextInput;
   return (
     <Container>
-      <TextInput placeholder={inputPlaceholder} value={value} />
-      <SearchButton>{buttonLabel}</SearchButton>
+      <TextInputComponent
+        placeholder={inputPlaceholder}
+        value={inputValue}
+        onChange={event => setInputValue(event.target.value)}
+      />
+
+      <SearchButton>
+        <If condition={!isDesktop}>
+          <SearchIcon />
+        </If>
+
+        <If condition={isDesktop}>{buttonLabel}</If>
+      </SearchButton>
     </Container>
   );
 };
