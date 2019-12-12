@@ -1,4 +1,5 @@
 using HlidacStatu.NasiPolitici.Data;
+using HlidacStatu.NasiPolitici.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -6,7 +7,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using System;
 using System.IO;
+using System.Net.Http.Headers;
 
 namespace HlidacStatu.NasiPolitici
 {
@@ -22,10 +25,24 @@ namespace HlidacStatu.NasiPolitici
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHttpClient<IDataContext, DataContext>();
             services.AddHttpClient<INewsDataContext, NewsDataContext>();
-            services.AddControllersWithViews()
-                .AddRazorRuntimeCompilation();
+
+            services.AddHttpClient<IPoliticianService, PoliticianService>(config =>
+            {
+                config.BaseAddress = new Uri(Configuration.GetValue<string>("HlidacApiUrl"));
+                config.DefaultRequestHeaders.Authorization =
+                    new AuthenticationHeaderValue("Token", Configuration.GetValue<string>("HlidacAuthenticationToken"));
+
+            });
+
+            services.AddHttpClient<INewsService, NewsService>(config =>
+            {
+                config.BaseAddress = new Uri(Configuration.GetValue<string>("CzFinApiUrl"));
+            });
+
+            services.AddMemoryCache();
+
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,11 +58,18 @@ namespace HlidacStatu.NasiPolitici
                 app.UseHsts();
             }
 
+            app.UseCors(config => 
+            {
+                config.AllowAnyOrigin();
+                config.AllowAnyHeader();
+                config.AllowAnyMethod();
+            });
+
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}");
+                endpoints.MapControllers();
             });
             app.UseStaticFiles(new StaticFileOptions
             {

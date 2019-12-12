@@ -1,65 +1,65 @@
 using HlidacStatu.NasiPolitici.Data;
 using HlidacStatu.NasiPolitici.Helpers;
+using HlidacStatu.NasiPolitici.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using System;
+using System.Net.Mime;
 using System.Threading.Tasks;
 
 namespace HlidacStatu.NasiPolitici.Controllers
 {
+    [ApiController]
     [Route("person")]
     public class PersonController : Controller
     {
         private static readonly TimeSpan CacheDuration = TimeSpan.FromHours(4);
 
-        private readonly IDataContext dataContext;
-        private readonly INewsDataContext newsDataContext;
-        private readonly IMemoryCache cache;
+        private readonly IPoliticianService _politicianService;
+        private readonly INewsService _newsService;
+        private readonly IMemoryCache _cache;
 
-        public PersonController(IDataContext dataContext, INewsDataContext newsDataContext, IMemoryCache cache)
+        public PersonController(IPoliticianService politicianService, INewsService newsService, IMemoryCache cache)
         {
-            this.dataContext = dataContext;
-            this.newsDataContext = newsDataContext;
-            this.cache = cache;
+            _politicianService = politicianService;
+            _newsService = newsService;
+            _cache = cache;
         }
 
         [Route("search/{query}")]
-        public Task<ObjectResult> Search(string query)
+        public async Task<IActionResult> Search(string query)
         {
-            Response?.Headers?.Add("Access-Control-Allow-Origin", "*");
-            Response?.Headers?.Add("Access-Control-Allow-Methods", "GET");
-            Response?.Headers?.Add("Access-Control-Allow-Headers", "Content-Type");
-            return CachedAsync(() => dataContext.SearchPersons(query));
+            var result = CacheAsync(() => _politicianService.SearchPeople(query));
+
+            return Content(await result, MediaTypeNames.Application.Json);
         }
 
         [Route("detail/{id}")]
-        public Task<ObjectResult> Detail(string id)
+        public async Task<IActionResult> Detail(string id)
         {
-            Response?.Headers?.Add("Access-Control-Allow-Origin", "*");
-            Response?.Headers?.Add("Access-Control-Allow-Methods", "GET");
-            Response?.Headers?.Add("Access-Control-Allow-Headers", "Content-Type");
-            return CachedAsync(() => dataContext.GetPerson(id));
+            var result = CacheAsync(() => _politicianService.GetPerson(id));
+
+            return Content(await result, MediaTypeNames.Application.Json);
         }
 
         [Route("news/{id}")]
-        public Task<ObjectResult> News(string id)
+        public async Task<IActionResult> News(string id)
         {
-            Response?.Headers?.Add("Access-Control-Allow-Origin", "*");
-            Response?.Headers?.Add("Access-Control-Allow-Methods", "GET");
-            Response?.Headers?.Add("Access-Control-Allow-Headers", "Content-Type");
+            var result = CacheAsync(() => _newsService.LatestNews(id));
 
-            return CachedAsync(() => newsDataContext.LatestNews(id));
+            return Content(await result, MediaTypeNames.Application.Json);
         }
 
-        private async Task<ObjectResult> CachedAsync<TResult>(Func<Task<TResult>> func)
+        private async Task<TResult> CacheAsync<TResult>(Func<Task<TResult>> func)
         {
-            var actionResult = await ControllerActions.WithErrorHandlingAsync(() => cache.GetOrCreateAsync(Request.Path, entry =>
+            var result = await _cache.GetOrCreateAsync(Request.Path, entry =>
             {
                 entry.SetAbsoluteExpiration(CacheDuration);
                 return func();
-            }));
+            });
 
-            return StatusCode((int)actionResult.StatusCode, actionResult.Body);
+            return result;
         }
+        
     }
 }
