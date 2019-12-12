@@ -1,8 +1,6 @@
-using HlidacStatu.NasiPolitici.Data;
 using HlidacStatu.NasiPolitici.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
@@ -25,8 +23,6 @@ namespace HlidacStatu.NasiPolitici
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHttpClient<INewsDataContext, NewsDataContext>();
-
             services.AddHttpClient<IPoliticianService, PoliticianService>(config =>
             {
                 config.BaseAddress = new Uri(Configuration.GetValue<string>("HlidacApiUrl"));

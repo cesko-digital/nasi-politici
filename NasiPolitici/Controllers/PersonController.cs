@@ -1,5 +1,3 @@
-using HlidacStatu.NasiPolitici.Data;
-using HlidacStatu.NasiPolitici.Helpers;
 using HlidacStatu.NasiPolitici.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
