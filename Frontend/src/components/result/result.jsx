@@ -12,11 +12,11 @@ function ResultRow({result}) {
     <Link className={styles.resultRow} to={`/detail/${result.id}`}>
       <div className={styles.resultItem}>
         <div className={styles.pictureWrapper} >
-          <ProfilePicture src={result.photoUrl} alt={result.lastName}/>
+          <ProfilePicture src={result.photo} alt={result.surname}/>
         </div>
         <div className={styles.dataWrapper}>
           <div className={styles.nameWrapper}>
-            <div className={styles.name}>{result.firstName} {result.lastName}</div>
+            <div className={styles.name}>{result.name} {result.surname}</div>
             <div className={styles.initialsWrapper}>
               {result.birthYear && <div className={styles.birthYear}>*{result.birthYear}</div>}
               <div className={styles.divider} />

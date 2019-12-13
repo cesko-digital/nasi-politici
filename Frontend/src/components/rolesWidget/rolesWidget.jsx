@@ -32,7 +32,7 @@ const Roles = ({rolesGroups, showAll, rolesCount, toggleShowAllRoles}) => {
           return (
             <div className={styles.tableSection} key={index}>
               <h3 className={styles.subtitle}>{group.year === 9999 ? 'Dosud' : group.year}</h3>
-              {group.items.map((item, index) => <TableRow name={item.name} value={item.organization} key={index}/>)}
+              {group.items.map((item, index) => <TableRow name={item.role} value={item.organisation} key={index}/>)}
             </div>
           )
         })}

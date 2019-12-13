@@ -7,24 +7,24 @@ export const getSearchResults = store => store.app.searchResults
 export const isSearchLoading = store => store.app.loadingSearch
 export const isDetailLoading = store => store.app.loadingDetail
 export const getDetailData = store => store.app.detail
-export const getPhotoUrl = store => getDetailData(store).photoUrl
+export const getPhotoUrl = store => getDetailData(store).photo
 export const getDetailNewsRaw = store => store.app.detailNews
 export const getShowAllDonations = store => store.app.showAllDonations
 export const getShowAllRoles = store => store.app.showAllRoles
-export const getPersonalInsolvency = store => getDetailData(store).personalInsolvency
-export const getCompanyInsolvency = store => getDetailData(store).companyInsolvency
+export const getPersonalInsolvency = store => getDetailData(store).insolvencyPerson
+export const getCompanyInsolvency = store => getDetailData(store).insolvencyCompany
 export const wasSearched = store => !!getSearchResults(store)
 
 export const getDetailNews = createSelector(getDetailNewsRaw, (news) => {
   return news.map(a => ({
     ...a,
-    source: a.source.replace(new RegExp('^www.'), ''),
+    source: a.Source.replace(new RegExp('^www.'), ''),
     time: (new Date(a.time*1000)).toLocaleDateString()
   }))
 })
 export const getFullName = store => {
 	const detail = getDetailData(store)
-	return `${detail.titlePrefix} ${detail.firstName} ${detail.lastName} ${detail.titleSuffix}`.trim() // TODO lip naformatovat
+	return `${detail.namePrefix} ${detail.name} ${detail.surname} ${detail.nameSuffix}`.trim() // TODO lip naformatovat
 }
 
 export const getBirthYear = store => {
@@ -59,7 +59,7 @@ const groupByYear = (data) => {
   })
 }
 
-export const getDonationsRaw = store => getDetailData(store).donations || []
+export const getDonationsRaw = store => getDetailData(store).sponsor || []
 export const getDonationsCount = store => getDonationsRaw(store).length
 export const getDonations = createSelector(getDonationsRaw, getShowAllDonations, (donations, showAll) => {
   let donationsToGroup = [...donations]
@@ -76,7 +76,7 @@ export const getRolesCount = store => getRolesRaw(store).length
 export const getRoles = createSelector(getRolesRaw, getShowAllRoles, (roles, showAll) => {
   let rolesMap = roles.map((role) => ({
     ...role,
-    year: role.endDate ? role.endDate.substring(0,4) : 9999
+    year: role.dateTo ? role.dateTo.substring(0,4) : 9999
   }))
   if (!showAll) {
     const sorted = rolesMap.sort((a, b) => b.year - a.year)

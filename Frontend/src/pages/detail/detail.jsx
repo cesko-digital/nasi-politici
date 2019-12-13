@@ -51,15 +51,15 @@ function Detail(props) {
           </div>
           <div className={styles.body}>
             <div className={styles.menu}>
-              <Link to='#overview' className={styles.link}>Přehled</Link>
+              <Link to='' className={styles.link}>Přehled</Link>
               <Link to='' className={styles.link}>Kariéra Politika</Link>
               <Link to='' className={styles.link}>Angažovanost</Link>
-              <Link to='#media' className={styles.link}>Mediální Obraz</Link>
+              <Link to='' className={styles.link}>Mediální Obraz</Link>
             </div>
             <div className={styles.detail}>
               <div className={styles.section}>
                 <div className={styles.titleWrapper}>
-                  <h1 id='overview' className={styles.title}>Přehled</h1>
+                  <h1 className={styles.title}>Přehled</h1>
                   <Divider className={styles.titleDivider}/>
                 </div>
                 <div className={styles.widgets}>
@@ -97,7 +97,7 @@ function Detail(props) {
               </div>
               <div className={styles.section}>
                 <div className={styles.titleWrapper}>
-                  <h1 className={styles.title} id='lala'>Kariéra</h1>
+                  <h1 className={styles.title}>Kariéra</h1>
                   <Divider className={styles.titleDivider}/>
                 </div>
                 <div className={styles.widgets}>
@@ -107,7 +107,7 @@ function Detail(props) {
                 </div>
                 <div className={styles.section}>
                   <div className={styles.titleWrapper}>
-                    <h1 id="media" className={styles.title}>Mediální obraz</h1>
+                    <h1 className={styles.title}>Mediální obraz</h1>
                     <Divider className={styles.titleDivider}/>
                   </div>
                   <div className={styles.widgets}>

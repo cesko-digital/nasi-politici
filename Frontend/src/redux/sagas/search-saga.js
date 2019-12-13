@@ -26,7 +26,7 @@ function* handleSearch(action) {
   yield put(searchStarted())
   yield put(push('/'))
   try {
-    const {persons} = yield call(api.search, query)
+    const persons = yield call(api.search, query)
     yield put(setSearchResults(persons))
   } catch (error) {
     yield put(setSearchResults([]))
@@ -40,7 +40,7 @@ function* handleLoadDetail(action) {
   try {
     const detail = yield call(api.fetchDetail, action.payload.id)
     yield put(setDetail(detail))
-    const {news} = yield call(api.fetchNews, action.payload.id)
+    const news = yield call(api.fetchNews, action.payload.id)
     yield put(setDetailNews(news))
   } catch (error) {
     // TODO asi vymyslet nejaky jednotny error handling idealne i s designem

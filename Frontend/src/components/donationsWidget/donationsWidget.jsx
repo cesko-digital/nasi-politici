@@ -33,7 +33,7 @@ const Donations = ({donationsGroups, toggleShowAll, showAll, donationsCount}) =>
         return (
           <div className={styles.tableSection} key={index}>
             <h3 className={styles.subtitle}>{group.year}</h3>
-            {group.items.map((item, index) => <TableRow name={item.party} value={item.value} key={index} />)}
+            {group.items.map((item, index) => <TableRow name={item.party} value={item.donatedAmount} key={index} />)}
           </div>
         )
       })}

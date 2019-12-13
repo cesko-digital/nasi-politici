@@ -11,18 +11,18 @@ import {
 import styles from './insolvencyWidget.module.scss'
 
 
-function InsolvencyRow(insolvency) {
+function InsolvencyRow({title, personalCount, companyCount}) {
   return (
     <div>
-      <h3 className={styles.subtitle}>je {insolvency.title}</h3>
+      <h3 className={styles.subtitle}>je {title}</h3>
       <div>
         <div className={styles.tableRow}>
           <div>jako fyzická osoba</div>
-          <div>{insolvency.personalInsolvency.count}</div>
+          <div>{personalCount}</div>
         </div>
         <div className={styles.tableRow}>
           <div>skrz právnickou osobu</div>
-          <div>{insolvency.companyInsolvency.count}</div>
+          <div>{companyCount}</div>
         </div>
       </div>
     </div>
@@ -41,9 +41,9 @@ const InsolvencyWidget = ({personalInsolvency, companyInsolvency}) => {
       </div>
       {personalInsolvency && companyInsolvency &&
         <React.Fragment>
-          <InsolvencyRow title='věřitelem' personalInsolvency={personalInsolvency.creditor} companyInsolvency={companyInsolvency.creditor}/>
-          <InsolvencyRow title='dlužníkem' personalInsolvency={personalInsolvency.debtor} companyInsolvency={companyInsolvency.debtor}/>
-          <InsolvencyRow title='insolvenčním správcem' personalInsolvency={personalInsolvency.bailiff} companyInsolvency={companyInsolvency.bailiff}/>
+          <InsolvencyRow title='věřitelem' personalCount={personalInsolvency.creditorCount} companyCount={companyInsolvency.creditorCount}/>
+          <InsolvencyRow title='dlužníkem' personalCount={personalInsolvency.debtorCount} companyCount={companyInsolvency.debtorCount}/>
+          <InsolvencyRow title='insolvenčním správcem' personalCount={personalInsolvency.bailiffCount} companyCount={companyInsolvency.bailiffCount}/>
         </React.Fragment>}
     </div>
   )
