@@ -1,0 +1,91 @@
+//
+// Colours
+//
+$clDark: #666;
+$clSalmon: #ffe5e5;
+$clCondensed: #1A1A1A;
+$clLight: #404040;
+$clLightGray: #999;
+$clLightGrayText: #CACACA;
+$clDarkBorder: #4D4D4D;
+$clBorder: #e5e5e5;
+$clTableRow: #fafafa;
+$clBackground: #f5f5f5;
+$clComponentBorder: #b2b2b2;
+
+$clPrimaryText: #13548f;
+$clPrimary: #307abe;
+$clPrimaryLight: #ecf1f6;
+
+//
+// Typography
+//
+@mixin headerTitle {
+  font-weight: 600;
+  font-size: 33px;
+  line-height: 120%;
+  color: #000;
+}
+@mixin lightTitle {
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 140%;
+  color: $clLightGray;
+}
+@mixin subTitle {
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 140%;
+  color: #000;
+}
+@mixin condensedTitle {
+  font-family: 'Saira Condensed';
+  font-weight: 500;
+  font-size: 21px;
+  line-height: 100%;
+  text-transform: uppercase;
+  color: #000;
+}
+@mixin featureText {
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 150%;
+  color: #000;
+}
+@mixin regularText {
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 140%;
+  color: #000;
+}
+@mixin smallText {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  color: #000;
+}
+
+//
+// Buttons
+//
+@mixin linkBtn {
+  position: relative;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 24px;
+  text-decoration: none;
+  color: $clDark;
+  cursor: pointer;
+
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #000;
+    width: 100%;
+    height: 1px;
+    opacity: .15;
+  }
+}

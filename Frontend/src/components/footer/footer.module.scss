@@ -1,0 +1,74 @@
+@import '../../App.scss';
+
+.footer {
+  padding: 50px 0 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #1E1E1E;
+  color: #fff;
+  text-align: left;
+}
+
+.top {
+  margin: 0 auto;
+  padding-bottom: 55px;
+  display: flex;
+  justify-content: space-between;
+  max-width: 1170px;
+  width: 1170px;
+}
+.header {
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+.socialWrapper {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+.socialLink {
+  @include regularText;
+  margin-left: 10px;
+  color: #fff;
+}
+.sponsor {
+  font-weight: 600;
+}
+.contacts {
+  margin: 0 30px;
+}
+.contact {
+  display: flex;
+  color: $clLightGrayText;
+}
+.address {
+  margin-right: 130px;
+}
+
+.bottom {
+  padding-top: 28px;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid $clLight;
+}
+.bottomWrapper {
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  max-width: 1170px;
+  width: 1170px;
+}
+.logo {
+  width: 215px;
+  fill: #fff;
+}
+.link {
+  @include linkBtn;
+  @include smallText;
+  color: $clLightGrayText;
+
+  &:after {
+    background-color: #fff;
+  }
+}

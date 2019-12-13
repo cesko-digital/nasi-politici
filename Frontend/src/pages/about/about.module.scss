@@ -1,0 +1,15 @@
+@import '../../App.scss';
+
+.about {
+  margin: 100px auto 160px;
+  max-width: 770px;
+  @include featureText;
+}
+.title {
+  @include headerTitle;
+  margin-bottom: 8px;
+}
+.subTitle {
+  @include condensedTitle;
+  margin: 50px 0 15px;
+}

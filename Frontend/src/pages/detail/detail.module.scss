@@ -1,0 +1,175 @@
+@import '../../App.scss';
+
+.detail {
+  background-color: $clBackground;
+}
+
+.body {
+  margin: 24px auto 0;
+  display: flex;
+  width: 1170px;
+}
+
+.heading {
+  @include condensedTitle;
+  margin-bottom: 24px;
+  padding: 24px;
+  background: #fff;
+  .wrapper {
+    position: relative;
+    margin: 0 auto;
+    padding-left: 200px;
+    max-width: 1170px;
+    display: flex;
+    width: 970px;
+    box-sizing: content-box;
+  }
+  .fullname,
+  .birthYear {
+    margin-right: 10px;
+  }
+  .birthYear,
+  .currentParty {
+    color: $clDark;
+  }
+  .fullname {
+    @include headerTitle;
+  }
+  .currentParty {
+    margin-left: 10px;
+  }
+}
+.photo {
+  position: absolute;
+  left: 0;
+}
+.initials,
+.initialsWrapper {
+  display: flex;
+  flex: 1;
+}
+.initials {
+  align-items: center;
+}
+.initialsWrapper {
+  @include regularText;
+  align-items: baseline;
+}
+.divider {
+  position: relative;
+  top: -3px;
+  width: 6px;
+  height: 6px;
+  background-color: #000;
+  border-radius: 50%;
+  opacity: .2;
+}
+.shareWrapper {
+  display: flex;
+  align-content: center;
+}
+.shareIcon {
+  width: 24px;
+}
+.shareBtn {
+  @include linkBtn;
+  margin-left: 8px;
+  color: $clPrimary;
+  text-transform: capitalize;
+
+  &:after {
+    background-color: $clPrimary;
+  }
+}
+
+.menu {
+  margin: 142px 30px 0 0;
+  min-width: 170px;
+  max-width: 170px;
+  .link {
+    @include linkBtn;
+    margin-bottom: 25px;
+  }
+}
+
+.titleWrapper {
+  margin-bottom: 36px;
+  display: flex;
+  align-items: center;
+}
+.section {
+  display: flex;
+  flex-direction: column;
+  .title {
+    @include lightTitle;
+    margin-right: 20px;
+  }
+  .subtitle {
+    @include subTitle;
+    margin-bottom: 10px;
+  }
+}
+.titleDivider {
+  display: inline-flex;
+  flex: 1;
+}
+.widgets {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.widget {
+  margin-bottom: 36px;
+  padding: 30px;
+  width: 48%;
+  border-top: 2px solid $clDarkBorder;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+  background-color: #fff;
+  .header {
+    display: flex;
+    justify-content: space-between;
+  }
+  .title {
+    @include condensedTitle;
+    margin-bottom: 24px;
+  }
+}
+.widgetWithTable {
+  .tableRow {
+    margin: 0 -10px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+
+    &:nth-child(even) {
+      background-color: $clTableRow;
+    }
+  }
+  .name {
+    max-width: 40%;
+    min-width: 40%;
+  }
+  .tableSection {
+    margin-bottom: 20px;
+  }
+}
+
+.roles {
+  .tableRow {
+    justify-content: flex-start;
+  }
+}
+
+.insolvency {
+  .tableRow {
+    &:nth-child(even) {
+      background-color: #fff;
+    }
+
+    &:nth-child(odd) {
+      background-color: $clTableRow;
+    }
+  }
+}

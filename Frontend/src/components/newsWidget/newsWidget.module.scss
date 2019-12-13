@@ -1,0 +1,55 @@
+@import '../../App.scss';
+
+.widget {
+  margin-bottom: 36px;
+  padding: 30px;
+  width: 48%;
+  border-top: 2px solid $clDarkBorder;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+  background-color: #fff;
+  .header {
+    display: flex;
+    justify-content: space-between;
+  }
+  .title {
+    @include condensedTitle;
+    margin-bottom: 24px;
+  }
+}
+
+.article {
+  margin-bottom: 20px;
+}
+.articles {
+  padding-top: 24px;
+  border-top: 1px solid $clBorder;
+}
+.sources {
+  margin-bottom: 8px;
+  display: flex;
+  @include smallText;
+  color: $clDark;
+}
+.source {
+  @include linkBtn;
+  @include smallText;
+}
+.headline {
+  @include linkBtn;
+  @include subTitle;
+  color: $clLight;
+  text-decoration: underline;
+  text-decoration-color: $clBorder;
+
+  &:after { content: none; }
+}
+
+.more {
+  @include linkBtn;
+  color: $clPrimary;
+
+  &:after {
+    background-color: $clPrimary;
+  }
+}

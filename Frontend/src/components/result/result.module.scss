@@ -1,0 +1,78 @@
+@import '../../App.scss';
+
+.results {
+  display: flex;
+  flex-direction: column
+}
+
+.resultRow {
+  padding: 30px;
+  box-shadow: inset 0 1px 0 #e5e5e5;
+  text-decoration: none;
+
+  &:nth-child(odd) {
+    background-color: $clTableRow;
+  }
+}
+
+.resultItem {
+  display: flex;
+}
+
+.name {
+  @include headerTitle;
+}
+
+.pictureWrapper {
+  margin-right: 30px;
+}
+
+.dataWrapper {
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.link {
+  @include linkBtn;
+  height: 39px;
+  line-height: 53px;
+  color: $clPrimary;
+
+  &:after {
+    background-color: $clPrimary;
+  }
+}
+
+.count {
+  @include condensedTitle;
+  margin: 0 0 17px 30px;
+}
+
+.initialsWrapper {
+  @include regularText;
+  margin-top: 8px;
+  display: flex;
+  align-items: baseline;
+}
+
+.birthYear,
+.currentParty {
+  margin-right: 10px;
+  color: $clDark;
+}
+
+.currentParty {
+  margin-left: 10px;
+}
+
+.divider {
+  position: relative;
+  top: -3px;
+  width: 6px;
+  height: 6px;
+  background-color: #000;
+  border-radius: 50%;
+  opacity: .2;
+}

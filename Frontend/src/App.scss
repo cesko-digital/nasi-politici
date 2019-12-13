@@ -1,0 +1,6 @@
+@import './assets/styles/vendor.scss';
+
+.body {
+  @include regularText;
+  text-align: left;
+}

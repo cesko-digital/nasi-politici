@@ -1,0 +1,65 @@
+html, body, canvas, dd, div, dl, fieldset, figcaption, figure, footer, form,
+h1, h2, h3, h4, h5, h6, address, article, aside, audio, blockquote, header,
+hr, ol, output, p, pre, section, table, tfoot, tbody, thead, ul,
+video, legend, time, embed, output, iframe {
+  padding: 0;
+  margin: 0;
+  outline: none;
+}
+
+article, aside, figcaption, figure, footer, header, nav, section,
+details, summary, main {
+  display: block;
+}
+
+b, big, i, small, tt, abbr, acronym, cite, code, dfn, em, kbd, button, input,
+label, select, textarea, optgroup, small, strike, mark, strong, samp, var, a,
+bdo, br, img, map, object, q, span, sub, sup {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  outline: 0;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 0;
+}
+
+audio, canvas, progress, video {
+  display: inline-block;
+}
+
+button, input, optgroup, select, textarea {
+  color: inherit;
+  font: inherit;
+}
+
+textarea {
+  display: block;
+}
+
+input {
+  line-height: normal;
+}
+
+img {
+  border: 0;
+}
+
+ul, ol, dl {
+  list-style: none;
+}
+
+* {
+  font-family: "Source Serif Pro";
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

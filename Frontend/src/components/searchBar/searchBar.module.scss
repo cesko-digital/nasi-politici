@@ -1,0 +1,30 @@
+@import '../../App.scss';
+
+.wrapper {
+  display: flex;
+  height: 60px;
+}
+.input {
+  flex: 1;
+  padding: 0 42px;
+  height: 100%;
+  border: 1px solid $clComponentBorder;
+  border-right: 0;
+  border-radius: 30px 0 0 30px;
+  box-sizing: border-box;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1), inset 0px 2px 3px rgba(0, 0, 0, 0.05);
+}
+.searchBtn {
+  padding: 8px 18px;
+  max-height: 60px;
+  border-radius: 0 30px 30px 0;
+  background-color: #307abe;
+  color: #ffffff;
+  font-size: 17px;
+  line-height: 24px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1), inset 0px 2px 3px rgba(0, 0, 0, 0.05);
+}
+.result-list {
+  display: flex;
+  flex-direction: column;
+}

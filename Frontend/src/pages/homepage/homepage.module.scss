@@ -1,0 +1,23 @@
+@import '../../App.scss';
+
+.homepage {
+  margin: 0 auto;
+  padding-bottom: 230px;
+}
+.wrapper {
+  margin: 0 auto;
+  max-width: 770px;
+}
+.logo {
+  width: 270px;
+}
+.intro {
+  margin: 230px 30px 0 30px;
+}
+.perex {
+  @include featureText;
+  margin: 20px 0 50px;
+}
+.searchWrapper {
+  margin: 45px 30px;
+}
