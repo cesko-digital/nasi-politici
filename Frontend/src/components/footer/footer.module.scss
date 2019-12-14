@@ -60,8 +60,22 @@
   width: 1170px;
 }
 .logo {
-  width: 215px;
   fill: #fff;
+}
+.logoNP {
+  width: 215px;
+}
+.logoTI {
+  width: 230px;
+}
+.logoHS {
+  width: 60px;
+}
+.logosBttm {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .link {
   @include linkBtn;

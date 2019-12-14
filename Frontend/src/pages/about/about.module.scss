@@ -7,9 +7,5 @@
 }
 .title {
   @include headerTitle;
-  margin-bottom: 8px;
-}
-.subTitle {
-  @include condensedTitle;
-  margin: 50px 0 15px;
+  margin-bottom: 15px;
 }

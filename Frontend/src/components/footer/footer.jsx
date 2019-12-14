@@ -1,7 +1,11 @@
 import React from 'react'
+import classnames from 'classnames'
 import { ReactComponent as FBLogo } from '../../assets/images/social-fb.svg';
 import { ReactComponent as TWLogo } from '../../assets/images/social-tw.svg';
 import { ReactComponent as LogoNP } from '../../assets/images/logo-np.svg';
+import { ReactComponent as LogoCD } from '../../assets/images/logo-cd.svg';
+import { ReactComponent as LogoHS } from '../../assets/images/logo-hs.svg';
+import { ReactComponent as LogoTI } from '../../assets/images/logo-ti.svg';
 
 import styles from './footer.module.scss'
 
@@ -20,7 +24,7 @@ function Footer () {
             <a href='https://twitter.com/nasipolitici' rel="noopener noreferrer" target='_blank' className={styles.socialLink}>@nasipolitici</a>
           </div>
         </div>
-        <div className={`${styles.column} ${styles.contacts}`}>
+        <div className={classnames(styles.column, styles.contacts)}>
           <h3 className={styles.header}>Kontakt</h3>
           <div className={styles.sponsor}>
             Transparency International —<br />
@@ -60,14 +64,16 @@ function Footer () {
         </div>
         <div className={styles.column}>
           <h3 className={styles.header}>Partneři</h3>
-          <div>Transparency International</div>
-          <div>Hlidac Statu</div>
-          <div>Cesko DIgital</div>
+          <LogoTI className={classnames(styles.logoTI, styles.logo)}/>
+          <div className={styles.logosBttm}>
+            <LogoHS className={classnames(styles.logoHS)}/>
+            <LogoCD className={classnames(styles.logoCD, styles.logo)}/>
+          </div>
         </div>
       </div>
       <div className={styles.bottom}>
         <div className={styles.bottomWrapper}>
-          <LogoNP className={styles.logo}/>
+          <LogoNP className={classnames(styles.logoNP, styles.logo)}/>
           <div>
             <div className={styles.link}>Zásady zpracování osobních údajů</div>
           </div>
