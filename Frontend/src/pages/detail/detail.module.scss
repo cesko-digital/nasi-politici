@@ -82,10 +82,14 @@
   }
 }
 
-.menu {
+.menuWrapper {
   margin: 142px 30px 0 0;
   min-width: 170px;
   max-width: 170px;
+}
+.menu {
+  position: sticky;
+  top: 32px;
   .link {
     @include linkBtn;
     margin-bottom: 25px;
@@ -103,6 +107,7 @@
   .title {
     @include lightTitle;
     margin-right: 20px;
+    flex: 1 0 auto;
   }
   .subtitle {
     @include subTitle;
@@ -111,7 +116,8 @@
 }
 .titleDivider {
   display: inline-flex;
-  flex: 1;
+  flex: 1 1 auto;
+  width: 100%;
 }
 .widgets {
   display: flex;

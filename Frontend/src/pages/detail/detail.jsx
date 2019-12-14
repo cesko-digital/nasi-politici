@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import {createStructuredSelector} from 'reselect'
 import { connect } from 'react-redux'
-import {Link} from 'react-router-dom'
 import { ReactComponent as ShareBtn } from '../../assets/images/share.svg';
 import { ReactComponent as ReportBtn } from '../../assets/images/report.svg';
 import { ReactComponent as Divider } from '../../assets/images/detailDivider.svg';
@@ -50,14 +49,16 @@ function Detail(props) {
             </div>
           </div>
           <div className={styles.body}>
-            <div className={styles.menu}>
-              <Link to='' className={styles.link}>Přehled</Link>
-              <Link to='' className={styles.link}>Kariéra Politika</Link>
-              <Link to='' className={styles.link}>Angažovanost</Link>
-              <Link to='' className={styles.link}>Mediální Obraz</Link>
+            <div className={styles.menuWrapper}>
+              <div className={styles.menu}>
+                <a href='#overview' className={styles.link}>Přehled</a>
+                <a href='#career' className={styles.link}>Kariéra Politika</a>
+                <a href='#engagement' className={styles.link}>Angažovanost</a>
+                <a href='#media' className={styles.link}>Mediální Obraz</a>
+              </div>
             </div>
             <div className={styles.detail}>
-              <div className={styles.section}>
+              <div id='overview' className={styles.section}>
                 <div className={styles.titleWrapper}>
                   <h1 className={styles.title}>Přehled</h1>
                   <Divider className={styles.titleDivider}/>
@@ -95,7 +96,7 @@ function Detail(props) {
                   </div>
                 </div>
               </div>
-              <div className={styles.section}>
+              <div id='career' className={styles.section}>
                 <div className={styles.titleWrapper}>
                   <h1 className={styles.title}>Kariéra</h1>
                   <Divider className={styles.titleDivider}/>
@@ -105,14 +106,20 @@ function Detail(props) {
                   <DonationsWidget />
                   <InsolvencyWidget />
                 </div>
-                <div className={styles.section}>
-                  <div className={styles.titleWrapper}>
-                    <h1 className={styles.title}>Mediální obraz</h1>
-                    <Divider className={styles.titleDivider}/>
-                  </div>
-                  <div className={styles.widgets}>
-                    <NewsWidget />
-                  </div>
+              </div>
+              <div id='engagement' className={styles.section}>
+                <div className={styles.titleWrapper}>
+                  <h1 className={styles.title}>Angažovanost</h1>
+                  <Divider className={styles.titleDivider}/>
+                </div>
+              </div>
+              <div id='media' className={styles.section}>
+                <div className={styles.titleWrapper}>
+                  <h1 className={styles.title}>Mediální obraz</h1>
+                  <Divider className={styles.titleDivider}/>
+                </div>
+                <div className={styles.widgets}>
+                  <NewsWidget />
                 </div>
               </div>
             </div>
