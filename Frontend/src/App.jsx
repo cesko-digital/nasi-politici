@@ -7,7 +7,6 @@ import Detail from './pages/detail/detail'
 import Error from './pages/error'
 import Homepage from './pages/homepage/homepage'
 import Media from './pages/media'
-import Search from './pages/search'
 
 import './App.scss';
 
@@ -21,7 +20,6 @@ function App() {
           <Route path="/detail/:id" component={Detail} />
           <Route path="/o-projektu" component={AboutUs} />
           <Route path="/pro-media" component={Media} />
-          <Route path="/search" component={Search} />
           <Route component={Error} />
         </Switch>
       </div>

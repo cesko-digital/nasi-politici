@@ -15,6 +15,7 @@ import {
   getCurrentParty,
   getPhotoUrl,
 } from '../../redux/selectors'
+import NoData from '../../components/emptyStates/noData/noData'
 import LoadingBar from '../../components/loadingBar/loadingBar'
 import NewsWidget from '../../components/newsWidget/newsWidget'
 import DonationsWidget from '../../components/donationsWidget/donationsWidget'
@@ -94,6 +95,7 @@ function Detail(props) {
                         <ReportBtn />
                       </div>
                     </div>
+                    {!props.demagog && <NoData />}
                   </div>
                   <div className={styles.widget}>
                     <div className={styles.header}>
@@ -102,14 +104,19 @@ function Detail(props) {
                         <ReportBtn />
                       </div>
                     </div>
-                    <div className={styles.subtitleWrapper}>
-                      <h3 className={styles.subtitle}>Sociální Sítě</h3>
-                      <div className={styles.line} />
-                    </div>
-                    <div className={styles.subtitleWrapper}>
-                      <h3 className={styles.subtitle}>Web</h3>
-                      <div className={styles.line} />
-                    </div>
+                    {/* TODO: temporary empty state */}
+                    {!props.contact && <NoData />}
+                    {props.contact &&
+                      <React.Fragment>
+                        <div className={styles.subtitleWrapper}>
+                          <h3 className={styles.subtitle}>Sociální Sítě</h3>
+                          <div className={styles.line} />
+                        </div>
+                        <div className={styles.subtitleWrapper}>
+                          <h3 className={styles.subtitle}>Web</h3>
+                          <div className={styles.line} />
+                        </div>
+                      </React.Fragment>}
                   </div>
                 </div>
               </div>
@@ -136,6 +143,7 @@ function Detail(props) {
                       <ReportBtn />
                     </div>
                   </div>
+                  {!props.engagement && <NoData />}
                 </div>
               </div>
               <div id='media' className={styles.section}>
