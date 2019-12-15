@@ -5,8 +5,6 @@ import * as serviceWorker from './serviceWorker'
 import {Provider} from 'react-redux'
 import setupStore, {history} from './redux/store'
 import { ConnectedRouter } from 'connected-react-router'
-import 'typeface-source-serif-pro'
-import 'typeface-saira-condensed'
 
 const store = setupStore()
 
