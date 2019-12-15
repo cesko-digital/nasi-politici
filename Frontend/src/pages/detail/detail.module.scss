@@ -93,6 +93,7 @@
   .link {
     @include linkBtn;
     margin-bottom: 25px;
+    color: #000;
   }
 }
 
@@ -109,9 +110,19 @@
     margin-right: 20px;
     flex: 1 0 auto;
   }
+  .subtitleWrapper {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+  }
   .subtitle {
     @include subTitle;
-    margin-bottom: 10px;
+  }
+  .line {
+    margin-left: 16px;
+    flex: 1;
+    height: 1px;
+    background-color: $clLine;
   }
 }
 .titleDivider {
@@ -133,6 +144,11 @@
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   box-sizing: border-box;
   background-color: #fff;
+
+  &.engage {
+    width: 100%;
+  }
+
   .header {
     display: flex;
     justify-content: space-between;
@@ -140,6 +156,24 @@
   .title {
     @include condensedTitle;
     margin-bottom: 24px;
+  }
+  .tags,
+  .tag {
+    display: flex;
+  }
+  .tags {
+    align-self: flex-start;
+  }
+  .tag {
+    margin-right: 10px;
+    padding: 0 8px;
+    align-items: center;
+    border-radius: 50px;
+    background-color: $clPrimaryLight;
+  }
+  .tagname {
+    margin-left: 4px;
+    color: $clPrimaryText;
   }
 }
 .widgetWithTable {

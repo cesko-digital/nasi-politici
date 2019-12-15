@@ -1,6 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { connect } from 'react-redux'
+import { ReactComponent as LinkBtn } from '../../assets/images/link.svg';
 import { ReactComponent as ReportBtn } from '../../assets/images/report.svg';
 import {createStructuredSelector} from 'reselect'
 import {
@@ -14,7 +15,10 @@ import styles from './insolvencyWidget.module.scss'
 function InsolvencyRow({title, personalCount, companyCount}) {
   return (
     <div>
-      <h3 className={styles.subtitle}>je {title}</h3>
+      <div className={styles.subtitleWrapper}>
+        <h3 className={styles.subtitle}>je {title}</h3>
+        <div className={styles.line} />
+      </div>
       <div>
         <div className={styles.tableRow}>
           <div>jako fyzická osoba</div>
@@ -34,8 +38,13 @@ const InsolvencyWidget = ({personalInsolvency, companyInsolvency}) => {
     <div className={classnames(styles.widget, styles.widgetWithTable, styles.insolvency)}>
       <div className={styles.header}>
         <h2 className={styles.title}>Insolvence</h2>
-        <div>
-          {/* <div></div> TODO: tagy */}
+        <div className={styles.tags}>
+          <div className={styles.tag}>
+            <LinkBtn />
+            <div className={styles.tagname}>
+              <a href='https://www.hlidacstatu.cz/' rel="noopener noreferrer" target='_blank'>hlidacstatu.cz</a>
+            </div>
+          </div>
           <ReportBtn />
         </div>
       </div>

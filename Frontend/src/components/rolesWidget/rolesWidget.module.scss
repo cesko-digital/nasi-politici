@@ -2,24 +2,44 @@
 
 .widget {
   margin-bottom: 36px;
-  padding: 30px;
   width: 48%;
   border-top: 2px solid $clDarkBorder;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   box-sizing: border-box;
   background-color: #fff;
   .header {
+    padding: 30px 30px 0 30px;
     display: flex;
     justify-content: space-between;
   }
   .title {
     @include condensedTitle;
     margin-bottom: 24px;
+    line-height: 24px;
+  }
+  .tags,
+  .tag {
+    display: flex;
+  }
+  .tags {
+    align-self: flex-start;
+  }
+  .tag {
+    margin-right: 10px;
+    padding: 0 8px;
+    align-items: center;
+    border-radius: 50px;
+    background-color: $clPrimaryLight;
+  }
+  .tagname {
+    margin-left: 4px;
+    color: $clPrimaryText;
   }
 }
 .widgetWithTable {
   .tableSection {
     margin-bottom: 20px;
+    padding: 0 30px;
   }
   .tableRow {
     margin: 0 -10px;
@@ -36,15 +56,51 @@
     min-width: 40%;
   }
 }
-.more {
+.more,
+.less {
   @include linkBtn;
   color: $clPrimary;
 
   &:after {
     background-color: $clPrimary;
   }
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: calc(100% + 12px);
+    top: 0;
+    transform: rotate(-45deg);
+    width: 10px;
+    height: 10px;
+    border-bottom: 3px solid $clPrimary;
+    border-left: 3px solid $clPrimary;
+    border-top: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-radius: 2px;
+  }
+}
+.less {
+  &:before {
+    top: 8px;
+    transform: rotate(135deg);
+  }
+}
+.subtitleWrapper {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
 }
 .subtitle {
   @include subTitle;
-  margin-bottom: 10px;
+}
+.line {
+  margin-left: 16px;
+  flex: 1;
+  height: 1px;
+  background-color: $clLine;
+}
+.showMore {
+  padding: 20px 30px;
+  border-top: 1px solid $clBorder;
 }

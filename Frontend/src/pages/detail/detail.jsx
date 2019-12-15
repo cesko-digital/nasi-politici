@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react'
+import React, {useEffect} from 'react'
 import {createStructuredSelector} from 'reselect'
-import { connect } from 'react-redux'
-import { ReactComponent as ShareBtn } from '../../assets/images/share.svg';
-import { ReactComponent as ReportBtn } from '../../assets/images/report.svg';
-import { ReactComponent as Divider } from '../../assets/images/detailDivider.svg';
+import {connect} from 'react-redux'
+import classnames from 'classnames'
+import {ReactComponent as LinkBtn} from '../../assets/images/link.svg';
+import {ReactComponent as ShareBtn} from '../../assets/images/share.svg';
+import {ReactComponent as ReportBtn} from '../../assets/images/report.svg';
+import {ReactComponent as Divider} from '../../assets/images/detailDivider.svg';
 import {loadDetail} from '../../redux/actions'
 import {
   getFullName,
@@ -67,8 +69,13 @@ function Detail(props) {
                   <div className={styles.widget}>
                     <div className={styles.header}>
                       <h2 className={styles.title}>Ve Zkratce</h2>
-                      <div>
-                        {/* <div></div> TODO: tagy */}
+                      <div className={styles.tags}>
+                        <div className={styles.tag}>
+                          <LinkBtn />
+                          <div className={styles.tagname}>
+                            <a href='https://www.transparency.cz/' rel="noopener noreferrer" target='_blank'>transparency.cz</a>
+                          </div>
+                        </div>
                         <ReportBtn />
                       </div>
                     </div>
@@ -77,8 +84,13 @@ function Detail(props) {
                   <div className={styles.widget}>
                     <div className={styles.header}>
                       <h2 className={styles.title}>Výroky</h2>
-                      <div>
-                        {/* <div></div> TODO: tagy */}
+                      <div className={styles.tags}>
+                        <div className={styles.tag}>
+                          <LinkBtn />
+                          <div className={styles.tagname}>
+                            <a href='https://demagog.cz/' rel="noopener noreferrer" target='_blank'>demagog.cz</a>
+                          </div>
+                        </div>
                         <ReportBtn />
                       </div>
                     </div>
@@ -87,12 +99,17 @@ function Detail(props) {
                     <div className={styles.header}>
                       <h2 className={styles.title}>Kontakty</h2>
                       <div>
-                        {/* <div></div> TODO: tagy */}
                         <ReportBtn />
                       </div>
                     </div>
-                    <h3 className={styles.subtitle}>Sociální Sítě</h3>
-                    <h3 className={styles.subtitle}>Web</h3>
+                    <div className={styles.subtitleWrapper}>
+                      <h3 className={styles.subtitle}>Sociální Sítě</h3>
+                      <div className={styles.line} />
+                    </div>
+                    <div className={styles.subtitleWrapper}>
+                      <h3 className={styles.subtitle}>Web</h3>
+                      <div className={styles.line} />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -111,6 +128,14 @@ function Detail(props) {
                 <div className={styles.titleWrapper}>
                   <h1 className={styles.title}>Angažovanost</h1>
                   <Divider className={styles.titleDivider}/>
+                </div>
+                <div className={classnames(styles.widget, styles.engage)}>
+                  <div className={styles.header}>
+                    <h2 className={styles.title}>Angažovanost</h2>
+                    <div className={styles.tags}>
+                      <ReportBtn />
+                    </div>
+                  </div>
                 </div>
               </div>
               <div id='media' className={styles.section}>

@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {createStructuredSelector} from 'reselect'
 import { connect } from 'react-redux'
+import { ReactComponent as LinkBtn } from '../../assets/images/link.svg';
 import { ReactComponent as ReportBtn } from '../../assets/images/report.svg';
 import {getDetailNews} from '../../redux/selectors'
 
@@ -28,9 +29,9 @@ const Articles = ({articles}) => {
         {!showAll && articles.slice(0, DEFAULT_ARTICLES_COUNT).map((article, index) => <Article article={article} key={index}/>)}
         {showAll && articles.map((article, index) => <Article article={article} key={index}/>)}
       </div>
-      <div onClick={() => setShowAll(!showAll)}>
+      <div className={styles.showMore} onClick={() => setShowAll(!showAll)}>
         {!showAll && <div className={styles.more}>Zobrazit {articles.length - DEFAULT_ARTICLES_COUNT} dalších</div>}
-        {showAll && <div className={styles.more}>Zobrazit méně</div>}
+        {showAll && <div className={styles.less}>Zobrazit méně</div>}
       </div>
     </React.Fragment>
   )
@@ -46,8 +47,13 @@ const NewsWidget = ({news}) => {
       <div className={styles.widget}>
         <div className={styles.header}>
           <h2 className={styles.title}>V médiích</h2>
-          <div>
-            {/* <div></div> TODO: tagy */}
+          <div className={styles.tags}>
+            <div className={styles.tag}>
+              <LinkBtn />
+              <div className={styles.tagname}>
+                <a href='https://monitora.cz/' rel="noopener noreferrer" target='_blank'>Monitora</a>
+              </div>
+            </div>
             <ReportBtn />
           </div>
         </div>

@@ -3,6 +3,7 @@ import React from 'react'
 import {createStructuredSelector} from 'reselect'
 import { connect } from 'react-redux'
 import classnames from 'classnames'
+import { ReactComponent as LinkBtn } from '../../assets/images/link.svg';
 import { ReactComponent as ReportBtn } from '../../assets/images/report.svg';
 import {getRoles, getShowAllRoles, getRolesCount} from '../../redux/selectors'
 import {toggleShowAllRoles} from '../../redux/actions'
@@ -31,14 +32,17 @@ const Roles = ({rolesGroups, showAll, rolesCount, toggleShowAllRoles}) => {
         {rolesGroups.map((group, index) => {
           return (
             <div className={styles.tableSection} key={index}>
-              <h3 className={styles.subtitle}>{group.year === 9999 ? 'Dosud' : group.year}</h3>
+              <div className={styles.subtitleWrapper}>
+                <h3 className={styles.subtitle}>{group.year === 9999 ? 'Dosud' : group.year}</h3>
+                <div className={styles.line} />
+              </div>
               {group.items.map((item, index) => <TableRow name={item.role} value={item.organisation} key={index}/>)}
             </div>
           )
         })}
-        <div onClick={toggleShowAllRoles}>
+        <div className={styles.showMore} onClick={toggleShowAllRoles}>
           {!showAll && <div className={styles.more}>Zobrazit {rolesCount-DEFAULT_ROLES_LIMIT} dalších</div>}
-          {showAll && <div className={styles.more}>Zobrazit méně</div>}
+          {showAll && <div className={styles.less}>Zobrazit méně</div>}
         </div>
     </React.Fragment>
   )
@@ -50,8 +54,13 @@ const RolesWidget = ({rolesGroups, showAll, toggleShowAllRoles, rolesCount}) => 
     <div className={classnames(styles.widget, styles.roles, styles.widgetWithTable)}>
       <div className={styles.header}>
         <h2 className={styles.title}>Role</h2>
-        <div>
-          {/* <div></div> TODO: tagy */}
+        <div className={styles.tags}>
+          <div className={styles.tag}>
+            <LinkBtn />
+            <div className={styles.tagname}>
+              <a href='https://www.hlidacstatu.cz/' rel="noopener noreferrer" target='_blank'>hlidacstatu.cz</a>
+            </div>
+          </div>
           <ReportBtn />
         </div>
       </div>
