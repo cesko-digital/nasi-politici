@@ -2,10 +2,11 @@ import React from 'react'
 import {createStructuredSelector} from 'reselect'
 import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
-import {getSearchResults, isSearchLoading} from '../../redux/selectors'
+import {getSearchResults, isSearchLoading, getSearchQuery} from '../../redux/selectors'
 import LoadingBar from '../loadingBar/loadingBar'
 import ProfilePicture from '../profilePicture/profilePicture'
 import styles from './result.module.scss'
+import { ReactComponent as ReportIcon } from '../../assets/images/report.svg';
 
 function ResultRow({result}) {
 	return (
@@ -32,16 +33,28 @@ function ResultRow({result}) {
   )
 }
 
-function EmptyState({result}) {
-	return (<div>¯\_(ツ)_/¯ Tak toho tu nemame ¯\_(ツ)_/¯</div>)
+function EmptyState({query}) {
+	return (
+		<div>
+			<div className={styles.emptyTitle}>žádnou političku ani politka jsme nenašli :(</div>
+			<div className={styles.explanationWrapper}>
+				<div className={styles.nonPolitician}>„{query}“ buď není politik, nebo ho zatím nemáme v databázi.</div>
+				<div className={styles.usage}>Nejlepší výsledky vyledávání dostanete zadáním celého jména.<br />
+					Nepřesnosti v diakritice náš systém toleruje.
+				</div>
+				<div className={styles.report}><ReportIcon /><div className={styles.text}>Nahlásit chybu</div></div>
+				<div className={styles.face}></div>
+			</div>
+		</div>
+	)
 }
 
-function Result({results, loading}) {
+function Result({results, loading, query}) {
 // TODO vyresit mnozne/jednotne cislo
 	return (
 		<React.Fragment>
       {loading && <LoadingBar />}
-      {!loading && results && results.length === 0 && <EmptyState />}
+      {!loading && results && results.length === 0 && <EmptyState query={query} />}
       {!loading && results && !!results.length &&
         <div>
           <div className={styles.count}>Nalezeni {results.length} politici</div>
@@ -53,7 +66,8 @@ function Result({results, loading}) {
 
 const mapStateToProps = createStructuredSelector({
   results: getSearchResults,
-  loading: isSearchLoading,
+	loading: isSearchLoading,
+  query: getSearchQuery,
 })
 
 export default connect(mapStateToProps)(Result);

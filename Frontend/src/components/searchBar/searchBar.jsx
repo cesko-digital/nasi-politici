@@ -17,7 +17,7 @@ function SearchBar({ setSearchQuery, search, query, wrapperClassname }) {
   return (
     <form onSubmit={onSubmit}>
       <div className={classnames(styles.wrapper, wrapperClassname)}>
-        <input className={styles.input} onChange={onChange} value={query}></input>
+        <input autoFocus className={styles.input} onChange={onChange} value={query}></input>
         <button type='submit' className={styles.searchBtn}>Hledat Politika/čku</button>
       </div>
     </form>
