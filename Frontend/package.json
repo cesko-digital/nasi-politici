@@ -14,9 +14,7 @@
     "redux": "^4.0.4",
     "redux-devtools-extension": "^2.13.8",
     "redux-saga": "^1.1.3",
-    "reselect": "^4.0.0",
-    "typeface-saira-condensed": "0.0.72",
-    "typeface-source-serif-pro": "0.0.75"
+    "reselect": "^4.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
