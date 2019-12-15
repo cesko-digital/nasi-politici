@@ -104,3 +104,8 @@
   padding: 20px 30px;
   border-top: 1px solid $clBorder;
 }
+
+.noData {
+  border-top: 1px solid $clComponentBorder;
+  background-color: #f0f0f0;
+}

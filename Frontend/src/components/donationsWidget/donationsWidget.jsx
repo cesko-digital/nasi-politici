@@ -5,15 +5,12 @@ import { connect } from 'react-redux'
 import classnames from 'classnames'
 import {getDonations, getShowAllDonations, getDonationsCount} from '../../redux/selectors'
 import {toggleShowAllDonations} from '../../redux/actions'
+import NoData from '../../components/emptyStates/noData/noData'
 import { ReactComponent as LinkBtn } from '../../assets/images/link.svg';
 import { ReactComponent as ReportBtn } from '../../assets/images/report.svg';
 import {DEFAULT_DONATIONS_LIMIT} from '../../constants'
 
 import styles from './donationsWidget.module.scss'
-
-const EmptyState = () => {
-  return (<div>Empty</div>)
-}
 
 const TableRow = (props) => {
   return (
@@ -25,7 +22,6 @@ const TableRow = (props) => {
     </React.Fragment>
   )
 }
-
 
 const Donations = ({donationsGroups, toggleShowAll, showAll, donationsCount}) => {
   return (
@@ -49,12 +45,16 @@ const Donations = ({donationsGroups, toggleShowAll, showAll, donationsCount}) =>
   )
 }
 const DonationsWidget = ({donationsGroups, showAll, toggleShowAllDonations, donationsCount}) => {
-
+  const donationWidgetCustomClassNames = classnames(
+    styles.widget,
+    styles.widgetWithTable,
+    !donationsGroups.length && styles.noData)
+  
   return (
-    <div className={classnames(styles.widget, styles.widgetWithTable)}>
+    <div className={donationWidgetCustomClassNames}>
       <div className={styles.header}>
         <h2 className={styles.title}>Sponzorství</h2>
-        <div className={styles.tags}>
+        {!!donationsGroups.length && <div className={styles.tags}>
           <div className={styles.tag}>
             <LinkBtn />
             <div className={styles.tagname}>
@@ -62,15 +62,15 @@ const DonationsWidget = ({donationsGroups, showAll, toggleShowAllDonations, dona
             </div>
           </div>
           <ReportBtn />
-        </div>
+        </div>}
       </div>
-      {donationsGroups.length > 0 && <Donations
+      {!!donationsGroups.length && <Donations
         donationsGroups={donationsGroups}
         showAll={showAll}
         toggleShowAll={toggleShowAllDonations}
         donationsCount={donationsCount}
       />}
-      {!donationsGroups.length && <EmptyState />}
+      {!donationsGroups.length && <NoData />}
 		</div>
   );
 }

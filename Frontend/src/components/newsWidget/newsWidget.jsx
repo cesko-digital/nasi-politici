@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import {createStructuredSelector} from 'reselect'
 import { connect } from 'react-redux'
+import classnames from 'classnames'
+import NoData from '../../components/emptyStates/noData/noData'
 import { ReactComponent as LinkBtn } from '../../assets/images/link.svg';
 import { ReactComponent as ReportBtn } from '../../assets/images/report.svg';
 import {getDetailNews} from '../../redux/selectors'
@@ -37,17 +39,17 @@ const Articles = ({articles}) => {
   )
 }
 
-const EmptyState = () => {
-  return (<div>Empty</div>)
-}
-
 const NewsWidget = ({news}) => {
+  const newsWidgetCustomClassNames = classnames(
+    styles.widget,
+    !news.length && styles.noData)
+
   return (
 		<React.Fragment>
-      <div className={styles.widget}>
+      <div className={newsWidgetCustomClassNames}>
         <div className={styles.header}>
           <h2 className={styles.title}>V médiích</h2>
-          <div className={styles.tags}>
+          {!!news.length && <div className={styles.tags}>
             <div className={styles.tag}>
               <LinkBtn />
               <div className={styles.tagname}>
@@ -55,10 +57,10 @@ const NewsWidget = ({news}) => {
               </div>
             </div>
             <ReportBtn />
-          </div>
+          </div>}
         </div>
-        {news.length > 0 && <Articles articles={news} />}
-        {!news.length && <EmptyState />}
+        {!!news.length && <Articles articles={news} />}
+        {!news.length && <NoData />}
       </div>
 		</React.Fragment>
   );

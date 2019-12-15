@@ -3,6 +3,7 @@ import React from 'react'
 import {createStructuredSelector} from 'reselect'
 import { connect } from 'react-redux'
 import classnames from 'classnames'
+import NoData from '../../components/emptyStates/noData/noData'
 import { ReactComponent as LinkBtn } from '../../assets/images/link.svg';
 import { ReactComponent as ReportBtn } from '../../assets/images/report.svg';
 import {getRoles, getShowAllRoles, getRolesCount} from '../../redux/selectors'
@@ -10,10 +11,6 @@ import {toggleShowAllRoles} from '../../redux/actions'
 import {DEFAULT_ROLES_LIMIT} from '../../constants'
 
 import styles from './rolesWidget.module.scss'
-
-const EmptyState = () => {
-  return (<div>Empty</div>)
-}
 
 const TableRow = (props) => {
   return (
@@ -49,9 +46,14 @@ const Roles = ({rolesGroups, showAll, rolesCount, toggleShowAllRoles}) => {
 }
 
 const RolesWidget = ({rolesGroups, showAll, toggleShowAllRoles, rolesCount}) => {
+  const rolesWidgetCustomClassNames = classnames(
+    styles.widget,
+    styles.widgetWithTable,
+    styles.roles,
+    !rolesGroups.length && styles.noData)
 
   return (
-    <div className={classnames(styles.widget, styles.roles, styles.widgetWithTable)}>
+    <div className={rolesWidgetCustomClassNames}>
       <div className={styles.header}>
         <h2 className={styles.title}>Role</h2>
         <div className={styles.tags}>
@@ -64,13 +66,13 @@ const RolesWidget = ({rolesGroups, showAll, toggleShowAllRoles, rolesCount}) => 
           <ReportBtn />
         </div>
       </div>
-      {rolesGroups.length && <Roles
+      {!!rolesGroups.length && <Roles
         rolesGroups={rolesGroups}
         showAll={showAll}
         rolesCount={rolesCount}
         toggleShowAllRoles={toggleShowAllRoles}
       />}
-      {!rolesGroups.length && <EmptyState />}
+      {!rolesGroups.length && <NoData />}
     </div>
   );
 }

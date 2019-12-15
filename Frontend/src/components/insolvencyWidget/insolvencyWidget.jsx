@@ -1,6 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { connect } from 'react-redux'
+import NoData from '../../components/emptyStates/noData/noData'
 import { ReactComponent as LinkBtn } from '../../assets/images/link.svg';
 import { ReactComponent as ReportBtn } from '../../assets/images/report.svg';
 import {createStructuredSelector} from 'reselect'
@@ -34,11 +35,17 @@ function InsolvencyRow({title, personalCount, companyCount}) {
 }
 
 const InsolvencyWidget = ({personalInsolvency, companyInsolvency}) => {
+  const insolvencyWidgetCustomClassNames = classnames(
+    styles.widget,
+    styles.widgetWithTable,
+    styles.insolvency,
+    !personalInsolvency && !companyInsolvency && styles.noData)
+
   return (
-    <div className={classnames(styles.widget, styles.widgetWithTable, styles.insolvency)}>
+    <div className={insolvencyWidgetCustomClassNames}>
       <div className={styles.header}>
         <h2 className={styles.title}>Insolvence</h2>
-        <div className={styles.tags}>
+        {!!personalInsolvency && !!companyInsolvency && <div className={styles.tags}>
           <div className={styles.tag}>
             <LinkBtn />
             <div className={styles.tagname}>
@@ -46,9 +53,10 @@ const InsolvencyWidget = ({personalInsolvency, companyInsolvency}) => {
             </div>
           </div>
           <ReportBtn />
-        </div>
+        </div>}
       </div>
-      {personalInsolvency && companyInsolvency &&
+      {!personalInsolvency && !companyInsolvency && <NoData />}
+      {!!personalInsolvency && !!companyInsolvency &&
         <React.Fragment>
           <InsolvencyRow title='věřitelem' personalCount={personalInsolvency.creditorCount} companyCount={companyInsolvency.creditorCount}/>
           <InsolvencyRow title='dlužníkem' personalCount={personalInsolvency.debtorCount} companyCount={companyInsolvency.debtorCount}/>

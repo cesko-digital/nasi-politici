@@ -29,6 +29,12 @@ function Detail(props) {
   useEffect(() => {
     loadDetail(id)
   }, [loadDetail, id]);
+
+  const engageWidgetCustomClassNames = classnames(styles.widget, styles.engage, !props.engagement && styles.noData)
+  const contactsWidgetCustomClassNames = classnames(styles.widget, !props.contacts && styles.noData)
+  const demagogWidgetCustomClassNames = classnames(styles.widget, !props.demagog && styles.noData)
+  const aboutWidgetCustomClassNames = classnames(styles.widget, !props.description && styles.noData)
+
   return (
 		<div className={styles.detail}>
 			{props.isLoading && <LoadingBar />}
@@ -67,10 +73,10 @@ function Detail(props) {
                   <Divider className={styles.titleDivider}/>
                 </div>
                 <div className={styles.widgets}>
-                  <div className={styles.widget}>
+                  <div className={aboutWidgetCustomClassNames}>
                     <div className={styles.header}>
                       <h2 className={styles.title}>Ve Zkratce</h2>
-                      <div className={styles.tags}>
+                      {!!props.description && <div className={styles.tags}>
                         <div className={styles.tag}>
                           <LinkBtn />
                           <div className={styles.tagname}>
@@ -78,14 +84,15 @@ function Detail(props) {
                           </div>
                         </div>
                         <ReportBtn />
-                      </div>
+                      </div>}
                     </div>
-                    <div className={styles.description}>{props.description}</div>
+                    {!props.description && <NoData />}
+                    {!!props.description && <div className={styles.description}>{props.description}</div>}
                   </div>
-                  <div className={styles.widget}>
+                  <div className={demagogWidgetCustomClassNames}>
                     <div className={styles.header}>
                       <h2 className={styles.title}>Výroky</h2>
-                      <div className={styles.tags}>
+                      {!!props.demagog && <div className={styles.tags}>
                         <div className={styles.tag}>
                           <LinkBtn />
                           <div className={styles.tagname}>
@@ -93,18 +100,17 @@ function Detail(props) {
                           </div>
                         </div>
                         <ReportBtn />
-                      </div>
+                      </div>}
                     </div>
                     {!props.demagog && <NoData />}
                   </div>
-                  <div className={styles.widget}>
+                  <div className={contactsWidgetCustomClassNames}>
                     <div className={styles.header}>
                       <h2 className={styles.title}>Kontakty</h2>
-                      <div>
+                      {!!props.contact && <div>
                         <ReportBtn />
-                      </div>
+                      </div>}
                     </div>
-                    {/* TODO: temporary empty state */}
                     {!props.contact && <NoData />}
                     {props.contact &&
                       <React.Fragment>
@@ -136,7 +142,7 @@ function Detail(props) {
                   <h1 className={styles.title}>Angažovanost</h1>
                   <Divider className={styles.titleDivider}/>
                 </div>
-                <div className={classnames(styles.widget, styles.engage)}>
+                <div className={engageWidgetCustomClassNames}>
                   <div className={styles.header}>
                     <h2 className={styles.title}>Angažovanost</h2>
                     <div className={styles.tags}>

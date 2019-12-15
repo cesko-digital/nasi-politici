@@ -98,3 +98,8 @@
     transform: rotate(135deg);
   }
 }
+
+.noData {
+  border-top: 1px solid $clComponentBorder;
+  background-color: #f0f0f0;
+}
