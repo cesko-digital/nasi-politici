@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.IO;
 using System.Net.Http.Headers;
+using System.Text;
 
 namespace HlidacStatu.NasiPolitici
 {
@@ -44,6 +45,16 @@ namespace HlidacStatu.NasiPolitici
             services.AddHttpClient<IMonitoraService, MonitoraService>(config =>
             {
                 config.BaseAddress = new Uri(Configuration.GetValue<string>("MonitoraApiUrl"));
+            });
+
+            services.AddHttpClient<IMailService, MailService>(config =>
+            {
+                config.BaseAddress = new Uri(Configuration.GetValue<string>("HlidacApiUrl"));
+                string authToken = Configuration.GetValue<string>("MailAuthenticationToken");
+                string authTokenBase64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(authToken));
+                config.DefaultRequestHeaders.Authorization =
+                    new AuthenticationHeaderValue("Basic", authTokenBase64);
+
             });
 
             services.AddMemoryCache();
