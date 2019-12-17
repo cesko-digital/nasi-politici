@@ -36,6 +36,11 @@ namespace HlidacStatu.NasiPolitici
                 config.BaseAddress = new Uri(Configuration.GetValue<string>("CzFinApiUrl"));
             });
 
+            services.AddHttpClient<IDemagogService, DemagogService>(config =>
+            {
+                config.BaseAddress = new Uri(Configuration.GetValue<string>("DemagogApiUrl"));
+            });
+
             services.AddMemoryCache();
 
             services.AddControllers();
