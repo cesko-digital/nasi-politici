@@ -41,6 +41,11 @@ namespace HlidacStatu.NasiPolitici
                 config.BaseAddress = new Uri(Configuration.GetValue<string>("DemagogApiUrl"));
             });
 
+            services.AddHttpClient<IMonitoraService, MonitoraService>(config =>
+            {
+                config.BaseAddress = new Uri(Configuration.GetValue<string>("MonitoraApiUrl"));
+            });
+
             services.AddMemoryCache();
 
             services.AddControllers();

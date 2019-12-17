@@ -30,6 +30,7 @@ namespace HlidacStatu.NasiPolitici.Controllers
             return Content(await result, MediaTypeNames.Application.Json);
         }
 
+        //todo: refactor - make this a service, since it is going to work in all controllers the same way
         private async Task<TResult> CacheAsync<TResult>(Func<Task<TResult>> func)
         {
             var result = await _cache.GetOrCreateAsync(Request.Path, entry =>
