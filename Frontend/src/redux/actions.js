@@ -10,7 +10,9 @@ import {
   SET_LOADING_DETAIL_START,
   SET_DETAIL_NEWS,
   TOGGLE_SHOW_ALL_DONATIONS,
-  TOGGLE_SHOW_ALL_ROLES,
+	TOGGLE_SHOW_ALL_ROLES,
+	SET_REPORT_MODAL_OPEN,
+	SUBMIT_REPORT_MODAL,
 } from "./action-types";
 
 export const setSearchQuery = query => ({
@@ -74,4 +76,29 @@ export const toggleShowAllDonations = () => ({
 
 export const toggleShowAllRoles = () => ({
   type: TOGGLE_SHOW_ALL_ROLES,
+});
+
+export const openReportModal = (modalTitle) => ({
+	type: SET_REPORT_MODAL_OPEN,
+	payload: {
+		open: true,
+		modalTitle,
+	},
+});
+
+export const closeReportModal = () => ({
+	type: SET_REPORT_MODAL_OPEN,
+	payload: {
+		open: false,
+		modalTitle: '',
+	},
+});
+
+export const submitReportModal = ({description, email, title}) => ({
+	type: SUBMIT_REPORT_MODAL,
+	payload: {
+		description,
+		email,
+		title,
+	},
 });

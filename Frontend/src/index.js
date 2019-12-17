@@ -9,11 +9,11 @@ import { ConnectedRouter } from 'connected-react-router'
 const store = setupStore()
 
 ReactDOM.render(
-	<Provider store={store}>
+  <Provider store={store}>
   <ConnectedRouter history={history}>
     <App />
   </ConnectedRouter>
-	</Provider>,
-	document.getElementById('root'));
+  </Provider>,
+  document.getElementById('root'));
 
 serviceWorker.unregister();

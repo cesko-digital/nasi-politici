@@ -8,7 +8,9 @@ const initialState = {
 	loadingDetail: false,
   loadingSearch: false,
   showAllDonations: false,
-  showAllRoles: false,
+	showAllRoles: false,
+	showReporModal: false,
+	reportModalTitle: '',
 };
 
 export default function(state = initialState, action) {
@@ -75,6 +77,13 @@ export default function(state = initialState, action) {
       return {
         ...state,
         showAllRoles: !state.showAllRoles,
+      };
+    }
+    case actions.SET_REPORT_MODAL_OPEN: {
+      return {
+        ...state,
+        showReporModal: action.payload.open,
+        reportModalTitle: action.payload.modalTitle,
       };
     }
     default:

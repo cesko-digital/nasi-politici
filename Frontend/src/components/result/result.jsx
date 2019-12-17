@@ -7,6 +7,7 @@ import LoadingBar from '../loadingBar/loadingBar'
 import ProfilePicture from '../profilePicture/profilePicture'
 import styles from './result.module.scss'
 import { ReactComponent as ReportIcon } from '../../assets/images/report.svg';
+import ReportModalTrigger from '../reportModal/reportModalTrigger'
 
 function ResultRow({result}) {
 	return (
@@ -33,6 +34,7 @@ function ResultRow({result}) {
   )
 }
 
+// TODO pouzit spravnou ikonku
 function EmptyState({query}) {
 	return (
 		<div>
@@ -42,7 +44,13 @@ function EmptyState({query}) {
 				<div className={styles.usage}>Nejlepší výsledky vyledávání dostanete zadáním celého jména.<br />
 					Nepřesnosti v diakritice náš systém toleruje.
 				</div>
-				<div className={styles.report}><ReportIcon /><div className={styles.text}>Nahlásit chybu</div></div>
+				<ReportModalTrigger
+					modalTitle={`${query}, vyhledávání`}
+					className={styles.report}
+				>
+					<ReportIcon />
+					<div className={styles.text}>Nahlásit chybu</div>
+				</ReportModalTrigger>
 				<div className={styles.face}></div>
 			</div>
 		</div>

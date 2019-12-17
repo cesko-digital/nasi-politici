@@ -1,6 +1,6 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects'
 
-import {SEARCH, LOAD_DETAIL} from '../action-types'
+import {SEARCH, LOAD_DETAIL, SUBMIT_REPORT_MODAL} from '../action-types'
 import {
   setSearchResults,
   setDetail,
@@ -35,6 +35,10 @@ function* handleSearch(action) {
   yield put(searchEnded())
 }
 
+function* handleSubmitReportModal(action) {
+	// TODO zavolat BE routu pro poslani emailu
+}
+
 function* handleLoadDetail(action) {
   yield put(loadingDetailStarted())
   try {
@@ -51,6 +55,7 @@ function* handleLoadDetail(action) {
 function* searchSaga() {
   yield takeLatest(SEARCH, handleSearch);
   yield takeLatest(LOAD_DETAIL, handleLoadDetail);
+  yield takeLatest(SUBMIT_REPORT_MODAL, handleSubmitReportModal);
 }
 
 export default searchSaga;

@@ -7,13 +7,14 @@ import Detail from './pages/detail/detail'
 import Error from './pages/error'
 import Homepage from './pages/homepage/homepage'
 import Media from './pages/media'
+import ReportModal from './components/reportModal/reportModal'
 
 import './App.scss';
 
-function App() {
+function App(props) {
   return (
-		<div className="App">
-			<Header />
+    <div className="App">
+      <Header />
       <div className='body'>
         <Switch>
           <Route path="/" component={Homepage} exact />
@@ -24,8 +25,9 @@ function App() {
         </Switch>
       </div>
       <Footer />
-		</div>
+      <ReportModal onCancel={props.closeReportModal} />
+    </div>
   );
 }
 
-export default App;
+export default App

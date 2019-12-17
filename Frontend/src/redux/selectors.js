@@ -14,6 +14,8 @@ export const getShowAllRoles = store => store.app.showAllRoles
 export const getPersonalInsolvency = store => getDetailData(store).insolvencyPerson
 export const getCompanyInsolvency = store => getDetailData(store).insolvencyCompany
 export const wasSearched = store => !!getSearchResults(store)
+export const isReporModalOpen = store => store.app.showReporModal
+export const getReporModalTitle = store => store.app.reportModalTitle
 
 export const getDetailNews = createSelector(getDetailNewsRaw, (news) => {
   return news.map(a => ({
