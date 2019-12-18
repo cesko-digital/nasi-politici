@@ -24,10 +24,11 @@ namespace HlidacStatu.NasiPolitici.Controllers
             _cache = cache;
         }
 
-        [Route("monitora/{query}")]
-        public async Task<IActionResult> GetMonitoraArticles(string query)
+        [HttpPost("monitora")]
+        public async Task<IActionResult> GetMonitoraArticles(MonitoraQuery query)
         {
-            var result = CacheAsync(() => _monitoraService.GetArticles(query));
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(query);
+            var result = CacheAsync(() => _monitoraService.GetArticles(json));
 
             return Content(await result, MediaTypeNames.Application.Json);
         }
@@ -53,5 +54,14 @@ namespace HlidacStatu.NasiPolitici.Controllers
             return result;
         }
 
+
+    }
+
+    public class MonitoraQuery
+    {
+        public string Name { get; set; }
+        public string Party { get; set; }
+
+        public string Search_query { get; set; }
     }
 }
