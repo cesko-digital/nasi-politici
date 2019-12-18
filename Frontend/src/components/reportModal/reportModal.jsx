@@ -79,7 +79,7 @@ const ReportModal = ({title, isReporModalOpen, closeReportModal, submit}) => {
 			<div className={style.header}>
 				<div className={style.icon}>
 					<ReportIcon />
-					<div>Nahlásit chybu</div>
+					<div className={style.headTitle}>Nahlásit chybu</div>
 				</div>
 				{!submited && <div className={style.cancel} onClick={closeReportModal}>Zrušit</div>}
 			</div>

@@ -8,6 +8,11 @@
 	display: flex;
 	justify-content: space-between;
 }
+.headTitle {
+  @include subTitle;
+  margin-left: 6px;
+}
+
 .title {
 	margin: 5px 0;
 	font-family: "Source Serif Pro";
@@ -27,15 +32,15 @@
 }
 
 .descriptionLabel, .emailLabel {
-	font-family: "Source Serif Pro";
-	font-size: 14px;
-	font-weight: 400;
-	line-height: 24px;
+  @include smallText;
+  margin-bottom: 4px;
+  color: $clDark;
 }
 
 .reportForm {
 	display: flex;
-	flex-direction: column;
+  flex-direction: column;
+  color: $clDark;
 }
 
 .email {
@@ -93,6 +98,7 @@
 }
 
 .submited {
+  margin-bottom: 10px;
 	.text {
 		margin-bottom: 30px;
 		color: $clSuccessText;

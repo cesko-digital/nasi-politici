@@ -63,7 +63,9 @@ const RolesWidget = ({rolesGroups, showAll, toggleShowAllRoles, rolesCount}) => 
               <a href='https://www.hlidacstatu.cz/' rel="noopener noreferrer" target='_blank'>hlidacstatu.cz</a>
             </div>
           </div>
-          <ReportBtn />
+          <div className={styles.reportBtnWrapper}>
+            <ReportBtn className={styles.reportBtn}/>
+          </div>
         </div>
       </div>
       {!!rolesGroups.length && <Roles

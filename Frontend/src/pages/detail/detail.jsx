@@ -83,7 +83,9 @@ function Detail(props) {
                             <a href='https://www.transparency.cz/' rel="noopener noreferrer" target='_blank'>transparency.cz</a>
                           </div>
                         </div>
-                        <ReportBtn />
+                        <div className={styles.reportBtnWrapper}>
+                          <ReportBtn className={styles.reportBtn}/>
+                        </div>
                       </div>}
                     </div>
                     {!props.description && <NoData />}
@@ -99,7 +101,9 @@ function Detail(props) {
                             <a href='https://demagog.cz/' rel="noopener noreferrer" target='_blank'>demagog.cz</a>
                           </div>
                         </div>
-                        <ReportBtn />
+                        <div className={styles.reportBtnWrapper}>
+                          <ReportBtn className={styles.reportBtn}/>
+                        </div>
                       </div>}
                     </div>
                     {!props.demagog && <NoData />}
@@ -108,7 +112,9 @@ function Detail(props) {
                     <div className={styles.header}>
                       <h2 className={styles.title}>Kontakty</h2>
                       {!!props.contact && <div>
-                        <ReportBtn />
+                        <div className={styles.reportBtnWrapper}>
+                          <ReportBtn className={styles.reportBtn}/>
+                        </div>
                       </div>}
                     </div>
                     {!props.contact && <NoData />}
@@ -146,7 +152,9 @@ function Detail(props) {
                   <div className={styles.header}>
                     <h2 className={styles.title}>Angažovanost</h2>
                     <div className={styles.tags}>
-                      <ReportBtn />
+                      <div className={styles.reportBtnWrapper}>
+                        <ReportBtn className={styles.reportBtn}/>
+                      </div>
                     </div>
                   </div>
                   {!props.engagement && <NoData />}

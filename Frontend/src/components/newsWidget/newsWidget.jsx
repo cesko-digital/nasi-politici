@@ -56,7 +56,9 @@ const NewsWidget = ({news}) => {
                 <a href='https://monitora.cz/' rel="noopener noreferrer" target='_blank'>Monitora</a>
               </div>
             </div>
-            <ReportBtn />
+            <div className={styles.reportBtnWrapper}>
+              <ReportBtn className={styles.reportBtn}/>
+            </div>
           </div>}
         </div>
         {!!news.length && <Articles articles={news} />}

@@ -60,15 +60,20 @@
 }
 
 .usage {
-	margin-top: 26px;
+  margin-top: 24px;
+  color: $clDark;
 }
 
 .report {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-top: 15px;
-	color: $clPrimary;
+	margin-top: 14px;
+  color: $clPrimary;
+  
+  svg g {
+    stroke: $clPrimary;
+  }
 
 	.text {
 		@include linkBtn;
@@ -82,11 +87,22 @@
 }
 
 .face {
+  position: relative;
 	width: 170px;
 	height: 170px;
 	background-color: #e7e7e7;
 	border-radius: 50%;
-	margin: 45px auto 0 auto;
+  margin: 45px auto 0 auto;
+  
+  &:after {
+    content: '';
+    width: 55px;
+    position: absolute;
+    top: 30%;
+    height: 43px;
+    right: 25%;
+    background: url('./../../assets/images/face-sad.svg');
+  }
 }
 
 .initialsWrapper {
