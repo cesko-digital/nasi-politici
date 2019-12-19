@@ -24,17 +24,18 @@ const Article = ({article}) => {
 }
 
 const Articles = ({articles}) => {
-  const [showAll, setShowAll] = useState(false)
+	const [showAll, setShowAll] = useState(false)
+	const hasMore = articles.length > DEFAULT_ARTICLES_COUNT
   return (
     <React.Fragment>
       <div className={styles.articles}>
         {!showAll && articles.slice(0, DEFAULT_ARTICLES_COUNT).map((article, index) => <Article article={article} key={index}/>)}
         {showAll && articles.map((article, index) => <Article article={article} key={index}/>)}
       </div>
-      <div className={styles.showMore} onClick={() => setShowAll(!showAll)}>
-        {!showAll && <div className={styles.more}>Zobrazit {articles.length - DEFAULT_ARTICLES_COUNT} dalších</div>}
+      {hasMore && <div className={styles.showMore} onClick={() => setShowAll(!showAll)}>
+        {!showAll && hasMore && <div className={styles.more}>Zobrazit {articles.length - DEFAULT_ARTICLES_COUNT} dalších</div>}
         {showAll && <div className={styles.less}>Zobrazit méně</div>}
-      </div>
+      </div>}
     </React.Fragment>
   )
 }

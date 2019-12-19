@@ -24,6 +24,7 @@ const TableRow = (props) => {
 }
 
 const Roles = ({rolesGroups, showAll, rolesCount, toggleShowAllRoles}) => {
+	const hasMore = rolesCount > DEFAULT_ROLES_LIMIT
   return (
     <React.Fragment>
         {rolesGroups.map((group, index) => {
@@ -37,10 +38,10 @@ const Roles = ({rolesGroups, showAll, rolesCount, toggleShowAllRoles}) => {
             </div>
           )
         })}
-        <div className={styles.showMore} onClick={toggleShowAllRoles}>
-          {!showAll && <div className={styles.more}>Zobrazit {rolesCount-DEFAULT_ROLES_LIMIT} dalších</div>}
+        {hasMore && <div className={styles.showMore} onClick={toggleShowAllRoles}>
+          {!showAll && hasMore && <div className={styles.more}>Zobrazit {rolesCount-DEFAULT_ROLES_LIMIT} dalších</div>}
           {showAll && <div className={styles.less}>Zobrazit méně</div>}
-        </div>
+        </div>}
     </React.Fragment>
   )
 }

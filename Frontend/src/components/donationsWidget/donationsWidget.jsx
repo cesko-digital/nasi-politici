@@ -24,6 +24,7 @@ const TableRow = (props) => {
 }
 
 const Donations = ({donationsGroups, toggleShowAll, showAll, donationsCount}) => {
+	const hasMore = donationsCount > DEFAULT_DONATIONS_LIMIT
   return (
     <React.Fragment>
       {donationsGroups && donationsGroups.map((group, index) => {
@@ -37,10 +38,10 @@ const Donations = ({donationsGroups, toggleShowAll, showAll, donationsCount}) =>
           </div>
         )
       })}
-      <div className={styles.showMore} onClick={toggleShowAll}>
+      {hasMore && <div className={styles.showMore} onClick={toggleShowAll}>
         {!showAll && <div className={styles.more}>Zobrazit {donationsCount-DEFAULT_DONATIONS_LIMIT} dalších</div>}
         {showAll && <div className={styles.less}>Zobrazit méně</div>}
-      </div>
+      </div>}
     </React.Fragment>
   )
 }
@@ -49,7 +50,7 @@ const DonationsWidget = ({donationsGroups, showAll, toggleShowAllDonations, dona
     styles.widget,
     styles.widgetWithTable,
     !donationsGroups.length && styles.noData)
-  
+
   return (
     <div className={donationWidgetCustomClassNames}>
       <div className={styles.header}>
