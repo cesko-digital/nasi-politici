@@ -22,6 +22,7 @@ import DonationsWidget from '../../components/donationsWidget/donationsWidget'
 import RolesWidget from '../../components/rolesWidget/rolesWidget'
 import InsolvencyWidget from '../../components/insolvencyWidget/insolvencyWidget'
 import ProfilePicture from '../../components/profilePicture/profilePicture'
+import ReportModalTrigger from '../../components/reportModal/reportModalTrigger'
 import styles from './detail.module.scss';
 
 function Detail(props) {
@@ -83,9 +84,12 @@ function Detail(props) {
                             <a href='https://www.transparency.cz/' rel="noopener noreferrer" target='_blank'>transparency.cz</a>
                           </div>
                         </div>
-                        <div className={styles.reportBtnWrapper}>
+                        <ReportModalTrigger
+													className={styles.reportBtnWrapper}
+													modalTitle={`${props.fullname}, ve zkratce`}
+												>
                           <ReportBtn className={styles.reportBtn}/>
-                        </div>
+                        </ReportModalTrigger>
                       </div>}
                     </div>
                     {!props.description && <NoData />}
@@ -101,9 +105,12 @@ function Detail(props) {
                             <a href='https://demagog.cz/' rel="noopener noreferrer" target='_blank'>demagog.cz</a>
                           </div>
                         </div>
-                        <div className={styles.reportBtnWrapper}>
+                        <ReportModalTrigger
+													className={styles.reportBtnWrapper}
+													modalTitle={`${props.fullname}, výroky`}
+												>
                           <ReportBtn className={styles.reportBtn}/>
-                        </div>
+                        </ReportModalTrigger>
                       </div>}
                     </div>
                     {!props.demagog && <NoData />}
@@ -112,9 +119,12 @@ function Detail(props) {
                     <div className={styles.header}>
                       <h2 className={styles.title}>Kontakty</h2>
                       {!!props.contact && <div>
-                        <div className={styles.reportBtnWrapper}>
+                        <ReportModalTrigger
+													className={styles.reportBtnWrapper}
+													modalTitle={`${props.fullname}, kontakty`}
+												>
                           <ReportBtn className={styles.reportBtn}/>
-                        </div>
+                        </ReportModalTrigger>
                       </div>}
                     </div>
                     {!props.contact && <NoData />}
@@ -152,9 +162,12 @@ function Detail(props) {
                   <div className={styles.header}>
                     <h2 className={styles.title}>Angažovanost</h2>
                     <div className={styles.tags}>
-                      <div className={styles.reportBtnWrapper}>
+                      <ReportModalTrigger
+												className={styles.reportBtnWrapper}
+												modalTitle={`${props.fullname}, angažovanost`}
+											>
                         <ReportBtn className={styles.reportBtn}/>
-                      </div>
+                      </ReportModalTrigger>
                     </div>
                   </div>
                   {!props.engagement && <NoData />}

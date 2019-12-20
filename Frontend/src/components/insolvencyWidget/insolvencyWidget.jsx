@@ -7,10 +7,13 @@ import { ReactComponent as ReportBtn } from '../../assets/images/report.svg';
 import {createStructuredSelector} from 'reselect'
 import {
   getPersonalInsolvency,
-  getCompanyInsolvency,
+	getCompanyInsolvency,
+	getFullName,
 } from '../../redux/selectors'
 
 import styles from './insolvencyWidget.module.scss'
+import ReportModalTrigger from '../reportModal/reportModalTrigger'
+
 
 
 function InsolvencyRow({title, personalCount, companyCount}) {
@@ -34,7 +37,7 @@ function InsolvencyRow({title, personalCount, companyCount}) {
   )
 }
 
-const InsolvencyWidget = ({personalInsolvency, companyInsolvency}) => {
+const InsolvencyWidget = ({personalInsolvency, companyInsolvency, fullname}) => {
   const insolvencyWidgetCustomClassNames = classnames(
     styles.widget,
     styles.widgetWithTable,
@@ -52,9 +55,12 @@ const InsolvencyWidget = ({personalInsolvency, companyInsolvency}) => {
               <a href='https://www.hlidacstatu.cz/' rel="noopener noreferrer" target='_blank'>hlidacstatu.cz</a>
             </div>
           </div>
-          <div className={styles.reportBtnWrapper}>
+          <ReportModalTrigger
+						className={styles.reportBtnWrapper}
+						modalTitle={`${fullname}, insolvence`}
+					>
             <ReportBtn className={styles.reportBtn}/>
-          </div>
+          </ReportModalTrigger>
         </div>}
       </div>
       {!personalInsolvency && !companyInsolvency && <NoData />}
@@ -71,7 +77,8 @@ const InsolvencyWidget = ({personalInsolvency, companyInsolvency}) => {
 const mapStateToProps = createStructuredSelector(
   {
     personalInsolvency: getPersonalInsolvency,
-    companyInsolvency: getCompanyInsolvency,
+		companyInsolvency: getCompanyInsolvency,
+		fullname: getFullName,
   }
 )
 

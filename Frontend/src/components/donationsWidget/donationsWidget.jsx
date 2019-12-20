@@ -3,11 +3,12 @@ import React from 'react'
 import {createStructuredSelector} from 'reselect'
 import { connect } from 'react-redux'
 import classnames from 'classnames'
-import {getDonations, getShowAllDonations, getDonationsCount} from '../../redux/selectors'
+import {getDonations, getShowAllDonations, getDonationsCount, getFullName} from '../../redux/selectors'
 import {toggleShowAllDonations} from '../../redux/actions'
 import NoData from '../../components/emptyStates/noData/noData'
 import { ReactComponent as LinkBtn } from '../../assets/images/link.svg';
 import { ReactComponent as ReportBtn } from '../../assets/images/report.svg';
+import ReportModalTrigger from '../reportModal/reportModalTrigger'
 import {DEFAULT_DONATIONS_LIMIT} from '../../constants'
 
 import styles from './donationsWidget.module.scss'
@@ -45,7 +46,7 @@ const Donations = ({donationsGroups, toggleShowAll, showAll, donationsCount}) =>
     </React.Fragment>
   )
 }
-const DonationsWidget = ({donationsGroups, showAll, toggleShowAllDonations, donationsCount}) => {
+const DonationsWidget = ({donationsGroups, showAll, toggleShowAllDonations, donationsCount, fullname}) => {
   const donationWidgetCustomClassNames = classnames(
     styles.widget,
     styles.widgetWithTable,
@@ -62,9 +63,12 @@ const DonationsWidget = ({donationsGroups, showAll, toggleShowAllDonations, dona
               <a href='https://www.hlidacstatu.cz/' rel="noopener noreferrer" target='_blank'>hlidacstatu.cz</a>
             </div>
           </div>
-          <div className={styles.reportBtnWrapper}>
+          <ReportModalTrigger
+						className={styles.reportBtnWrapper}
+						modalTitle={`${fullname}, sponzorstvi`}
+					>
             <ReportBtn className={styles.reportBtn}/>
-          </div>
+          </ReportModalTrigger>
         </div>}
       </div>
       {!!donationsGroups.length && <Donations
@@ -81,7 +85,8 @@ const DonationsWidget = ({donationsGroups, showAll, toggleShowAllDonations, dona
 const mapStateToProps = createStructuredSelector({
   donationsGroups: getDonations,
   showAll: getShowAllDonations,
-  donationsCount: getDonationsCount,
+	donationsCount: getDonationsCount,
+	fullname: getFullName,
 })
 
 export default connect(mapStateToProps, {toggleShowAllDonations})(DonationsWidget);
