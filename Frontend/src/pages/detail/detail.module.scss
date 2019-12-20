@@ -7,19 +7,20 @@
 .body {
   margin: 24px auto 0;
   display: flex;
-  width: 1170px;
+  width: $resBase;
 }
 
 .heading {
   @include condensedTitle;
   margin-bottom: 24px;
   padding: 24px;
+  display: flex;
   background: #fff;
   .wrapper {
     position: relative;
     margin: 0 auto;
     padding-left: 200px;
-    max-width: 1170px;
+    max-width: $resBase;
     display: flex;
     width: 970px;
     box-sizing: content-box;
@@ -150,12 +151,12 @@
   }
 
   .header {
+    margin-bottom: 24px;
     display: flex;
     justify-content: space-between;
   }
   .title {
     @include condensedTitle;
-    margin-bottom: 24px;
   }
   .tags,
   .tag {
@@ -227,4 +228,34 @@
 }
 .reportBtn {
   transform: scale(.6);
+}
+
+@media screen and (max-width: 1169px) {
+  .body {
+    width: $resFluid;
+  }
+  .heading {
+    .wrapper {
+      max-width: $resFluid;
+    }
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .heading {
+    .wrapper {
+      padding: 0;
+    }
+    .fullname {
+      @include subTitle;
+    }
+  }
+  .photo {
+    margin-right: 20px;
+    position: relative;
+    width: 20vw;
+  }
+  .menuWrapper {
+    display: none;
+  }
 }

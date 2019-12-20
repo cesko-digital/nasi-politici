@@ -23,6 +23,7 @@ import RolesWidget from '../../components/rolesWidget/rolesWidget'
 import InsolvencyWidget from '../../components/insolvencyWidget/insolvencyWidget'
 import ProfilePicture from '../../components/profilePicture/profilePicture'
 import ReportModalTrigger from '../../components/reportModal/reportModalTrigger'
+
 import styles from './detail.module.scss';
 
 function Detail(props) {

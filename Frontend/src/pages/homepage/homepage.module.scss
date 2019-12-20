@@ -6,7 +6,7 @@
 }
 .wrapper {
   margin: 0 auto;
-  max-width: 770px;
+  max-width: $componentBase;
 }
 .logo {
   width: 270px;
@@ -20,4 +20,17 @@
 }
 .searchWrapper {
   margin: 45px 30px;
+}
+
+@media screen and (max-width: 1169px) {
+  .wrapper,
+  .logo {
+    max-width: $componentFluid;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .searchWrapper {
+    margin: 24px 20px;
+  }
 }
