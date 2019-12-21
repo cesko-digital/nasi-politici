@@ -1,6 +1,16 @@
 @import './assets/styles/vendor.scss';
 
+html, body, #root, .App {
+  height: 100%;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+}
+
 .body {
   @include regularText;
   text-align: left;
+  flex: 1;
 }

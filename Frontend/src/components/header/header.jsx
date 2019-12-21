@@ -15,7 +15,6 @@ function Header() {
             <img src={logo} alt={logo} className={styles.logo}/>
           </Link>}
           <div className={styles.links}>
-            <Link to='/' className={styles.link}>Home</Link>
             <Link to='/o-projektu' className={styles.link}>O Projektu</Link>
             <Link to='/pro-media' className={styles.link}>Pro Média</Link>
           </div>

@@ -48,9 +48,11 @@ function Detail(props) {
               <div className={styles.initials}>
                 <div className={styles.initialsWrapper}>
                   <div className={styles.fullname}>{props.fullname}</div>
-                  <div className={styles.birthYear}>*{props.birthYear}</div>
-                  <div className={styles.divider}></div>
-                  <div className={styles.currentParty}>{props.currentParty}</div>
+                  <div className={styles.personal}>
+                    <div className={styles.birthYear}>*{props.birthYear}</div>
+                    <div className={styles.divider}></div>
+                    <div className={styles.currentParty}>{props.currentParty}</div>
+                  </div>
                 </div>
                 <div className={styles.shareWrapper}>
                   <ShareBtn className={styles.shareIcon}/>

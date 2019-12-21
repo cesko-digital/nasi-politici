@@ -4,7 +4,6 @@
   display: flex;
   flex-direction: column
 }
-
 .resultRow {
   padding: 30px;
   box-shadow: inset 0 1px 0 #e5e5e5;
@@ -14,25 +13,24 @@
     background-color: $clTableRow;
   }
 }
-
 .resultItem {
   display: flex;
 }
-
+.nameWrapper {
+  margin-right: 12px;
+  max-width: 250px;
+}
 .name {
   @include headerTitle;
 }
-
 .pictureWrapper {
   margin-right: 30px;
-  flex: 1 2 100px;
 }
-
 .dataWrapper {
   padding-top: 30px;
   display: flex;
   justify-content: space-between;
-  flex: 3 1 auto;
+  flex: 1 1 auto;
   flex-wrap: wrap;
 }
 
@@ -138,6 +136,9 @@
 @media screen and (max-width: 1169px) {
   .results {
     margin: 0 20px;
+  }
+  .pictureWrapper {
+    flex: 0 1 20vw;
   }
 }
 
