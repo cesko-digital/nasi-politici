@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import {useRouteMatch} from "react-router-dom"
+import {useRouteMatch} from 'react-router-dom'
 import classnames from 'classnames'
 import SearchBar from '../searchBar/searchBar'
 
@@ -9,7 +9,6 @@ import styles from './header.module.scss'
 function Header() {
   const match = useRouteMatch('/')
   const matchDetail = useRouteMatch('/detail/:id')
-  console.log(matchDetail)
   return (
     <header className={classnames(matchDetail && styles.detailHeader, styles.header)}>
       <div className={styles.wrapper}>

@@ -1,8 +1,21 @@
 @import '../../App.scss';
 
 .wrapper {
+  position: relative;
   display: flex;
   height: 60px;
+  
+  &:before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    background: url('../../assets/images/search-dark.svg')no-repeat center center;
+    background-size: contain;
+  }
 }
 .input {
   flex: 1;
