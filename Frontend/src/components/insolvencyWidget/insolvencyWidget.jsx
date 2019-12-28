@@ -2,6 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { connect } from 'react-redux'
 import NoData from '../../components/emptyStates/noData/noData'
+import ZeroValue from '../../components/emptyStates/zeroValue/zeroValue'
 import { ReactComponent as LinkBtn } from '../../assets/images/link.svg';
 import { ReactComponent as ReportBtn } from '../../assets/images/report.svg';
 import {createStructuredSelector} from 'reselect'
@@ -9,6 +10,8 @@ import {
   getPersonalInsolvency,
 	getCompanyInsolvency,
 	getFullName,
+  hasInsolvency,
+  hasInsolvencyData,
 } from '../../redux/selectors'
 
 import styles from './insolvencyWidget.module.scss'
@@ -37,18 +40,18 @@ function InsolvencyRow({title, personalCount, companyCount}) {
   )
 }
 
-const InsolvencyWidget = ({personalInsolvency, companyInsolvency, fullname}) => {
+const InsolvencyWidget = ({personalInsolvency, companyInsolvency, fullname, hasInsolvency, hasInsolvencyData}) => {
   const insolvencyWidgetCustomClassNames = classnames(
     styles.widget,
     styles.widgetWithTable,
     styles.insolvency,
-    !personalInsolvency && !companyInsolvency && styles.noData)
+    !hasInsolvencyData && styles.noData)
 
   return (
     <div className={insolvencyWidgetCustomClassNames}>
       <div className={styles.header}>
         <h2 className={styles.title}>Insolvence</h2>
-        {!!personalInsolvency && !!companyInsolvency && <div className={styles.tags}>
+        {hasInsolvencyData && <div className={styles.tags}>
           <div className={styles.tag}>
             <LinkBtn />
             <div className={styles.tagname}>
@@ -63,8 +66,10 @@ const InsolvencyWidget = ({personalInsolvency, companyInsolvency, fullname}) => 
           </ReportModalTrigger>
         </div>}
       </div>
-      {!personalInsolvency && !companyInsolvency && <NoData />}
-      {!!personalInsolvency && !!companyInsolvency &&
+      {!hasInsolvencyData && <NoData />}
+      {hasInsolvencyData && !hasInsolvency &&
+        <ZeroValue title='Politik dosud není věřitelem, ani dlužníkem'/>}
+      {!!hasInsolvency &&
         <React.Fragment>
           <InsolvencyRow title='věřitelem' personalCount={personalInsolvency.creditorCount} companyCount={companyInsolvency.creditorCount}/>
           <InsolvencyRow title='dlužníkem' personalCount={personalInsolvency.debtorCount} companyCount={companyInsolvency.debtorCount}/>
@@ -76,6 +81,8 @@ const InsolvencyWidget = ({personalInsolvency, companyInsolvency, fullname}) => 
 
 const mapStateToProps = createStructuredSelector(
   {
+    hasInsolvencyData: hasInsolvencyData,
+    hasInsolvency: hasInsolvency,
     personalInsolvency: getPersonalInsolvency,
 		companyInsolvency: getCompanyInsolvency,
 		fullname: getFullName,

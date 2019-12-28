@@ -5,9 +5,9 @@ import { connect } from 'react-redux'
 import classnames from 'classnames'
 import {getDonations, getShowAllDonations, getDonationsCount, getFullName} from '../../redux/selectors'
 import {toggleShowAllDonations} from '../../redux/actions'
-import NoData from '../../components/emptyStates/noData/noData'
-import { ReactComponent as LinkBtn } from '../../assets/images/link.svg';
-import { ReactComponent as ReportBtn } from '../../assets/images/report.svg';
+import ZeroValue from '../../components/emptyStates/zeroValue/zeroValue'
+import { ReactComponent as LinkBtn } from '../../assets/images/link.svg'
+import { ReactComponent as ReportBtn } from '../../assets/images/report.svg'
 import ReportModalTrigger from '../reportModal/reportModalTrigger'
 import {DEFAULT_DONATIONS_LIMIT} from '../../constants'
 
@@ -49,8 +49,7 @@ const Donations = ({donationsGroups, toggleShowAll, showAll, donationsCount}) =>
 const DonationsWidget = ({donationsGroups, showAll, toggleShowAllDonations, donationsCount, fullname}) => {
   const donationWidgetCustomClassNames = classnames(
     styles.widget,
-    styles.widgetWithTable,
-    !donationsGroups.length && styles.noData)
+    styles.widgetWithTable)
 
   return (
     <div className={donationWidgetCustomClassNames}>
@@ -77,7 +76,8 @@ const DonationsWidget = ({donationsGroups, showAll, toggleShowAllDonations, dona
         toggleShowAll={toggleShowAllDonations}
         donationsCount={donationsCount}
       />}
-      {!donationsGroups.length && <NoData />}
+      {!donationsGroups.length &&
+        <ZeroValue title='Politik dosud neposkytl sponzorský dar'/>}
 		</div>
   );
 }

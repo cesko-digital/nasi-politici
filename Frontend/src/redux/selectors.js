@@ -11,11 +11,32 @@ export const getPhotoUrl = store => getDetailData(store).photo
 export const getDetailNewsRaw = store => store.app.detailNews
 export const getShowAllDonations = store => store.app.showAllDonations
 export const getShowAllRoles = store => store.app.showAllRoles
-export const getPersonalInsolvency = store => getDetailData(store).insolvencyPerson
-export const getCompanyInsolvency = store => getDetailData(store).insolvencyCompany
+export const getPersonalInsolvency = store => getDetailData(store).insolvencyPerson || {}
+export const getCompanyInsolvency = store => getDetailData(store).insolvencyCompany || {}
 export const wasSearched = store => !!getSearchResults(store)
 export const isReporModalOpen = store => store.app.showReporModal
 export const getReporModalTitle = store => store.app.reportModalTitle
+
+export const hasInsolvencyData = createSelector(getPersonalInsolvency, getCompanyInsolvency, (personal, company) => {
+  console.log(Object.entries(personal).length !== 0 && Object.entries(company).length !== 0)
+  return Object.entries(personal).length !== 0 && Object.entries(company).length !== 0
+})
+
+export const hasPersonalInsolvency = createSelector(getPersonalInsolvency, (insolvency) => {
+  if (Object.entries(insolvency).length === 0) return
+  const {debtorCount, creditorCount, bailiffCount} = insolvency
+  return debtorCount !== 0 || creditorCount !== 0 || bailiffCount !== 0
+})
+
+export const hasCompanyInsolvency = createSelector(getCompanyInsolvency, (insolvency) => {
+  if (Object.entries(insolvency).length === 0) return
+  const {debtorCount, creditorCount, bailiffCount} = insolvency
+  return debtorCount !== 0 || creditorCount !== 0 || bailiffCount !== 0
+})
+
+export const hasInsolvency = createSelector(hasPersonalInsolvency, hasCompanyInsolvency, (personal, company) => {
+  return personal || company
+})
 
 export const getDetailNews = createSelector(getDetailNewsRaw, (news) => {
   return news.map(a => ({
@@ -24,6 +45,7 @@ export const getDetailNews = createSelector(getDetailNewsRaw, (news) => {
     time: (new Date(a.time*1000)).toLocaleDateString()
   }))
 })
+
 export const getFullName = store => {
 	const detail = getDetailData(store)
 	return `${detail.namePrefix} ${detail.name} ${detail.surname} ${detail.nameSuffix}`.trim() // TODO lip naformatovat
