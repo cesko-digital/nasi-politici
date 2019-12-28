@@ -18,7 +18,6 @@ export const isReporModalOpen = store => store.app.showReporModal
 export const getReporModalTitle = store => store.app.reportModalTitle
 
 export const hasInsolvencyData = createSelector(getPersonalInsolvency, getCompanyInsolvency, (personal, company) => {
-  console.log(Object.entries(personal).length !== 0 && Object.entries(company).length !== 0)
   return Object.entries(personal).length !== 0 && Object.entries(company).length !== 0
 })
 
