@@ -21,6 +21,7 @@ import NewsWidget from '../../components/newsWidget/newsWidget'
 import DonationsWidget from '../../components/donationsWidget/donationsWidget'
 import RolesWidget from '../../components/rolesWidget/rolesWidget'
 import InsolvencyWidget from '../../components/insolvencyWidget/insolvencyWidget'
+import DemagogWidget from '../../components/demagogWidget/demagogWidget'
 import ProfilePicture from '../../components/profilePicture/profilePicture'
 import ReportModalTrigger from '../../components/reportModal/reportModalTrigger'
 
@@ -34,13 +35,12 @@ function Detail(props) {
 
   const engageWidgetCustomClassNames = classnames(styles.widget, styles.engage, !props.engagement && styles.noData)
   const contactsWidgetCustomClassNames = classnames(styles.widget, !props.contacts && styles.noData)
-  const demagogWidgetCustomClassNames = classnames(styles.widget, !props.demagog && styles.noData)
   const aboutWidgetCustomClassNames = classnames(styles.widget, !props.description && styles.noData)
 
   return (
-		<div className={styles.detail}>
-			{props.isLoading && <LoadingBar />}
-			{!props.isLoading &&
+    <div className={styles.detail}>
+      {props.isLoading && <LoadingBar />}
+      {!props.isLoading &&
         <React.Fragment>
           <div className={styles.heading}>
             <div className={styles.wrapper}>
@@ -88,9 +88,9 @@ function Detail(props) {
                           </div>
                         </div>
                         <ReportModalTrigger
-													className={styles.reportBtnWrapper}
-													modalTitle={`${props.fullname}, ve zkratce`}
-												>
+                          className={styles.reportBtnWrapper}
+                          modalTitle={`${props.fullname}, ve zkratce`}
+                        >
                           <ReportBtn className={styles.reportBtn}/>
                         </ReportModalTrigger>
                       </div>}
@@ -98,34 +98,15 @@ function Detail(props) {
                     {!props.description && <NoData />}
                     {!!props.description && <div className={styles.description}>{props.description}</div>}
                   </div>
-                  <div className={demagogWidgetCustomClassNames}>
-                    <div className={styles.header}>
-                      <h2 className={styles.title}>Výroky</h2>
-                      {!!props.demagog && <div className={styles.tags}>
-                        <div className={styles.tag}>
-                          <LinkBtn />
-                          <div className={styles.tagname}>
-                            <a href='https://demagog.cz/' rel="noopener noreferrer" target='_blank'>demagog.cz</a>
-                          </div>
-                        </div>
-                        <ReportModalTrigger
-													className={styles.reportBtnWrapper}
-													modalTitle={`${props.fullname}, výroky`}
-												>
-                          <ReportBtn className={styles.reportBtn}/>
-                        </ReportModalTrigger>
-                      </div>}
-                    </div>
-                    {!props.demagog && <NoData />}
-                  </div>
+                  <DemagogWidget />
                   <div className={contactsWidgetCustomClassNames}>
                     <div className={styles.header}>
                       <h2 className={styles.title}>Kontakty</h2>
                       {!!props.contact && <div>
                         <ReportModalTrigger
-													className={styles.reportBtnWrapper}
-													modalTitle={`${props.fullname}, kontakty`}
-												>
+                          className={styles.reportBtnWrapper}
+                          modalTitle={`${props.fullname}, kontakty`}
+                        >
                           <ReportBtn className={styles.reportBtn}/>
                         </ReportModalTrigger>
                       </div>}
@@ -166,9 +147,9 @@ function Detail(props) {
                     <h2 className={styles.title}>Angažovanost</h2>
                     <div className={styles.tags}>
                       <ReportModalTrigger
-												className={styles.reportBtnWrapper}
-												modalTitle={`${props.fullname}, angažovanost`}
-											>
+                        className={styles.reportBtnWrapper}
+                        modalTitle={`${props.fullname}, angažovanost`}
+                      >
                         <ReportBtn className={styles.reportBtn}/>
                       </ReportModalTrigger>
                     </div>
@@ -189,14 +170,14 @@ function Detail(props) {
           </div>
         </React.Fragment>
       }
-		</div>
+    </div>
   );
 }
 
 const mapStateToProps = createStructuredSelector({
-	fullname: getFullName,
-	birthYear: getBirthYear,
-	currentParty: getCurrentParty,
+  fullname: getFullName,
+  birthYear: getBirthYear,
+  currentParty: getCurrentParty,
   isLoading: isDetailLoading,
   description: getDescription,
   photoUrl: getPhotoUrl,

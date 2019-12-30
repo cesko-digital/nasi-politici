@@ -11,6 +11,7 @@ const initialState = {
 	showAllRoles: false,
 	showReporModal: false,
 	reportModalTitle: '',
+	demagog: {},
 };
 
 export default function(state = initialState, action) {
@@ -84,6 +85,12 @@ export default function(state = initialState, action) {
         ...state,
         showReporModal: action.payload.open,
         reportModalTitle: action.payload.modalTitle,
+      };
+    }
+    case actions.SET_DEMAGOG_DATA: {
+      return {
+        ...state,
+        demagog: action.payload,
       };
     }
     default:

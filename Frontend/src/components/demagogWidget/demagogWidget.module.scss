@@ -1,0 +1,110 @@
+@import '../../App.scss';
+
+.widget {
+  margin-bottom: 36px;
+  width: $widgetBase;
+  border-top: 2px solid $clDarkBorder;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+  background-color: #fff;
+	padding: 30px;
+  .header {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .title {
+    @include condensedTitle;
+    margin-bottom: 24px;
+    line-height: 24px;
+  }
+  .tags,
+  .tag {
+    display: flex;
+  }
+  .tags {
+    align-self: flex-start;
+  }
+  .tag {
+    margin-right: 10px;
+    padding: 0 8px;
+    align-items: center;
+    border-radius: 50px;
+    background-color: $clPrimaryLight;
+  }
+  .tagname {
+    margin-left: 4px;
+    color: $clPrimaryText;
+  }
+}
+
+.noData {
+  border-top: 1px solid $clComponentBorder;
+  background-color: #f0f0f0;
+}
+
+.reportBtnWrapper {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #F2F2F2;
+}
+.reportBtn {
+  transform: scale(.6);
+}
+
+.sum {
+	margin-bottom: 17px;
+}
+
+.itemsWrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+.count {
+	display: flex;
+	justify-content: space-between;
+	line-height: 40px;
+	margin-bottom: 10px;
+}
+
+.percBar {
+	height: 40px;
+	margin-bottom: -40px;
+}
+
+.true {
+	color: $clPrimaryText;
+	.percBar {
+		background-color: $clPrimaryBg;
+	}
+}
+
+.untrue {
+	color: $clError;
+	.percBar {
+		background-color: $clErrorBg;
+	}
+}
+
+.misleading {
+	color: $clWarning;
+	.percBar {
+		background-color: $clWarningBg;
+	}
+}
+
+.unverifiable {
+	margin-bottom: 0;
+	color: $clDark;
+	.percBar {
+		background-color: $clDarkBg;
+	}
+}
+
+@media screen and (max-width: 650px) {
+  .widget {
+    width: $widgetFluid;
+  }
+}

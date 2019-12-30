@@ -96,6 +96,19 @@ export const getDonations = createSelector(getDonationsRaw, getShowAllDonations,
 export const getRolesRaw = store => getDetailData(store).roles || []
 export const getRolesCount = store => getRolesRaw(store).length
 
+export const getDemagogDataRaw = store => store.app.demagog
+export const getDemagogData = createSelector(getDemagogDataRaw, (demagog) => {
+	const count = demagog.misleading + demagog.true + demagog.untrue + demagog.unverifiable
+	return {
+		...demagog,
+		truePerc: Math.round(demagog.true / count * 100),
+		untruePerc: Math.round(demagog.untrue / count * 100),
+		misleadingPerc: Math.round(demagog.misleading / count * 100),
+		unverifiablePerc: Math.round(demagog.unverifiable / count * 100),
+		count: demagog.misleading + demagog.true + demagog.untrue + demagog.unverifiable
+	}
+})
+
 export const getRoles = createSelector(getRolesRaw, getShowAllRoles, (roles, showAll) => {
   let rolesMap = roles.map((role) => ({
     ...role,

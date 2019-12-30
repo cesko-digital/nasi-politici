@@ -7,7 +7,8 @@ import {
   loadingDetailStarted,
   loadingDetailEnded,
   searchEnded,
-  searchStarted,
+	searchStarted,
+	setDemagogData,
   // setDetailNews,
 } from '../actions'
 import {getSearchQuery} from '../selectors'
@@ -44,8 +45,9 @@ function* handleLoadDetail(action) {
   try {
     const detail = yield call(api.fetchDetail, action.payload.id)
     yield put(setDetail(detail))
-    // const news = yield call(api.fetchNews, action.payload.id)
-    // yield put(setDetailNews(news))
+    const {data: demagog} = yield call(api.fetchDemagog, action.payload.id)
+    const speaker = demagog.speakers[0]
+    yield put(setDemagogData(speaker ? speaker.stats : {}))
   } catch (error) {
     // TODO asi vymyslet nejaky jednotny error handling idealne i s designem
   }
