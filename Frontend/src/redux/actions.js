@@ -73,7 +73,10 @@ export const setDetailNews = news => ({
 
 export const setDemagogData = data => ({
   type: SET_DEMAGOG_DATA,
-  payload: data
+  payload: {
+		id: data.id,
+		...data.stats,
+	}
 });
 
 export const toggleShowAllDonations = () => ({

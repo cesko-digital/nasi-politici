@@ -18,7 +18,7 @@ const DemagogWidget = ({data, fullname}) => {
 		<div className={demagogWidgetCustomClassNames}>
 			<div className={styles.header}>
 				<h2 className={styles.title}>Výroky</h2>
-				{!!data.count && <div className={styles.tags}>
+				{!!data.id && <div className={styles.tags}>
 					<div className={styles.tag}>
 						<LinkBtn />
 						<div className={styles.tagname}>
@@ -33,31 +33,36 @@ const DemagogWidget = ({data, fullname}) => {
 					</ReportModalTrigger>
 				</div>}
 			</div>
-			{!!data.count && <div className={styles.stats}>
+			{!!data.id && <React.Fragment>
 				<div className={styles.sum}>Politik má celkem {data.count} hodnocených výroků, z toho je:</div>
-				<div className={styles.itemsWrapper}>
-					<div className={styles.true}>
-						<div className={styles.percBar} style={{width: `${data.truePerc}%`}} />
-						<div className={styles.count}>
-							<div>{data.true} pravdivých</div> <div className={styles.percent}>{data.truePerc}%</div></div>
-						</div>
-					<div className={styles.untrue}>
-						<div className={styles.percBar} style={{width: `${data.untruePerc}%`}} />
-						<div className={styles.count}>
-							<div>{data.untrue} nepravdivých</div> <div className={styles.percent}>{data.untruePerc}%</div></div>
-						</div>
-					<div className={styles.misleading}>
-					<div className={styles.percBar} style={{width: `${data.misleadingPerc}%`}} />
-						<div className={styles.count}>
-							<div>{data.misleading} zavádějících</div> <div className={styles.percent}>{data.misleadingPerc}%</div></div>
-						</div>
-					<div className={styles.unverifiable}>
-					<div className={styles.percBar} style={{width: `${data.unverifiablePerc}%`}} />
-						<div className={styles.count}>
-							<div>{data.unverifiable} neověřitelných</div> <div className={styles.percent}>{data.unverifiablePerc}%</div></div>
-						</div>
+				<div className={styles.stats}>
+					<div className={styles.itemsWrapper}>
+						<div className={styles.true}>
+							<div className={styles.percBar} style={{width: `${data.truePerc}%`}} />
+							<div className={styles.count}>
+								<div className={styles.number}><div className={styles.icon}></div>{data.true} pravdivých</div> <div className={styles.percent}>{data.truePerc}%</div></div>
+							</div>
+						<div className={styles.untrue}>
+							<div className={styles.percBar} style={{width: `${data.untruePerc}%`}} />
+							<div className={styles.count}>
+								<div className={styles.number}><div className={styles.icon}></div>{data.untrue} nepravdivých</div> <div className={styles.percent}>{data.untruePerc}%</div></div>
+							</div>
+						<div className={styles.misleading}>
+						<div className={styles.percBar} style={{width: `${data.misleadingPerc}%`}} />
+							<div className={styles.count}>
+								<div className={styles.number}><div className={styles.icon}></div>{data.misleading} zavádějících</div> <div className={styles.percent}>{data.misleadingPerc}%</div></div>
+							</div>
+						<div className={styles.unverifiable}>
+						<div className={styles.percBar} style={{width: `${data.unverifiablePerc}%`}} />
+							<div className={styles.count}>
+								<div className={styles.number}><div className={styles.icon}></div>{data.unverifiable} neověřitelných</div> <div className={styles.percent}>{data.unverifiablePerc}%</div></div>
+							</div>
+					</div>
 				</div>
-			</div>}
+				<div className={styles.linkWrapper}>
+					<a className={styles.link} href={`https://demagog.cz/politici/${data.id}`} rel="noopener noreferrer" target='_blank'>Přejít na Demagog.cz</a>
+				</div>
+			</React.Fragment>}
 
 			{!data.count && <NoData />}
 		</div>

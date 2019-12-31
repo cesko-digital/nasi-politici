@@ -47,7 +47,7 @@ function* handleLoadDetail(action) {
     yield put(setDetail(detail))
     const {data: demagog} = yield call(api.fetchDemagog, action.payload.id)
     const speaker = demagog.speakers[0]
-    yield put(setDemagogData(speaker ? speaker.stats : {}))
+    yield put(setDemagogData(speaker ? speaker : {}))
   } catch (error) {
     // TODO asi vymyslet nejaky jednotny error handling idealne i s designem
   }
