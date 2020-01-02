@@ -47,7 +47,10 @@
 		.link {
 			@include linkBtn;
 			color: $clPrimary;
-		}
+    }
+    .redirectBtn {
+      margin-left: 6px;
+    }
 	}
 }
 
@@ -85,6 +88,7 @@
 		display: flex;
 		align-items: center;
 		.icon {
+      padding: 6px;
 			width: 30px;
 			height: 30px;
 			border-radius: 50%;
@@ -101,7 +105,8 @@
 .true {
 	color: $clPrimaryText;
 	.percBar {
-		background-color: $clPrimaryBg;
+		background-color: $clBlue;
+    opacity: .1;
 	}
 	.icon {
 		background-color: $clPrimaryText;
@@ -119,12 +124,13 @@
 }
 
 .misleading {
-	color: $clWarning;
+	color: $clYellow;
 	.percBar {
-		background-color: $clWarningBg;
+    background-color: $clYellow;
+    opacity: .1;
 	}
 	.icon {
-		background-color: $clWarning;
+		background-color: $clYellow;
 	}
 }
 
@@ -132,7 +138,8 @@
 	margin-bottom: 0;
 	color: $clDark;
 	.percBar {
-		background-color: $clDarkBg;
+		background-color: $clGray;
+    opacity: .1;
 	}
 	.icon {
 		background-color: $clDark;
