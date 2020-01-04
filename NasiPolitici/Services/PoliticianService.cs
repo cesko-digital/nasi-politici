@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -29,15 +30,17 @@ namespace HlidacStatu.NasiPolitici.Services
                 entry.SetAbsoluteExpiration(CacheDuration);
                 return LoadPeople();
             });
-                
+
+
+            CompareInfo ci = new CultureInfo("").CompareInfo;
+            CompareOptions co = CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace;
 
             var wantedPersons =  people
                 .Where(p =>
-                    p.asciiSurname?.StartsWith(text, StringComparison.InvariantCultureIgnoreCase) == true
-                    || p.asciiName?.StartsWith(text, StringComparison.InvariantCultureIgnoreCase) == true
-                    || (p.asciiName + " " + p.asciiSurname)?.StartsWith(text, StringComparison.InvariantCultureIgnoreCase) == true
-                    || (p.asciiSurname + " " + p.asciiName)?.StartsWith(text, StringComparison.InvariantCultureIgnoreCase) == true
-                    )
+                    ci.IndexOf(p.asciiSurname, text, co) == 0
+                    || ci.IndexOf(p.asciiName, text, co) == 0
+                    || ci.IndexOf(p.asciiName + " " + p.asciiSurname, text, co) == 0
+                    || ci.IndexOf(p.asciiSurname + " " + p.asciiName, text, co) == 0)
                 .Select(p => new
                 {
                     p.id,
