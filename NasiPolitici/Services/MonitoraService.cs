@@ -18,7 +18,7 @@ namespace HlidacStatu.NasiPolitici.Services
         {
 
             HttpContent content = new StringContent(json, Encoding.UTF8, MediaTypeNames.Application.Json);
-            var response = await _httpClient.PostAsync("topicsForPoliticianByQuery", content);
+            var response = await _httpClient.PostAsync("articles", content);
             if (response.IsSuccessStatusCode)
             {
                 var result = await response.Content.ReadAsStringAsync();

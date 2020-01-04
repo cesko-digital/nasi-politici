@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using System;
+using System.IO;
 using System.Net.Mime;
 using System.Threading.Tasks;
 
@@ -25,10 +26,15 @@ namespace HlidacStatu.NasiPolitici.Controllers
         }
 
         [HttpPost("monitora")]
-        public async Task<IActionResult> GetMonitoraArticles(MonitoraQuery query)
+        public async Task<IActionResult> GetMonitoraArticles()
         {
-            string json = Newtonsoft.Json.JsonConvert.SerializeObject(query);
-            var result = CacheAsync(() => _monitoraService.GetArticles(json));
+            string body = "";
+            using (var reader = new StreamReader(Request.Body))
+            {
+                body = await reader.ReadToEndAsync();
+            }
+
+            var result = CacheAsync(() => _monitoraService.GetArticles(body));
 
             return Content(await result, MediaTypeNames.Application.Json);
         }
@@ -57,11 +63,4 @@ namespace HlidacStatu.NasiPolitici.Controllers
 
     }
 
-    public class MonitoraQuery
-    {
-        public string Name { get; set; }
-        public string Party { get; set; }
-
-        public string Search_query { get; set; }
-    }
 }
