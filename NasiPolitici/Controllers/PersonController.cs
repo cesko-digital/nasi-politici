@@ -14,13 +14,11 @@ namespace HlidacStatu.NasiPolitici.Controllers
         private static readonly TimeSpan CacheDuration = TimeSpan.FromHours(4);
 
         private readonly IPoliticianService _politicianService;
-        private readonly INewsService _newsService;
         private readonly IMemoryCache _cache;
 
-        public PersonController(IPoliticianService politicianService, INewsService newsService, IMemoryCache cache)
+        public PersonController(IPoliticianService politicianService, IMemoryCache cache)
         {
             _politicianService = politicianService;
-            _newsService = newsService;
             _cache = cache;
         }
 
