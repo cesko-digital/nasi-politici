@@ -73,7 +73,6 @@ const ReportModal = ({title, isReporModalOpen, closeReportModal, submit}) => {
 
 	if (!isReporModalOpen) return null
 
-	// TODO pouzit spravnou ikonku
 	return (
 		<Modal onCloseRequest={closeReportModal} className={style.modalWrapper}>
 			<div className={style.header}>
