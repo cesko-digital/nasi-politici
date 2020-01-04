@@ -31,8 +31,7 @@ namespace HlidacStatu.NasiPolitici.Services
                 return LoadPeople();
             });
 
-
-            CompareInfo ci = new CultureInfo("").CompareInfo;
+            CompareInfo ci = CultureInfo.InvariantCulture.CompareInfo;
             CompareOptions co = CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace;
 
             var wantedPersons =  people
