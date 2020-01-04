@@ -46,7 +46,9 @@ namespace HlidacStatu.NasiPolitici.Services
                     p.birthYear,
                     p.currentParty,
                     p.eventCount
-                }) ;
+                })
+                .OrderByDescending( p => p.eventCount)
+                .Take(50);
             return JsonConvert.SerializeObject(wantedPersons);
         }
 
@@ -74,7 +76,7 @@ namespace HlidacStatu.NasiPolitici.Services
             public string asciiSurname { get; set; }
             public string birthYear { get; set; }
             public string currentParty { get; set; }
-            public string eventCount { get; set; }
+            public int? eventCount { get; set; }
         }
     }
 
