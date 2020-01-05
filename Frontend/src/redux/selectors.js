@@ -47,7 +47,9 @@ export const getDetailNews = createSelector(getDetailNewsRaw, (news) => {
 
 export const getFullName = store => {
 	const detail = getDetailData(store)
-	return `${detail.namePrefix} ${detail.name} ${detail.surname} ${detail.nameSuffix}`.trim() // TODO lip naformatovat
+	const prefix = detail.namePrefix ? `${detail.namePrefix} ` : ''
+	const suffix = detail.nameSuffix ? `${detail.nameSuffix} ` : ''
+	return `${prefix}${detail.name} ${detail.surname}${suffix}`.trim() // TODO lip naformatovat
 }
 
 export const getBirthYear = store => {
@@ -101,11 +103,11 @@ export const getDemagogData = createSelector(getDemagogDataRaw, (demagog) => {
 	const count = demagog.misleading + demagog.true + demagog.untrue + demagog.unverifiable
 	return {
 		...demagog,
-		truePerc: Math.round(demagog.true / count * 100),
-		untruePerc: Math.round(demagog.untrue / count * 100),
-		misleadingPerc: Math.round(demagog.misleading / count * 100),
-		unverifiablePerc: Math.round(demagog.unverifiable / count * 100),
-		count: demagog.misleading + demagog.true + demagog.untrue + demagog.unverifiable
+		truePerc: Math.round(demagog.true / count * 100) || 0,
+		untruePerc: Math.round(demagog.untrue / count * 100) || 0,
+		misleadingPerc: Math.round(demagog.misleading / count * 100) || 0,
+		unverifiablePerc: Math.round(demagog.unverifiable / count * 100) || 0,
+		count: count,
 	}
 })
 
