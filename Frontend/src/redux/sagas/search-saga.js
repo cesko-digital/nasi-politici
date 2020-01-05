@@ -1,15 +1,12 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects'
 
-import {SEARCH, LOAD_DETAIL, SUBMIT_REPORT_MODAL} from '../action-types'
+import * as actions from '../action-types'
 import {
   setSearchResults,
   setDetail,
   loadingDetailStarted,
   loadingDetailEnded,
-  searchEnded,
-	searchStarted,
 	setDemagogData,
-  // setDetailNews,
 } from '../actions'
 import {getSearchQuery} from '../selectors'
 import API from '../../services/api'
@@ -24,7 +21,6 @@ function* handleSearch(action) {
     yield put(setSearchResults(null))
     return
   }
-  yield put(searchStarted())
   yield put(push('/'))
   try {
     const persons = yield call(api.search, query)
@@ -33,7 +29,6 @@ function* handleSearch(action) {
     yield put(setSearchResults([]))
     // TODO asi vymyslet nejaky jednotny error handling idealne i s designem
   }
-  yield put(searchEnded())
 }
 
 function* handleSubmitReportModal(action) {
@@ -55,9 +50,9 @@ function* handleLoadDetail(action) {
 }
 
 function* searchSaga() {
-  yield takeLatest(SEARCH, handleSearch);
-  yield takeLatest(LOAD_DETAIL, handleLoadDetail);
-  yield takeLatest(SUBMIT_REPORT_MODAL, handleSubmitReportModal);
+  yield takeLatest([actions.SEARCH, actions.SET_SEARCH_QUERY], handleSearch);
+  yield takeLatest(actions.LOAD_DETAIL, handleLoadDetail);
+  yield takeLatest(actions.SUBMIT_REPORT_MODAL, handleSubmitReportModal);
 }
 
 export default searchSaga;
