@@ -36,6 +36,7 @@
   }
   .fullname {
     @include headerTitle;
+    text-transform: capitalize;
   }
   .currentParty {
     margin-left: 10px;
