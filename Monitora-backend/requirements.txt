@@ -1,7 +1,7 @@
 --find-links wheelhouse
 alembic==0.8.3
 aniso8601==1.1.0
-Flask==0.10.1
+Flask==1.0
 Flask-Migrate==1.6.0
 Flask-RESTful==0.3.4
 Flask-Script==2.0.5
