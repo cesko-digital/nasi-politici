@@ -1,0 +1,29 @@
+[program:11HacksAPI]
+directory=/home/hacker/11HacksAPI
+command=/home/hacker/anaconda3/bin/gunicorn -w 5 --bind unix:/home/hacker/socks/11hacksapi.sock main:app
+user=hacker
+autostart=true
+autorestart=true
+stopasgroup=true
+killasgroup=true
+
+
+stderr_logfile=/var/log/11HacksAPI/11HacksAPI.err.log
+stdout_logfile=/var/log/11HacksAPI/11HacksAPI.out.log
+
+
+
+server {
+        listen 81;
+        server_name 13.80.131.134;
+        access_log  /var/log/nginx/11HacksAPI.log;
+
+        location / {
+                proxy_pass http://unix:/home/hacker/socks/11hacksapi.sock;
+                include /etc/nginx/proxy_params;
+                proxy_redirect off;
+        }
+}
+
+
+pip wheel --wheel-dir=wheelhouse -r requirements.txt
