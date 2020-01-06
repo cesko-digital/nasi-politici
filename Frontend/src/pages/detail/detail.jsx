@@ -21,7 +21,10 @@ import NewsWidget from '../../components/newsWidget/newsWidget'
 import DonationsWidget from '../../components/donationsWidget/donationsWidget'
 import RolesWidget from '../../components/rolesWidget/rolesWidget'
 import InsolvencyWidget from '../../components/insolvencyWidget/insolvencyWidget'
+import DemagogWidget from '../../components/demagogWidget/demagogWidget'
 import ProfilePicture from '../../components/profilePicture/profilePicture'
+import ReportModalTrigger from '../../components/reportModal/reportModalTrigger'
+
 import styles from './detail.module.scss';
 
 function Detail(props) {
@@ -32,13 +35,12 @@ function Detail(props) {
 
   const engageWidgetCustomClassNames = classnames(styles.widget, styles.engage, !props.engagement && styles.noData)
   const contactsWidgetCustomClassNames = classnames(styles.widget, !props.contacts && styles.noData)
-  const demagogWidgetCustomClassNames = classnames(styles.widget, !props.demagog && styles.noData)
   const aboutWidgetCustomClassNames = classnames(styles.widget, !props.description && styles.noData)
 
   return (
-		<div className={styles.detail}>
-			{props.isLoading && <LoadingBar />}
-			{!props.isLoading &&
+    <div className={styles.detail}>
+      {props.isLoading && <LoadingBar />}
+      {!props.isLoading &&
         <React.Fragment>
           <div className={styles.heading}>
             <div className={styles.wrapper}>
@@ -46,9 +48,11 @@ function Detail(props) {
               <div className={styles.initials}>
                 <div className={styles.initialsWrapper}>
                   <div className={styles.fullname}>{props.fullname}</div>
-                  <div className={styles.birthYear}>*{props.birthYear}</div>
-                  <div className={styles.divider}></div>
-                  <div className={styles.currentParty}>{props.currentParty}</div>
+                  <div className={styles.personal}>
+                    <div className={styles.birthYear}>*{props.birthYear}</div>
+                    <div className={styles.divider}></div>
+                    <div className={styles.currentParty}>{props.currentParty}</div>
+                  </div>
                 </div>
                 <div className={styles.shareWrapper}>
                   <ShareBtn className={styles.shareIcon}/>
@@ -83,38 +87,28 @@ function Detail(props) {
                             <a href='https://www.transparency.cz/' rel="noopener noreferrer" target='_blank'>transparency.cz</a>
                           </div>
                         </div>
-                        <div className={styles.reportBtnWrapper}>
+                        <ReportModalTrigger
+                          className={styles.reportBtnWrapper}
+                          modalTitle={`${props.fullname}, ve zkratce`}
+                        >
                           <ReportBtn className={styles.reportBtn}/>
-                        </div>
+                        </ReportModalTrigger>
                       </div>}
                     </div>
                     {!props.description && <NoData />}
                     {!!props.description && <div className={styles.description}>{props.description}</div>}
                   </div>
-                  <div className={demagogWidgetCustomClassNames}>
-                    <div className={styles.header}>
-                      <h2 className={styles.title}>Výroky</h2>
-                      {!!props.demagog && <div className={styles.tags}>
-                        <div className={styles.tag}>
-                          <LinkBtn />
-                          <div className={styles.tagname}>
-                            <a href='https://demagog.cz/' rel="noopener noreferrer" target='_blank'>demagog.cz</a>
-                          </div>
-                        </div>
-                        <div className={styles.reportBtnWrapper}>
-                          <ReportBtn className={styles.reportBtn}/>
-                        </div>
-                      </div>}
-                    </div>
-                    {!props.demagog && <NoData />}
-                  </div>
+                  <DemagogWidget />
                   <div className={contactsWidgetCustomClassNames}>
                     <div className={styles.header}>
                       <h2 className={styles.title}>Kontakty</h2>
                       {!!props.contact && <div>
-                        <div className={styles.reportBtnWrapper}>
+                        <ReportModalTrigger
+                          className={styles.reportBtnWrapper}
+                          modalTitle={`${props.fullname}, kontakty`}
+                        >
                           <ReportBtn className={styles.reportBtn}/>
-                        </div>
+                        </ReportModalTrigger>
                       </div>}
                     </div>
                     {!props.contact && <NoData />}
@@ -152,9 +146,12 @@ function Detail(props) {
                   <div className={styles.header}>
                     <h2 className={styles.title}>Angažovanost</h2>
                     <div className={styles.tags}>
-                      <div className={styles.reportBtnWrapper}>
+                      <ReportModalTrigger
+                        className={styles.reportBtnWrapper}
+                        modalTitle={`${props.fullname}, angažovanost`}
+                      >
                         <ReportBtn className={styles.reportBtn}/>
-                      </div>
+                      </ReportModalTrigger>
                     </div>
                   </div>
                   {!props.engagement && <NoData />}
@@ -173,14 +170,14 @@ function Detail(props) {
           </div>
         </React.Fragment>
       }
-		</div>
+    </div>
   );
 }
 
 const mapStateToProps = createStructuredSelector({
-	fullname: getFullName,
-	birthYear: getBirthYear,
-	currentParty: getCurrentParty,
+  fullname: getFullName,
+  birthYear: getBirthYear,
+  currentParty: getCurrentParty,
   isLoading: isDetailLoading,
   description: getDescription,
   photoUrl: getPhotoUrl,

@@ -13,6 +13,7 @@ import {
 	TOGGLE_SHOW_ALL_ROLES,
 	SET_REPORT_MODAL_OPEN,
 	SUBMIT_REPORT_MODAL,
+	SET_DEMAGOG_DATA,
 } from "./action-types";
 
 export const setSearchQuery = query => ({
@@ -68,6 +69,14 @@ export const setDetailNews = news => ({
   payload: {
     news
   }
+});
+
+export const setDemagogData = data => ({
+  type: SET_DEMAGOG_DATA,
+  payload: {
+		id: data.id,
+		...data.stats,
+	}
 });
 
 export const toggleShowAllDonations = () => ({

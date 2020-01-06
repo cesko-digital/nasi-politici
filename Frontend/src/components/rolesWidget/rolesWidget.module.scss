@@ -2,7 +2,7 @@
 
 .widget {
   margin-bottom: 36px;
-  width: 48%;
+  width: $widgetBase;
   border-top: 2px solid $clDarkBorder;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   box-sizing: border-box;
@@ -11,6 +11,7 @@
     padding: 30px 30px 0 30px;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
   }
   .title {
     @include condensedTitle;
@@ -118,4 +119,10 @@
 }
 .reportBtn {
   transform: scale(.6);
+}
+
+@media screen and (max-width: 650px) {
+  .widget {
+    width: $widgetFluid;
+  }
 }

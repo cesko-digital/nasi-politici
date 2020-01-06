@@ -1,11 +1,19 @@
 @import '../../App.scss';
 
 .about {
-  margin: 100px auto 160px;
-  max-width: 770px;
   @include featureText;
+  margin: 100px auto 160px;
+  padding: 0 20px;
+  max-width: $componentBase;
+  box-sizing: content-box;
 }
 .title {
   @include headerTitle;
   margin-bottom: 15px;
+}
+
+@media screen and (max-width: 1169px) {
+  .about {
+    max-width: $componentFluid;
+  }
 }

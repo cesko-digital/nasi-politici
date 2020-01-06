@@ -13,7 +13,7 @@ function Footer () {
   return (
     <div className={styles.footer}>
       <div className={styles.top}>
-        <div className={styles.column}>
+        <div className={classnames(styles.column, styles.social)}>
           <h3 className={styles.header}>V síti</h3>
           <div className={styles.socialWrapper}>
             <FBLogo />
@@ -74,7 +74,7 @@ function Footer () {
       <div className={styles.bottom}>
         <div className={styles.bottomWrapper}>
           <LogoNP className={classnames(styles.logoNP, styles.logo)}/>
-          <div>
+          <div className={styles.privacyPolicy}>
             <div className={styles.link}>Zásady zpracování osobních údajů</div>
           </div>
         </div>

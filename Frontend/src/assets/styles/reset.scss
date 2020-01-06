@@ -40,9 +40,11 @@ button, input, optgroup, select, textarea {
 
 textarea {
   display: block;
+  resize: none;
 }
 
 input {
+  max-width: 0;
   line-height: normal;
 }
 

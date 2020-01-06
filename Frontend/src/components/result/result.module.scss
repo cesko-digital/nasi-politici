@@ -4,7 +4,6 @@
   display: flex;
   flex-direction: column
 }
-
 .resultRow {
   padding: 30px;
   box-shadow: inset 0 1px 0 #e5e5e5;
@@ -14,24 +13,25 @@
     background-color: $clTableRow;
   }
 }
-
 .resultItem {
   display: flex;
 }
-
+.nameWrapper {
+  margin-right: 12px;
+  max-width: 250px;
+}
 .name {
   @include headerTitle;
 }
-
 .pictureWrapper {
   margin-right: 30px;
 }
-
 .dataWrapper {
   padding-top: 30px;
   display: flex;
   justify-content: space-between;
-  flex: 1;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
 }
 
 .link {
@@ -39,6 +39,7 @@
   height: 39px;
   line-height: 53px;
   color: $clPrimary;
+  white-space: nowrap;
 
   &:after {
     background-color: $clPrimary;
@@ -130,4 +131,37 @@
   background-color: #000;
   border-radius: 50%;
   opacity: .2;
+}
+
+@media screen and (max-width: 1169px) {
+  .results {
+    margin: 0 20px;
+  }
+  .pictureWrapper {
+    flex: 0 1 20vw;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .resultRow {
+    padding: 20px 0;
+  }
+  .dataWrapper {
+    padding-top: 0;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .count {
+    margin: 0 0 17px 20px;
+  }
+  .name {
+    @include subTitle;
+  }
+  .initialsWrapper {
+    @include smallText;
+  }
+  .pictureWrapper {
+    display: flex;
+    align-items: center;
+  }
 }

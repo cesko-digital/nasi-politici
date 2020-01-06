@@ -1,7 +1,15 @@
+$resBase: 1170px;
+$resFluid: 100%;
+$componentBase: 770px;
+$componentFluid: 100%;
+$widgetBase: 48%;
+$widgetFluid: 100%;
+
 //
 // Colours
 //
 $clDark: #666;
+$clDarkBg: #F5F5F5;
 $clSalmon: #ffe5e5;
 $clCondensed: #1A1A1A;
 $clLight: #404040;
@@ -13,12 +21,20 @@ $clTableRow: #fafafa;
 $clBackground: #f5f5f5;
 $clComponentBorder: #b2b2b2;
 $clLine: #0003;
+$clErrorBg: #FCF5F5;
 $clError: #c3343e;
 
 $clPrimaryText: #13548f;
 $clPrimary: #307abe;
+$clPrimaryBg: #F5F8FC;
 $clPrimaryLight: #ecf1f6;
 $clSuccessText: #2d6d1d;
+$clWarning: #b28612;
+$clWarningBg: #FDF7E9;
+
+$clBlue: #3D73CC;
+$clYellow: #E7B123;
+$clGray: #999999;
 
 //
 // Typography

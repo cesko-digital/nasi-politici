@@ -14,7 +14,7 @@ function ResultRow({result}) {
     <Link className={styles.resultRow} to={`/detail/${result.id}`}>
       <div className={styles.resultItem}>
         <div className={styles.pictureWrapper} >
-          <ProfilePicture src={result.photo} alt={result.surname}/>
+          <ProfilePicture src={`https://www.hlidacstatu.cz/Photo/${result.id}`} alt={result.surname}/>
         </div>
         <div className={styles.dataWrapper}>
           <div className={styles.nameWrapper}>

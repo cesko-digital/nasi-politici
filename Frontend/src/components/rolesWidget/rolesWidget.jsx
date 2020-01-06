@@ -6,9 +6,10 @@ import classnames from 'classnames'
 import NoData from '../../components/emptyStates/noData/noData'
 import { ReactComponent as LinkBtn } from '../../assets/images/link.svg';
 import { ReactComponent as ReportBtn } from '../../assets/images/report.svg';
-import {getRoles, getShowAllRoles, getRolesCount} from '../../redux/selectors'
+import {getRoles, getShowAllRoles, getRolesCount, getFullName} from '../../redux/selectors'
 import {toggleShowAllRoles} from '../../redux/actions'
 import {DEFAULT_ROLES_LIMIT} from '../../constants'
+import ReportModalTrigger from '../reportModal/reportModalTrigger'
 
 import styles from './rolesWidget.module.scss'
 
@@ -24,6 +25,7 @@ const TableRow = (props) => {
 }
 
 const Roles = ({rolesGroups, showAll, rolesCount, toggleShowAllRoles}) => {
+	const hasMore = rolesCount > DEFAULT_ROLES_LIMIT
   return (
     <React.Fragment>
         {rolesGroups.map((group, index) => {
@@ -37,15 +39,15 @@ const Roles = ({rolesGroups, showAll, rolesCount, toggleShowAllRoles}) => {
             </div>
           )
         })}
-        <div className={styles.showMore} onClick={toggleShowAllRoles}>
-          {!showAll && <div className={styles.more}>Zobrazit {rolesCount-DEFAULT_ROLES_LIMIT} dalších</div>}
+        {hasMore && <div className={styles.showMore} onClick={toggleShowAllRoles}>
+          {!showAll && hasMore && <div className={styles.more}>Zobrazit {rolesCount-DEFAULT_ROLES_LIMIT} dalších</div>}
           {showAll && <div className={styles.less}>Zobrazit méně</div>}
-        </div>
+        </div>}
     </React.Fragment>
   )
 }
 
-const RolesWidget = ({rolesGroups, showAll, toggleShowAllRoles, rolesCount}) => {
+const RolesWidget = ({rolesGroups, showAll, toggleShowAllRoles, rolesCount, fullname}) => {
   const rolesWidgetCustomClassNames = classnames(
     styles.widget,
     styles.widgetWithTable,
@@ -63,9 +65,12 @@ const RolesWidget = ({rolesGroups, showAll, toggleShowAllRoles, rolesCount}) => 
               <a href='https://www.hlidacstatu.cz/' rel="noopener noreferrer" target='_blank'>hlidacstatu.cz</a>
             </div>
           </div>
-          <div className={styles.reportBtnWrapper}>
+          <ReportModalTrigger
+						className={styles.reportBtnWrapper}
+						modalTitle={`${fullname}, role`}
+					>
             <ReportBtn className={styles.reportBtn}/>
-          </div>
+          </ReportModalTrigger>
         </div>
       </div>
       {!!rolesGroups.length && <Roles
@@ -82,7 +87,8 @@ const RolesWidget = ({rolesGroups, showAll, toggleShowAllRoles, rolesCount}) => 
 const mapStateToProps = createStructuredSelector({
   rolesGroups: getRoles,
   showAll: getShowAllRoles,
-  rolesCount: getRolesCount,
+	rolesCount: getRolesCount,
+	fullname: getFullName,
 })
 
 export default connect(mapStateToProps, {toggleShowAllRoles})(RolesWidget);

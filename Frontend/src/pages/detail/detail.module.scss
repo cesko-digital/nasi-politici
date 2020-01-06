@@ -7,20 +7,22 @@
 .body {
   margin: 24px auto 0;
   display: flex;
-  width: 1170px;
+  width: $resBase;
 }
 
 .heading {
   @include condensedTitle;
   margin-bottom: 24px;
   padding: 24px;
+  display: flex;
   background: #fff;
   .wrapper {
     position: relative;
     margin: 0 auto;
     padding-left: 200px;
-    max-width: 1170px;
+    align-items: center;
     display: flex;
+    max-width: $resBase;
     width: 970px;
     box-sizing: content-box;
   }
@@ -34,14 +36,21 @@
   }
   .fullname {
     @include headerTitle;
+    text-transform: capitalize;
   }
   .currentParty {
     margin-left: 10px;
+  }
+  .personal {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
   }
 }
 .photo {
   position: absolute;
   left: 0;
+  top: 0;
 }
 .initials,
 .initialsWrapper {
@@ -54,6 +63,7 @@
 .initialsWrapper {
   @include regularText;
   align-items: baseline;
+  flex-wrap: wrap;
 }
 .divider {
   position: relative;
@@ -139,7 +149,7 @@
 .widget {
   margin-bottom: 36px;
   padding: 30px;
-  width: 48%;
+  width: $widgetBase;
   border-top: 2px solid $clDarkBorder;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   box-sizing: border-box;
@@ -150,12 +160,13 @@
   }
 
   .header {
+    margin-bottom: 24px;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
   }
   .title {
     @include condensedTitle;
-    margin-bottom: 24px;
   }
   .tags,
   .tag {
@@ -227,4 +238,59 @@
 }
 .reportBtn {
   transform: scale(.6);
+}
+
+@media screen and (max-width: 1169px) {
+  .body {
+    width: $resFluid;
+  }
+  .heading {
+    .wrapper {
+      max-width: $resFluid;
+    }
+  }
+}
+
+@media screen and (max-width: 979px) {
+  .heading {
+    padding: 10px 20px;
+    .wrapper {
+      padding: 0;
+    }
+  }
+  .menuWrapper {
+    display: none;
+  }
+  .photo {
+    margin-right: 10px;
+    position: relative;
+    width: 20vw;
+  }
+  .initialsWrapper {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .widget {
+    width: $widgetFluid;
+  }
+  .personal {
+    @include smallText;
+  }
+  .shareBtn {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .heading {
+    .fullname {
+      @include subTitle;
+    }
+  }
+  .photo {
+    width: 40px;
+    height: 40px;
+  }
 }
