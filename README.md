@@ -37,3 +37,11 @@ detail `https://localhost:5001/person/detail/andrej-babis`
 ## Způsob otevření projektu
 
 Ve vašem oblíbeném textovém editoru, případně IDE si otevřete stažený Git repozitář. Zdrojové kódy jsou ve složce NasiPolitici.
+
+## Env variables
+
+### Frontend
+ - /Frontend/.env pro base addressu
+ 
+### Monitora-backend
+ - /Monitora-backend/app/data/token.py pro token ke sluzbe Monitory
