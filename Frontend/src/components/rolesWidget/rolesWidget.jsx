@@ -1,15 +1,11 @@
 
 import React from 'react'
-import {createStructuredSelector} from 'reselect'
-import { connect } from 'react-redux'
 import classnames from 'classnames'
 import NoData from '../../components/emptyStates/noData/noData'
 import { ReactComponent as LinkBtn } from '../../assets/images/link.svg';
 import { ReactComponent as ReportBtn } from '../../assets/images/report.svg';
-import {getRoles, getShowAllRoles, getRolesCount, getFullName} from '../../redux/selectors'
-import {toggleShowAllRoles} from '../../redux/actions'
 import {DEFAULT_ROLES_LIMIT} from '../../constants'
-import ReportModalTrigger from '../reportModal/reportModalTrigger'
+import ReportModalTrigger from '../reportModal/reportModalTriggerConnected'
 
 import styles from './rolesWidget.module.scss'
 
@@ -47,7 +43,7 @@ const Roles = ({rolesGroups, showAll, rolesCount, toggleShowAllRoles}) => {
   )
 }
 
-const RolesWidget = ({rolesGroups, showAll, toggleShowAllRoles, rolesCount, fullname}) => {
+export default ({rolesGroups, showAll, toggleShowAllRoles, rolesCount, fullname}) => {
   const rolesWidgetCustomClassNames = classnames(
     styles.widget,
     styles.widgetWithTable,
@@ -83,12 +79,3 @@ const RolesWidget = ({rolesGroups, showAll, toggleShowAllRoles, rolesCount, full
     </div>
   );
 }
-
-const mapStateToProps = createStructuredSelector({
-  rolesGroups: getRoles,
-  showAll: getShowAllRoles,
-	rolesCount: getRolesCount,
-	fullname: getFullName,
-})
-
-export default connect(mapStateToProps, {toggleShowAllRoles})(RolesWidget);

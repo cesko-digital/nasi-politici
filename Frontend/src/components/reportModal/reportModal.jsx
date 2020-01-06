@@ -1,12 +1,8 @@
 import React, {useCallback, useState, useEffect} from 'react'
-import {connect} from 'react-redux'
 import classnames from 'classnames'
 import { ReactComponent as ReportIcon } from '../../assets/images/report.svg';
 import style from './reportModal.module.scss'
 import Modal from '../modal/modal'
-import {createStructuredSelector} from 'reselect'
-import {isReporModalOpen, getReporModalTitle} from '../../redux/selectors'
-import {closeReportModal, submitReportModal} from '../../redux/actions'
 import {useInput} from '../../hooks/hooks'
 
 const EMAIL_REGEXP = /^[+a-zA-Z0-9_.!#$%&'*\\/=?^`{|}~-]+@([a-zA-Z0-9-]+\.)+[a-zA-Z0-9]{2,63}$/
@@ -40,7 +36,7 @@ const Form = ({onSubmit, validation, bindDescription, bindEmail}) => {
 	)
 }
 
-const ReportModal = ({title, isReporModalOpen, closeReportModal, submit}) => {
+export default ({title, isReporModalOpen, closeReportModal, submit}) => {
 
 	const {value: description, reset: resetDescription, bind: bindDescription} = useInput('')
 	const {value: email, reset: resetEmail, bind: bindEmail} = useInput('')
@@ -95,10 +91,3 @@ const ReportModal = ({title, isReporModalOpen, closeReportModal, submit}) => {
 		</Modal>
 	)
 }
-
-const mapStateToProps = createStructuredSelector({
-	isReporModalOpen,
-	title: getReporModalTitle
-})
-
-export default connect(mapStateToProps, {closeReportModal, submit: submitReportModal})(ReportModal);

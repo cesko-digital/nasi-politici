@@ -1,13 +1,10 @@
 import React from 'react'
-import {createStructuredSelector} from 'reselect'
 import {Link} from 'react-router-dom'
-import { connect } from 'react-redux'
-import {getSearchResults, isSearchLoading, getSearchQuery} from '../../redux/selectors'
 import LoadingBar from '../loadingBar/loadingBar'
 import ProfilePicture from '../profilePicture/profilePicture'
 import styles from './result.module.scss'
 import { ReactComponent as ReportIcon } from '../../assets/images/report.svg';
-import ReportModalTrigger from '../reportModal/reportModalTrigger'
+import ReportModalTrigger from '../reportModal/reportModalTriggerConnected'
 
 function ResultRow({result}) {
 	return (
@@ -57,7 +54,7 @@ function EmptyState({query}) {
 	)
 }
 
-function Result({results, loading, query}) {
+export default ({results, loading, query}) => {
 // TODO vyresit mnozne/jednotne cislo
 	return (
 		<React.Fragment>
@@ -71,11 +68,3 @@ function Result({results, loading, query}) {
 		</React.Fragment>
   )
 }
-
-const mapStateToProps = createStructuredSelector({
-  results: getSearchResults,
-	loading: isSearchLoading,
-  query: getSearchQuery,
-})
-
-export default connect(mapStateToProps)(Result);

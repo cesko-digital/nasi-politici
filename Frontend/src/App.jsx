@@ -3,11 +3,11 @@ import {Route, Switch} from 'react-router-dom'
 import Footer from './components/footer/footer'
 import Header from './components/header/header'
 import AboutUs from './pages/about/about'
-import Detail from './pages/detail/detail'
+import Detail from './pages/detail/detailConnected'
 import Error from './pages/error'
-import Homepage from './pages/homepage/homepage'
+import Homepage from './pages/homepage/homepageConnected'
 import Media from './pages/media'
-import ReportModal from './components/reportModal/reportModal'
+import ReportModal from './components/reportModal/reportModalConnected'
 
 import './App.scss';
 

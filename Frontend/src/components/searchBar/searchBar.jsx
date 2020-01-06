@@ -1,15 +1,11 @@
 import React, { useCallback } from 'react'
-import {createStructuredSelector} from 'reselect'
-import { connect } from 'react-redux'
 import {useRouteMatch} from 'react-router-dom'
-import { setSearchQuery, search } from '../../redux/actions'
-import { getSearchQuery } from '../../redux/selectors'
 import classnames from 'classnames'
 import {ReactComponent as Search} from '../../assets/images/search.svg';
 
 import styles from './searchBar.module.scss'
 
-function SearchBar({form, setSearchQuery, search, query, wrapperClassname}) {
+export default ({form, setSearchQuery, search, query, wrapperClassname}) => {
   const matchDetail = useRouteMatch('/detail/:id')
   const onSubmit = useCallback((e) => {
     e.preventDefault()
@@ -21,7 +17,7 @@ function SearchBar({form, setSearchQuery, search, query, wrapperClassname}) {
   return (
     <form className={form} onSubmit={onSubmit}>
       <div className={classnames(styles.wrapper, wrapperClassname)}>
-        <input 
+        <input
           autoFocus= {!matchDetail && 'autoFocus'}
           className={styles.input}
           onChange={onChange}
@@ -34,9 +30,3 @@ function SearchBar({form, setSearchQuery, search, query, wrapperClassname}) {
     </form>
   );
 }
-
-const mapStateToProps = createStructuredSelector({
-  query: getSearchQuery,
-})
-
-export default connect(mapStateToProps, { setSearchQuery, search })(SearchBar);

@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import {useRouteMatch} from 'react-router-dom'
 import classnames from 'classnames'
-import SearchBar from '../searchBar/searchBar'
+import SearchBar from '../searchBar/searchBarConnected'
 import {ReactComponent as Search} from '../../assets/images/searchIcon.svg';
 
 import styles from './header.module.scss'
@@ -12,7 +12,7 @@ function Header() {
   const [openSearch, setOpenSearch] = useState(false)
   const match = useRouteMatch('/')
   const matchDetail = useRouteMatch('/detail/:id')
-  
+
   const showMobileSearch = () => {
     setOpenMenu(false)
     setOpenSearch(true)

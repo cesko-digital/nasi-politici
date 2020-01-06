@@ -1,33 +1,22 @@
 import React, {useEffect} from 'react'
-import {createStructuredSelector} from 'reselect'
-import {connect} from 'react-redux'
 import classnames from 'classnames'
 import {ReactComponent as LinkBtn} from '../../assets/images/link.svg';
 import {ReactComponent as ShareBtn} from '../../assets/images/share.svg';
 import {ReactComponent as ReportBtn} from '../../assets/images/report.svg';
 import {ReactComponent as Divider} from '../../assets/images/detailDivider.svg';
-import {loadDetail} from '../../redux/actions'
-import {
-  getFullName,
-  getBirthYear,
-  isDetailLoading,
-  getDescription,
-  getCurrentParty,
-  getPhotoUrl,
-} from '../../redux/selectors'
 import NoData from '../../components/emptyStates/noData/noData'
 import LoadingBar from '../../components/loadingBar/loadingBar'
-import NewsWidget from '../../components/newsWidget/newsWidget'
-import DonationsWidget from '../../components/donationsWidget/donationsWidget'
-import RolesWidget from '../../components/rolesWidget/rolesWidget'
-import InsolvencyWidget from '../../components/insolvencyWidget/insolvencyWidget'
-import DemagogWidget from '../../components/demagogWidget/demagogWidget'
+import NewsWidget from '../../components/newsWidget/newsWidgetConnected'
+import DonationsWidget from '../../components/donationsWidget/donationsWidgetConnected'
+import RolesWidget from '../../components/rolesWidget/rolesWidgetConnected'
+import InsolvencyWidget from '../../components/insolvencyWidget/insolvencyWidgetConnected'
+import DemagogWidget from '../../components/demagogWidget/demagogWidgetConnected'
 import ProfilePicture from '../../components/profilePicture/profilePicture'
-import ReportModalTrigger from '../../components/reportModal/reportModalTrigger'
+import ReportModalTrigger from '../../components/reportModal/reportModalTriggerConnected'
 
 import styles from './detail.module.scss';
 
-function Detail(props) {
+export default (props) => {
   const {loadDetail, match: { params: {id} } } = props
   useEffect(() => {
     loadDetail(id)
@@ -173,14 +162,3 @@ function Detail(props) {
     </div>
   );
 }
-
-const mapStateToProps = createStructuredSelector({
-  fullname: getFullName,
-  birthYear: getBirthYear,
-  currentParty: getCurrentParty,
-  isLoading: isDetailLoading,
-  description: getDescription,
-  photoUrl: getPhotoUrl,
-})
-
-export default connect(mapStateToProps, {loadDetail})(Detail);

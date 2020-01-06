@@ -1,14 +1,10 @@
 
 import React from 'react'
-import {createStructuredSelector} from 'reselect'
-import { connect } from 'react-redux'
 import classnames from 'classnames'
-import {getDonations, getShowAllDonations, getDonationsCount, getFullName} from '../../redux/selectors'
-import {toggleShowAllDonations} from '../../redux/actions'
 import ZeroValue from '../../components/emptyStates/zeroValue/zeroValue'
 import { ReactComponent as LinkBtn } from '../../assets/images/link.svg'
 import { ReactComponent as ReportBtn } from '../../assets/images/report.svg'
-import ReportModalTrigger from '../reportModal/reportModalTrigger'
+import ReportModalTrigger from '../reportModal/reportModalTriggerConnected'
 import {DEFAULT_DONATIONS_LIMIT} from '../../constants'
 
 import styles from './donationsWidget.module.scss'
@@ -46,7 +42,8 @@ const Donations = ({donationsGroups, toggleShowAll, showAll, donationsCount}) =>
     </React.Fragment>
   )
 }
-const DonationsWidget = ({donationsGroups, showAll, toggleShowAllDonations, donationsCount, fullname}) => {
+
+export default ({donationsGroups, showAll, toggleShowAllDonations, donationsCount, fullname}) => {
   const donationWidgetCustomClassNames = classnames(
     styles.widget,
     styles.widgetWithTable)
@@ -81,12 +78,3 @@ const DonationsWidget = ({donationsGroups, showAll, toggleShowAllDonations, dona
 		</div>
   );
 }
-
-const mapStateToProps = createStructuredSelector({
-  donationsGroups: getDonations,
-  showAll: getShowAllDonations,
-	donationsCount: getDonationsCount,
-	fullname: getFullName,
-})
-
-export default connect(mapStateToProps, {toggleShowAllDonations})(DonationsWidget);

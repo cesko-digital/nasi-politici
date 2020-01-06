@@ -1,21 +1,12 @@
 import React from 'react'
 import classnames from 'classnames'
-import { connect } from 'react-redux'
 import NoData from '../../components/emptyStates/noData/noData'
 import ZeroValue from '../../components/emptyStates/zeroValue/zeroValue'
 import { ReactComponent as LinkBtn } from '../../assets/images/link.svg';
 import { ReactComponent as ReportBtn } from '../../assets/images/report.svg';
-import {createStructuredSelector} from 'reselect'
-import {
-  getPersonalInsolvency,
-	getCompanyInsolvency,
-	getFullName,
-  hasInsolvency,
-  hasInsolvencyData,
-} from '../../redux/selectors'
+import ReportModalTrigger from '../reportModal/reportModalTriggerConnected'
 
 import styles from './insolvencyWidget.module.scss'
-import ReportModalTrigger from '../reportModal/reportModalTrigger'
 
 
 
@@ -40,7 +31,7 @@ function InsolvencyRow({title, personalCount, companyCount}) {
   )
 }
 
-const InsolvencyWidget = ({personalInsolvency, companyInsolvency, fullname, hasInsolvency, hasInsolvencyData}) => {
+export default ({personalInsolvency, companyInsolvency, fullname, hasInsolvency, hasInsolvencyData}) => {
   const insolvencyWidgetCustomClassNames = classnames(
     styles.widget,
     styles.widgetWithTable,
@@ -78,15 +69,3 @@ const InsolvencyWidget = ({personalInsolvency, companyInsolvency, fullname, hasI
     </div>
   )
 }
-
-const mapStateToProps = createStructuredSelector(
-  {
-    hasInsolvencyData: hasInsolvencyData,
-    hasInsolvency: hasInsolvency,
-    personalInsolvency: getPersonalInsolvency,
-		companyInsolvency: getCompanyInsolvency,
-		fullname: getFullName,
-  }
-)
-
-export default connect(mapStateToProps)(InsolvencyWidget);

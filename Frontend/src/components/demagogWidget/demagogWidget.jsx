@@ -1,6 +1,4 @@
 import React from 'react'
-import {createStructuredSelector} from 'reselect'
-import { connect } from 'react-redux'
 import classnames from 'classnames'
 import NoData from '../../components/emptyStates/noData/noData'
 import { ReactComponent as Tick } from '../../assets/images/dem-tick.svg';
@@ -10,13 +8,12 @@ import { ReactComponent as Question } from '../../assets/images/dem-question.svg
 import { ReactComponent as LinkBtn } from '../../assets/images/link.svg';
 import { ReactComponent as RedirectBtn } from '../../assets/images/redirect.svg';
 import { ReactComponent as ReportBtn } from '../../assets/images/report.svg';
-import {getDemagogData, getFullName} from '../../redux/selectors'
-import ReportModalTrigger from '../reportModal/reportModalTrigger'
+import ReportModalTrigger from '../reportModal/reportModalTriggerConnected'
 
 import styles from './demagogWidget.module.scss'
 
 
-const DemagogWidget = ({data, fullname}) => {
+export default ({data, fullname}) => {
   const demagogWidgetCustomClassNames = classnames(styles.widget, !data.count && styles.noData)
 
   return (
@@ -74,10 +71,3 @@ const DemagogWidget = ({data, fullname}) => {
 		</div>
   );
 }
-
-const mapStateToProps = createStructuredSelector({
-	data: getDemagogData,
-	fullname: getFullName,
-})
-
-export default connect(mapStateToProps)(DemagogWidget);

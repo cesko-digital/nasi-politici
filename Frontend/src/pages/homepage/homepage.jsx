@@ -1,16 +1,12 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {createStructuredSelector} from 'reselect'
-import SearchBar from '../../components/searchBar/searchBar'
-import Result from '../../components/result/result'
-import {wasSearched} from '../../redux/selectors'
+import SearchBar from '../../components/searchBar/searchBarConnected'
+import Result from '../../components/result/resultConnected'
 
 import styles from './homepage.module.scss'
 
 import logo from '../../assets/images/logo-np.svg'
 
-// TODO loading pri vyhledavani
-function Homepage(props) {
+export default (props) => {
   return (
     <div className={styles.homepage}>
       <div className={styles.wrapper}>
@@ -24,8 +20,3 @@ function Homepage(props) {
     </div>
   )
 }
-
-const mapStateToProps = createStructuredSelector({wasSearched})
-
-export default connect(mapStateToProps)(Homepage);
-

@@ -1,11 +1,8 @@
 import React, {useState} from 'react'
-import {createStructuredSelector} from 'reselect'
-import { connect } from 'react-redux'
 import classnames from 'classnames'
 import NoData from '../../components/emptyStates/noData/noData'
 import { ReactComponent as LinkBtn } from '../../assets/images/link.svg';
 import { ReactComponent as ReportBtn } from '../../assets/images/report.svg';
-import {getDetailNews} from '../../redux/selectors'
 
 import styles from './newsWidget.module.scss'
 
@@ -40,7 +37,7 @@ const Articles = ({articles}) => {
   )
 }
 
-const NewsWidget = ({news}) => {
+export default ({news}) => {
   const newsWidgetCustomClassNames = classnames(
     styles.widget,
     !news.length && styles.noData)
@@ -68,9 +65,3 @@ const NewsWidget = ({news}) => {
 		</React.Fragment>
   );
 }
-
-const mapStateToProps = createStructuredSelector({
-  news: getDetailNews,
-})
-
-export default connect(mapStateToProps)(NewsWidget);
