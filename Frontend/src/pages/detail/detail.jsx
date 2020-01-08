@@ -17,17 +17,14 @@ import ReportModalTrigger from '../../components/reportModal/reportModalTriggerC
 import styles from './detail.module.scss';
 
 export default (props) => {
-  let detailRef = React.createRef()
   const {loadDetail, match: { params: {id} } } = props
   useEffect(() => {
     loadDetail(id)
   }, [loadDetail, id]);
   useEffect(() => {
-    if (detailRef.current) {
-      window.scrollTo({
-        top: detailRef.current.offsetTop
-      });
-    }
+    window.scrollTo({
+      top: document.body.scrollTop
+    });
   })
 
   const engageWidgetCustomClassNames = classnames(styles.widget, styles.engage, !props.engagement && styles.noData)
@@ -35,7 +32,7 @@ export default (props) => {
   const aboutWidgetCustomClassNames = classnames(styles.widget, !props.description && styles.noData)
 
   return (
-    <div className={styles.detail} ref={detailRef}>
+    <div className={styles.detail}>
       {props.isLoading && <LoadingBar />}
       {!props.isLoading &&
         <React.Fragment>
