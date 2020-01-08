@@ -47,23 +47,28 @@
   padding: 0 30px;
 }
 .sources {
+  @include smallText;
   margin-bottom: 8px;
   display: flex;
-  @include smallText;
   color: $clDark;
 }
 .source {
   @include linkBtn;
   @include smallText;
+  color: $clDark;
 }
 .headline {
   @include linkBtn;
   @include subTitle;
+  margin-bottom: 8px;
   color: $clLight;
   text-decoration: underline;
   text-decoration-color: $clBorder;
 
   &:after { content: none; }
+}
+.perex {
+  @include smallText;
 }
 .showMore {
   padding: 20px 30px;

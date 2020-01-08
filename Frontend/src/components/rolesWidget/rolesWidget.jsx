@@ -63,8 +63,7 @@ export default ({rolesGroups, showAll, toggleShowAllRoles, rolesCount, fullname}
           </div>
           <ReportModalTrigger
 						className={styles.reportBtnWrapper}
-						modalTitle={`${fullname}, role`}
-					>
+						modalTitle={`${fullname}, role`}>
             <ReportBtn className={styles.reportBtn}/>
           </ReportModalTrigger>
         </div>

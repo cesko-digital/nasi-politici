@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import classnames from 'classnames'
 import NoData from '../../components/emptyStates/noData/noData'
+import ReportModalTrigger from '../reportModal/reportModalTriggerConnected'
 import { ReactComponent as LinkBtn } from '../../assets/images/link.svg';
 import { ReactComponent as ReportBtn } from '../../assets/images/report.svg';
 
@@ -13,16 +14,17 @@ const Article = ({article}) => {
       <div className={styles.article}>
         <div className={styles.sources}>
           <div className={styles.source}>{article.source}</div>
-          <div>, {article.time}</div>
+          <div>, {article.published}</div>
         </div>
-        <div><a href={article.web} target='_blank' rel="noopener noreferrer" className={styles.headline}>{article.headline}</a></div>
+        <div><a href={article.web} target='_blank' rel="noopener noreferrer" className={styles.headline}>{article.title}</a></div>
+        <div className={styles.perex}>{article.perex}</div>
       </div>
   )
 }
 
 const Articles = ({articles}) => {
 	const [showAll, setShowAll] = useState(false)
-	const hasMore = articles.length > DEFAULT_ARTICLES_COUNT
+  const hasMore = articles.length > DEFAULT_ARTICLES_COUNT
   return (
     <React.Fragment>
       <div className={styles.articles}>
@@ -37,7 +39,7 @@ const Articles = ({articles}) => {
   )
 }
 
-export default ({news}) => {
+export default ({news, fullname}) => {
   const newsWidgetCustomClassNames = classnames(
     styles.widget,
     !news.length && styles.noData)
@@ -54,9 +56,11 @@ export default ({news}) => {
                 <a href='https://monitora.cz/' rel="noopener noreferrer" target='_blank'>Monitora</a>
               </div>
             </div>
-            <div className={styles.reportBtnWrapper}>
+            <ReportModalTrigger
+              className={styles.reportBtnWrapper}
+              modalTitle={`${fullname}, v médiích`}>
               <ReportBtn className={styles.reportBtn}/>
-            </div>
+            </ReportModalTrigger>
           </div>}
         </div>
         {!!news.length && <Articles articles={news} />}

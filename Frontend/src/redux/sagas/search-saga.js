@@ -7,6 +7,7 @@ import {
   loadingDetailStarted,
   loadingDetailEnded,
 	setDemagogData,
+  setDetailNews,
 } from '../actions'
 import {getSearchQuery} from '../selectors'
 import API from '../../services/api'
@@ -41,6 +42,11 @@ function* handleLoadDetail(action) {
     const detail = yield call(api.fetchDetail, action.payload.id)
     yield put(setDetail(detail))
     const {data: demagog} = yield call(api.fetchDemagog, action.payload.id)
+    const fullName = detail.name + " " + detail.surname
+    const party = detail.currentParty
+    const searchQuery = detail.name + "+" + detail.surname + "+" + party
+    const news = yield call(api.fetchNews, fullName, party, searchQuery)
+    yield put(setDetailNews(news))
     const speaker = demagog.speakers[0]
     yield put(setDemagogData(speaker ? speaker : {}))
   } catch (error) {

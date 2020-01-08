@@ -9,6 +9,7 @@ export const isDetailLoading = store => store.app.loadingDetail
 export const getDetailData = store => store.app.detail
 export const getPhotoUrl = store => getDetailData(store).photo
 export const getDetailNewsRaw = store => store.app.detailNews
+export const getArticles = store => getDetailNewsRaw(store).articles || []
 export const getShowAllDonations = store => store.app.showAllDonations
 export const getShowAllRoles = store => store.app.showAllRoles
 export const getPersonalInsolvency = store => getDetailData(store).insolvencyPerson || {}
@@ -37,11 +38,11 @@ export const hasInsolvency = createSelector(hasPersonalInsolvency, hasCompanyIns
   return personal || company
 })
 
-export const getDetailNews = createSelector(getDetailNewsRaw, (news) => {
-  return news.map(a => ({
+export const getDetailNews = createSelector(getArticles, (articles) => {
+  return articles.map(a => ({
     ...a,
-    source: a.Source.replace(new RegExp('^www.'), ''),
-    time: (new Date(a.time*1000)).toLocaleDateString()
+    source: a.source.replace(new RegExp('^www.'), ''),
+    published: (new Date(a.published)).toLocaleDateString()
   }))
 })
 
