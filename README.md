@@ -26,7 +26,7 @@ vystup zobrazi cestu, kam to vybuildil.
 
 ## Zobrazení stránek
 
-V browseru pak stačí zadat následující adresu http://localhost:5000/
+V browseru pak stačí zadat následující adresu http://localhost:5001/
 
 priklad:
 
@@ -41,7 +41,7 @@ Ve vašem oblíbeném textovém editoru, případně IDE si otevřete stažený 
 ## Env variables
 
 ### Frontend
- - /Frontend/.env pro base addressu
+ - /Frontend/.env pro base addresu (jeho vzor je v `/Frontend/.env-example`)
  
 ### Monitora-backend
  - /Monitora-backend/app/data/token.py pro token ke sluzbe Monitory
