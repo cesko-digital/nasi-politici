@@ -5,6 +5,7 @@ import ProfilePicture from '../profilePicture/profilePicture'
 import styles from './result.module.scss'
 import { ReactComponent as ReportIcon } from '../../assets/images/report.svg';
 import ReportModalTrigger from '../reportModal/reportModalTriggerConnected'
+import {dummyPluralize as pluralize} from '../../utils/string'
 
 function ResultRow({result}) {
 	return (
@@ -31,7 +32,6 @@ function ResultRow({result}) {
   )
 }
 
-// TODO pouzit spravnou ikonku
 function EmptyState({query}) {
 	return (
 		<div>
@@ -55,14 +55,13 @@ function EmptyState({query}) {
 }
 
 export default ({results, loading, query}) => {
-// TODO vyresit mnozne/jednotne cislo
 	return (
 		<React.Fragment>
       {loading && <LoadingBar />}
       {!loading && results && results.length === 0 && <EmptyState query={query} />}
       {!loading && results && !!results.length &&
         <div>
-          <div className={styles.count}>Nalezeni {results.length} politici</div>
+          <div className={styles.count}>{pluralize(results.length, 'Nalezen', 'Nalezeni', 'Nalezeno')} {results.length} {pluralize(results.length, 'politik', 'politici', 'politiků')}</div>
           <div className={styles.results}>{results.map(result => <ResultRow key={result.id} result={result} />)}</div>
         </div>}
 		</React.Fragment>

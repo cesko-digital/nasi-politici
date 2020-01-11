@@ -9,8 +9,10 @@ import { ReactComponent as LinkBtn } from '../../assets/images/link.svg';
 import { ReactComponent as RedirectBtn } from '../../assets/images/redirect.svg';
 import { ReactComponent as ReportBtn } from '../../assets/images/report.svg';
 import ReportModalTrigger from '../reportModal/reportModalTriggerConnected'
+import {dummyPluralize as pluralize} from '../../utils/string'
 
 import styles from './demagogWidget.module.scss'
+import Row from './demagogWidgetRow'
 
 
 export default ({data, fullname}) => {
@@ -36,29 +38,41 @@ export default ({data, fullname}) => {
 				</div>}
 			</div>
 			{!!data.id && <React.Fragment>
-				<div className={styles.sum}>Politik má celkem {data.count} hodnocených výroků, z toho je:</div>
+				<div className={styles.sum}>Politik má celkem {data.count} {pluralize(data.count, 'hodnocený výrok', 'hodnocené výroky', 'hodnocených výroků')}, z toho je:</div>
 				<div className={styles.stats}>
 					<div className={styles.itemsWrapper}>
 						<div className={styles.true}>
-							<div className={styles.percBar} style={{width: `${data.truePerc}%`}} />
-							<div className={styles.count}>
-								<div className={styles.number}><Tick className={styles.icon}/>{data.true} pravdivých</div> <div className={styles.percent}>{data.truePerc}%</div></div>
-							</div>
+							<Row
+								value={data.true}
+								valuePerc={data.truePerc}
+								iconComponent={Tick}
+								titleForms={['pravdivý', 'pravdivé', 'pravdivých']}
+							/>
+						</div>
 						<div className={styles.untrue}>
-							<div className={styles.percBar} style={{width: `${data.untruePerc}%`}} />
-							<div className={styles.count}>
-								<div className={styles.number}><Cross className={styles.icon}/>{data.untrue} nepravdivých</div> <div className={styles.percent}>{data.untruePerc}%</div></div>
-							</div>
+							<Row
+								value={data.untrue}
+								valuePerc={data.untruePerc}
+								iconComponent={Cross}
+								titleForms={['nepravdivý', 'nepravdivé', 'nepravdivých']}
+							/>
+						</div>
 						<div className={styles.misleading}>
-						<div className={styles.percBar} style={{width: `${data.misleadingPerc}%`}} />
-							<div className={styles.count}>
-								<div className={styles.number}><Exclamation className={styles.icon}/>{data.misleading} zavádějících</div> <div className={styles.percent}>{data.misleadingPerc}%</div></div>
-							</div>
+							<Row
+								value={data.misleading}
+								valuePerc={data.misleadingPerc}
+								iconComponent={Exclamation}
+								titleForms={['zavádějící', 'zavádějící', 'zavádějících']}
+							/>
+						</div>
 						<div className={styles.unverifiable}>
-						<div className={styles.percBar} style={{width: `${data.unverifiablePerc}%`}} />
-							<div className={styles.count}>
-								<div className={styles.number}><Question className={styles.icon}/>{data.unverifiable} neověřitelných</div> <div className={styles.percent}>{data.unverifiablePerc}%</div></div>
-							</div>
+							<Row
+								value={data.unverifiable}
+								valuePerc={data.unverifiablePerc}
+								iconComponent={Question}
+								titleForms={['neověřitelný', 'neověřitelné', 'neověřitelných']}
+							/>
+						</div>
 					</div>
 				</div>
 				<div className={styles.linkWrapper}>
@@ -67,7 +81,7 @@ export default ({data, fullname}) => {
 				</div>
 			</React.Fragment>}
 
-			{!data.count && <NoData />}
+			{!data.id && <NoData />}
 		</div>
   );
 }
