@@ -59,7 +59,7 @@ export default ({personalInsolvency, companyInsolvency, fullname, hasInsolvency,
       </div>
       {!hasInsolvencyData && <NoData />}
       {hasInsolvencyData && !hasInsolvency &&
-        <ZeroValue title='Politik dosud není věřitelem, ani dlužníkem'/>}
+        <ZeroValue title='Politik dosud není věřitelem ani dlužníkem'/>}
       {!!hasInsolvency &&
         <React.Fragment>
           <InsolvencyRow title='věřitelem' personalCount={personalInsolvency.creditorCount} companyCount={companyInsolvency.creditorCount}/>
