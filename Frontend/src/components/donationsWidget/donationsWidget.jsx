@@ -10,11 +10,12 @@ import {DEFAULT_DONATIONS_LIMIT} from '../../constants'
 import styles from './donationsWidget.module.scss'
 
 const TableRow = (props) => {
+  const donation = props.value
   return (
     <React.Fragment>
       <div className={styles.tableRow}>
         <div className={styles.name}>{props.name}</div>
-        <div className={styles.value}>{props.value}</div>
+        <div className={styles.value}>{Intl.NumberFormat('cs-CZ', {style: 'currency', currency: 'CZK'}).format(donation)}</div>
       </div>
     </React.Fragment>
   )
