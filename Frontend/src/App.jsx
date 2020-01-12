@@ -14,6 +14,9 @@ import './App.scss';
 function App(props) {
   return (
     <div className="App">
+      <div className='banner-beta'>
+        Jedná se o testovací web s testovacími daty.
+      </div>
       <Header />
       <div className='body'>
         <Switch>

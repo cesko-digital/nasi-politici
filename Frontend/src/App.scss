@@ -1,5 +1,32 @@
 @import './assets/styles/vendor.scss';
 
+.body {
+  @include regularText;
+  text-align: left;
+}
+
+.banner-beta {
+  @include subTitle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+  width: 100%;
+  font-weight: 600;
+  background-color: #FFF1CD;
+  color: #B28612;
+}
+
+@media screen and (max-width: 650px) {
+  .banner-beta {
+    @include smallText;
+    height: 48px;
+    font-weight: 600;
+    color: #B28612;
+  }
+}
+
+// TODO: decide what to do with this idea
 // html, body, #root, .App {
 //   height: 100%;
 // }
@@ -9,8 +36,6 @@
 //   flex-direction: column;
 // }
 
-.body {
-  @include regularText;
-  text-align: left;
-  // flex: 1;
-}
+// .body {
+//   flex: 1;
+// }
