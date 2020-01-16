@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
 import {createStructuredSelector} from 'reselect'
-import {loadDetail} from '../../redux/actions'
+import {loadDetail} from '../../store/detail/actions'
 import {
   getFullName,
   getBirthYear,
@@ -8,7 +8,7 @@ import {
   getDescription,
   getCurrentParty,
   getPhotoUrl,
-} from '../../redux/selectors'
+} from '../../store/detail/selectors'
 
 import Detail from './detail'
 

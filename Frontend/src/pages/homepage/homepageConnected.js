@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
 import {createStructuredSelector} from 'reselect'
-import {wasSearched} from '../../redux/selectors'
+import {wasSearched} from '../../store/search/selectors'
 
 import Homepage from './homepage'
 

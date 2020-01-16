@@ -1,13 +1,18 @@
-import React, {useCallback, useState, useEffect} from 'react'
+import * as React from 'react'
 import classnames from 'classnames'
 import { ReactComponent as ReportIcon } from '../../assets/images/report.svg';
 import style from './reportModal.module.scss'
 import Modal from '../modal/modal'
-import {useInput} from '../../hooks/hooks'
+import {useInput, BindInput} from '../../hooks/hooks'
 
 const EMAIL_REGEXP = /^[+a-zA-Z0-9_.!#$%&'*\\/=?^`{|}~-]+@([a-zA-Z0-9-]+\.)+[a-zA-Z0-9]{2,63}$/
-
-const Form = ({onSubmit, validation, bindDescription, bindEmail}) => {
+interface PropsForm {
+	onSubmit: (ev: any) => void,
+	bindDescription: BindInput,
+	bindEmail: BindInput,
+	validation: {description: boolean, email: boolean},
+}
+const Form: React.FC<PropsForm> = ({onSubmit, validation, bindDescription, bindEmail}) => {
 	const descriptionClassName = classnames({
 		[style.description]: true,
 		[style.invalid]: !validation.description
@@ -36,13 +41,20 @@ const Form = ({onSubmit, validation, bindDescription, bindEmail}) => {
 	)
 }
 
-export default ({title, isReporModalOpen, closeReportModal, submit}) => {
+export interface Props {
+	title: string,
+	isReportModalOpen: boolean,
+	closeReportModal: () => {},
+	submit: (data: {description: string, email: string, title: string}) => {},
+}
+
+const ReportModal: React.FC<Props> = ({title, isReportModalOpen, closeReportModal, submit}) => {
 
 	const {value: description, reset: resetDescription, bind: bindDescription} = useInput('')
 	const {value: email, reset: resetEmail, bind: bindEmail} = useInput('')
-	const [validation, setValidation] = useState({email: true, description: true})
-	const [submited, setSubmited] = useState(false)
-	const onSubmit = useCallback((ev) => {
+	const [validation, setValidation] = React.useState({email: true, description: true})
+	const [submited, setSubmited] = React.useState(false)
+	const onSubmit = React.useCallback((ev) => {
 		ev.preventDefault()
 		const validation = {
 			description: !!description.trim(),
@@ -59,15 +71,15 @@ export default ({title, isReporModalOpen, closeReportModal, submit}) => {
 		}
 	}, [email, description, setValidation, submit, title, setSubmited])
 
-	useEffect(() => {
+	React.useEffect(() => {
 		return () => {
 			resetDescription()
 			resetEmail()
 			setValidation({email: true, description: true})
 		}
-	}, [isReporModalOpen, resetDescription, resetEmail, setValidation]);
+	}, [isReportModalOpen, resetDescription, resetEmail, setValidation]);
 
-	if (!isReporModalOpen) return null
+	if (!isReportModalOpen) return null
 
 	return (
 		<Modal onCloseRequest={closeReportModal} className={style.modalWrapper}>
@@ -91,3 +103,5 @@ export default ({title, isReporModalOpen, closeReportModal, submit}) => {
 		</Modal>
 	)
 }
+
+export default ReportModal

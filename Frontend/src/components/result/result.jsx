@@ -1,6 +1,5 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import LoadingBar from '../loadingBar/loadingBar'
 import ProfilePicture from '../profilePicture/profilePicture'
 import styles from './result.module.scss'
 import { ReactComponent as ReportIcon } from '../../assets/images/report.svg';
@@ -54,12 +53,11 @@ function EmptyState({query}) {
 	)
 }
 
-export default ({results, loading, query}) => {
+export default ({results, query, wasSearched}) => {
 	return (
 		<React.Fragment>
-      {loading && <LoadingBar />}
-      {!loading && results && results.length === 0 && <EmptyState query={query} />}
-      {!loading && results && !!results.length &&
+      {wasSearched && results && results.length === 0 && <EmptyState query={query} />}
+      {results && !!results.length &&
         <div>
           <div className={styles.count}>{pluralize(results.length, 'Nalezen', 'Nalezeni', 'Nalezeno')} {results.length} {pluralize(results.length, 'politik', 'politici', 'politiků')}</div>
           <div className={styles.results}>{results.map(result => <ResultRow key={result.id} result={result} />)}</div>

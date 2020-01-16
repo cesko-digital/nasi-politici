@@ -6,7 +6,7 @@ import {
 	getFullName,
   hasInsolvency,
   hasInsolvencyData,
-} from '../../redux/selectors'
+} from '../../store/detail/selectors'
 
 import InsolvencyWidget from './insolvencyWidget'
 

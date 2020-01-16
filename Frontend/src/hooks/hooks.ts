@@ -1,6 +1,11 @@
 import { useState, useCallback } from "react";
 
-export const useInput = initialValue => {
+export interface BindInput {
+	value: string,
+	onChange: (event: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => void,
+}
+
+export function useInput(initialValue: string) {
   const [value, setValue] = useState(initialValue);
 	const reset = useCallback(() => setValue(''), [setValue])
   return {
@@ -9,7 +14,7 @@ export const useInput = initialValue => {
     reset,
     bind: {
       value,
-      onChange: event => {
+      onChange: (event: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
         setValue(event.target.value);
       }
     }

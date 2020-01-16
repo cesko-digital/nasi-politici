@@ -28,7 +28,7 @@ function App(props) {
         </Switch>
       </div>
       <Footer />
-      <ReportModal onCancel={props.closeReportModal} />
+      <ReportModal/>
     </div>
   );
 }
