@@ -14,10 +14,15 @@ export interface ArticlesState {
 }
 
 export const SET_ARTICLES = 'SET_ARTICLES'
+export const RESET_ARTICLES = 'RESET_ARTICLES'
 
 export interface SetArticlesAction {
   type: typeof SET_ARTICLES;
   payload: Article[];
 }
 
-export type ArticlesActionTypes = SetArticlesAction;
+export interface ResetArticlesAction {
+  type: typeof RESET_ARTICLES;
+}
+
+export type ArticlesActionTypes = SetArticlesAction | ResetArticlesAction;

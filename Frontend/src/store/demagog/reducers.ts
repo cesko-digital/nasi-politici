@@ -1,4 +1,4 @@
-import { SET_DEMAGOG_DATA, DemagogState, DemagogActionTypes } from "./types";
+import { SET_DEMAGOG_DATA, RESET_DEMAGOG_DATA, DemagogState, DemagogActionTypes } from "./types";
 
 const initialState: DemagogState = {
 	id: '',
@@ -16,6 +16,11 @@ export function demagogReducer(
     case SET_DEMAGOG_DATA: {
       return {
         ...action.payload,
+      };
+    }
+    case RESET_DEMAGOG_DATA: {
+      return {
+        ...initialState,
       };
     }
     default:

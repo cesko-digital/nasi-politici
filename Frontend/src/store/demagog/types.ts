@@ -7,10 +7,15 @@ export interface DemagogState {
 }
 
 export const SET_DEMAGOG_DATA = 'SET_DEMAGOG_DATA'
+export const RESET_DEMAGOG_DATA = 'RESET_DEMAGOG_DATA'
 
 interface SetDemagogDataAction {
   type: typeof SET_DEMAGOG_DATA;
   payload: DemagogState;
 }
 
-export type DemagogActionTypes = SetDemagogDataAction;
+interface ResetDemagogDataAction {
+  type: typeof RESET_DEMAGOG_DATA;
+}
+
+export type DemagogActionTypes = SetDemagogDataAction | ResetDemagogDataAction;

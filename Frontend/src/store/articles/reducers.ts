@@ -1,4 +1,4 @@
-import { SET_ARTICLES, ArticlesState, ArticlesActionTypes } from "./types";
+import { SET_ARTICLES, RESET_ARTICLES, ArticlesState, ArticlesActionTypes } from "./types";
 
 const initialState: ArticlesState = {
 	articles: []
@@ -13,6 +13,11 @@ export function articlesReducer(
       return {
         ...state,
         articles: action.payload,
+      };
+    }
+    case RESET_ARTICLES: {
+      return {
+        ...initialState,
       };
     }
     default:

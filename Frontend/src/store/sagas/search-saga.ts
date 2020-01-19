@@ -6,8 +6,8 @@ import {SUBMIT_REPORT_MODAL} from '../report/types'
 
 import {setSearchResults, search, setSearchQuery} from '../search/actions'
 import {setDetail, loadingDetailEnded, loadingDetailStarted, loadDetail} from '../detail/actions'
-import {setDemagogData} from '../demagog/actions'
-import {setArticles} from '../articles/actions'
+import {setDemagogData, resetDemagogData} from '../demagog/actions'
+import {setArticles, resetArticles} from '../articles/actions'
 
 import {getSearchQuery} from '../search/selectors'
 import API from '../../services/api'
@@ -37,20 +37,43 @@ function* handleSubmitReportModal() {
 	// TODO zavolat BE routu pro poslani emailu
 }
 
-function* handleLoadDetail(action: ReturnType<typeof loadDetail>) {
-  yield put(loadingDetailStarted())
-  try {
-    const detail: Detail = yield call(api.fetchDetail, action.payload)
-    yield put(setDetail(detail))
-    const {data: demagog}: DemagogResponse = yield call(api.fetchDemagog, action.payload)
-    const fullName = detail.name + " " + detail.surname
+function* loadNews(detail: Detail) {
+	try {
+		const fullName = detail.name + " " + detail.surname
     const party = detail.currentParty
     const searchQuery = detail.name + "+" + detail.surname + "+" + party
     const news: ArticleResponse = yield call(api.fetchNews, fullName, party, searchQuery)
     yield put(setArticles(news.articles))
-    const speaker = demagog.speakers[0]
-    if (speaker) yield put(setDemagogData({id: speaker.id, ...speaker.stats}))
+	} catch (error) {
+		yield put(resetArticles())
+    // TODO asi vymyslet nejaky jednotny error handling idealne i s designem
+  }
+}
+
+function* loadDemagog(id: string) {
+	try {
+		const {data: demagog}: DemagogResponse = yield call(api.fetchDemagog, id)
+		const speaker = demagog.speakers[0]
+		if (speaker) {
+			yield put(setDemagogData({id: speaker.id, ...speaker.stats}))
+		} else {
+			yield put(resetDemagogData())
+		}
+	} catch (error) {
+		yield put(resetDemagogData())
+    // TODO asi vymyslet nejaky jednotny error handling idealne i s designem
+  }
+}
+
+function* handleLoadDetail(action: ReturnType<typeof loadDetail>) {
+  yield put(loadingDetailStarted())
+  try {
+    const detail: Detail = yield call(api.fetchDetail, action.payload)
+		yield put(setDetail(detail))
+		yield call(loadDemagog, action.payload)
+		yield call(loadNews, detail)
   } catch (error) {
+		console.error(error)
     // TODO asi vymyslet nejaky jednotny error handling idealne i s designem
   }
 	yield put(loadingDetailEnded())
