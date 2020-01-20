@@ -1,7 +1,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import ZeroValue from '../../components/emptyStates/zeroValue/zeroValue'
+import ZeroValue from '../emptyStates/zeroValue/zeroValue'
 import { ReactComponent as LinkBtn } from '../../assets/images/link.svg'
 import { ReactComponent as ReportBtn } from '../../assets/images/report.svg'
 import ReportModalTrigger from '../reportModal/reportModalTriggerConnected'
@@ -9,7 +9,12 @@ import {DEFAULT_DONATIONS_LIMIT} from '../../constants'
 
 import styles from './donationsWidget.module.scss'
 
-const TableRow = (props) => {
+interface TableRowProps {
+	value: number,
+	name: string,
+}
+
+const TableRow = (props: TableRowProps) => {
   const donation = props.value
   return (
     <React.Fragment>
@@ -21,7 +26,20 @@ const TableRow = (props) => {
   )
 }
 
-const Donations = ({donationsGroups, toggleShowAll, showAll, donationsCount}) => {
+interface DonationsProps {
+	donationsGroups: Array<{
+    year: number;
+    items: Array<{
+			party: string,
+			donatedAmount: number,
+		}>
+	}>,
+	showAll: boolean,
+	toggleShowAll: () => void,
+	donationsCount: number,
+}
+
+const Donations = ({donationsGroups, toggleShowAll, showAll, donationsCount}: DonationsProps) => {
 	const hasMore = donationsCount > DEFAULT_DONATIONS_LIMIT
   return (
     <React.Fragment>
@@ -44,7 +62,11 @@ const Donations = ({donationsGroups, toggleShowAll, showAll, donationsCount}) =>
   )
 }
 
-export default ({donationsGroups, showAll, toggleShowAllDonations, donationsCount, fullname}) => {
+interface Props extends DonationsProps {
+	fullname: string,
+}
+
+export default ({donationsGroups, showAll, toggleShowAll, donationsCount, fullname}: Props) => {
   const donationWidgetCustomClassNames = classnames(
     styles.widget,
     styles.widgetWithTable)
@@ -71,7 +93,7 @@ export default ({donationsGroups, showAll, toggleShowAllDonations, donationsCoun
       {!!donationsGroups.length && <Donations
         donationsGroups={donationsGroups}
         showAll={showAll}
-        toggleShowAll={toggleShowAllDonations}
+        toggleShowAll={toggleShowAll}
         donationsCount={donationsCount}
       />}
       {!donationsGroups.length &&
