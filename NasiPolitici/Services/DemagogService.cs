@@ -24,7 +24,7 @@ namespace HlidacStatu.NasiPolitici.Services
                 var result = await response.Content.ReadAsStringAsync();
                 return result;
             }
-            return "";
+            throw new HttpRequestException($"Demagog responded with statusCode=[{response.StatusCode}].");
         }
 
     }

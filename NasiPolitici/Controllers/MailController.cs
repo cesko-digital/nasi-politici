@@ -25,22 +25,11 @@ namespace HlidacStatu.NasiPolitici.Controllers
         [HttpPost]
         public async Task<IActionResult> SendMail(Email email)
         {
-            var result = CacheAsync(() => _mailService.SendMail(email.Text, email.Subject));
+            var result = _mailService.SendMail(email.Text, email.Subject);
 
             return Content(await result, MediaTypeNames.Application.Json);
         }
-
-        //todo: refactor - make this a service, since it is going to work in all controllers the same way
-        private async Task<TResult> CacheAsync<TResult>(Func<Task<TResult>> func)
-        {
-            var result = await _cache.GetOrCreateAsync(Request.Path, entry =>
-            {
-                entry.SetAbsoluteExpiration(CacheDuration);
-                return func();
-            });
-
-            return result;
-        }
+        
     }
 
     public class Email

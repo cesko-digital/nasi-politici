@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +25,7 @@ namespace HlidacStatu.NasiPolitici.Services
                 var result = await response.Content.ReadAsStringAsync();
                 return result;
             }
-            return "";
+            throw new HttpRequestException($"Monitora responded with statusCode=[{response.StatusCode}].");
         }
 
     }
