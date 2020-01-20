@@ -4,8 +4,13 @@ import { setSearchQuery, search } from '../../store/search/actions'
 import { getSearchQuery } from '../../store/search/selectors'
 
 import SearchBar from './searchBar'
+import { AppState } from '../../store'
 
-const mapStateToProps = createStructuredSelector({
+interface StateProps {
+	query: string;
+}
+
+const mapStateToProps = createStructuredSelector<AppState, StateProps>({
   query: getSearchQuery,
 })
 

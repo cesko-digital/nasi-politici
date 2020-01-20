@@ -5,7 +5,15 @@ import {ReactComponent as Search} from '../../assets/images/search.svg';
 
 import styles from './searchBar.module.scss'
 
-export default ({form, setSearchQuery, search, query, wrapperClassname}) => {
+export interface Props {
+	form?: string;
+	query: string;
+	search: () => void;
+	setSearchQuery: (query: string) => void;
+	wrapperClassname?: string;
+}
+
+const SearchBar: React.FC<Props> = ({form, setSearchQuery, search, query, wrapperClassname}) => {
   const matchDetail = useRouteMatch('/detail/:id')
   const onSubmit = useCallback((e) => {
     e.preventDefault()
@@ -18,7 +26,7 @@ export default ({form, setSearchQuery, search, query, wrapperClassname}) => {
     <form className={form} onSubmit={onSubmit}>
       <div className={classnames(styles.wrapper, wrapperClassname)}>
         <input
-          autoFocus= {!matchDetail && 'autoFocus'}
+          autoFocus={!matchDetail}
           className={styles.input}
           onChange={onChange}
           value={query} placeholder='Markéta Adamová'></input>
@@ -30,3 +38,5 @@ export default ({form, setSearchQuery, search, query, wrapperClassname}) => {
     </form>
   );
 }
+
+export default SearchBar

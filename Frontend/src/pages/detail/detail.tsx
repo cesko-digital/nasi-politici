@@ -16,7 +16,24 @@ import ReportModalTrigger from '../../components/reportModal/reportModalTriggerC
 
 import styles from './detail.module.scss';
 
-export default (props) => {
+interface Props {
+	loadDetail: (id: string) => void,
+	isLoading: boolean,
+	photoUrl: string,
+	fullname: string,
+	birthYear: string,
+	currentParty: string,
+	description: string,
+	contact: string,
+	engagement: string,
+	match: {
+		params: {
+			id: string,
+		}
+	}
+}
+
+export default (props: Props) => {
   const {loadDetail, match: { params: {id} } } = props
   useEffect(() => {
     loadDetail(id)
@@ -28,7 +45,7 @@ export default (props) => {
   })
 
   const engageWidgetCustomClassNames = classnames(styles.widget, styles.engage, !props.engagement && styles.noData)
-  const contactsWidgetCustomClassNames = classnames(styles.widget, !props.contacts && styles.noData)
+  const contactsWidgetCustomClassNames = classnames(styles.widget, !props.contact && styles.noData)
   const aboutWidgetCustomClassNames = classnames(styles.widget, !props.description && styles.noData)
 
   return (
@@ -85,7 +102,7 @@ export default (props) => {
                           className={styles.reportBtnWrapper}
                           modalTitle={`${props.fullname}, ve zkratce`}
                         >
-                          <ReportBtn className={styles.reportBtn}/>
+													<ReportBtn className={styles.reportBtn}/>
                         </ReportModalTrigger>
                       </div>}
                     </div>

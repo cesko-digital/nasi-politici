@@ -2,7 +2,7 @@ import * as React from 'react'
 
 interface Props {
 	modalTitle: string,
-	children: React.ReactChildren,
+	children: Element|React.ReactChild|React.ReactChild[],
 	openReportModal: (title: string) => void,
 	className: string,
 }

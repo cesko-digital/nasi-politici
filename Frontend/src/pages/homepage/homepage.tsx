@@ -6,7 +6,11 @@ import styles from './homepage.module.scss'
 
 import logo from '../../assets/images/logo-np.svg'
 
-export default (props) => {
+export interface Props {
+	wasSearched: boolean;
+}
+
+const Homepage: React.FC<Props> = (props) => {
   return (
     <div className={styles.homepage}>
       <div className={styles.wrapper}>
@@ -14,9 +18,11 @@ export default (props) => {
           <img src={logo} alt={logo} className={styles.logo}/>
           <div className={styles.perex}>Mapujeme stav korupce v ČR a aktivně přispíváme k jejímu omezování. Hledejte političky a politiky.</div>
         </div>}
-        <div className={styles.searchWrapper}><SearchBar/></div>
+        <div className={styles.searchWrapper}><SearchBar /></div>
         <Result />
       </div>
     </div>
   )
 }
+
+export default Homepage
