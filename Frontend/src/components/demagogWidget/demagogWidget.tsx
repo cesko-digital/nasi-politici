@@ -1,6 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
-import NoData from '../../components/emptyStates/noData/noData'
+import NoData from '../emptyStates/noData/noData'
 import { ReactComponent as Tick } from '../../assets/images/dem-tick.svg';
 import { ReactComponent as Cross } from '../../assets/images/dem-cross.svg';
 import { ReactComponent as Exclamation } from '../../assets/images/dem-exclamation.svg';
@@ -14,9 +14,24 @@ import {dummyPluralize as pluralize} from '../../utils/string'
 import styles from './demagogWidget.module.scss'
 import Row from './demagogWidgetRow'
 
+interface Props {
+	data: {
+		count: number,
+		id: string,
+		misleading: number,
+		misleadingPerc: number,
+		true: number,
+		truePerc: number,
+		untrue: number,
+		untruePerc: number,
+		unverifiable: number,
+		unverifiablePerc: number,
+	}
+	fullname: string,
+}
 
-export default ({data, fullname}) => {
-  const demagogWidgetCustomClassNames = classnames(styles.widget, !data.count && styles.noData)
+export default ({data, fullname}: Props) => {
+  const demagogWidgetCustomClassNames = classnames(styles.widget, !data.id && styles.noData)
 
   return (
 		<div className={demagogWidgetCustomClassNames}>

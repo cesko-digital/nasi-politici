@@ -5,7 +5,14 @@ import {dummyPluralize as pluralize} from '../../utils/string'
 
 import styles from './demagogWidget.module.scss'
 
-export default ({value, valuePerc, iconComponent, titleForms}) => {
+interface Props {
+	value: number,
+	valuePerc: number,
+	iconComponent: React.ElementType,
+	titleForms: [string, string, string],
+}
+
+export default ({value, valuePerc, iconComponent, titleForms}: Props) => {
 	const Icon = iconComponent
 	return (
 		<React.Fragment>

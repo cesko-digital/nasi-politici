@@ -1,4 +1,4 @@
-export const dummyPluralize = (number, one, lessThanFive, more) => {
+export const dummyPluralize = (number: number, one: string, lessThanFive: string, more: string): string => {
 	switch (number) {
 		case 1:
 			return one
