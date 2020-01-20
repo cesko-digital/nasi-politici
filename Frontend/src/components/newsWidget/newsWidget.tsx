@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import classnames from 'classnames'
-import NoData from '../../components/emptyStates/noData/noData'
+import NoData from '../emptyStates/noData/noData'
 import ReportModalTrigger from '../reportModal/reportModalTriggerConnected'
 import { ReactComponent as LinkBtn } from '../../assets/images/link.svg';
 import { ReactComponent as ReportBtn } from '../../assets/images/report.svg';
@@ -9,27 +9,35 @@ import styles from './newsWidget.module.scss'
 
 const DEFAULT_ARTICLES_COUNT = 2
 
-const Article = ({article}) => {
+interface ArticleProps {
+	perex: string;
+	published: string;
+	source: string;
+	title: string;
+	url: string;
+}
+
+const Article = ({source, published, url, title, perex}: ArticleProps) => {
   return (
       <div className={styles.article}>
         <div className={styles.sources}>
-          <div className={styles.source}>{article.source}</div>
-          <div>, {article.published}</div>
+          <div className={styles.source}>{source}</div>
+          <div>, {published}</div>
         </div>
-        <div><a href={article.url} target='_blank' rel="noopener noreferrer" className={styles.headline}>{article.title}</a></div>
-        <div className={styles.perex}>{article.perex}</div>
+        <div><a href={url} target='_blank' rel="noopener noreferrer" className={styles.headline}>{title}</a></div>
+        <div className={styles.perex}>{perex}</div>
       </div>
   )
 }
 
-const Articles = ({articles}) => {
+const Articles = ({articles}: {articles: ArticleProps[]}) => {
 	const [showAll, setShowAll] = useState(false)
   const hasMore = articles.length > DEFAULT_ARTICLES_COUNT
   return (
     <React.Fragment>
       <div className={styles.articles}>
-        {!showAll && articles.slice(0, DEFAULT_ARTICLES_COUNT).map((article, index) => <Article article={article} key={index}/>)}
-        {showAll && articles.map((article, index) => <Article article={article} key={index}/>)}
+        {!showAll && articles.slice(0, DEFAULT_ARTICLES_COUNT).map((article, index) => <Article {...article} key={index}/>)}
+        {showAll && articles.map((article, index) => <Article {...article} key={index}/>)}
       </div>
       {hasMore && <div className={styles.showMore} onClick={() => setShowAll(!showAll)}>
         {!showAll && hasMore && <div className={styles.more}>Zobrazit {articles.length - DEFAULT_ARTICLES_COUNT} dalších</div>}
@@ -39,7 +47,12 @@ const Articles = ({articles}) => {
   )
 }
 
-export default ({news, fullname}) => {
+interface Props {
+	news: ArticleProps[],
+	fullname: string,
+}
+
+export default ({news, fullname}: Props) => {
   const newsWidgetCustomClassNames = classnames(
     styles.widget,
     !news.length && styles.noData)

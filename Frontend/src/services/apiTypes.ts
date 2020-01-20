@@ -42,8 +42,12 @@ export interface Detail {
 	"currentParty": string,
 }
 
-interface SearchResult {
-
+export interface SearchResult {
+	id: string;
+	name: string;
+	surname: string;
+	birthYear: string;
+	currentParty: string | null;
 }
 
 interface Speaker {
@@ -80,9 +84,8 @@ export interface ArticleResponse {
 	topic_map: {[key: string]: number[]}
 }
 
-
 export interface API {
-	search: (query: string) => SearchResult | Promise<SearchResult>
+	search: (query: string) => SearchResult[] | Promise<SearchResult[]>
 	fetchDetail: (id: string) => Detail | Promise<Detail>
 	fetchDemagog: (id: string) => DemagogResponse | Promise<DemagogResponse>
 	fetchNews: (fullName: string, party: string, searchQuery: string) => ArticleResponse | Promise<ArticleResponse>

@@ -1,4 +1,10 @@
-export interface Result {}
+export interface Result {
+	id: string;
+	name: string;
+	surname: string;
+	birthYear: string;
+	currentParty: string|null;
+}
 
 export interface SearchState {
 	query: string;

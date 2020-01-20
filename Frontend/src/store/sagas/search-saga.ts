@@ -13,7 +13,7 @@ import {getSearchQuery} from '../search/selectors'
 import API from '../../services/api'
 import API_MOCK from '../../services/apiMock'
 import { push } from 'connected-react-router'
-import {ArticleResponse, Detail, DemagogResponse} from '../../services/apiTypes'
+import {ArticleResponse, Detail, DemagogResponse, SearchResult} from '../../services/apiTypes'
 
 const api = process.env.REACT_APP_USE_API_MOCK ? API_MOCK : API
 
@@ -25,7 +25,7 @@ function* handleSearch(action: ReturnType<typeof search|typeof setSearchQuery>) 
   }
   yield put(push('/'))
   try {
-    const persons = yield call(api.search, query)
+    const persons: SearchResult[] = yield call(api.search, query)
     yield put(setSearchResults(persons, true))
   } catch (error) {
     yield put(setSearchResults([], true))

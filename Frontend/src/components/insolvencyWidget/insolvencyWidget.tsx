@@ -1,16 +1,20 @@
 import React from 'react'
 import classnames from 'classnames'
-import NoData from '../../components/emptyStates/noData/noData'
-import ZeroValue from '../../components/emptyStates/zeroValue/zeroValue'
+import NoData from '../emptyStates/noData/noData'
+import ZeroValue from '../emptyStates/zeroValue/zeroValue'
 import { ReactComponent as LinkBtn } from '../../assets/images/link.svg';
 import { ReactComponent as ReportBtn } from '../../assets/images/report.svg';
 import ReportModalTrigger from '../reportModal/reportModalTriggerConnected'
 
 import styles from './insolvencyWidget.module.scss'
 
+interface RowProps {
+	title: string,
+	personalCount: number,
+	companyCount: number,
+}
 
-
-function InsolvencyRow({title, personalCount, companyCount}) {
+function InsolvencyRow({title, personalCount, companyCount}: RowProps) {
   return (
     <div>
       <div className={styles.subtitleWrapper}>
@@ -31,7 +35,24 @@ function InsolvencyRow({title, personalCount, companyCount}) {
   )
 }
 
-export default ({personalInsolvency, companyInsolvency, fullname, hasInsolvency, hasInsolvencyData}) => {
+interface InsolvencyData {
+	bailiffCount: number;
+	bailiffLink: string;
+	creditorCount: number;
+	creditorLink: string;
+	debtorCount: number;
+	debtorLink: string;
+}
+
+interface Props {
+	companyInsolvency: InsolvencyData,
+	fullname: string,
+	hasInsolvency: boolean,
+	hasInsolvencyData: boolean,
+	personalInsolvency: InsolvencyData,
+}
+
+export default ({personalInsolvency, companyInsolvency, fullname, hasInsolvency, hasInsolvencyData}: Props) => {
   const insolvencyWidgetCustomClassNames = classnames(
     styles.widget,
     styles.widgetWithTable,

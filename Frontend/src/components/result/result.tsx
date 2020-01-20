@@ -6,20 +6,28 @@ import { ReactComponent as ReportIcon } from '../../assets/images/report.svg';
 import ReportModalTrigger from '../reportModal/reportModalTriggerConnected'
 import {dummyPluralize as pluralize} from '../../utils/string'
 
-function ResultRow({result}) {
+interface ResultRowProps {
+	id: string;
+	name: string;
+	surname: string;
+	birthYear: string;
+	currentParty: string | null;
+}
+
+function ResultRow({id, name, surname, birthYear, currentParty}: ResultRowProps) {
 	return (
-    <Link className={styles.resultRow} to={`/detail/${result.id}`}>
+    <Link className={styles.resultRow} to={`/detail/${id}`}>
       <div className={styles.resultItem}>
         <div className={styles.pictureWrapper} >
-          <ProfilePicture src={`https://www.hlidacstatu.cz/Photo/${result.id}`} alt={result.surname}/>
+          <ProfilePicture src={`https://www.hlidacstatu.cz/Photo/${id}`} name={surname}/>
         </div>
         <div className={styles.dataWrapper}>
           <div className={styles.nameWrapper}>
-            <div className={styles.name}>{result.name} {result.surname}</div>
+            <div className={styles.name}>{name} {surname}</div>
             <div className={styles.initialsWrapper}>
-              {result.birthYear && <div className={styles.birthYear}>*{result.birthYear}</div>}
+              {birthYear && <div className={styles.birthYear}>*{birthYear}</div>}
               <div className={styles.divider} />
-              {result.currentParty && <div className={styles.currentParty}>{result.currentParty}</div>}
+              {currentParty && <div className={styles.currentParty}>{currentParty}</div>}
             </div>
           </div>
           <div className={styles.linkWrapper}>
@@ -31,7 +39,7 @@ function ResultRow({result}) {
   )
 }
 
-function EmptyState({query}) {
+function EmptyState({query}: {query: string}) {
 	return (
 		<div>
 			<div className={styles.emptyTitle}>žádnou političku ani politka jsme nenašli :(</div>
@@ -53,14 +61,20 @@ function EmptyState({query}) {
 	)
 }
 
-export default ({results, query, wasSearched}) => {
+interface Props {
+	results: ResultRowProps[],
+	query: string,
+	wasSearched: boolean,
+}
+
+export default ({results, query, wasSearched}: Props) => {
 	return (
 		<React.Fragment>
       {wasSearched && results && results.length === 0 && <EmptyState query={query} />}
       {results && !!results.length &&
         <div>
           <div className={styles.count}>{pluralize(results.length, 'Nalezen', 'Nalezeni', 'Nalezeno')} {results.length} {pluralize(results.length, 'politik', 'politici', 'politiků')}</div>
-          <div className={styles.results}>{results.map(result => <ResultRow key={result.id} result={result} />)}</div>
+          <div className={styles.results}>{results.map(result => <ResultRow {...result} key={result.id} />)}</div>
         </div>}
 		</React.Fragment>
   )
