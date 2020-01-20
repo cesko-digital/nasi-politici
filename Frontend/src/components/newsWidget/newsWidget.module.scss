@@ -55,7 +55,8 @@
 .source {
   @include linkBtn;
   @include smallText;
-  color: $clDark;
+	color: $clDark;
+	cursor: default;
 }
 .headline {
   @include linkBtn;

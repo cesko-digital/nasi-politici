@@ -16,7 +16,7 @@ const Article = ({article}) => {
           <div className={styles.source}>{article.source}</div>
           <div>, {article.published}</div>
         </div>
-        <div><a href={article.web} target='_blank' rel="noopener noreferrer" className={styles.headline}>{article.title}</a></div>
+        <div><a href={article.url} target='_blank' rel="noopener noreferrer" className={styles.headline}>{article.title}</a></div>
         <div className={styles.perex}>{article.perex}</div>
       </div>
   )
