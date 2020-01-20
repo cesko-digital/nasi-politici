@@ -40,8 +40,8 @@ export const getFullName = (store: AppState) => {
 
 export const getBirthYear = (store: AppState) => {
   const {birthDate} = getDetailData(store)
-  if (!birthDate) return ''
-	return (new Date(birthDate)).getFullYear()
+  if (!birthDate) return
+	return (new Date(birthDate)).getFullYear().toString()
 }
 
 export const getCurrentParty = (store: AppState) => {

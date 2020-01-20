@@ -11,13 +11,23 @@ import {
 } from '../../store/detail/selectors'
 
 import Detail from './detail'
+import { AppState } from '../../store'
 
-const mapStateToProps = createStructuredSelector({
-  fullname: getFullName,
+interface StateProps {
+	birthYear?: string,
+	currentParty: string,
+	description: string,
+	fullname: string,
+	isLoading: boolean,
+	photoUrl: string,
+}
+
+const mapStateToProps = createStructuredSelector<AppState, StateProps>({
   birthYear: getBirthYear,
   currentParty: getCurrentParty,
-  isLoading: isDetailLoading,
   description: getDescription,
+  fullname: getFullName,
+  isLoading: isDetailLoading,
   photoUrl: getPhotoUrl,
 })
 

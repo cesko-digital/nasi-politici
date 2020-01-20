@@ -17,20 +17,20 @@ import ReportModalTrigger from '../../components/reportModal/reportModalTriggerC
 import styles from './detail.module.scss';
 
 interface Props {
-	loadDetail: (id: string) => void,
-	isLoading: boolean,
-	photoUrl: string,
-	fullname: string,
-	birthYear: string,
+	birthYear?: string,
+	contact: string,
 	currentParty: string,
 	description: string,
-	contact: string,
 	engagement: string,
+	fullname: string,
+	isLoading: boolean,
+	loadDetail: (id: string) => void,
 	match: {
 		params: {
 			id: string,
 		}
 	}
+	photoUrl: string,
 }
 
 export default (props: Props) => {
@@ -60,7 +60,7 @@ export default (props: Props) => {
                 <div className={styles.initialsWrapper}>
                   <div className={styles.fullname}>{props.fullname}</div>
                   <div className={styles.personal}>
-                    <div className={styles.birthYear}>*{props.birthYear}</div>
+                    {props.birthYear && <div className={styles.birthYear}>*{props.birthYear}</div>}
                     <div className={styles.divider}></div>
                     <div className={styles.currentParty}>{props.currentParty}</div>
                   </div>
