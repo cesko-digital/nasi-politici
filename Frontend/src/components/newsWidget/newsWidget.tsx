@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import classnames from 'classnames'
 import NoData from '../emptyStates/noData/noData'
 import ReportModalTrigger from '../reportModal/reportModalTriggerConnected'
-import { ReactComponent as LinkBtn } from '../../assets/images/link.svg';
 import { ReactComponent as ReportBtn } from '../../assets/images/report.svg';
 
 import styles from './newsWidget.module.scss'
@@ -63,12 +62,6 @@ export default ({news, fullname}: Props) => {
         <div className={styles.header}>
           <h2 className={styles.title}>V médiích</h2>
           {!!news.length && <div className={styles.tags}>
-            <div className={styles.tag}>
-              <LinkBtn />
-              <div className={styles.tagname}>
-                <a href='https://monitora.cz/' rel="noopener noreferrer" target='_blank'>Monitora</a>
-              </div>
-            </div>
             <ReportModalTrigger
               className={styles.reportBtnWrapper}
               modalTitle={`${fullname}, v médiích`}>
