@@ -1,0 +1,97 @@
+@import '../../App.scss';
+
+.widget {
+	margin-bottom: 36px;
+	padding-bottom: 30px;
+  width: $widgetBase;
+  border-top: 2px solid $clDarkBorder;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+  background-color: #fff;
+
+  &.engage {
+    width: 100%;
+  }
+
+  .header {
+		margin-bottom: 24px;
+		padding: 30px 30px 0 30px;
+    display: flex;
+    justify-content: space-between;
+		flex-wrap: wrap;
+		.reportBtnWrapper {
+			width: 24px;
+			height: 24px;
+			border-radius: 50%;
+			background-color: #F2F2F2;
+		}
+		.reportBtn {
+			transform: scale(.6);
+		}
+  }
+  .title {
+    @include condensedTitle;
+  }
+  .tags,
+  .tag {
+    display: flex;
+  }
+  .tags {
+    align-self: flex-start;
+  }
+  .tag {
+    margin-right: 10px;
+    padding: 0 8px;
+    align-items: center;
+    border-radius: 50px;
+    background-color: $clPrimaryLight;
+  }
+  .tagname {
+    margin-left: 4px;
+    color: $clPrimaryText;
+	}
+	.subtitleWrapper {
+		margin-bottom: 10px;
+		padding: 0 20px 0 30px;
+    display: flex;
+    align-items: center;
+  }
+  .subtitle {
+    @include subTitle;
+  }
+  .line {
+    margin-left: 16px;
+    flex: 1;
+    height: 1px;
+    background-color: $clLine;
+	}
+	.contactsWrapper {
+		margin: 0 20px 20px 20px;
+		.contact {
+			display: flex;
+			align-items: center;
+			height: 40px;
+			&:nth-child(odd) {
+				background-color: $clTableRow;
+			}
+			.icon {
+				margin-left: 10px;
+			}
+			.link {
+				@include linkBtn;
+				margin-left: 10px;
+			}
+		}
+	}
+}
+
+.noData {
+  border-top: 1px solid $clComponentBorder;
+  background-color: #f0f0f0;
+}
+
+@media screen and (max-width: 650px) {
+  .widget {
+    width: $widgetFluid;
+  }
+}

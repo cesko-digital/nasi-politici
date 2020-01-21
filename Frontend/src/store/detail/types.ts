@@ -21,8 +21,22 @@ export interface Sponsor {
 	year: number;
 }
 
+export enum ContactService {
+	FacebookPage = 'Facebook_page',
+	FacebookProfile = 'Facebook_profile',
+	Twitter = 'Twitter',
+	Instagram = 'Instagram',
+	WWW = 'WWW',
+}
+
+export interface Contact {
+ Service: ContactService,
+ Contact: string,
+}
+
 export interface Detail {
 	birthDate: string;
+	contacts?: Contact[]; // TODO odebrat ? az zacne chodit z API
 	companyConnection: string;
 	currentParty: string;
 	deathDate: string | null;

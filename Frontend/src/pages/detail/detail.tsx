@@ -11,6 +11,7 @@ import DonationsWidget from '../../components/donationsWidget/donationsWidgetCon
 import RolesWidget from '../../components/rolesWidget/rolesWidgetConnected'
 import InsolvencyWidget from '../../components/insolvencyWidget/insolvencyWidgetConnected'
 import DemagogWidget from '../../components/demagogWidget/demagogWidgetConnected'
+import ContactsWidget from '../../components/contactsWidget/contactsWidgetConnected'
 import ProfilePicture from '../../components/profilePicture/profilePicture'
 import ReportModalTrigger from '../../components/reportModal/reportModalTriggerConnected'
 
@@ -45,7 +46,6 @@ export default (props: Props) => {
   })
 
   const engageWidgetCustomClassNames = classnames(styles.widget, styles.engage, !props.engagement && styles.noData)
-  const contactsWidgetCustomClassNames = classnames(styles.widget, !props.contact && styles.noData)
   const aboutWidgetCustomClassNames = classnames(styles.widget, !props.description && styles.noData)
 
   return (
@@ -110,31 +110,7 @@ export default (props: Props) => {
                     {!!props.description && <div className={styles.description}>{props.description}</div>}
                   </div>
                   <DemagogWidget />
-                  <div className={contactsWidgetCustomClassNames}>
-                    <div className={styles.header}>
-                      <h2 className={styles.title}>Kontakty</h2>
-                      {!!props.contact && <div>
-                        <ReportModalTrigger
-                          className={styles.reportBtnWrapper}
-                          modalTitle={`${props.fullname}, kontakty`}
-                        >
-                          <ReportBtn className={styles.reportBtn}/>
-                        </ReportModalTrigger>
-                      </div>}
-                    </div>
-                    {!props.contact && <NoData />}
-                    {props.contact &&
-                      <React.Fragment>
-                        <div className={styles.subtitleWrapper}>
-                          <h3 className={styles.subtitle}>Sociální Sítě</h3>
-                          <div className={styles.line} />
-                        </div>
-                        <div className={styles.subtitleWrapper}>
-                          <h3 className={styles.subtitle}>Web</h3>
-                          <div className={styles.line} />
-                        </div>
-                      </React.Fragment>}
-                  </div>
+                  <ContactsWidget />
                 </div>
               </div>
               <div id='career' className={styles.section}>

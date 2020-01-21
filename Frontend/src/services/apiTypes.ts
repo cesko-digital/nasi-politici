@@ -7,39 +7,53 @@ interface Role {
 }
 
 interface Insolvency {
-	"debtorCount": number,
-	"debtorLink": string,
-	"creditorCount": number,
-	"creditorLink": string,
-	"bailiffCount": number,
-	"bailiffLink": string,
+	debtorCount: number,
+	debtorLink: string,
+	creditorCount: number,
+	creditorLink: string,
+	bailiffCount: number,
+	bailiffLink: string,
 }
 
 interface Sponsor {
-	"party": string,
-	"donatedAmount": number,
-	"year": number,
-	"source": string | null,
+	party: string,
+	donatedAmount: number,
+	year: number,
+	source: string | null,
+}
+
+export enum ContactService {
+	FacebookPage = 'Facebook_page',
+	FacebookProfile = 'Facebook_profile',
+	Twitter = 'Twitter',
+	Instagram = 'Instagram',
+	WWW = 'WWW',
+}
+
+export interface Contact {
+ Service: ContactService,
+ Contact: string,
 }
 
 export interface Detail {
-	"id": string,
-	"namePrefix": string,
-	"nameSuffix": string,
-	"name": string,
-	"surname": string,
-	"birthDate": string,
-	"deathDate": string|null,
-	"status": string,
-	"photo": string,
-	"description": string,
-	"companyConnection": string,
-	"roles": Role[],
-	"insolvencyPerson": Insolvency,
-	"insolvencyCompany": Insolvency,
-	"source": string,
-	"sponsor": Sponsor[],
-	"currentParty": string,
+	birthDate: string,
+	contacts?: Contact[], // TODO odebrat ? az zacne chodit z API
+	companyConnection: string,
+	currentParty: string,
+	deathDate: string|null,
+	description: string,
+	id: string,
+	insolvencyCompany: Insolvency,
+	insolvencyPerson: Insolvency,
+	name: string,
+	namePrefix: string,
+	nameSuffix: string,
+	photo: string,
+	roles: Role[],
+	source: string,
+	sponsor: Sponsor[],
+	status: string,
+	surname: string,
 }
 
 export interface SearchResult {

@@ -2,6 +2,7 @@ import {createSelector} from 'reselect'
 
 import {AppState} from '../index'
 import {DEFAULT_DONATIONS_LIMIT, DEFAULT_ROLES_LIMIT} from '../../constants'
+import { ContactService, Contact } from './types'
 
 
 export const getDetailData = (store: AppState) => store.detail.detail
@@ -97,3 +98,21 @@ export const getRoles = createSelector(getRolesRaw, getShowAllRoles, (roles, sho
   }
   return groupByYear(rolesMap)
 })
+
+export const getContacts = (store: AppState) => store.detail.detail.contacts || []
+
+export const hasContacts = (store: AppState) => !!store.detail.detail.contacts && !!store.detail.detail.contacts.length
+
+const mapContact = (contact: Contact) => ({
+	service: contact.Service,
+	contact: contact.Contact,
+})
+
+export const getSocialNetworksContacts = createSelector(getContacts, (contacts) => {
+	return contacts.filter((contact) => contact.Service !== ContactService.WWW).map(mapContact)
+})
+
+export const getWebContacts = createSelector(getContacts, (contacts) => {
+	return contacts.filter((contact) => contact.Service === ContactService.WWW).map(mapContact)
+})
+

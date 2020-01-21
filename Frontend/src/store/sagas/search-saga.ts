@@ -68,7 +68,7 @@ function* loadDemagog(id: string) {
 function* handleLoadDetail(action: ReturnType<typeof loadDetail>) {
   yield put(loadingDetailStarted())
   try {
-    const detail: Detail = yield call(api.fetchDetail, action.payload)
+		const detail: Detail = yield call(api.fetchDetail, action.payload)
 		yield put(setDetail(detail))
 		yield call(loadDemagog, action.payload)
 		yield call(loadNews, detail)
