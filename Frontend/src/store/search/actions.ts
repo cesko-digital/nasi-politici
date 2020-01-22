@@ -1,15 +1,15 @@
-import { SEARCH, SET_SEARCH_RESULTS, SET_SEARCH_QUERY, Result } from "./types";
+import { SEARCH, SET_SEARCH_RESULTS, SET_SEARCH_QUERY, Result, SearchActionTypes } from './types'
 
-export const setSearchQuery = (query: string) => ({
+export const setSearchQuery = (query: string): SearchActionTypes => ({
   type: SET_SEARCH_QUERY,
   payload: query,
-});
+})
 
-export const setSearchResults = (results: Result[], wasSearched: boolean) => ({
+export const setSearchResults = (results: Result[], wasSearched: boolean): SearchActionTypes => ({
   type: SET_SEARCH_RESULTS,
-  payload: {results, wasSearched},
-});
+  payload: { results, wasSearched },
+})
 
-export const search = () => ({
+export const search = (): SearchActionTypes => ({
   type: SEARCH,
-});
+})

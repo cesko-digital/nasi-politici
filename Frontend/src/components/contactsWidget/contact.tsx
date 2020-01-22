@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 
 import { ContactService } from '../../store/detail/types'
 
@@ -7,13 +7,15 @@ import Link from './contactLink'
 import Icon from './contactIcon'
 
 export interface Contact {
-	contact: string,
-	service: ContactService,
+  contact: string
+  service: ContactService
 }
 
-export default (props: Contact) => (
-	<div className={styles.contact}>
-		<Icon service={props.service} />
-		<Link {...props} />
-	</div>
+const Contact: React.FC<Contact> = props => (
+  <div className={styles.contact}>
+    <Icon service={props.service} />
+    <Link {...props} />
+  </div>
 )
+
+export default Contact

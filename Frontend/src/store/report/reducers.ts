@@ -1,22 +1,19 @@
-import { SET_REPORT_MODAL_OPEN, ReportState, ReportActionTypes } from "./types";
+import { SET_REPORT_MODAL_OPEN, ReportState, ReportActionTypes } from './types'
 
 const initialState: ReportState = {
-	open: false,
-	title: '',
-};
+  open: false,
+  title: '',
+}
 
-export function reportReducer(
-  state = initialState,
-  action: ReportActionTypes
-): ReportState {
+export function reportReducer(state = initialState, action: ReportActionTypes): ReportState {
   switch (action.type) {
     case SET_REPORT_MODAL_OPEN: {
       return {
         ...state,
-        ...action.payload
-      };
+        ...action.payload,
+      }
     }
     default:
-      return state;
+      return state
   }
 }

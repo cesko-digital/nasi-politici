@@ -1,4 +1,4 @@
-import {AppState} from '../index'
+import { AppState } from '../index'
 
-export const isReportModalOpen = (store: AppState) => store.report.open
-export const getReportModalTitle = (store: AppState) => store.report.title
+export const isReportModalOpen = (store: AppState): boolean => store.report.open
+export const getReportModalTitle = (store: AppState): string => store.report.title

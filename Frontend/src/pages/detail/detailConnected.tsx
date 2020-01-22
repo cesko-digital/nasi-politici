@@ -1,6 +1,6 @@
-import {connect} from 'react-redux'
-import {createStructuredSelector} from 'reselect'
-import {loadDetail} from '../../store/detail/actions'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { loadDetail } from '../../store/detail/actions'
 import {
   getFullName,
   getBirthYear,
@@ -14,12 +14,12 @@ import Detail from './detail'
 import { AppState } from '../../store'
 
 interface StateProps {
-	birthYear?: string,
-	currentParty: string,
-	description: string,
-	fullname: string,
-	isLoading: boolean,
-	photoUrl: string,
+  birthYear: string
+  currentParty: string
+  description: string
+  fullname: string
+  isLoading: boolean
+  photoUrl: string
 }
 
 const mapStateToProps = createStructuredSelector<AppState, StateProps>({
@@ -31,4 +31,4 @@ const mapStateToProps = createStructuredSelector<AppState, StateProps>({
   photoUrl: getPhotoUrl,
 })
 
-export default connect(mapStateToProps, {loadDetail})(Detail);
+export default connect(mapStateToProps, { loadDetail })(Detail)

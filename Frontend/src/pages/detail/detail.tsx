@@ -1,9 +1,9 @@
-import React, {useEffect} from 'react'
+import * as React from 'react'
 import classnames from 'classnames'
-import {ReactComponent as LinkBtn} from '../../assets/images/link.svg';
-import {ReactComponent as ShareBtn} from '../../assets/images/share.svg';
-import {ReactComponent as ReportBtn} from '../../assets/images/report.svg';
-import {ReactComponent as Divider} from '../../assets/images/detailDivider.svg';
+import { ReactComponent as LinkBtn } from '../../assets/images/link.svg'
+import { ReactComponent as ShareBtn } from '../../assets/images/share.svg'
+import { ReactComponent as ReportBtn } from '../../assets/images/report.svg'
+import { ReactComponent as Divider } from '../../assets/images/detailDivider.svg'
 import NoData from '../../components/emptyStates/noData/noData'
 import LoadingBar from '../../components/loadingBar/loadingBar'
 import NewsWidget from '../../components/newsWidget/newsWidgetConnected'
@@ -15,34 +15,39 @@ import ContactsWidget from '../../components/contactsWidget/contactsWidgetConnec
 import ProfilePicture from '../../components/profilePicture/profilePicture'
 import ReportModalTrigger from '../../components/reportModal/reportModalTriggerConnected'
 
-import styles from './detail.module.scss';
+import styles from './detail.module.scss'
 
 interface Props {
-	birthYear?: string,
-	contact: string,
-	currentParty: string,
-	description: string,
-	engagement: string,
-	fullname: string,
-	isLoading: boolean,
-	loadDetail: (id: string) => void,
-	match: {
-		params: {
-			id: string,
-		}
-	}
-	photoUrl: string,
+  birthYear: string
+  contact: string
+  currentParty: string
+  description: string
+  engagement: string
+  fullname: string
+  isLoading: boolean
+  loadDetail: (id: string) => void
+  match: {
+    params: {
+      id: string
+    }
+  }
+  photoUrl: string
 }
 
-export default (props: Props) => {
-  const {loadDetail, match: { params: {id} } } = props
-  useEffect(() => {
+const Detail: React.FC<Props> = props => {
+  const {
+    loadDetail,
+    match: {
+      params: { id },
+    },
+  } = props
+  React.useEffect(() => {
     loadDetail(id)
-  }, [loadDetail, id]);
-  useEffect(() => {
+  }, [loadDetail, id])
+  React.useEffect(() => {
     window.scrollTo({
-      top: document.body.scrollTop
-    });
+      top: document.body.scrollTop,
+    })
   })
 
   const engageWidgetCustomClassNames = classnames(styles.widget, styles.engage, !props.engagement && styles.noData)
@@ -51,7 +56,7 @@ export default (props: Props) => {
   return (
     <div className={styles.detail}>
       {props.isLoading && <LoadingBar />}
-      {!props.isLoading &&
+      {!props.isLoading && (
         <React.Fragment>
           <div className={styles.heading}>
             <div className={styles.wrapper}>
@@ -66,7 +71,7 @@ export default (props: Props) => {
                   </div>
                 </div>
                 <div className={styles.shareWrapper}>
-                  <ShareBtn className={styles.shareIcon}/>
+                  <ShareBtn className={styles.shareIcon} />
                   <div className={styles.shareBtn}>Sdílet</div>
                 </div>
               </div>
@@ -75,36 +80,48 @@ export default (props: Props) => {
           <div className={styles.body}>
             <div className={styles.menuWrapper}>
               <div className={styles.menu}>
-                <a href='#overview' className={styles.link}>Přehled</a>
-                <a href='#career' className={styles.link}>Kariéra Politika</a>
-                <a href='#engagement' className={styles.link}>Angažovanost</a>
-                <a href='#media' className={styles.link}>Mediální Obraz</a>
+                <a href="#overview" className={styles.link}>
+                  Přehled
+                </a>
+                <a href="#career" className={styles.link}>
+                  Kariéra Politika
+                </a>
+                <a href="#engagement" className={styles.link}>
+                  Angažovanost
+                </a>
+                <a href="#media" className={styles.link}>
+                  Mediální Obraz
+                </a>
               </div>
             </div>
             <div className={styles.detail}>
-              <div id='overview' className={styles.section}>
+              <div id="overview" className={styles.section}>
                 <div className={styles.titleWrapper}>
                   <h1 className={styles.title}>Přehled</h1>
-                  <Divider className={styles.titleDivider}/>
+                  <Divider className={styles.titleDivider} />
                 </div>
                 <div className={styles.widgets}>
                   <div className={aboutWidgetCustomClassNames}>
                     <div className={styles.header}>
                       <h2 className={styles.title}>Ve Zkratce</h2>
-                      {!!props.description && <div className={styles.tags}>
-                        <div className={styles.tag}>
-                          <LinkBtn />
-                          <div className={styles.tagname}>
-                            <a href='https://www.transparency.cz/' rel="noopener noreferrer" target='_blank'>transparency.cz</a>
+                      {!!props.description && (
+                        <div className={styles.tags}>
+                          <div className={styles.tag}>
+                            <LinkBtn />
+                            <div className={styles.tagname}>
+                              <a href="https://www.transparency.cz/" rel="noopener noreferrer" target="_blank">
+                                transparency.cz
+                              </a>
+                            </div>
                           </div>
+                          <ReportModalTrigger
+                            className={styles.reportBtnWrapper}
+                            modalTitle={`${props.fullname}, ve zkratce`}
+                          >
+                            <ReportBtn className={styles.reportBtn} />
+                          </ReportModalTrigger>
                         </div>
-                        <ReportModalTrigger
-                          className={styles.reportBtnWrapper}
-                          modalTitle={`${props.fullname}, ve zkratce`}
-                        >
-													<ReportBtn className={styles.reportBtn}/>
-                        </ReportModalTrigger>
-                      </div>}
+                      )}
                     </div>
                     {!props.description && <NoData />}
                     {!!props.description && <div className={styles.description}>{props.description}</div>}
@@ -113,10 +130,10 @@ export default (props: Props) => {
                   <ContactsWidget />
                 </div>
               </div>
-              <div id='career' className={styles.section}>
+              <div id="career" className={styles.section}>
                 <div className={styles.titleWrapper}>
                   <h1 className={styles.title}>Kariéra</h1>
-                  <Divider className={styles.titleDivider}/>
+                  <Divider className={styles.titleDivider} />
                 </div>
                 <div className={styles.widgets}>
                   <RolesWidget />
@@ -124,10 +141,10 @@ export default (props: Props) => {
                   <InsolvencyWidget />
                 </div>
               </div>
-              <div id='engagement' className={styles.section}>
+              <div id="engagement" className={styles.section}>
                 <div className={styles.titleWrapper}>
                   <h1 className={styles.title}>Angažovanost</h1>
-                  <Divider className={styles.titleDivider}/>
+                  <Divider className={styles.titleDivider} />
                 </div>
                 <div className={engageWidgetCustomClassNames}>
                   <div className={styles.header}>
@@ -137,17 +154,17 @@ export default (props: Props) => {
                         className={styles.reportBtnWrapper}
                         modalTitle={`${props.fullname}, angažovanost`}
                       >
-                        <ReportBtn className={styles.reportBtn}/>
+                        <ReportBtn className={styles.reportBtn} />
                       </ReportModalTrigger>
                     </div>
                   </div>
                   {!props.engagement && <NoData />}
                 </div>
               </div>
-              <div id='media' className={styles.section}>
+              <div id="media" className={styles.section}>
                 <div className={styles.titleWrapper}>
                   <h1 className={styles.title}>Mediální obraz</h1>
-                  <Divider className={styles.titleDivider}/>
+                  <Divider className={styles.titleDivider} />
                 </div>
                 <div className={styles.widgets}>
                   <NewsWidget />
@@ -156,7 +173,9 @@ export default (props: Props) => {
             </div>
           </div>
         </React.Fragment>
-      }
+      )}
     </div>
-  );
+  )
 }
+
+export default Detail

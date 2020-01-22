@@ -1,8 +1,8 @@
-import React from 'react'
-import {ReactComponent as NoDataImg} from '../../../assets/images/collection.svg';
+import * as React from 'react'
+import { ReactComponent as NoDataImg } from '../../../assets/images/collection.svg'
 import styles from './noData.module.scss'
 
-function NoData() {
+const NoData: React.FC = () => {
   return (
     <div className={styles.emptyState}>
       <div className={styles.circle}>
@@ -13,4 +13,4 @@ function NoData() {
   )
 }
 
-export default NoData;
+export default NoData

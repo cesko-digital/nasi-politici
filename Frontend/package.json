@@ -31,8 +31,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test:unit": "react-scripts test",
+    "test:lint": "eslint --ext .ts --ext .tsx .",
+    "test:lint:fix": "npm run test:lint -- --fix",
+    "test": "npm run test:lint && npm run test:unit"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -48,5 +51,15 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.17.0",
+    "@typescript-eslint/parser": "^2.17.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-config-react": "^1.1.7",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.18.0",
+    "prettier": "^1.19.1"
   }
 }

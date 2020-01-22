@@ -1,12 +1,12 @@
-import { DemagogState, SET_DEMAGOG_DATA, RESET_DEMAGOG_DATA } from "./types";
+import { DemagogState, SET_DEMAGOG_DATA, RESET_DEMAGOG_DATA, DemagogActionTypes } from './types'
 
-export const setDemagogData = (data: DemagogState) => ({
+export const setDemagogData = (data: DemagogState): DemagogActionTypes => ({
   type: SET_DEMAGOG_DATA,
   payload: {
-		...data,
-	}
-});
+    ...data,
+  },
+})
 
-export const resetDemagogData = () => ({
+export const resetDemagogData = (): DemagogActionTypes => ({
   type: RESET_DEMAGOG_DATA,
 })
