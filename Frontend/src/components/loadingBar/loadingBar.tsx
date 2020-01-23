@@ -1,7 +1,7 @@
-import React from 'react'
+import * as React from 'react'
 import styles from './loadingBar.module.scss'
 
-export default () =>
+const LoadingBar: React.FC = () => (
   <div className={styles.roller}>
     <div className={styles.wrapper}>
       <div className={styles.circle}></div>
@@ -14,3 +14,6 @@ export default () =>
       <div className={styles.circle}></div>
     </div>
   </div>
+)
+
+export default LoadingBar

@@ -1,5 +1,5 @@
-import React from 'react';
-import {Route, Switch} from 'react-router-dom'
+import * as React from 'react'
+import { Route, Switch } from 'react-router-dom'
 import Footer from './components/footer/footer'
 import Header from './components/header/header'
 import AboutUs from './pages/about/about'
@@ -9,16 +9,14 @@ import Homepage from './pages/homepage/homepageConnected'
 import Media from './pages/media'
 import ReportModal from './components/reportModal/reportModalConnected'
 
-import './App.scss';
+import './App.scss'
 
-function App(props) {
+const App: React.FC = () => {
   return (
     <div className="App">
-      <div className='banner-beta'>
-        Jedná se o testovací web s testovacími daty.
-      </div>
+      <div className="banner-beta">Jedná se o testovací web s testovacími daty.</div>
       <Header />
-      <div className='body'>
+      <div className="body">
         <Switch>
           <Route path="/" component={Homepage} exact />
           <Route path="/detail/:id" component={Detail} />
@@ -28,9 +26,9 @@ function App(props) {
         </Switch>
       </div>
       <Footer />
-      <ReportModal/>
+      <ReportModal />
     </div>
-  );
+  )
 }
 
 export default App
