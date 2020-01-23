@@ -17,7 +17,7 @@ const ContactLink: React.FC<Props> = props => {
       href = `https://facebook.com/${props.contact}`
       break
     case ContactService.Twitter:
-      href = `https://facebook.com/${props.contact}`
+      href = `https://twitter.com/${props.contact}`
       break
     case ContactService.Instagram:
       href = `https://instagram.com/${props.contact}`
