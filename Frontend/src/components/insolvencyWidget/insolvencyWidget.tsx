@@ -1,10 +1,10 @@
 import * as React from 'react'
 import classnames from 'classnames'
-import NoData from '../emptyStates/noData/noData'
-import ZeroValue from '../emptyStates/zeroValue/zeroValue'
-import { ReactComponent as LinkBtn } from '../../assets/images/link.svg'
-import { ReactComponent as ReportBtn } from '../../assets/images/report.svg'
-import ReportModalTrigger from '../reportModal/reportModalTriggerConnected'
+import NoData from 'components/emptyStates/noData/noData'
+import ZeroValue from 'components/emptyStates/zeroValue/zeroValue'
+import { ReactComponent as LinkBtn } from 'assets/images/link.svg'
+import { ReactComponent as ReportBtn } from 'assets/images/report.svg'
+import ReportModalTrigger from 'components/reportModal/reportModalTriggerConnected'
 
 import styles from './insolvencyWidget.module.scss'
 

@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { getSearchResults, getSearchQuery, wasSearched } from '../../store/search/selectors'
+import { getSearchResults, getSearchQuery, wasSearched } from 'store/search/selectors'
 import Result from './result'
-import { AppState } from '../../store'
+import { AppState } from 'store'
 
 interface StateProps {
   results: Array<{

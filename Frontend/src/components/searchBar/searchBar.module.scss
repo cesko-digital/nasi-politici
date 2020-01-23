@@ -1,10 +1,10 @@
-@import '../../App.scss';
+@import 'App.scss';
 
 .wrapper {
   position: relative;
   display: flex;
   height: 60px;
-  
+
   &:before {
     content: '';
     position: absolute;

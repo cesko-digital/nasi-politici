@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
 import { useRouteMatch } from 'react-router-dom'
 import classnames from 'classnames'
-import { ReactComponent as Search } from '../../assets/images/search.svg'
+import { ReactComponent as Search } from 'assets/images/search.svg'
 
 import styles from './searchBar.module.scss'
 

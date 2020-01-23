@@ -1,9 +1,9 @@
 import * as React from 'react'
 import classnames from 'classnames'
 
-import ReportModalTrigger from '../reportModal/reportModalTriggerConnected'
-import { ReactComponent as ReportBtn } from '../../assets/images/report.svg'
-import NoData from '../emptyStates/noData/noData'
+import ReportModalTrigger from 'components/reportModal/reportModalTriggerConnected'
+import { ReactComponent as ReportBtn } from 'assets/images/report.svg'
+import NoData from 'components/emptyStates/noData/noData'
 
 import styles from './contactsWidget.module.scss'
 import { Contact as ContactType } from './contact'

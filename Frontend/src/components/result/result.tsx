@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
-import ProfilePicture from '../profilePicture/profilePicture'
+import ProfilePicture from 'components/profilePicture/profilePicture'
 import styles from './result.module.scss'
-import { ReactComponent as ReportIcon } from '../../assets/images/report.svg'
-import ReportModalTrigger from '../reportModal/reportModalTriggerConnected'
-import { dummyPluralize as pluralize } from '../../utils/string'
+import { ReactComponent as ReportIcon } from 'assets/images/report.svg'
+import ReportModalTrigger from 'components/reportModal/reportModalTriggerConnected'
+import { dummyPluralize as pluralize } from 'utils/string'
 
 interface ResultRowProps {
   id: string

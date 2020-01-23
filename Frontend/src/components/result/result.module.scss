@@ -1,4 +1,4 @@
-@import '../../App.scss';
+@import 'App.scss';
 
 .results {
   display: flex;
@@ -71,7 +71,7 @@
 	align-items: center;
 	margin-top: 14px;
   color: $clPrimary;
-  
+
   svg g {
     stroke: $clPrimary;
   }
@@ -94,7 +94,7 @@
 	background-color: #e7e7e7;
 	border-radius: 50%;
   margin: 45px auto 0 auto;
-  
+
   &:after {
     content: '';
     width: 55px;

@@ -1,11 +1,11 @@
 import * as React from 'react'
 import classnames from 'classnames'
-import { ReactComponent as FBLogo } from '../../assets/images/social-fb.svg'
-import { ReactComponent as TWLogo } from '../../assets/images/social-tw.svg'
-import { ReactComponent as LogoNP } from '../../assets/images/logo-np.svg'
-import { ReactComponent as LogoCD } from '../../assets/images/logo-cd.svg'
-import { ReactComponent as LogoHS } from '../../assets/images/logo-hs.svg'
-import { ReactComponent as LogoTI } from '../../assets/images/logo-ti.svg'
+import { ReactComponent as FBLogo } from 'assets/images/social-fb.svg'
+import { ReactComponent as TWLogo } from 'assets/images/social-tw.svg'
+import { ReactComponent as LogoNP } from 'assets/images/logo-np.svg'
+import { ReactComponent as LogoCD } from 'assets/images/logo-cd.svg'
+import { ReactComponent as LogoHS } from 'assets/images/logo-hs.svg'
+import { ReactComponent as LogoTI } from 'assets/images/logo-ti.svg'
 
 import styles from './footer.module.scss'
 

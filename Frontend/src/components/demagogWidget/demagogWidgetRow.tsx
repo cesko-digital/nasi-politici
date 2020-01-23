@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { dummyPluralize as pluralize } from '../../utils/string'
+import { dummyPluralize as pluralize } from 'utils/string'
 
 import styles from './demagogWidget.module.scss'
 

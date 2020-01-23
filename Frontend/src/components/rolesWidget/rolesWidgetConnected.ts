@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { getRoles, getShowAllRoles, getRolesCount, getFullName } from '../../store/detail/selectors'
-import { toggleShowAllRoles } from '../../store/detail/actions'
+import { getRoles, getShowAllRoles, getRolesCount, getFullName } from 'store/detail/selectors'
+import { toggleShowAllRoles } from 'store/detail/actions'
 
 import RolesWidget from './rolesWidget'
 import { AppState } from 'store'

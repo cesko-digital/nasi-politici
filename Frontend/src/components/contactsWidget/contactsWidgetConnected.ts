@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { getFullName, hasContacts, getSocialNetworksContacts, getWebContacts } from '../../store/detail/selectors'
+import { getFullName, hasContacts, getSocialNetworksContacts, getWebContacts } from 'store/detail/selectors'
 import ContactsWidget from './contactsWidget'
-import { AppState } from '../../store'
+import { AppState } from 'store'
 
 interface StateProps {
   fullname: string

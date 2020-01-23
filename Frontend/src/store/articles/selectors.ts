@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 
-import { AppState } from '../index'
+import { AppState } from 'store'
 import { ArticlesState } from './types'
 
 export const getArticles = (store: AppState): ArticlesState['articles'] => store.articles.articles

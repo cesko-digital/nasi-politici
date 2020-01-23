@@ -1,9 +1,9 @@
 import * as React from 'react'
 import classnames from 'classnames'
-import { ReactComponent as ReportIcon } from '../../assets/images/report.svg'
+import { ReactComponent as ReportIcon } from 'assets/images/report.svg'
 import style from './reportModal.module.scss'
-import Modal from '../modal/modal'
-import { useInput, BindInput } from '../../hooks/hooks'
+import Modal from 'components/modal/modal'
+import { useInput, BindInput } from 'hooks/hooks'
 
 const EMAIL_REGEXP = /^[+a-zA-Z0-9_.!#$%&'*\\/=?^`{|}~-]+@([a-zA-Z0-9-]+\.)+[a-zA-Z0-9]{2,63}$/
 interface PropsForm {

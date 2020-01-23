@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { getDetailNews } from '../../store/articles/selectors'
-import { getFullName } from '../../store/detail/selectors'
+import { getDetailNews } from 'store/articles/selectors'
+import { getFullName } from 'store/detail/selectors'
 
 import NewsWidget from './newsWidget'
-import { AppState } from '../../store'
+import { AppState } from 'store'
 
 interface Article {
   perex: string

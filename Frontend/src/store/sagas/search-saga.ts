@@ -1,20 +1,20 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects'
 import { SagaIterator } from 'redux-saga'
 
-import { SEARCH, SET_SEARCH_QUERY } from '../search/types'
-import { LOAD_DETAIL } from '../detail/types'
-import { SUBMIT_REPORT_MODAL } from '../report/types'
+import { SEARCH, SET_SEARCH_QUERY } from 'store/search/types'
+import { LOAD_DETAIL } from 'store/detail/types'
+import { SUBMIT_REPORT_MODAL } from 'store/report/types'
 
-import { setSearchResults } from '../search/actions'
-import { setDetail, loadingDetailEnded, loadingDetailStarted, loadDetail } from '../detail/actions'
-import { setDemagogData, resetDemagogData } from '../demagog/actions'
-import { setArticles, resetArticles } from '../articles/actions'
+import { setSearchResults } from 'store/search/actions'
+import { setDetail, loadingDetailEnded, loadingDetailStarted, loadDetail } from 'store/detail/actions'
+import { setDemagogData, resetDemagogData } from 'store/demagog/actions'
+import { setArticles, resetArticles } from 'store/articles/actions'
 
-import { getSearchQuery } from '../search/selectors'
-import API from '../../services/api'
-import API_MOCK from '../../services/apiMock'
+import { getSearchQuery } from 'store/search/selectors'
+import API from 'services/api'
+import API_MOCK from 'services/apiMock'
 import { push } from 'connected-react-router'
-import { ArticleResponse, Detail, DemagogResponse, SearchResult } from '../../services/apiTypes'
+import { ArticleResponse, Detail, DemagogResponse, SearchResult } from 'services/apiTypes'
 
 const api = process.env.REACT_APP_USE_API_MOCK ? API_MOCK : API
 

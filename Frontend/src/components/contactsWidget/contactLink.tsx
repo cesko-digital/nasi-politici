@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { ContactService } from '../../store/detail/types'
+import { ContactService } from 'store/detail/types'
 
 import styles from './contactsWidget.module.scss'
 

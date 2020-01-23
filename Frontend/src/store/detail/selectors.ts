@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect'
 
-import { AppState } from '../index'
-import { DEFAULT_DONATIONS_LIMIT, DEFAULT_ROLES_LIMIT } from '../../constants'
+import { AppState } from 'store'
+import { DEFAULT_DONATIONS_LIMIT, DEFAULT_ROLES_LIMIT } from 'constants/constants'
 import { ContactService, Contact, Role, Sponsor, Detail, Insolvency } from './types'
 
 export const getDetailData = (store: AppState): Detail => store.detail.detail

@@ -1,8 +1,8 @@
 import * as React from 'react'
 import classnames from 'classnames'
-import NoData from '../emptyStates/noData/noData'
-import ReportModalTrigger from '../reportModal/reportModalTriggerConnected'
-import { ReactComponent as ReportBtn } from '../../assets/images/report.svg'
+import NoData from 'components/emptyStates/noData/noData'
+import ReportModalTrigger from 'components/reportModal/reportModalTriggerConnected'
+import { ReactComponent as ReportBtn } from 'assets/images/report.svg'
 
 import styles from './newsWidget.module.scss'
 

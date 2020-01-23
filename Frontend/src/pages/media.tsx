@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../pages/about/about.module.scss'
+import styles from 'pages/about/about.module.scss'
 
 const Media: React.FC = () => {
   return (

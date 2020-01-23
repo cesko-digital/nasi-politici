@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { isReportModalOpen, getReportModalTitle } from '../../store/report/selectors'
-import { closeReportModal, submitReportModal } from '../../store/report/actions'
+import { isReportModalOpen, getReportModalTitle } from 'store/report/selectors'
+import { closeReportModal, submitReportModal } from 'store/report/actions'
 
 import ReportModal from './reportModal'
-import { AppState } from '../../store'
+import { AppState } from 'store'
 
 interface StateProps {
   isReportModalOpen: boolean

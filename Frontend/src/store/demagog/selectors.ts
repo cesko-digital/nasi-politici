@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 
-import { AppState } from '../index'
+import { AppState } from 'store'
 
 export const getDemagogDataRaw = (store: AppState): AppState['demagog'] => store.demagog
 export const getDemagogData = createSelector(getDemagogDataRaw, demagog => {

@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { getDonations, getShowAllDonations, getDonationsCount, getFullName } from '../../store/detail/selectors'
-import { toggleShowAllDonations as toggleShowAll } from '../../store/detail/actions'
+import { getDonations, getShowAllDonations, getDonationsCount, getFullName } from 'store/detail/selectors'
+import { toggleShowAllDonations as toggleShowAll } from 'store/detail/actions'
 import DonationsWidget from './donationsWidget'
-import { AppState } from '../../store'
+import { AppState } from 'store'
 
 interface StateProps {
   donationsGroups: Array<{

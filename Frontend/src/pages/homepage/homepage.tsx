@@ -1,10 +1,10 @@
 import React from 'react'
-import SearchBar from '../../components/searchBar/searchBarConnected'
-import Result from '../../components/result/resultConnected'
+import SearchBar from 'components/searchBar/searchBarConnected'
+import Result from 'components/result/resultConnected'
 
 import styles from './homepage.module.scss'
 
-import logo from '../../assets/images/logo-np.svg'
+import logo from 'assets/images/logo-np.svg'
 
 export interface Props {
   wasSearched: boolean

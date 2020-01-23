@@ -1,7 +1,7 @@
 import * as React from 'react'
 import classnames from 'classnames'
-import { ReactComponent as Forbidden } from '../../../assets/images/forbidden.svg'
-import styles from '../noData/noData.module.scss'
+import { ReactComponent as Forbidden } from 'assets/images/forbidden.svg'
+import styles from 'components/emptyStates/noData/noData.module.scss'
 
 interface Props {
   title: string

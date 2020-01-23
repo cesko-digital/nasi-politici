@@ -6,10 +6,10 @@ import {
   getFullName,
   hasInsolvency,
   hasInsolvencyData,
-} from '../../store/detail/selectors'
+} from 'store/detail/selectors'
 
 import InsolvencyWidget from './insolvencyWidget'
-import { AppState } from '../../store'
+import { AppState } from 'store'
 
 interface InsolvencyData {
   bailiffCount: number

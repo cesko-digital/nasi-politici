@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { loadDetail } from '../../store/detail/actions'
+import { loadDetail } from 'store/detail/actions'
 import {
   getFullName,
   getBirthYear,
@@ -8,10 +8,10 @@ import {
   getDescription,
   getCurrentParty,
   getPhotoUrl,
-} from '../../store/detail/selectors'
+} from 'store/detail/selectors'
 
 import Detail from './detail'
-import { AppState } from '../../store'
+import { AppState } from 'store'
 
 interface StateProps {
   birthYear: string

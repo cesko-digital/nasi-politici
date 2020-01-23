@@ -1,4 +1,4 @@
-import { AppState } from '../index'
+import { AppState } from 'store'
 import { Result } from './types'
 
 export const getSearchQuery = (store: AppState): string => store.search.query

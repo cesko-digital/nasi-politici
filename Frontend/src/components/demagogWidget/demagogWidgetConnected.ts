@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { getDemagogData } from '../../store/demagog/selectors'
-import { getFullName } from '../../store/detail/selectors'
+import { getDemagogData } from 'store/demagog/selectors'
+import { getFullName } from 'store/detail/selectors'
 import DemagogWidget from './demagogWidget'
-import { AppState } from '../../store'
+import { AppState } from 'store'
 
 interface StateProps {
   data: {
