@@ -1,5 +1,6 @@
 import * as React from 'react'
 import classnames from 'classnames'
+import Helmet from 'react-helmet'
 import { ReactComponent as LinkBtn } from 'assets/images/link.svg'
 import { ReactComponent as ShareBtn } from 'assets/images/share.svg'
 import { ReactComponent as ReportBtn } from 'assets/images/report.svg'
@@ -58,6 +59,9 @@ const Detail: React.FC<Props> = props => {
       {props.isLoading && <LoadingBar />}
       {!props.isLoading && (
         <React.Fragment>
+          <Helmet>
+            <title>{props.fullname} | Naši Politici</title>
+          </Helmet>
           <div className={styles.heading}>
             <div className={styles.wrapper}>
               <ProfilePicture src={props.photoUrl} name={props.fullname} customClassName={styles.photo} />
