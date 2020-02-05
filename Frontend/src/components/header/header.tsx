@@ -45,10 +45,10 @@ const Header: React.FC = () => {
           )}
           <div className={classnames(styles.links, openMenu && styles.openMenu)}>
             <Link to="/o-projektu" className={styles.link}>
-              O Projektu
+              O projektu
             </Link>
             <Link to="/pro-media" className={styles.link}>
-              Pro Média
+              Pro média
             </Link>
           </div>
         </div>

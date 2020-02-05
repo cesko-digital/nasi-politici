@@ -87,13 +87,13 @@ const Detail: React.FC<Props> = props => {
                   Přehled
                 </a>
                 <a href="#career" className={styles.link}>
-                  Kariéra Politika
+                  Kariéra politika
                 </a>
                 <a href="#engagement" className={styles.link}>
                   Angažovanost
                 </a>
                 <a href="#media" className={styles.link}>
-                  Mediální Obraz
+                  Mediální obraz
                 </a>
               </div>
             </div>
