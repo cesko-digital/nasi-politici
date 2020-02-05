@@ -1,7 +1,6 @@
 import * as React from 'react'
 import classnames from 'classnames'
 import Helmet from 'react-helmet'
-import { ReactComponent as LinkBtn } from 'assets/images/link.svg'
 import { ReactComponent as ShareBtn } from 'assets/images/share.svg'
 import { ReactComponent as ReportBtn } from 'assets/images/report.svg'
 import { ReactComponent as Divider } from 'assets/images/detailDivider.svg'
@@ -110,14 +109,6 @@ const Detail: React.FC<Props> = props => {
                       <h2 className={styles.title}>Ve Zkratce</h2>
                       {!!props.description && (
                         <div className={styles.tags}>
-                          <div className={styles.tag}>
-                            <LinkBtn />
-                            <div className={styles.tagname}>
-                              <a href="https://www.transparency.cz/" rel="noopener noreferrer" target="_blank">
-                                transparency.cz
-                              </a>
-                            </div>
-                          </div>
                           <ReportModalTrigger
                             className={styles.reportBtnWrapper}
                             modalTitle={`${props.fullname}, ve zkratce`}
