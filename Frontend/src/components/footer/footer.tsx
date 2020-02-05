@@ -89,10 +89,16 @@ const Footer: React.FC = () => {
         </div>
         <div className={styles.column}>
           <h3 className={styles.header}>Partneři</h3>
-          <LogoTI className={classnames(styles.logoTI, styles.logo)} />
+          <a href="https://www.transparency.cz/" rel="noopener noreferrer" target="_blank">
+            <LogoTI className={classnames(styles.logoTI, styles.logo)} />
+          </a>
           <div className={styles.logosBttm}>
-            <LogoHS className={classnames(styles.logoHS)} />
-            <LogoCD className={classnames(styles.logoCD, styles.logo)} />
+            <a href="https://www.hlidacstatu.cz/" rel="noopener noreferrer" target="_blank">
+              <LogoHS className={classnames(styles.logoHS)} />
+            </a>
+            <a href="https://cesko.digital/" rel="noopener noreferrer" target="_blank">
+              <LogoCD className={classnames(styles.logoCD, styles.logo)} />
+            </a>
           </div>
         </div>
       </div>
