@@ -98,11 +98,7 @@
     background-color: #fff;
   }
 }
-.privacyPolicy {
-  text-align: center;
-}
-.logo,
-.privacyPolicy {
+.logo {
   margin-top: 12px;
 }
 
@@ -111,11 +107,5 @@
   .bottomWrapper {
     width: $resFluid;
     max-width: $resFluid;
-  }
-}
-
-@media screen and (max-width: 650px) {
-  .privacyPolicy {
-    text-align: center;
   }
 }

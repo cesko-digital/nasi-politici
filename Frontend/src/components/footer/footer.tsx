@@ -99,9 +99,6 @@ const Footer: React.FC = () => {
       <div className={styles.bottom}>
         <div className={styles.bottomWrapper}>
           <LogoNP className={classnames(styles.logoNP, styles.logo)} />
-          <div className={styles.privacyPolicy}>
-            <div className={styles.link}>Zásady zpracování osobních údajů</div>
-          </div>
         </div>
       </div>
     </div>
