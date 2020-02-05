@@ -102,7 +102,7 @@ const DemagogWidget: React.FC<Props> = ({ data, fullname }) => {
               rel="noopener noreferrer"
               target="_blank"
             >
-              Přejít na Demagog.cz
+              Zdůvodnění hodnocení zde
             </a>
             <RedirectBtn className={styles.redirectBtn} />
           </div>

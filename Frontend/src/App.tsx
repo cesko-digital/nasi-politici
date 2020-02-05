@@ -6,7 +6,6 @@ import AboutUs from './pages/about/about'
 import Detail from './pages/detail/detailConnected'
 import Error from './pages/error'
 import Homepage from './pages/homepage/homepageConnected'
-import Media from './pages/media'
 import ReportModal from './components/reportModal/reportModalConnected'
 
 import './App.scss'
@@ -21,7 +20,6 @@ const App: React.FC = () => {
           <Route path="/" component={Homepage} exact />
           <Route path="/detail/:id" component={Detail} />
           <Route path="/o-projektu" component={AboutUs} />
-          <Route path="/pro-media" component={Media} />
           <Route component={Error} />
         </Switch>
       </div>
