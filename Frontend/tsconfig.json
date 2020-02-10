@@ -16,11 +16,11 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
+		"noEmit": true,
+		"baseUrl": "src",
     "jsx": "react"
   },
   "include": [
 		"src",
-		"types"
   ]
 }

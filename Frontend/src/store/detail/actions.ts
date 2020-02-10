@@ -1,35 +1,37 @@
 import {
-	Detail,
-	SET_DETAIL,
-	SET_LOADING_DETAIL_END,
-	SET_LOADING_DETAIL_START,
-	TOGGLE_SHOW_ALL_DONATIONS,
-	TOGGLE_SHOW_ALL_ROLES,
-	LOAD_DETAIL,
-} from "./types";
+  Detail,
+  SET_DETAIL,
+  SET_LOADING_DETAIL_END,
+  SET_LOADING_DETAIL_START,
+  TOGGLE_SHOW_ALL_DONATIONS,
+  TOGGLE_SHOW_ALL_ROLES,
+  LOAD_DETAIL,
+  DetailActionTypes,
+  LoadDetailAction,
+} from './types'
 
-export const setDetail = (detail: Detail) => ({
-	type: SET_DETAIL,
-	payload: detail,
-});
+export const setDetail = (detail: Detail): DetailActionTypes => ({
+  type: SET_DETAIL,
+  payload: detail,
+})
 
-export const loadingDetailStarted = () => ({
-	type: SET_LOADING_DETAIL_START,
-});
+export const loadingDetailStarted = (): DetailActionTypes => ({
+  type: SET_LOADING_DETAIL_START,
+})
 
-export const loadingDetailEnded = () => ({
-	type: SET_LOADING_DETAIL_END,
-});
+export const loadingDetailEnded = (): DetailActionTypes => ({
+  type: SET_LOADING_DETAIL_END,
+})
 
-export const toggleShowAllDonations = () => ({
+export const toggleShowAllDonations = (): DetailActionTypes => ({
   type: TOGGLE_SHOW_ALL_DONATIONS,
-});
+})
 
-export const toggleShowAllRoles = () => ({
+export const toggleShowAllRoles = (): DetailActionTypes => ({
   type: TOGGLE_SHOW_ALL_ROLES,
-});
+})
 
-export const loadDetail = (id: string) => ({
-	type: LOAD_DETAIL,
-	payload: id,
-});
+export const loadDetail = (id: string): LoadDetailAction => ({
+  type: LOAD_DETAIL,
+  payload: id,
+})

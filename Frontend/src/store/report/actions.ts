@@ -1,30 +1,34 @@
-import { SET_REPORT_MODAL_OPEN, SUBMIT_REPORT_MODAL, SubmitReportModalActionPayload } from "./types";
+import { SET_REPORT_MODAL_OPEN, SUBMIT_REPORT_MODAL, SubmitReportModalActionPayload, ReportActionTypes } from './types'
 
-export function openReportModal(title: string) {
+export function openReportModal(title: string): ReportActionTypes {
   return {
     type: SET_REPORT_MODAL_OPEN,
     payload: {
-			open: true,
-			title,
-		}
-  };
+      open: true,
+      title,
+    },
+  }
 }
 
-export function closeReportModal() {
+export function closeReportModal(): ReportActionTypes {
   return {
     type: SET_REPORT_MODAL_OPEN,
     payload: {
-			open: false,
-			title: '',
-		}
-  };
+      open: false,
+      title: '',
+    },
+  }
 }
 
-export const submitReportModal = ({description, email, title}: SubmitReportModalActionPayload) => ({
-	type: SUBMIT_REPORT_MODAL,
-	payload: {
-		description,
-		email,
-		title,
-	},
-});
+export const submitReportModal = ({
+  description,
+  email,
+  title,
+}: SubmitReportModalActionPayload): ReportActionTypes => ({
+  type: SUBMIT_REPORT_MODAL,
+  payload: {
+    description,
+    email,
+    title,
+  },
+})
