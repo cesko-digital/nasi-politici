@@ -36,10 +36,10 @@ namespace HlidacStatu.NasiPolitici.Services
 
             var wantedPersons =  people
                 .Where(p =>
-                    ci.IndexOf(p.asciiSurname, text, co) == 0
-                    || ci.IndexOf(p.asciiName, text, co) == 0
-                    || ci.IndexOf(p.asciiName + " " + p.asciiSurname, text, co) == 0
-                    || ci.IndexOf(p.asciiSurname + " " + p.asciiName, text, co) == 0)
+                    ci.IndexOf(p.asciiSurname, text, co) > 0
+                    || ci.IndexOf(p.asciiName, text, co) > 0
+                    || ci.IndexOf(p.asciiName + " " + p.asciiSurname, text, co) > 0
+                    || ci.IndexOf(p.asciiSurname + " " + p.asciiName, text, co) > 0)
                 .Select(p => new
                 {
                     p.id,
