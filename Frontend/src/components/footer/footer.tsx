@@ -72,14 +72,9 @@ const Footer: React.FC = () => {
                 <br />
                 dárcovského účtu TI
                 <br />
-                2100385154/2010 (Fio banka, a.s.)
-                <br />
-              </div>
-              <br />
-              <div>
-                Bankovní číslo provozního účtu TI
-                <br />
-                197958078/0300 (ČSOB, a.s.)
+                <a href="https://ib.fio.cz/ib/transparent?a=2100385154" rel="noopener noreferrer" target="_blank">
+                  2100385154/2010 (Fio banka, a.s.)
+                </a>
                 <br />
                 <br />
                 TI není plátcem DPH.
