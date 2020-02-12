@@ -34,7 +34,7 @@ export const hasInsolvency = createSelector(hasPersonalInsolvency, hasCompanyIns
 export const getFullName = (store: AppState): string => {
   const detail = getDetailData(store)
   const prefix = detail.namePrefix ? `${detail.namePrefix} ` : ''
-  const suffix = detail.nameSuffix ? `${detail.nameSuffix} ` : ''
+  const suffix = detail.nameSuffix ? ` ${detail.nameSuffix}` : ''
   return `${prefix}${detail.name} ${detail.surname}${suffix}`.trim() // TODO lip naformatovat
 }
 
