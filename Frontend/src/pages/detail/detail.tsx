@@ -19,6 +19,7 @@ import styles from './detail.module.scss'
 
 interface Props {
   birthYear: string
+  deathYear: string
   contact: string
   currentParty: string
   description: string
@@ -68,7 +69,12 @@ const Detail: React.FC<Props> = props => {
                 <div className={styles.initialsWrapper}>
                   <div className={styles.fullname}>{props.fullname}</div>
                   <div className={styles.personal}>
-                    {props.birthYear && <div className={styles.birthYear}>*{props.birthYear}</div>}
+                    {props.birthYear && (
+                      <div className={styles.birthYear}>
+                        *{props.birthYear}
+                        {props.deathYear && ` - ✝${props.deathYear}`}
+                      </div>
+                    )}
                     <div className={styles.divider}></div>
                     <div className={styles.currentParty}>{props.currentParty}</div>
                   </div>

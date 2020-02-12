@@ -44,6 +44,12 @@ export const getBirthYear = (store: AppState): string => {
   return new Date(birthDate).getFullYear().toString()
 }
 
+export const getDeathYear = (store: AppState): string => {
+  const { deathDate } = getDetailData(store)
+  if (!deathDate) return ''
+  return new Date(deathDate).getFullYear().toString()
+}
+
 export const getCurrentParty = (store: AppState): string => {
   const { currentParty } = getDetailData(store)
   return currentParty

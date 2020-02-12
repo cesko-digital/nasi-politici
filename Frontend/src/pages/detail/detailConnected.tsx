@@ -2,12 +2,13 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { loadDetail } from 'store/detail/actions'
 import {
-  getFullName,
   getBirthYear,
-  isDetailLoading,
-  getDescription,
   getCurrentParty,
+  getDeathYear,
+  getDescription,
+  getFullName,
   getPhotoUrl,
+  isDetailLoading,
 } from 'store/detail/selectors'
 
 import Detail from './detail'
@@ -15,6 +16,7 @@ import { AppState } from 'store'
 
 interface StateProps {
   birthYear: string
+  deathYear: string
   currentParty: string
   description: string
   fullname: string
@@ -24,6 +26,7 @@ interface StateProps {
 
 const mapStateToProps = createStructuredSelector<AppState, StateProps>({
   birthYear: getBirthYear,
+  deathYear: getDeathYear,
   currentParty: getCurrentParty,
   description: getDescription,
   fullname: getFullName,
