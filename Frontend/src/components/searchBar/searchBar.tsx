@@ -40,7 +40,7 @@ const SearchBar: React.FC<Props> = ({ form, setSearchQuery, search, query, wrapp
         ></input>
         <button type="submit" className={styles.searchBtn}>
           <Search className={styles.icon} />
-          <span className={styles.noIcon}>Hledat Politika/čku</span>
+          <span className={styles.noIcon}>Hledat</span>
         </button>
       </div>
     </form>
