@@ -18,7 +18,7 @@ const Homepage: React.FC<Props> = props => {
           <div className={styles.intro}>
             <img src={logo} alt={logo} className={styles.logo} />
             <div className={styles.perex}>
-              Mapujeme stav korupce v ČR a aktivně přispíváme k jejímu omezování. Hledejte političky a politiky.
+              Největší otevřená databáze českých politiků a političek. Zjistěte si, kdo vám vládne.
             </div>
           </div>
         )}
