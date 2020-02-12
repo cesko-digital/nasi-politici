@@ -36,7 +36,7 @@ const SearchBar: React.FC<Props> = ({ form, setSearchQuery, search, query, wrapp
           className={styles.input}
           onChange={onChange}
           value={query}
-          placeholder="Markéta Adamová"
+          placeholder="Jméno Příjmení"
         ></input>
         <button type="submit" className={styles.searchBtn}>
           <Search className={styles.icon} />
