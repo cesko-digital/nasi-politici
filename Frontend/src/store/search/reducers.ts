@@ -1,4 +1,4 @@
-import { SET_SEARCH_QUERY, SET_SEARCH_RESULTS, SearchState, SearchActionTypes } from './types'
+import { SET_SEARCH_QUERY, SET_SEARCH_RESULTS, RESET_SEARCH_QUERY, SearchState, SearchActionTypes } from './types'
 
 const initialState: SearchState = {
   query: '',
@@ -18,6 +18,11 @@ export function searchReducer(state = initialState, action: SearchActionTypes): 
       return {
         ...state,
         ...action.payload,
+      }
+    }
+    case RESET_SEARCH_QUERY: {
+      return {
+        ...initialState,
       }
     }
     default:

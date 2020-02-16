@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Footer from './components/footer/footer'
-import Header from './components/header/header'
+import Header from './components/header/headerConnected'
 import AboutUs from './pages/about/about'
 import Detail from './pages/detail/detailConnected'
 import Error from './pages/error'

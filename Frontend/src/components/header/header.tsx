@@ -7,7 +7,11 @@ import { ReactComponent as Search } from 'assets/images/searchIcon.svg'
 
 import styles from './header.module.scss'
 
-const Header: React.FC = () => {
+interface Props {
+  onLogoClick: () => {}
+}
+
+const Header: React.FC<Props> = props => {
   const [openMenu, setOpenMenu] = React.useState(false)
   const [openSearch, setOpenSearch] = React.useState(false)
   const match = useRouteMatch('/')
@@ -23,7 +27,7 @@ const Header: React.FC = () => {
       <div className={classnames(openSearch && styles.mobileSearch, styles.wrapper)}>
         <div className={styles.navigation}>
           {match && !match.isExact && (
-            <Link to="/" className={styles.logoLink}>
+            <Link to="/" className={styles.logoLink} onClick={props.onLogoClick}>
               <div className={styles.logo} />
             </Link>
           )}
