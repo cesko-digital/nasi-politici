@@ -10,6 +10,7 @@ import styles from './rolesWidget.module.scss'
 
 interface TableRowProps {
   name: string
+  from: string
   value: string
 }
 
@@ -18,7 +19,10 @@ const TableRow: React.FC<TableRowProps> = props => {
     <React.Fragment>
       <div className={styles.tableRow}>
         <div className={styles.name}>{props.name}</div>
-        <div className={styles.value}>{props.value}</div>
+        <div className={styles.valueWrapper}>
+          <div className={styles.value}>{props.value}</div>
+          <div className={styles.from}>od {props.from}</div>
+        </div>
       </div>
     </React.Fragment>
   )
@@ -29,6 +33,7 @@ interface RolesProps {
     year: number
     items: Array<{
       role: string
+      dateFrom: string
       organisation: string
     }>
   }>
@@ -49,7 +54,7 @@ const Roles: React.FC<RolesProps> = ({ rolesGroups, showAll, rolesCount, toggleS
               <div className={styles.line} />
             </div>
             {group.items.map((item, index) => (
-              <TableRow name={item.role} value={item.organisation} key={index} />
+              <TableRow name={item.role} from={item.dateFrom} value={item.organisation} key={index} />
             ))}
           </div>
         )

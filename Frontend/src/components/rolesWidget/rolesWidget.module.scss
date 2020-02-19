@@ -54,8 +54,13 @@
   }
   .name {
     max-width: 40%;
-    min-width: 40%;
-  }
+		min-width: 40%;
+		text-transform: capitalize;
+	}
+	.from {
+		@include smallText;
+		color: $clLightGray;
+	}
 }
 .more,
 .less {
@@ -124,5 +129,21 @@
 @media screen and (max-width: 650px) {
   .widget {
     width: $widgetFluid;
-  }
+	}
+	.widgetWithTable {
+		.tableSection {
+			margin-bottom: 20px;
+			padding: 0 30px;
+		}
+		.tableRow {
+			flex-direction: column;
+		}
+		.value {
+			@include smallText;
+		}
+		.from {
+			@include smallText;
+			color: $clLightGray;
+		}
+	}
 }
