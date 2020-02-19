@@ -1,4 +1,5 @@
 import * as React from 'react'
+import Helmet from 'react-helmet'
 import { Route, Switch } from 'react-router-dom'
 import Footer from './components/footer/footer'
 import Header from './components/header/headerConnected'
@@ -13,6 +14,9 @@ import './App.scss'
 const App: React.FC = () => {
   return (
     <div className="App">
+      <Helmet>
+        <title>Naši Politici</title>
+      </Helmet>
       <div className="banner-beta">Jedná se o testovací web s testovacími daty.</div>
       <Header />
       <div className="body">
