@@ -100,7 +100,7 @@ export const getDonations = createSelector(getDonationsRaw, getShowAllDonations,
 export const getRoles = createSelector(getRolesRaw, getShowAllRoles, (roles, showAll) => {
   let rolesMap = roles.map(role => ({
     ...role,
-    dateFrom: role.dateFrom.substring(0, 4),
+    dateFrom: role.dateFrom ? role.dateFrom.substring(0, 4) : '',
     year: role.dateTo ? +role.dateTo.substring(0, 4) : 9999,
   }))
   if (!showAll) {

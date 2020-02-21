@@ -21,7 +21,7 @@ const TableRow: React.FC<TableRowProps> = props => {
         <div className={styles.name}>{props.name}</div>
         <div className={styles.valueWrapper}>
           <div className={styles.value}>{props.value}</div>
-          <div className={styles.from}>od {props.from}</div>
+          {props.from && <div className={styles.from}>od {props.from}</div>}
         </div>
       </div>
     </React.Fragment>

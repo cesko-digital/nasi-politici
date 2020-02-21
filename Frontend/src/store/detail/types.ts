@@ -8,7 +8,7 @@ export interface Insolvency {
 }
 
 export interface Role {
-  dateFrom: string
+  dateFrom: string | null
   dateTo: string | null
   organisation: string
   role: string
