@@ -9,7 +9,14 @@
 }
 .title {
   @include headerTitle;
+  margin-bottom: 8px;
+}
+.subTitle {
+  @include condensedTitle;
   margin-bottom: 15px;
+}
+.textBlock {
+  margin-bottom: 50px;
 }
 
 @media screen and (max-width: 1169px) {
