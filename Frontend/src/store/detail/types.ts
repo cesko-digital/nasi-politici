@@ -53,6 +53,7 @@ export interface Detail {
   sponsor: Sponsor[]
   status: string
   surname: string
+  valid?: boolean
 }
 
 export interface DetailState {
