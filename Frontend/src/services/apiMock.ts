@@ -176,6 +176,7 @@ const api: API = {
       { party: 'ANO', donatedAmount: 50000.0, year: 2018, source: 'https://udhpsh.cz/5290-2/' },
       { party: 'ANO', donatedAmount: 19400.0, year: 2018, source: 'https://udhpsh.cz/5290-2/' },
     ],
+    valid: true,
     currentParty: 'KSČ',
   }),
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -9,8 +9,8 @@ export const isDetailLoading = (store: AppState): boolean => store.detail.loadin
 export const getPhotoUrl = (store: AppState): string => getDetailData(store).photo
 export const getShowAllDonations = (store: AppState): boolean => store.detail.showAllDonations
 export const getShowAllRoles = (store: AppState): boolean => store.detail.showAllRoles
-export const getPersonalInsolvency = (store: AppState): Insolvency => getDetailData(store).insolvencyPerson
-export const getCompanyInsolvency = (store: AppState): Insolvency => getDetailData(store).insolvencyCompany
+export const getPersonalInsolvency = (store: AppState): Insolvency => getDetailData(store).insolvencyPerson || {}
+export const getCompanyInsolvency = (store: AppState): Insolvency => getDetailData(store).insolvencyCompany || {}
 export const hasInsolvencyData = createSelector(getPersonalInsolvency, getCompanyInsolvency, (personal, company) => {
   return Object.entries(personal).length !== 0 && Object.entries(company).length !== 0
 })
@@ -58,7 +58,7 @@ export const getCurrentParty = (store: AppState): string => {
 export const getDescription = (store: AppState): string => {
   return getDetailData(store).description
 }
-export const getRolesRaw = (store: AppState): Role[] => getDetailData(store).roles
+export const getRolesRaw = (store: AppState): Role[] => getDetailData(store).roles || []
 export const getRolesCount = (store: AppState): number => getRolesRaw(store).length
 
 export const getDonationsRaw = (store: AppState): Sponsor[] => getDetailData(store).sponsor || []
