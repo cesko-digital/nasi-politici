@@ -51,9 +51,6 @@ const Header: React.FC<Props> = props => {
             <Link to="/o-projektu" className={styles.link}>
               O projektu
             </Link>
-            <Link to="/pro-media" className={styles.link}>
-              Pro média
-            </Link>
           </div>
         </div>
         {match && !match.isExact && <SearchBar form={styles.form} wrapperClassname={styles.headerSearchBar} />}
