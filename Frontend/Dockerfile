@@ -1,8 +1,8 @@
 FROM node:12.14
 WORKDIR /user/src/app/
 
-COPY package.json package.json
-RUN yarn install
+COPY package.json yarn.lock .
+RUN yarn run install
 
 COPY --chown=node:node . .
 
@@ -10,4 +10,4 @@ RUN yarn build
 
 EXPOSE 5001
 
-CMD ["npm", "start"]
+CMD ["yarn", "run", "start"]
