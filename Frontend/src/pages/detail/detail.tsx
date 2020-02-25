@@ -1,7 +1,14 @@
 import * as React from 'react'
 import classnames from 'classnames'
 import Helmet from 'react-helmet'
-import { ReactComponent as ShareBtn } from 'assets/images/share.svg'
+import {
+  FacebookShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  TwitterShareButton,
+  LinkedinIcon,
+  LinkedinShareButton,
+} from 'react-share'
 import { ReactComponent as ReportBtn } from 'assets/images/report.svg'
 import { ReactComponent as Divider } from 'assets/images/detailDivider.svg'
 import NoData from 'components/emptyStates/noData/noData'
@@ -80,8 +87,15 @@ const Detail: React.FC<Props> = props => {
                   </div>
                 </div>
                 <div className={styles.shareWrapper}>
-                  <ShareBtn className={styles.shareIcon} />
-                  <div className={styles.shareBtn}>Sdílet</div>
+                  <FacebookShareButton className={styles.shareBtn} url={window.location.href}>
+                    <FacebookIcon round size={30} />
+                  </FacebookShareButton>
+                  <TwitterShareButton className={styles.shareBtn} url={window.location.href}>
+                    <TwitterIcon round size={30} />
+                  </TwitterShareButton>
+                  <LinkedinShareButton className={styles.shareBtn} url={window.location.href}>
+                    <LinkedinIcon round size={30} />
+                  </LinkedinShareButton>
                 </div>
               </div>
             </div>

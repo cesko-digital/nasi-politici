@@ -78,18 +78,9 @@
   display: flex;
   align-content: center;
 }
-.shareIcon {
-  width: 24px;
-}
-.shareBtn {
-  @include linkBtn;
-  margin-left: 8px;
-  color: $clPrimary;
-  text-transform: capitalize;
 
-  &:after {
-    background-color: $clPrimary;
-  }
+.shareBtn {
+	margin-left: 5px;
 }
 
 .menuWrapper {
