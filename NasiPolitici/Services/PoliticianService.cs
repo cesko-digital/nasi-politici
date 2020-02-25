@@ -25,11 +25,7 @@ namespace HlidacStatu.NasiPolitici.Services
 
         public async Task<string> SearchPeople(string text)
         {
-            var people = await _cache.GetOrCreateAsync<IEnumerable<PersonDTO>>(_peopleCacheKey, entry =>
-            {
-                entry.SetAbsoluteExpiration(CacheDuration);
-                return LoadPeople();
-            });
+            var people = await GetCachedPeople();
 
             CompareInfo ci = CultureInfo.InvariantCulture.CompareInfo;
             CompareOptions co = CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace;
@@ -54,6 +50,13 @@ namespace HlidacStatu.NasiPolitici.Services
             return JsonConvert.SerializeObject(wantedPersons);
         }
 
+        public async Task<int> GetPeopleCount()
+        {
+            var people = await GetCachedPeople();
+
+            return people.Count();
+        }
+
         private async Task<IEnumerable<PersonDTO>> LoadPeople()
         {
             var uri = "nasipolitici_getlist";
@@ -67,6 +70,17 @@ namespace HlidacStatu.NasiPolitici.Services
             var uri = $"nasipolitici_getdata?id={HttpUtility.UrlEncode(id)}";
             var result = await _httpClient.GetStringAsync(uri);
             return result;
+        }
+
+        private async Task<IEnumerable<PersonDTO>> GetCachedPeople()
+        {
+            var people = await _cache.GetOrCreateAsync<IEnumerable<PersonDTO>>(_peopleCacheKey, entry =>
+            {
+                entry.SetAbsoluteExpiration(CacheDuration);
+                return LoadPeople();
+            });
+
+            return people;
         }
 
         class PersonDTO

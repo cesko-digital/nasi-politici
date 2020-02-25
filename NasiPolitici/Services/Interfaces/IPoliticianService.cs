@@ -6,5 +6,6 @@ namespace HlidacStatu.NasiPolitici.Services
     {
         Task<string> GetPerson(string id);
         Task<string> SearchPeople(string text);
+        Task<int> GetPeopleCount();
     }
 }
