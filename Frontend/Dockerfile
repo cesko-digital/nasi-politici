@@ -2,11 +2,11 @@ FROM node:12.14
 WORKDIR /user/src/app/
 
 COPY package.json yarn.lock .
-RUN yarn run install
+RUN yarn install
 
 COPY --chown=node:node . .
 
-RUN yarn build
+RUN yarn run build
 
 EXPOSE 5001
 
