@@ -28,7 +28,7 @@ vystup zobrazi cestu, kam to vybuildil.
 
 V browseru pak stačí zadat následující adresu http://localhost:5001/
 
-priklad:
+Příklad:
 
 search `https://localhost:5001/person/search/babis`
 
@@ -36,7 +36,7 @@ detail `https://localhost:5001/person/detail/andrej-babis`
 
 ## Způsob otevření projektu
 
-Ve vašem oblíbeném textovém editoru, případně IDE si otevřete stažený Git repozitář. Zdrojové kódy jsou ve složce NasiPolitici.
+Ve vašem oblíbeném textovém editoru, případně IDE si otevřete stažený Git repozitář.
 
 ## Env variables
 
@@ -44,4 +44,4 @@ Ve vašem oblíbeném textovém editoru, případně IDE si otevřete stažený 
  - /Frontend/.env pro base addresu (jeho vzor je v `/Frontend/.env-example`)
  
 ### Monitora-backend
- - /Monitora-backend/app/data/token.py pro token ke sluzbe Monitory
+ - /Monitora-backend/app/data/token.py pro token ke službě Monitory

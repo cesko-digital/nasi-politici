@@ -8,3 +8,10 @@ You can **start the application in 2 ways:
 **OR**
 
 * To use **mock data**, set up your .evn file with `REACT_APP_USE_API_MOCK=1`
+
+**OR by Docker**
+
+```
+docker build -t nasi-politici .
+docker run -ti --rm -p 5001:5001 nasi-politici
+```
