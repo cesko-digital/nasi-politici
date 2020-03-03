@@ -42,6 +42,7 @@ namespace HlidacStatu.NasiPolitici.Services
                     p.name,
                     p.surname,
                     p.birthYear,
+                    p.deathYear,
                     p.currentParty,
                     p.eventCount
                 })
@@ -91,6 +92,7 @@ namespace HlidacStatu.NasiPolitici.Services
             public string asciiName { get; set; }
             public string asciiSurname { get; set; }
             public string birthYear { get; set; }
+            public string deathYear { get; set; }
             public string currentParty { get; set; }
             public int? eventCount { get; set; }
         }
