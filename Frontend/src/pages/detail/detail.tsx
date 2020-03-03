@@ -87,6 +87,7 @@ const Detail: React.FC<Props> = props => {
                   </div>
                 </div>
                 <div className={styles.shareWrapper}>
+                  <div className={styles.shareText}>Sdílet</div>
                   <FacebookShareButton className={styles.shareBtn} url={window.location.href}>
                     <FacebookIcon round size={30} />
                   </FacebookShareButton>

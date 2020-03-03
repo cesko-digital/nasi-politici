@@ -45,13 +45,12 @@ function* handleLoadDetail(action: ReturnType<typeof loadDetail>): SagaIterator 
   yield put(loadingDetailStarted())
   try {
     const detail: Detail = yield call(api.fetchDetail, action.payload)
-    console.log(detail)
     if (detail.valid !== false) {
       yield put(setDetail(detail))
       yield call(loadDemagog, action.payload)
       yield call(loadNews, detail)
     } else {
-      console.log('error')    
+      console.log('error')
     }
   } catch (error) {
     console.error('error', error)
