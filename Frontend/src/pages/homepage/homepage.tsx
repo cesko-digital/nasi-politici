@@ -8,9 +8,15 @@ import logo from 'assets/images/logo-np.svg'
 
 export interface Props {
   wasSearched: boolean
+  profilesCount: number
+  onEnter: () => void
 }
 
 const Homepage: React.FC<Props> = props => {
+  const { onEnter, profilesCount } = props
+  React.useEffect(() => {
+    !profilesCount && onEnter()
+  }, [onEnter, profilesCount])
   return (
     <div className={styles.homepage}>
       <div className={styles.wrapper}>
@@ -19,6 +25,7 @@ const Homepage: React.FC<Props> = props => {
             <img src={logo} alt={logo} className={styles.logo} />
             <div className={styles.perex}>
               Největší otevřená databáze českých politiků a političek. Zjistěte si, kdo vám vládne.
+              {!!profilesCount && <div>Aktuálně zde najdete {profilesCount} profilů.</div>}
             </div>
           </div>
         )}

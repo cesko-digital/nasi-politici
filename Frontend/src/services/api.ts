@@ -6,6 +6,10 @@ const api: API = {
     const response = await axios.get(`${process.env.REACT_APP_BASE_API_URL}/api/v1/person/search/${query}`)
     return response.data
   },
+  fetchProfileCount: async () => {
+    const response = await axios.get(`${process.env.REACT_APP_BASE_API_URL}/api/v1/person/count`)
+    return response.data
+  },
   fetchDetail: async id => {
     const response = await axios.get(`${process.env.REACT_APP_BASE_API_URL}/api/v1/person/detail/${id}`)
     return response.data

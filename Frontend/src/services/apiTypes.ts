@@ -101,6 +101,7 @@ export interface ArticleResponse {
 
 export interface API {
   search: (query: string) => SearchResult[] | Promise<SearchResult[]>
+  fetchProfileCount: () => number | Promise<number>
   fetchDetail: (id: string) => Detail | Promise<Detail>
   fetchDemagog: (id: string) => DemagogResponse | Promise<DemagogResponse>
   fetchNews: (fullName: string, party: string, searchQuery: string) => ArticleResponse | Promise<ArticleResponse>

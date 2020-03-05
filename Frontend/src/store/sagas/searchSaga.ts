@@ -1,8 +1,8 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects'
 import { SagaIterator } from 'redux-saga'
 
-import { SEARCH, SET_SEARCH_QUERY } from 'store/search/types'
-import { setSearchResults } from 'store/search/actions'
+import { SEARCH, SET_SEARCH_QUERY, ON_HOMEPAGE_ENTER } from 'store/search/types'
+import { setSearchResults, setProfilesCount } from 'store/search/actions'
 import { getSearchQuery } from 'store/search/selectors'
 import API from 'services/api'
 import API_MOCK from 'services/apiMock'
@@ -27,8 +27,19 @@ function* handleSearch(): SagaIterator {
   }
 }
 
+function* handleHomepageEnter(): SagaIterator {
+  try {
+    const count: number = yield call(api.fetchProfileCount)
+    yield put(setProfilesCount(count))
+  } catch (error) {
+    yield put(setProfilesCount(0))
+    // TODO asi vymyslet nejaky jednotny error handling idealne i s designem
+  }
+}
+
 function* searchSaga(): SagaIterator {
   yield takeLatest([SEARCH, SET_SEARCH_QUERY], handleSearch)
+  yield takeLatest([ON_HOMEPAGE_ENTER], handleHomepageEnter)
 }
 
 export default searchSaga
