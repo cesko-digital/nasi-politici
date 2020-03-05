@@ -90,6 +90,7 @@ const InsolvencyWidget: React.FC<Props> = ({
       {hasInsolvencyData && !hasInsolvency && <ZeroValue title="Politik není věřitelem ani dlužníkem" />}
       {!!hasInsolvency && (
         <React.Fragment>
+          <div className={styles.description}>Počet případů insolvence, ve kterých politik figuruje:</div>
           <InsolvencyRow
             title="věřitelem"
             personalCount={personalInsolvency.creditorCount}
