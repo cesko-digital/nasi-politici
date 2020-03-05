@@ -3,6 +3,7 @@ export interface Result {
   name: string
   surname: string
   birthYear: string
+  deathYear: string | null
   currentParty: string | null
 }
 

@@ -10,6 +10,7 @@ interface StateProps {
     name: string
     surname: string
     birthYear: string
+    deathYear: string | null
     currentParty: string | null
   }>
   wasSearched: boolean
