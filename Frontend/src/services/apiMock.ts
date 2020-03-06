@@ -69,6 +69,10 @@ const api: API = {
   ],
   fetchProfileCount: () => 10,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  sendEmail: (subject, text) => {
+    return
+  },
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   fetchDetail: id => ({
     id: 'andrej-babis',
     namePrefix: '',

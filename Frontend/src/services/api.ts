@@ -28,6 +28,9 @@ const api: API = {
     const response = await axios.get(`${process.env.REACT_APP_BASE_API_URL}/api/v1/demagog/${id}`)
     return response.data
   },
+  sendEmail: async (subject: string, text: string) => {
+    axios.post(`${process.env.REACT_APP_BASE_API_URL}/api/v1/mail`, { subject, text })
+  },
 }
 
 export default api
