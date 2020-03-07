@@ -45,15 +45,10 @@ function* handleLoadDetail(action: ReturnType<typeof loadDetail>): SagaIterator 
   yield put(loadingDetailStarted())
   try {
     const detail: Detail = yield call(api.fetchDetail, action.payload)
-    if (detail.valid !== false) {
-      yield put(setDetail(detail))
-      yield call(loadDemagog, action.payload)
-      yield call(loadNews, detail)
-    } else {
-      console.log('error')
-    }
+    yield put(setDetail(detail))
+    yield call(loadDemagog, action.payload)
+    yield call(loadNews, detail)
   } catch (error) {
-    console.error('error', error)
     // TODO asi vymyslet nejaky jednotny error handling idealne i s designem
   }
   yield put(loadingDetailEnded())

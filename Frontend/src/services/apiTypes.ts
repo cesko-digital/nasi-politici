@@ -41,6 +41,7 @@ export interface Detail {
   currentParty: string
   deathDate: string | null
   description: string
+  error?: Object
   id: string
   insolvencyCompany: Insolvency
   insolvencyPerson: Insolvency
@@ -53,7 +54,6 @@ export interface Detail {
   sponsor: Sponsor[]
   status: string
   surname: string
-  valid?: boolean
 }
 
 export interface SearchResult {

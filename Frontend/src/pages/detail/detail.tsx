@@ -21,6 +21,7 @@ import DemagogWidget from 'components/demagogWidget/demagogWidgetConnected'
 import ContactsWidget from 'components/contactsWidget/contactsWidgetConnected'
 import ProfilePicture from 'components/profilePicture/profilePicture'
 import ReportModalTrigger from 'components/reportModal/reportModalTriggerConnected'
+import Error from 'pages/error/error'
 
 import styles from './detail.module.scss'
 
@@ -40,6 +41,7 @@ interface Props {
     }
   }
   photoUrl: string
+  isValid?: boolean
 }
 
 const Detail: React.FC<Props> = props => {
@@ -60,11 +62,11 @@ const Detail: React.FC<Props> = props => {
 
   const engageWidgetCustomClassNames = classnames(styles.widget, styles.engage, !props.engagement && styles.noData)
   const aboutWidgetCustomClassNames = classnames(styles.widget, !props.description && styles.noData)
-
   return (
     <div className={styles.detail}>
       {props.isLoading && <LoadingBar />}
-      {!props.isLoading && (
+      {!props.isLoading && !props.isValid && <Error />}
+      {!props.isLoading && props.isValid && (
         <React.Fragment>
           <Helmet>
             <title>{props.fullname} | Naši Politici</title>
