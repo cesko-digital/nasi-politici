@@ -15,6 +15,7 @@ const Header: React.FC<Props> = props => {
   const [openMenu, setOpenMenu] = React.useState(false)
   const [openSearch, setOpenSearch] = React.useState(false)
   const match = useRouteMatch('/')
+  const matchAboutUs = useRouteMatch('/o-projektu')
   const matchDetail = useRouteMatch('/detail/:id')
 
   const showMobileSearch = (): void => {
@@ -48,9 +49,10 @@ const Header: React.FC<Props> = props => {
                 </React.Fragment>
               )}
               <div className={classnames(styles.links, openMenu && styles.openMenu)}>
-                <Link to="/o-projektu" className={styles.link}>
-                  O projektu
-                </Link>
+                {!matchAboutUs && (
+                  <Link to="/o-projektu" className={styles.link}>
+                    O projektu
+                  </Link>)}
               </div>
             </div>
             {match && !match.isExact && <SearchBar form={styles.form} wrapperClassname={styles.headerSearchBar} />}
