@@ -63,7 +63,7 @@
   border-top: 1px solid $clLight;
 }
 .bottomWrapper {
-  margin: 0 auto;
+  margin: 12px auto 0;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -98,10 +98,17 @@
     background-color: #fff;
   }
 }
-.logo {
-  margin-top: 12px;
-}
+.aboutUsLink {
+  @include linkBtn;
+  display: flex;
+  align-items: center;
+  color: $clLightGrayText;
+  white-space: nowrap;
 
+  &:after {
+    background-color: #fff;
+  }
+}
 @media screen and (max-width: 1169px) {
   .top,
   .bottomWrapper {

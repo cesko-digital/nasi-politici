@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { Link } from 'react-router-dom'
 import classnames from 'classnames'
 import { ReactComponent as FBLogo } from 'assets/images/social-fb.svg'
 import { ReactComponent as TWLogo } from 'assets/images/social-tw.svg'
@@ -99,6 +100,9 @@ const Footer: React.FC = () => {
       </div>
       <div className={styles.bottom}>
         <div className={styles.bottomWrapper}>
+          <Link to="/o-projektu" className={styles.aboutUsLink}>
+            O projektu
+          </Link>
           <LogoNP className={classnames(styles.logoNP, styles.logo)} />
         </div>
       </div>
