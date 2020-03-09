@@ -11,6 +11,21 @@ namespace HlidacStatu.NasiPolitici.Controllers
     [Route("api/v1/person")]
     public class PersonController : Controller
     {
+        class HlidacErrorMsg
+        {
+            //   {"valid":false,"value":null,"error":{"number":404,"description":"Politik not found","errorDetail":null}}
+            public bool? Valid { get; set; }
+            public string Value { get; set; }
+            public HlidacError Error { get; set; }
+        }
+
+        class HlidacError
+        {
+            public int Number { get; set; }
+            public string Description { get; set; }
+            public string ErrorDetail { get; set; }
+        }
+
         private static readonly TimeSpan CacheDuration = TimeSpan.FromHours(4);
 
         private readonly IPoliticianService _politicianService;
@@ -33,9 +48,15 @@ namespace HlidacStatu.NasiPolitici.Controllers
         [Route("detail/{id}")]
         public async Task<IActionResult> Detail(string id)
         {
-            var result = CacheAsync(() => _politicianService.GetPerson(id));
+            var result = await CacheAsync(() => _politicianService.GetPerson(id));
 
-            return Content(await result, MediaTypeNames.Application.Json);
+            var parsed = Newtonsoft.Json.JsonConvert.DeserializeObject<HlidacErrorMsg>(result);
+            if (parsed.Valid == false)
+            {
+                return NotFound(parsed.Error.Description);
+            }
+
+            return Content(result, MediaTypeNames.Application.Json);
         }
 
         [Route("count")]
