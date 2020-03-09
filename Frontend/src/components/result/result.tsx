@@ -11,10 +11,11 @@ interface ResultRowProps {
   name: string
   surname: string
   birthYear: string
+  deathYear: string | null
   currentParty: string | null
 }
 
-const ResultRow: React.FC<ResultRowProps> = ({ id, name, surname, birthYear, currentParty }) => {
+const ResultRow: React.FC<ResultRowProps> = ({ id, name, surname, birthYear, currentParty, deathYear }) => {
   return (
     <Link className={styles.resultRow} to={`/detail/${id}`}>
       <div className={styles.resultItem}>
@@ -27,7 +28,12 @@ const ResultRow: React.FC<ResultRowProps> = ({ id, name, surname, birthYear, cur
               {name} {surname}
             </div>
             <div className={styles.initialsWrapper}>
-              {birthYear && <div className={styles.birthYear}>*{birthYear}</div>}
+              {birthYear && (
+                <div className={styles.birthYear}>
+                  *{birthYear}
+                  {deathYear && ` - ✝${deathYear}`}
+                </div>
+              )}
               <div className={styles.divider} />
               {currentParty && <div className={styles.currentParty}>{currentParty}</div>}
             </div>

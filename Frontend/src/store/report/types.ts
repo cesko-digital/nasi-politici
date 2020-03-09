@@ -17,7 +17,7 @@ export interface SubmitReportModalActionPayload {
   title: string
 }
 
-interface SubmitReportModalAction {
+export interface SubmitReportModalAction {
   type: typeof SUBMIT_REPORT_MODAL
   payload: SubmitReportModalActionPayload
 }

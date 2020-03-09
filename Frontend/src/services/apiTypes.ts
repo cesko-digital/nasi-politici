@@ -41,6 +41,7 @@ export interface Detail {
   currentParty: string
   deathDate: string | null
   description: string
+  error?: Object
   id: string
   insolvencyCompany: Insolvency
   insolvencyPerson: Insolvency
@@ -53,7 +54,6 @@ export interface Detail {
   sponsor: Sponsor[]
   status: string
   surname: string
-  valid?: boolean
 }
 
 export interface SearchResult {
@@ -61,6 +61,7 @@ export interface SearchResult {
   name: string
   surname: string
   birthYear: string
+  deathYear: string | null
   currentParty: string | null
 }
 
@@ -100,7 +101,9 @@ export interface ArticleResponse {
 
 export interface API {
   search: (query: string) => SearchResult[] | Promise<SearchResult[]>
+  fetchProfileCount: () => number | Promise<number>
   fetchDetail: (id: string) => Detail | Promise<Detail>
   fetchDemagog: (id: string) => DemagogResponse | Promise<DemagogResponse>
   fetchNews: (fullName: string, party: string, searchQuery: string) => ArticleResponse | Promise<ArticleResponse>
+  sendEmail: (subject: string, text: string) => void
 }

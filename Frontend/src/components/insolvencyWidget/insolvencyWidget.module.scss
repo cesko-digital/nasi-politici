@@ -85,10 +85,14 @@
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background-color: #F2F2F2;
+	background-color: #F2F2F2;
+	cursor: pointer;
 }
 .reportBtn {
   transform: scale(.6);
+}
+.description {
+	margin-bottom: 17px;
 }
 
 @media screen and (max-width: 650px) {

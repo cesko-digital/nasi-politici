@@ -13,7 +13,7 @@ const Trigger: React.FC<Props> = ({ modalTitle, children, openReportModal, class
   }, [modalTitle, openReportModal])
 
   return (
-    <div className={className} onClick={onClick}>
+    <div className={className} onClick={onClick} title="Nahlásit chybu">
       {children}
     </div>
   )

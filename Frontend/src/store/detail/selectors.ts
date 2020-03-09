@@ -31,6 +31,10 @@ export const hasInsolvency = createSelector(hasPersonalInsolvency, hasCompanyIns
   return personal || company
 })
 
+export const getIsValid = createSelector(getDetailData, detail => {
+  return !!detail.source
+})
+
 export const getFullName = (store: AppState): string => {
   const detail = getDetailData(store)
   const prefix = detail.namePrefix ? `${detail.namePrefix} ` : ''

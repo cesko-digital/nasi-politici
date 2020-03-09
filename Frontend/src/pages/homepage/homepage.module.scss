@@ -30,6 +30,12 @@
 }
 
 @media screen and (max-width: 650px) {
+  .homepage {
+    padding-bottom: 72px;
+  }
+  .intro {
+    margin: 72px 30px 0 30px;
+  }
   .searchWrapper {
     margin: 24px 20px;
   }

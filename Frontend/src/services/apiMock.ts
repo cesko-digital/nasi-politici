@@ -8,6 +8,7 @@ const api: API = {
       name: 'Pavel',
       surname: 'Andrejkiv',
       birthYear: '1972',
+      deathYear: null,
       photo: 'https://www.hlidacstatu.cz/Photo/pavel-andrejkiv',
       description:
         'Pavel Andrejkiv (*1972 ),zastupitel (od 2014)  - Zastupitelstvo města Karlových Varů\nradní (od 2015)  - Rada města Karlových Varů.4 firem, ve kterých se angažuje, v roce 2019 získaly zakázky za celkem 12 mil. Kč.',
@@ -18,6 +19,7 @@ const api: API = {
       name: 'Andrej',
       surname: 'Babiš',
       birthYear: '1954',
+      deathYear: null,
       photo: 'https://www.hlidacstatu.cz/Photo/andrej-babis',
       description:
         'Andrej Babiš (*1954 ),poslanec (od 2017)  - Poslanecká sněmovna PČR (2017 - 2021)\nposlanec (od 2013 do 2017)  - Poslanecká sněmovna PČR (2013 - 2017).Andrej Babiš mezi roky 2012-18 sponzoroval 2 polit. strany v celkové výši 19 mil. Kč. Nejvyšší sponzorský dar byl ve výši 3 mil. Kč.204 firem, ve kterých se angažuje, v roce 2019 získaly zakázky za celkem 20 mld. Kč.',
@@ -28,6 +30,7 @@ const api: API = {
       name: 'Andrej',
       surname: 'Gjurič',
       birthYear: '1938',
+      deathYear: null,
       photo: 'https://www.hlidacstatu.cz/Photo/andrej-gjuric',
       description: 'Andrej Gjurič (*1938 )',
       currentParty: null,
@@ -37,6 +40,7 @@ const api: API = {
       name: 'Andrej',
       surname: 'Grega',
       birthYear: '1950',
+      deathYear: null,
       photo: 'https://www.hlidacstatu.cz/Photo/andrej-grega',
       description:
         'Andrej Grega (*1950 )Je angažován v 2 firmách, které v roce 2019 získaly zakázky za celkem 17 mil. Kč.Andrej Grega v roce 2014 sponzoroval ČSSD v celkové výši 20 000  Kč. Nejvyšší sponzorský dar byl ve výši 20 000  Kč.',
@@ -47,6 +51,7 @@ const api: API = {
       name: 'Andrej',
       surname: 'Kiska',
       birthYear: '1963',
+      deathYear: null,
       photo: 'https://www.hlidacstatu.cz/Photo/andrej-kiska',
       description: 'Andrej Kiska (*1963 )',
       currentParty: null,
@@ -56,11 +61,17 @@ const api: API = {
       name: 'Andrej',
       surname: 'Koudelka',
       birthYear: '1951',
+      deathYear: null,
       photo: 'https://www.hlidacstatu.cz/Photo/andrej-koudelka',
       description: 'Ing. Andrej Koudelka (*1951 ),zastupitel (od 2018)  - Praha 12.',
       currentParty: null,
     },
   ],
+  fetchProfileCount: () => 10,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  sendEmail: (subject, text) => {
+    return
+  },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   fetchDetail: id => ({
     id: 'andrej-babis',

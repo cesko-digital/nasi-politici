@@ -73,6 +73,10 @@ const ReportModal: React.FC<Props> = ({ title, isReportModalOpen, closeReportMod
     },
     [email, description, setValidation, submit, title, setSubmited],
   )
+  const onClose = React.useCallback(() => {
+    setSubmited(false)
+    closeReportModal()
+  }, [closeReportModal])
 
   React.useEffect(() => {
     return (): void => {
@@ -85,14 +89,14 @@ const ReportModal: React.FC<Props> = ({ title, isReportModalOpen, closeReportMod
   if (!isReportModalOpen) return null
 
   return (
-    <Modal onCloseRequest={closeReportModal} className={style.modalWrapper}>
+    <Modal onCloseRequest={onClose} className={style.modalWrapper}>
       <div className={style.header}>
         <div className={style.icon}>
           <ReportIcon />
           <div className={style.headTitle}>Nahlásit chybu</div>
         </div>
         {!submited && (
-          <div className={style.cancel} onClick={closeReportModal}>
+          <div className={style.cancel} onClick={onClose}>
             Zrušit
           </div>
         )}
@@ -107,7 +111,7 @@ const ReportModal: React.FC<Props> = ({ title, isReportModalOpen, closeReportMod
             <div className={style.text}>
               Chyba v obsahu byla úspěšně nahlášena. Děkujeme, že nám pomáhate dělat naše politiky lepšími.
             </div>
-            <div className={style.close} onClick={closeReportModal}>
+            <div className={style.close} onClick={onClose}>
               Zpět na profil politika
             </div>
           </div>
