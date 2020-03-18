@@ -10,7 +10,7 @@ itsdangerous==0.24
 Jinja2==2.8
 Mako==1.0.3
 MarkupSafe==0.23
-marshmallow==2.2.0
+marshmallow==2.15.1
 marshmallow-jsonapi==0.3.0
 python-dateutil==2.5.0
 python-editor==0.4
