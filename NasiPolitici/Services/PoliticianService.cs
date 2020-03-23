@@ -68,7 +68,7 @@ namespace HlidacStatu.NasiPolitici.Services
 
         public async Task<string> GetPerson(string id)
         {
-            var uri = $"nasipolitici_getdata?id={HttpUtility.UrlEncode(id)}";
+            var uri = $"nasipolitici_getdata/{HttpUtility.UrlEncode(id)}";
             var result = await _httpClient.GetStringAsync(uri);
             return result;
         }
