@@ -10,6 +10,7 @@ import { ReactComponent as RedirectBtn } from 'assets/images/redirect.svg'
 import { ReactComponent as ReportBtn } from 'assets/images/report.svg'
 import ReportModalTrigger from 'components/reportModal/reportModalTriggerConnected'
 import { dummyPluralize as pluralize } from 'utils/string'
+import ExplanationModal from 'components/explanationModal/explanationModal'
 
 import styles from './demagogWidget.module.scss'
 import Row from './demagogWidgetRow'
@@ -36,7 +37,17 @@ const DemagogWidget: React.FC<Props> = ({ data, fullname }) => {
   return (
     <div className={demagogWidgetCustomClassNames}>
       <div className={styles.header}>
-        <h2 className={styles.title}>Výroky</h2>
+        <div className={styles.titleWrapper}>
+          <h2 className={styles.title}>Výroky</h2>
+          <ExplanationModal title="Výroky">
+            Výroky naznačují, jak pravdivě či nepravdivě se vyjadřuje politik/politička, kterého hledáte. Jedná se o
+            data organizace Demagog.cz, která ověřuje výroky politiků (tzv. factchecking) a snaží se tak kultivovat
+            veřejnou debatu. Nehodnotí se politická prohlášení, hodnotící soudy a predikce dopadů nějakých opatření
+            (např.: Opatření vlády XY je dobré, neboť způsobí růst zaměstnanosti.), jednoduše proto, že to není možné
+            ověřit: budoucnost neznáme nikdo a u hodnotových soudů nelze nalézt jedinou „správnou“ pozici. Více o
+            metodologii dat se dočtete na stránkách Demagog.cz.
+          </ExplanationModal>
+        </div>
         {!!data.id && (
           <div className={styles.tags}>
             <div className={styles.tag}>

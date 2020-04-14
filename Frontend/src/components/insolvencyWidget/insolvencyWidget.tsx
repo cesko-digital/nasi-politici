@@ -5,6 +5,7 @@ import ZeroValue from 'components/emptyStates/zeroValue/zeroValue'
 import { ReactComponent as LinkBtn } from 'assets/images/link.svg'
 import { ReactComponent as ReportBtn } from 'assets/images/report.svg'
 import ReportModalTrigger from 'components/reportModal/reportModalTriggerConnected'
+import ExplanationModal from 'components/explanationModal/explanationModal'
 
 import styles from './insolvencyWidget.module.scss'
 
@@ -69,7 +70,15 @@ const InsolvencyWidget: React.FC<Props> = ({
   return (
     <div className={insolvencyWidgetCustomClassNames}>
       <div className={styles.header}>
-        <h2 className={styles.title}>Insolvence</h2>
+        <div className={styles.headerTitleWrapper}>
+          <h2 className={styles.title}>Insolvence</h2>
+          <ExplanationModal title="Insolvence">
+            Ne všechno se vždycky daří podle představ a někdy to znamená být v červených číslech. Jenomže veřejně činná
+            osoba by mohla být kvůli podobným peripetiím vydíratelná. A pokud se tato osoba nebo na ni napojené firmy
+            nachází v insolvenci, mohl by mít nejenom motivaci ideovou, ale i finanční, rozhodovat se určitým způsobem.
+            A to ať už přímo či nepřímo. Proto se v téhle škatulce můžete přesvědčit, jak to s ní doopravdy je.
+          </ExplanationModal>
+        </div>
         {hasInsolvencyData && (
           <div className={styles.tags}>
             <div className={styles.tag}>

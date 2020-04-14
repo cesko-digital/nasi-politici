@@ -1,0 +1,48 @@
+@import 'assets/styles/mixins';
+
+.modalWrapper {
+  width: 570px;
+  padding: 30px;
+}
+
+.header {
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+.headTitle {
+  @include condensedTitle;
+}
+
+.title {
+  margin: 5px 0;
+  font-family: 'Source Serif Pro';
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 32px;
+}
+
+.cancel {
+  @include linkBtn;
+  font-size: 14px;
+
+  &:after {
+    bottom: 3px;
+  }
+}
+.explanationBtnWrapper {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+.explanationBtn {
+  transform: scale(0.6);
+}
+
+@media screen and (max-width: 650px) {
+  .modalWrapper {
+		width: 90%;
+	}
+}

@@ -5,6 +5,7 @@ import { ReactComponent as LinkBtn } from 'assets/images/link.svg'
 import { ReactComponent as ReportBtn } from 'assets/images/report.svg'
 import ReportModalTrigger from 'components/reportModal/reportModalTriggerConnected'
 import { DEFAULT_DONATIONS_LIMIT } from 'constants/constants'
+import ExplanationModal from 'components/explanationModal/explanationModal'
 
 import styles from './donationsWidget.module.scss'
 
@@ -78,7 +79,14 @@ const DonationsWidget: React.FC<Props> = ({ donationsGroups, showAll, toggleShow
   return (
     <div className={donationWidgetCustomClassNames}>
       <div className={styles.header}>
-        <h2 className={styles.title}>Sponzorství</h2>
+        <div className={styles.headerTitleWrapper}>
+          <h2 className={styles.title}>Sponzorství</h2>
+          <ExplanationModal title="Sponzorství">
+            Politika není jenom o tom, kdo sponzoruje politika/političku, ale také o tom, koho sponzoruje
+            politik/politička. Zde můžete vidět, kolik komu daná osoba darovala a jaké politické subjekty finančně
+            podporovala či stále podporuje.
+          </ExplanationModal>
+        </div>
         {!!donationsGroups.length && (
           <div className={styles.tags}>
             <div className={styles.tag}>

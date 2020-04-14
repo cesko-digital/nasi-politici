@@ -13,8 +13,12 @@
     justify-content: space-between;
     flex-wrap: wrap;
   }
-  .title {
-    @include condensedTitle;
+	.headerTitleWrapper {
+		display: flex;
+	}
+	.title {
+		@include condensedTitle;
+		margin-right: 8px;
     margin-bottom: 24px;
     line-height: 24px;
   }

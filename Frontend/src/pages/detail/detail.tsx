@@ -22,7 +22,7 @@ import ContactsWidget from 'components/contactsWidget/contactsWidgetConnected'
 import ProfilePicture from 'components/profilePicture/profilePicture'
 import ReportModalTrigger from 'components/reportModal/reportModalTriggerConnected'
 import Error from 'pages/error/error'
-
+import ExplanationModal from 'components/explanationModal/explanationModal'
 import styles from './detail.module.scss'
 
 interface Props {
@@ -166,7 +166,15 @@ const Detail: React.FC<Props> = props => {
                 </div>
                 <div className={engageWidgetCustomClassNames}>
                   <div className={styles.header}>
-                    <h2 className={styles.title}>Angažovanost</h2>
+                    <div className={styles.headerTitleWrapper}>
+                      <h2 className={styles.title}>Angažovanost</h2>
+                      <ExplanationModal title="Angažovanost">
+                        Ne každý máme rádi pavouky. Ale majetkové a personální pavouky musí mít rád každý. Přehledným
+                        způsobem Vám totiž ukazují, kam až sahá napojení politiků. Tyhle pavučiny ale jsou spředeny z
+                        otevřených zdrojů, tudíž nemusí ukazovat úplně všechny existující vazby, ale zobrazují ty
+                        potvrzené.
+                      </ExplanationModal>
+                    </div>
                     <div className={styles.tags}>
                       <ReportModalTrigger
                         className={styles.reportBtnWrapper}

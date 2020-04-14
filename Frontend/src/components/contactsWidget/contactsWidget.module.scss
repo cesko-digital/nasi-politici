@@ -29,9 +29,13 @@
 		.reportBtn {
 			transform: scale(.6);
 		}
-  }
+	}
+	.titleWrapper {
+		display: flex;
+	}
   .title {
-    @include condensedTitle;
+		@include condensedTitle;
+		margin-right: 8px;
   }
   .tags,
   .tag {

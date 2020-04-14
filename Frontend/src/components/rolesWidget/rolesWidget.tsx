@@ -5,6 +5,7 @@ import { ReactComponent as LinkBtn } from 'assets/images/link.svg'
 import { ReactComponent as ReportBtn } from 'assets/images/report.svg'
 import { DEFAULT_ROLES_LIMIT } from 'constants/constants'
 import ReportModalTrigger from 'components/reportModal/reportModalTriggerConnected'
+import ExplanationModal from 'components/explanationModal/explanationModal'
 
 import styles from './rolesWidget.module.scss'
 
@@ -86,7 +87,20 @@ const RolesWidget: React.FC<Props> = ({ rolesGroups, showAll, toggleShowAllRoles
   return (
     <div className={rolesWidgetCustomClassNames}>
       <div className={styles.header}>
-        <h2 className={styles.title}>Role</h2>
+        <div className={styles.titleWrapper}>
+          <h2 className={styles.title}>Role</h2>
+          <ExplanationModal title="Role">
+            <React.Fragment>
+              Politik/politička za svou kariéru vystřídá velkou řádku rolí. A ty nejdůležitější by měly být přímo tady.
+              Kterými stranami prošel, jestli byl jen řadovým politikem nebo se dostal výš, nebo zda byl aktivním
+              politikem před rokem 1989.
+              <br />
+              Tyto informace sbíráme ručně, proto Vás žádáme o shovívavost, pokud nám nějaká unikne. Právě proto tu máme
+              ikonku vlaječky, díky které nám případnou nepřesnost můžete nahlásit a my budeme informaci fact-checkovat
+              dále.
+            </React.Fragment>
+          </ExplanationModal>
+        </div>
         <div className={styles.tags}>
           <div className={styles.tag}>
             <LinkBtn />

@@ -4,6 +4,7 @@ import classnames from 'classnames'
 import ReportModalTrigger from 'components/reportModal/reportModalTriggerConnected'
 import { ReactComponent as ReportBtn } from 'assets/images/report.svg'
 import NoData from 'components/emptyStates/noData/noData'
+import ExplanationModal from 'components/explanationModal/explanationModal'
 
 import styles from './contactsWidget.module.scss'
 import { Contact as ContactType } from './contact'
@@ -22,7 +23,15 @@ const ContactsWidget: React.FC<Props> = props => {
   return (
     <div className={contactsWidgetCustomClassNames}>
       <div className={styles.header}>
-        <h2 className={styles.title}>Kontakty</h2>
+        <div className={styles.titleWrapper}>
+          <h2 className={styles.title}>Kontakty</h2>
+          <ExplanationModal title="Kontakty">
+            Chcete se s politikem/političkou spojit? Chcete si ověřit, které jsou oficiální profily? Tak jste v téhle
+            škatulce správně! Najdete zde sesbírané kontakty z veřejných zdrojů, ať už z osobních stránek, stránek
+            institucí, kde politik/politička působí, sociálních sítí, a dalších. Pokud víte o kontaktu, který nám unikl,
+            klikněte na vlaječku a pošlete nám upozornění.
+          </ExplanationModal>
+        </div>
         {props.hasContacts && (
           <div>
             <ReportModalTrigger className={styles.reportBtnWrapper} modalTitle={`${props.fullname}, kontakty`}>
