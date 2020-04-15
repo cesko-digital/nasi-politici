@@ -3,10 +3,13 @@ import { createSelector } from 'reselect'
 import { AppState } from 'store'
 import { DEFAULT_DONATIONS_LIMIT, DEFAULT_ROLES_LIMIT } from 'constants/constants'
 import { ContactService, Contact, Role, Sponsor, Detail, Insolvency } from './types'
+import { dummyFormatDateShort } from 'utils/date'
 
 export const getDetailData = (store: AppState): Detail => store.detail.detail
 export const isDetailLoading = (store: AppState): boolean => store.detail.loadingDetail // TODO rename to loading
 export const getPhotoUrl = (store: AppState): string => getDetailData(store).photo
+export const getLastUpdate = (store: AppState): string =>
+  getDetailData(store).lastUpdate ? dummyFormatDateShort(new Date(getDetailData(store).lastUpdate)) : ''
 export const getShowAllDonations = (store: AppState): boolean => store.detail.showAllDonations
 export const getShowAllRoles = (store: AppState): boolean => store.detail.showAllRoles
 export const getPersonalInsolvency = (store: AppState): Insolvency => getDetailData(store).insolvencyPerson || {}

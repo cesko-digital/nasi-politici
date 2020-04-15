@@ -52,12 +52,14 @@ const Header: React.FC<Props> = props => {
                 {!matchAboutUs && (
                   <Link to="/o-projektu" className={styles.link}>
                     O projektu
-                  </Link>)}
+                  </Link>
+                )}
               </div>
             </div>
             {match && !match.isExact && <SearchBar form={styles.form} wrapperClassname={styles.headerSearchBar} />}
           </div>
-        </header>)}
+        </header>
+      )}
     </React.Fragment>
   )
 }

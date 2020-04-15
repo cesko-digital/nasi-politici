@@ -26,22 +26,36 @@
     width: 970px;
     box-sizing: content-box;
   }
-  .fullname,
+	.fullname,
   .birthYear {
     margin-right: 10px;
-  }
+	}
+	.additionalWrapper {
+		display: flex;
+	}
   .birthYear,
-  .currentParty {
+	.currentParty,
+	.lastUpdate {
     color: $clDark;
   }
   .fullname {
     @include headerTitle;
     text-transform: capitalize;
   }
-  .currentParty {
-    margin-left: 10px;
-  }
-  .personal {
+	.currentParty {
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+	.lastUpdate {
+		margin-left: 10px;
+		text-transform: none;
+		display: flex;
+	}
+	.lastUpdateLabelShort {
+		display: none;
+	}
+  .personal,
+  .lastUpdateWrapper {
     display: flex;
     align-items: center;
     white-space: nowrap;
@@ -285,7 +299,26 @@
   }
   .titleWrapper {
     margin: 0 20px 36px;
-  }
+	}
+	.additionalWrapper {
+		flex-direction: column;
+	}
+	.lastUpdateWrapper {
+		@include smallText;
+		margin-top: 7px;
+		.divider {
+			display: none;
+		}
+		.lastUpdate {
+			margin-left: 0;
+		}
+		.lastUpdateLabel {
+			display: none;
+		}
+		.lastUpdateLabelShort {
+			display: inline;
+		}
+	}
 }
 
 @media screen and (max-width: 479px) {

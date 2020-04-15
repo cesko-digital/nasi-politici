@@ -29,6 +29,7 @@ const intialDetail: Detail = {
   id: '',
   insolvencyCompany: initialInsolvency,
   insolvencyPerson: initialInsolvency,
+  lastUpdate: '',
   name: '',
   namePrefix: '',
   nameSuffix: '',

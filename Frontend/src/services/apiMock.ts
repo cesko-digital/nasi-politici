@@ -79,6 +79,7 @@ const api: API = {
     nameSuffix: '',
     name: 'Andrej',
     surname: 'Babiš',
+    lastUpdate: '2020-04-01T00:00:00',
     birthDate: '1954-09-02T00:00:00',
     deathDate: null,
     status: 'Politik',

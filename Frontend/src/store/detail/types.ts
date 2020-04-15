@@ -44,6 +44,7 @@ export interface Detail {
   id: string
   insolvencyCompany: Insolvency
   insolvencyPerson: Insolvency
+  lastUpdate: string
   name: string
   namePrefix: string
   nameSuffix: string

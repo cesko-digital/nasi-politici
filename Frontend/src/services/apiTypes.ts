@@ -41,10 +41,10 @@ export interface Detail {
   currentParty: string
   deathDate: string | null
   description: string
-  error?: Object
   id: string
   insolvencyCompany: Insolvency
   insolvencyPerson: Insolvency
+  lastUpdate: string
   name: string
   namePrefix: string
   nameSuffix: string

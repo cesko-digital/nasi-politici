@@ -34,6 +34,7 @@ interface Props {
   engagement: string
   fullname: string
   isLoading: boolean
+  lastUpdate: string
   loadDetail: (id: string) => void
   match: {
     params: {
@@ -77,15 +78,30 @@ const Detail: React.FC<Props> = props => {
               <div className={styles.initials}>
                 <div className={styles.initialsWrapper}>
                   <div className={styles.fullname}>{props.fullname}</div>
-                  <div className={styles.personal}>
-                    {props.birthYear && (
-                      <div className={styles.birthYear}>
-                        *{props.birthYear}
-                        {props.deathYear && ` - ✝${props.deathYear}`}
+                  <div className={styles.additionalWrapper}>
+                    <div className={styles.personal}>
+                      {props.birthYear && (
+                        <div className={styles.birthYear}>
+                          *{props.birthYear}
+                          {props.deathYear && ` - ✝${props.deathYear}`}
+                        </div>
+                      )}
+                      {props.currentParty && (
+                        <>
+                          <div className={styles.divider}></div>
+                          <div className={styles.currentParty}>{props.currentParty}</div>
+                        </>
+                      )}
+                    </div>
+                    {props.lastUpdate && (
+                      <div className={styles.lastUpdateWrapper}>
+                        <div className={styles.divider}></div>
+                        <div className={styles.lastUpdate}>
+                          <div className={styles.lastUpdateLabel}>Aktualizováno&nbsp;</div>
+                          <div className={styles.lastUpdateLabelShort}>Aktual.&nbsp;</div> {props.lastUpdate}
+                        </div>
                       </div>
                     )}
-                    <div className={styles.divider}></div>
-                    <div className={styles.currentParty}>{props.currentParty}</div>
                   </div>
                 </div>
                 <div className={styles.shareWrapper}>
