@@ -68,7 +68,7 @@ const DemagogWidget: React.FC<Props> = ({ data, fullname }) => {
         <React.Fragment>
           <div className={styles.sum}>
             Politik má celkem {data.count}{' '}
-            {pluralize(data.count, 'hodnocený výrok', 'hodnocené výroky', 'hodnocených výroků')}, z toho je:
+            {pluralize(data.count, 'hodnocený výrok', 'hodnocené výroky', 'hodnocených výroků')}, z toho:
           </div>
           <div className={styles.stats}>
             <div className={styles.itemsWrapper}>
