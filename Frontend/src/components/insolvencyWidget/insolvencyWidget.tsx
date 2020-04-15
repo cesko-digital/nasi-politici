@@ -6,6 +6,7 @@ import { ReactComponent as LinkBtn } from 'assets/images/link.svg'
 import { ReactComponent as ReportBtn } from 'assets/images/report.svg'
 import ReportModalTrigger from 'components/reportModal/reportModalTriggerConnected'
 import ExplanationModal from 'components/explanationModal/explanationModal'
+import { dummyPluralize as pluralize } from 'utils/string'
 
 import styles from './insolvencyWidget.module.scss'
 
@@ -25,11 +26,15 @@ const InsolvencyRow: React.FC<RowProps> = ({ title, personalCount, companyCount 
       <div>
         <div className={styles.tableRow}>
           <div>jako fyzická osoba</div>
-          <div>{personalCount}</div>
+          <div>
+            {personalCount} {pluralize(personalCount, 'případ', 'případy', 'případů')}
+          </div>
         </div>
         <div className={styles.tableRow}>
           <div>skrz právnickou osobu</div>
-          <div>{companyCount}</div>
+          <div>
+            {companyCount} {pluralize(companyCount, 'případ', 'případy', 'případů')}
+          </div>
         </div>
       </div>
     </div>
@@ -99,7 +104,6 @@ const InsolvencyWidget: React.FC<Props> = ({
       {hasInsolvencyData && !hasInsolvency && <ZeroValue title="Politik není věřitelem ani dlužníkem" />}
       {!!hasInsolvency && (
         <React.Fragment>
-          <div className={styles.description}>Počet případů insolvence, ve kterých politik figuruje:</div>
           <InsolvencyRow
             title="věřitelem"
             personalCount={personalInsolvency.creditorCount}
