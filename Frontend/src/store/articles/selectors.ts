@@ -5,6 +5,7 @@ import { ArticlesState } from './types'
 import { dummyFormatDate } from 'utils/date'
 
 export const getArticles = (store: AppState): ArticlesState['articles'] => store.articles.articles
+export const isLoading = (store: AppState): boolean => store.articles.loading
 
 export const getDetailNews = createSelector(getArticles, articles => {
   return articles.map(a => ({

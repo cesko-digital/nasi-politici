@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { getDetailNews } from 'store/articles/selectors'
+import { getDetailNews, isLoading } from 'store/articles/selectors'
+import { loadArticles } from 'store/articles/actions'
 import { getFullName } from 'store/detail/selectors'
 
 import NewsWidget from './newsWidget'
@@ -17,11 +18,17 @@ interface Article {
 interface StateProps {
   fullname: string
   news: Article[]
+  isLoading: boolean
 }
 
 const mapStateToProps = createStructuredSelector<AppState, StateProps>({
   fullname: getFullName,
   news: getDetailNews,
+  isLoading,
 })
 
-export default connect(mapStateToProps)(NewsWidget)
+const dispatchProps = {
+  loadNews: loadArticles,
+}
+
+export default connect(mapStateToProps, dispatchProps)(NewsWidget)

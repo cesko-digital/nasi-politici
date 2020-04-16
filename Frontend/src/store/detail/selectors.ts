@@ -6,7 +6,7 @@ import { ContactService, Contact, Role, Sponsor, Detail, Insolvency } from './ty
 import { dummyFormatDateShort } from 'utils/date'
 
 export const getDetailData = (store: AppState): Detail => store.detail.detail
-export const isDetailLoading = (store: AppState): boolean => store.detail.loadingDetail // TODO rename to loading
+export const isDetailLoading = (store: AppState): boolean => store.detail.loadingDetail
 export const getPhotoUrl = (store: AppState): string => getDetailData(store).photo
 export const getLastUpdate = (store: AppState): string =>
   getDetailData(store).lastUpdate ? dummyFormatDateShort(new Date(getDetailData(store).lastUpdate)) : ''

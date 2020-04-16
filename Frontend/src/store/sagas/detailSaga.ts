@@ -1,11 +1,13 @@
-import { call, put, takeLatest } from 'redux-saga/effects'
+import { call, put, takeLatest, select } from 'redux-saga/effects'
 import { SagaIterator } from 'redux-saga'
 
 import { LOAD_DETAIL } from 'store/detail/types'
+import { LOAD_ARTICLES } from 'store/articles/types'
 
 import { setDetail, loadingDetailEnded, loadingDetailStarted, loadDetail } from 'store/detail/actions'
+import { getDetailData } from 'store/detail/selectors'
 import { setDemagogData, resetDemagogData } from 'store/demagog/actions'
-import { setArticles, resetArticles } from 'store/articles/actions'
+import { setArticles, resetArticles, loadingArticlesEnded, loadingArticlesStarted } from 'store/articles/actions'
 
 import API from 'services/api'
 import API_MOCK from 'services/apiMock'
@@ -13,7 +15,9 @@ import { ArticleResponse, Detail, DemagogResponse } from 'services/apiTypes'
 
 const api = process.env.REACT_APP_USE_API_MOCK ? API_MOCK : API
 
-function* loadNews(detail: Detail): SagaIterator {
+function* handleLoadArticles(): SagaIterator {
+  yield put(loadingArticlesStarted())
+  const detail = yield select(getDetailData)
   try {
     const fullName = detail.name + ' ' + detail.surname
     const party = detail.currentParty
@@ -24,6 +28,7 @@ function* loadNews(detail: Detail): SagaIterator {
     yield put(resetArticles())
     // TODO asi vymyslet nejaky jednotny error handling idealne i s designem
   }
+  yield put(loadingArticlesEnded())
 }
 
 function* loadDemagog(id: string): SagaIterator {
@@ -47,7 +52,6 @@ function* handleLoadDetail(action: ReturnType<typeof loadDetail>): SagaIterator 
     const detail: Detail = yield call(api.fetchDetail, action.payload)
     yield put(setDetail(detail))
     yield call(loadDemagog, action.payload)
-    yield call(loadNews, detail)
   } catch (error) {
     // TODO asi vymyslet nejaky jednotny error handling idealne i s designem
   }
@@ -56,6 +60,7 @@ function* handleLoadDetail(action: ReturnType<typeof loadDetail>): SagaIterator 
 
 function* searchSaga(): SagaIterator {
   yield takeLatest(LOAD_DETAIL, handleLoadDetail)
+  yield takeLatest(LOAD_ARTICLES, handleLoadArticles)
 }
 
 export default searchSaga

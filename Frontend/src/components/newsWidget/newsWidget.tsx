@@ -1,6 +1,7 @@
 import * as React from 'react'
 import classnames from 'classnames'
 import NoData from 'components/emptyStates/noData/noData'
+import LoadingData from 'components/emptyStates/loadingData/loadingData'
 import ReportModalTrigger from 'components/reportModal/reportModalTriggerConnected'
 import { ReactComponent as ReportBtn } from 'assets/images/report.svg'
 import ExplanationModal from 'components/explanationModal/explanationModal'
@@ -62,12 +63,16 @@ const Articles: React.FC<ArticlesProps> = ({ articles }) => {
 
 interface Props {
   news: ArticleProps[]
+  loadNews: () => void
+  isLoading: boolean
   fullname: string
 }
 
-const NewsWidget: React.FC<Props> = ({ news, fullname }) => {
+const NewsWidget: React.FC<Props> = ({ news, fullname, loadNews, isLoading }) => {
   const newsWidgetCustomClassNames = classnames(styles.widget, !news.length && styles.noData)
-
+  React.useEffect(() => {
+    loadNews()
+  }, [loadNews])
   return (
     <React.Fragment>
       <div className={newsWidgetCustomClassNames}>
@@ -92,8 +97,9 @@ const NewsWidget: React.FC<Props> = ({ news, fullname }) => {
             </div>
           )}
         </div>
-        {!!news.length && <Articles articles={news} />}
-        {!news.length && <NoData />}
+        {!isLoading && !!news.length && <Articles articles={news} />}
+        {!isLoading && !news.length && <NoData />}
+        {isLoading && <LoadingData />}
       </div>
     </React.Fragment>
   )

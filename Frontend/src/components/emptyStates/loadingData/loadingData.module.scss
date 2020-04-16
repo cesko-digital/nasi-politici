@@ -1,0 +1,26 @@
+@import 'assets/styles/mixins';
+
+.emptyState {
+  padding: 32px 16px;
+	text-align: center;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+.circle {
+  margin: auto;
+  display: flex;
+  width: 70px;
+  height: 70px;
+  border: 1px solid $clLine;
+  border-radius: 50%;
+}
+.image {
+	margin: auto;
+	animation:spin 1s linear infinite
+}
+.title {
+  margin-top: 18px;
+}

@@ -1,7 +1,15 @@
-import { SET_ARTICLES, RESET_ARTICLES, ArticlesState, ArticlesActionTypes } from './types'
+import {
+  SET_ARTICLES,
+  RESET_ARTICLES,
+  ArticlesState,
+  ArticlesActionTypes,
+  SET_LOADING_ARTICLES_END,
+  SET_LOADING_ARTICLES_START,
+} from './types'
 
 const initialState: ArticlesState = {
   articles: [],
+  loading: false,
 }
 
 export function articlesReducer(state = initialState, action: ArticlesActionTypes): ArticlesState {
@@ -15,6 +23,18 @@ export function articlesReducer(state = initialState, action: ArticlesActionType
     case RESET_ARTICLES: {
       return {
         ...initialState,
+      }
+    }
+    case SET_LOADING_ARTICLES_START: {
+      return {
+        ...state,
+        loading: true,
+      }
+    }
+    case SET_LOADING_ARTICLES_END: {
+      return {
+        ...state,
+        loading: false,
       }
     }
     default:
