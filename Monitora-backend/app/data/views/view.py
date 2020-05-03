@@ -37,7 +37,7 @@ class View(Resource):
         topics = helper.process(' '.join([item["text"] for item in response.json()]))
         topic_map = {}
         for index, item in enumerate(data):
-            data[index]['perex'] = str(item['perex'].replace("<span class=\"article-hl\">", "").replace("</span>",""))
+            data[index]['perex'] = str(item['perex'].replace("<span class=\"article-hl\">", "").replace("</span>","").replace("&quot;", "\\\""))
             for topic in topics:
                 if topic['topic'] in item['text']:
                     if topic['topic'] not in topic_map:
@@ -63,7 +63,7 @@ class View(Resource):
         topics = helper.process(' '.join([item["text"] for item in response.json()]))
         topic_map = {}
         for index, item in enumerate(data):
-            data[index]['perex'] = str(item['perex'].replace("<span class=\"article-hl\">", "").replace("</span>", ""))
+            data[index]['perex'] = str(item['perex'].replace("<span class=\"article-hl\">", "").replace("</span>", "").replace("&quot;", "\\\""))
             for topic in topics:
                 if topic['topic'] in item['text']:
                     if topic['topic'] not in topic_map:
