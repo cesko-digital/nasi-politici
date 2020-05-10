@@ -83,7 +83,7 @@ const Detail: React.FC<Props> = props => {
                       {props.birthYear && (
                         <div className={styles.birthYear}>
                           *{props.birthYear}
-                          {props.deathYear && ` - ✝${props.deathYear}`}
+                          {props.deathYear && ` - \u271D${props.deathYear}`}
                         </div>
                       )}
                       {props.currentParty && (

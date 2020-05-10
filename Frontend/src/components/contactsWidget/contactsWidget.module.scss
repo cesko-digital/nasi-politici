@@ -93,6 +93,7 @@
 .noData {
   border-top: 1px solid $clComponentBorder;
   background-color: #f0f0f0;
+  box-shadow: none;
 }
 
 @media screen and (max-width: 650px) {

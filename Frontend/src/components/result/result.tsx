@@ -31,7 +31,7 @@ const ResultRow: React.FC<ResultRowProps> = ({ id, name, surname, birthYear, cur
               {birthYear && (
                 <div className={styles.birthYear}>
                   *{birthYear}
-                  {deathYear && ` - ✝${deathYear}`}
+                  {deathYear && ` - \u271D${deathYear}`}
                 </div>
               )}
               <div className={styles.divider} />
