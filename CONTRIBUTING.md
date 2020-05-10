@@ -3,7 +3,7 @@
 Moc děkujeme za jakoukoli pomoc a zpětnou vazbu!
 
 ## Doporučené workflow
-1) z issues tady na GitHubu  nebo v [Trellu] (https://trello.com/b/gJA4Y6Ml/na%C5%A1i-politici) si vybereš, které bys chtěl realizovat
+1) z issues tady na GitHubu  nebo v [Trellu](https://trello.com/b/gJA4Y6Ml/na%C5%A1i-politici) si vybereš, které bys chtěl realizovat
 3) napíšeš na Slack kanál [#p-nasi-politici](https://cesko-digital.slack.com/archives/CK0ER8UBG), že máš chuť udělat issue XY a ideálně k němu přidáš i komentář na githubu, aby to bylo všem ostatním jasné a nepracovalo nás na na tom zbytečně více najednou
 3) forkneš si repository, připravíš úpravy u sebe v repositáři
 4) založíš pull request do master větve)
