@@ -14,6 +14,7 @@ interface IconProps {
 
 const ContactIcon: React.FC<IconProps> = props => {
   switch (props.service) {
+    case ContactService.Facebook:
     case ContactService.FacebookPage:
     case ContactService.FacebookProfile:
       return <FBLogo className={styles.icon} />
@@ -22,6 +23,8 @@ const ContactIcon: React.FC<IconProps> = props => {
     case ContactService.Instagram:
       return <IGLogo className={styles.icon} />
     case ContactService.WWW:
+      return <WebLogo className={styles.icon} />
+    default:
       return <WebLogo className={styles.icon} />
   }
 }

@@ -24,6 +24,7 @@ export interface Sponsor {
 export enum ContactService {
   FacebookPage = 'Facebook_page',
   FacebookProfile = 'Facebook_profile',
+  Facebook = 'Facebook',
   Twitter = 'Twitter',
   Instagram = 'Instagram',
   WWW = 'WWW',
