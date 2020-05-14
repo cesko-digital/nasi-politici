@@ -52,6 +52,9 @@ class View(Resource):
         politician_dict = raw_dict['data']
         id = View.searchPoliticianByName(politician_dict["name"])
         if id is None:
+            # Monitora requires party to be filled, empty string is for no party
+            if politician_dict['party'] is None:
+               politician_dict['party'] = '' 
             requests.post(View.root + 'politicians/',
                           json=politician_dict,
                           headers={'Authorization': token_string})
