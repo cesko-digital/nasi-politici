@@ -77,6 +77,7 @@ const api: API = {
     id: 'andrej-babis',
     namePrefix: '',
     nameSuffix: '',
+    connections: [],
     name: 'Andrej',
     surname: 'Babiš',
     lastUpdate: '2020-04-01T00:00:00',

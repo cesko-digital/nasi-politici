@@ -2,7 +2,7 @@ import { createSelector } from 'reselect'
 
 import { AppState } from 'store'
 import { DEFAULT_DONATIONS_LIMIT, DEFAULT_ROLES_LIMIT } from 'constants/constants'
-import { ContactService, Contact, Role, Sponsor, Detail, Insolvency } from './types'
+import { ContactService, Contact, Connection, Role, Sponsor, Detail, Insolvency } from './types'
 import { dummyFormatDateShort } from 'utils/date'
 
 export const getDetailData = (store: AppState): Detail => store.detail.detail
@@ -118,6 +118,7 @@ export const getRoles = createSelector(getRolesRaw, getShowAllRoles, (roles, sho
 })
 
 export const getContacts = (store: AppState): Contact[] => store.detail.detail.contacts || []
+export const getConnections = (store: AppState): Connection[] => store.detail.detail.connections || []
 
 export const hasContacts = (store: AppState): boolean =>
   !!store.detail.detail.contacts && !!store.detail.detail.contacts.length

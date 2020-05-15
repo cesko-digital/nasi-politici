@@ -22,6 +22,7 @@ const initialInsolvency: Insolvency = {
 const intialDetail: Detail = {
   birthDate: '',
   contacts: [],
+  connections: [],
   companyConnection: '',
   currentParty: '',
   deathDate: '',

@@ -24,6 +24,7 @@ import ReportModalTrigger from 'components/reportModal/reportModalTriggerConnect
 import Error from 'pages/error/error'
 import ExplanationModal from 'components/explanationModal/explanationModal'
 import styles from './detail.module.scss'
+import EngagementChart from 'components/engagementChart/engagementChartConnected'
 
 interface Props {
   birthYear: string
@@ -200,7 +201,7 @@ const Detail: React.FC<Props> = props => {
                       </ReportModalTrigger>
                     </div>
                   </div>
-                  {!props.engagement && <NoData />}
+                  <EngagementChart />
                 </div>
               </div>
               <div id="media" className={styles.section}>

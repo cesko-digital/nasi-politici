@@ -34,9 +34,18 @@ export interface Contact {
   Contact: string
 }
 
+export interface Connection {
+  company: string
+  ico: string
+  since: string
+  until: string | null
+  description: string
+}
+
 export interface Detail {
   birthDate: string
   contacts?: Contact[] // TODO odebrat ? az zacne chodit z API
+  connections: Connection[]
   companyConnection: string
   currentParty: string
   deathDate: string | null
