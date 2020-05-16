@@ -6,10 +6,10 @@ on:
     paths:
       - 'Frontend/**'
 env:
-  region: 'eu-west-1'
-  REACT_APP_BASE_API_URL: 'https://nasipolitici.ceskodigital.net'
-  bucketName: 'nasi-politici-frontend'
-  cloudFrontDeploymentId: 'E272UJVD1FXLKI'
+  region: ${{ secrets.AWS_REGION }}
+  REACT_APP_BASE_API_URL: ${{ secrets.REACT_APP_BASE_API_URL }}
+  bucketName: ${{ secrets.AWS_FRONTEND_BUCKET_NAME }}
+  cloudFrontDeploymentId: ${{ secrets.AWS_CLOUDFRONT_DEPLOYMENT_ID }}
 jobs:
   deploy:
     runs-on: ubuntu-latest

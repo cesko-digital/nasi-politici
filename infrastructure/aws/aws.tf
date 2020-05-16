@@ -48,6 +48,26 @@ data "aws_route53_zone" "public" {
   name = "${var.public-domain}."
 }
 
+# SecretsManager, needs to be created outside of Terraform and populated with secrets.
+data "aws_secretsmanager_secret" "secrets" {
+  name = "nasipoliticiSecrets"
+}
+
+data "aws_secretsmanager_secret_version" "secrets-version" {
+  secret_id = data.aws_secretsmanager_secret.secrets.id
+}
+
+# TODO:
+# We use hardcoded Secrets from SecretsManager because non-hardcoded way to pass secrets to
+# ECS container pass it as single JSON object, which needs to be parsed on Backend.
+# I'll create issue as an BE improvement for it.
+locals {
+  MonitoraApiUrl = jsondecode(data.aws_secretsmanager_secret_version.secrets-version.secret_string)["MonitoraApiUrl"]
+  HlidacAuthenticationToken = jsondecode(data.aws_secretsmanager_secret_version.secrets-version.secret_string)["HlidacAuthenticationToken"]
+  CzFinToken = jsondecode(data.aws_secretsmanager_secret_version.secrets-version.secret_string)["CzFinToken"]
+  MailAuthenticationToken = jsondecode(data.aws_secretsmanager_secret_version.secrets-version.secret_string)["MailAuthenticationToken"]
+}
+
 # ----------------
 # VPC Section
 # ----------------
@@ -204,7 +224,11 @@ resource "aws_ecs_task_definition" "nasi-politici" {
   family = "nasi-politici"
   container_definitions = templatefile("ecs/nasi-politici.tmpl", {
     aws_region = var.aws_region,
-    aws_repository = aws_ecr_repository.nasi-politici.repository_url
+    aws_repository = aws_ecr_repository.nasi-politici.repository_url,
+    MailAuthenticationToken = local.MailAuthenticationToken,
+    MonitoraApiUrl = local.MonitoraApiUrl,
+    CzFinToken = local.CzFinToken,
+    HlidacAuthenticationToken = local.HlidacAuthenticationToken
   })
   network_mode = "awsvpc"
   execution_role_arn = aws_iam_role.ecr-task-execution-role.arn
@@ -318,6 +342,11 @@ resource "aws_iam_role" "ecr-task-execution-role" {
 resource "aws_iam_role_policy_attachment" "ecr-task-execution-policy-attachment" {
   role = aws_iam_role.ecr-task-execution-role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+}
+
+resource "aws_iam_role_policy_attachment" "secrets-manager-policy-attachment" {
+  role = aws_iam_role.ecr-task-execution-role.name
+  policy_arn = "arn:aws:iam::aws:policy/SecretsManagerReadWrite"
 }
 
 # ------------

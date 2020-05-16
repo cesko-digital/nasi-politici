@@ -22,7 +22,22 @@ ${jsonencode([
     "linuxParameters": null,
     "cpu": 0,
     "environment": [
-
+    {
+      "name": "ASPNETCORE_MonitoraApiUrl",
+      "value": "${MonitoraApiUrl}"
+    },
+    {
+      "name": "ASPNETCORE_HlidacAuthenticationToken",
+      "value": "${HlidacAuthenticationToken}"
+    },
+    {
+      "name": "ASPNETCORE_CzFinToken",
+      "value": "${CzFinToken}"
+    },
+    {
+      "name": "ASPNETCORE_MailAuthenticationToken",
+      "value": "${MailAuthenticationToken}"
+    }
     ],
     "resourceRequirements": null,
     "ulimits": null,
