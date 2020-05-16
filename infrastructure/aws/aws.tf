@@ -39,6 +39,11 @@ variable "domain-certificate-arn" {
   default = "arn:aws:acm:us-east-1:313370994665:certificate/92346f6e-1016-4471-834a-a9c12ab70663"
 }
 
+variable "frontend-bucket-name" {
+  type = string
+  default = "nasi-politici-frontend"
+}
+
 provider "aws" {
   version = "~> 2.0"
   region = var.aws_region
@@ -423,12 +428,12 @@ resource "aws_api_gateway_deployment" "api" {
 }
 
 resource "aws_s3_bucket" "frontend" {
-  bucket = "nasi-politici-frontend"
+  bucket = var.frontend-bucket-name
   acl = "private"
 
   policy = templatefile("roles/s3-cloudfront-policy.tmpl", {
     cloudfront_arn = aws_cloudfront_origin_access_identity.default.iam_arn,
-    bucket_name = "nasi-politici-frontend"
+    bucket_name = var.frontend-bucket-name
   })
 }
 
