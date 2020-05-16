@@ -29,11 +29,11 @@ jobs:
         run: yarn run build
         working-directory: 'Frontend'
       - name: 'Deploy to AWS'
-          run: |
-            aws s3 sync --sse --delete . s3://${{ env.bucketName }}
-            aws cloudfront create-invalidation --distribution-id ${{ env.cloudFrontDeploymentId }} --paths "/*"
-          working-directory: 'Frontend/build'
-          env:
-            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          aws s3 sync --sse --delete . s3://${{ env.bucketName }}
+          aws cloudfront create-invalidation --distribution-id ${{ env.cloudFrontDeploymentId }} --paths "/*"
+        working-directory: 'Frontend/build'
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
