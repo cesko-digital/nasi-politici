@@ -79,6 +79,8 @@ const api: API = {
     nameSuffix: '',
     connections: [],
     name: 'Andrej',
+    notificationRegisterId: '',
+    notificationRegisterStatements: [],
     surname: 'Babiš',
     lastUpdate: '2020-04-01T00:00:00',
     birthDate: '1954-09-02T00:00:00',

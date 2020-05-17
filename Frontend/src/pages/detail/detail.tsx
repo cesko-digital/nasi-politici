@@ -16,6 +16,7 @@ import LoadingBar from 'components/loadingBar/loadingBar'
 import NewsWidget from 'components/newsWidget/newsWidgetConnected'
 import DonationsWidget from 'components/donationsWidget/donationsWidgetConnected'
 import RolesWidget from 'components/rolesWidget/rolesWidgetConnected'
+import NotificationsWidget from 'components/notificationsWidget/notificationsWidgetConnected'
 import InsolvencyWidget from 'components/insolvencyWidget/insolvencyWidgetConnected'
 import DemagogWidget from 'components/demagogWidget/demagogWidgetConnected'
 import ContactsWidget from 'components/contactsWidget/contactsWidgetConnected'
@@ -174,6 +175,7 @@ const Detail: React.FC<Props> = props => {
                   <RolesWidget />
                   <DonationsWidget />
                   <InsolvencyWidget />
+                  <NotificationsWidget />
                 </div>
               </div>
               <div id="engagement" className={styles.section}>

@@ -7,6 +7,7 @@ import {
   SET_LOADING_DETAIL_END,
   SET_LOADING_DETAIL_START,
   TOGGLE_SHOW_ALL_DONATIONS,
+  TOGGLE_SHOW_ALL_NOTIFICATIONS,
   TOGGLE_SHOW_ALL_ROLES,
 } from './types'
 
@@ -34,6 +35,8 @@ const intialDetail: Detail = {
   name: '',
   namePrefix: '',
   nameSuffix: '',
+  notificationRegisterId: '',
+  notificationRegisterStatements: [],
   photo: '',
   roles: [],
   source: '',
@@ -46,6 +49,7 @@ const initialState: DetailState = {
   detail: intialDetail,
   loadingDetail: false,
   showAllDonations: false,
+  showAllNotifications: false,
   showAllRoles: false,
 }
 
@@ -73,6 +77,12 @@ export function detailReducer(state = initialState, action: DetailActionTypes): 
       return {
         ...state,
         showAllDonations: !state.showAllDonations,
+      }
+    }
+    case TOGGLE_SHOW_ALL_NOTIFICATIONS: {
+      return {
+        ...state,
+        showAllNotifications: !state.showAllNotifications,
       }
     }
     case TOGGLE_SHOW_ALL_ROLES: {

@@ -1,0 +1,151 @@
+@import 'assets/styles/mixins';
+
+.widget {
+  margin-bottom: 36px;
+  padding: 30px;
+  width: $widgetBase;
+  border-top: 2px solid $clDarkBorder;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
+  background-color: #fff;
+  .header {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+	.headerTitleWrapper {
+		display: flex;
+	}
+  .title {
+		@include condensedTitle;
+		margin-right: 2px;
+    margin-bottom: 24px;
+    line-height: 24px;
+  }
+  .tags,
+  .tag {
+    display: flex;
+  }
+  .tags {
+    align-self: flex-start;
+  }
+  .tag {
+    margin-right: 4px;
+    padding: 0 8px;
+    align-items: center;
+    border-radius: 50px;
+    background-color: $clPrimaryLight;
+  }
+  .tagname {
+    margin-left: 4px;
+    color: $clPrimaryText;
+  }
+  .subtitleWrapper {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  .subtitle {
+    @include subTitle;
+  }
+  .line {
+    margin-left: 16px;
+    flex: 1;
+    height: 1px;
+    background-color: $clLine;
+  }
+}
+.link {
+  @include linkBtn;
+  margin-top: 20px;
+  color: $clPrimary;
+}
+.itemDesignation {
+  margin: 16px 0 10px;
+  text-transform: capitalize;
+  font-weight: 700;
+}
+.notification {
+  margin-bottom: 30px;
+}
+.collapsable {
+  text-align: left;
+}
+.collapsed {
+  display: none;
+}
+.linkWrapper {
+  display: flex;
+  align-items: center;
+  .link {
+    @include linkBtn;
+    color: $clPrimary;
+  }
+  .redirectBtn {
+    margin-top: 15px;
+    margin-left: 6px;
+    cursor: pointer;
+  }
+}
+.reportBtnWrapper {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+	background-color: #F2F2F2;
+	cursor: pointer;
+}
+.reportBtn {
+  transform: scale(.6);
+}
+
+.showMore {
+  padding: 20px 0;
+  border-top: 1px solid $clBorder;
+}
+.more,
+.less {
+  @include linkBtn;
+  color: $clPrimary;
+
+  &:after {
+    background-color: $clPrimary;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: calc(100% + 12px);
+    top: 0;
+    transform: rotate(-45deg);
+    width: 10px;
+    height: 10px;
+    border-bottom: 3px solid $clPrimary;
+    border-left: 3px solid $clPrimary;
+    border-top: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-radius: 2px;
+  }
+}
+.less {
+  &:before {
+    top: 8px;
+    transform: rotate(135deg);
+  }
+}
+
+.widgetWithTable {
+  .tableRow {
+    margin: 0 -10px;
+    padding: 10px 10px 10px 20px;
+    display: flex;
+    justify-content: space-between;
+
+    &:nth-child(even) {
+      background-color: $clTableRow;
+    }
+  }
+  .name {
+    opacity: .75;
+  }
+}

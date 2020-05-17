@@ -4,6 +4,7 @@ import {
   SET_LOADING_DETAIL_END,
   SET_LOADING_DETAIL_START,
   TOGGLE_SHOW_ALL_DONATIONS,
+  TOGGLE_SHOW_ALL_NOTIFICATIONS,
   TOGGLE_SHOW_ALL_ROLES,
   LOAD_DETAIL,
   DetailActionTypes,
@@ -25,6 +26,10 @@ export const loadingDetailEnded = (): DetailActionTypes => ({
 
 export const toggleShowAllDonations = (): DetailActionTypes => ({
   type: TOGGLE_SHOW_ALL_DONATIONS,
+})
+
+export const toggleShowAllNotifications = (): DetailActionTypes => ({
+  type: TOGGLE_SHOW_ALL_NOTIFICATIONS,
 })
 
 export const toggleShowAllRoles = (): DetailActionTypes => ({

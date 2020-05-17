@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect'
 
 import { AppState } from 'store'
-import { DEFAULT_DONATIONS_LIMIT, DEFAULT_ROLES_LIMIT } from 'constants/constants'
+import { DEFAULT_DONATIONS_LIMIT, DEFAULT_NOTIFICATION_LIMIT, DEFAULT_ROLES_LIMIT } from 'constants/constants'
 import { ContactService, Contact, Connection, Role, Sponsor, Detail, Insolvency } from './types'
 import { dummyFormatDateShort } from 'utils/date'
 
@@ -11,6 +11,7 @@ export const getPhotoUrl = (store: AppState): string => getDetailData(store).pho
 export const getLastUpdate = (store: AppState): string =>
   getDetailData(store).lastUpdate ? dummyFormatDateShort(new Date(getDetailData(store).lastUpdate)) : ''
 export const getShowAllDonations = (store: AppState): boolean => store.detail.showAllDonations
+export const getShowAllNotifications = (store: AppState): boolean => store.detail.showAllNotifications
 export const getShowAllRoles = (store: AppState): boolean => store.detail.showAllRoles
 export const getPersonalInsolvency = (store: AppState): Insolvency => getDetailData(store).insolvencyPerson || {}
 export const getCompanyInsolvency = (store: AppState): Insolvency => getDetailData(store).insolvencyCompany || {}
@@ -119,6 +120,19 @@ export const getRoles = createSelector(getRolesRaw, getShowAllRoles, (roles, sho
 
 export const getContacts = (store: AppState): Contact[] => store.detail.detail.contacts || []
 export const getConnections = (store: AppState): Connection[] => store.detail.detail.connections || []
+
+export const getOfficialsRegisterId = (store: AppState): string => store.detail.detail.notificationRegisterId || ''
+
+export const getNotificatonRegistryData = (store: AppState): [] => store.detail.detail.notificationRegisterStatements || []
+
+export const getNotificationsCount = (store: AppState): number => getNotificatonRegistryData(store).length
+
+export const getNotifications = createSelector(getNotificatonRegistryData, getShowAllNotifications, (notifications, showAll) => {
+  if (!showAll) {
+    return notifications.slice(0, DEFAULT_NOTIFICATION_LIMIT)
+  }
+  return notifications
+})
 
 export const hasContacts = (store: AppState): boolean =>
   !!store.detail.detail.contacts && !!store.detail.detail.contacts.length

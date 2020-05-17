@@ -57,6 +57,8 @@ export interface Detail {
   name: string
   namePrefix: string
   nameSuffix: string
+  notificationRegisterId: string
+  notificationRegisterStatements: []
   photo: string
   roles: Role[]
   source: string

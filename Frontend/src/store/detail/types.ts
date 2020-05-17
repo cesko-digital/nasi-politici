@@ -58,6 +58,8 @@ export interface Detail {
   name: string
   namePrefix: string
   nameSuffix: string
+  notificationRegisterId: string
+  notificationRegisterStatements: []
   photo: string
   roles: Role[]
   source: string
@@ -72,12 +74,14 @@ export interface DetailState {
   loadingDetail: boolean
   showAllRoles: boolean
   showAllDonations: boolean
+  showAllNotifications: boolean
 }
 
 export const SET_DETAIL = 'SET_DETAIL'
 export const SET_LOADING_DETAIL_START = 'SET_LOADING_DETAIL_START'
 export const SET_LOADING_DETAIL_END = 'SET_LOADING_DETAIL_END'
 export const TOGGLE_SHOW_ALL_DONATIONS = 'TOGGLE_SHOW_ALL_DONATIONS'
+export const TOGGLE_SHOW_ALL_NOTIFICATIONS = 'TOGGLE_SHOW_ALL_NOTIFICATIONS'
 export const TOGGLE_SHOW_ALL_ROLES = 'TOGGLE_SHOW_ALL_ROLES'
 export const LOAD_DETAIL = 'LOAD_DETAIL'
 
@@ -98,6 +102,10 @@ interface ToggleShowAllDonationsAction {
   type: typeof TOGGLE_SHOW_ALL_DONATIONS
 }
 
+interface ToggleShowAllNotificationsAction {
+  type: typeof TOGGLE_SHOW_ALL_NOTIFICATIONS
+}
+
 interface ToggleShowAllRolesAction {
   type: typeof TOGGLE_SHOW_ALL_ROLES
 }
@@ -112,5 +120,6 @@ export type DetailActionTypes =
   | SetLoadingDetailEndAction
   | SetLoadingDetailStartAction
   | ToggleShowAllDonationsAction
+  | ToggleShowAllNotificationsAction
   | ToggleShowAllRolesAction
   | LoadDetailAction
