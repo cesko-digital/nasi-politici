@@ -152,17 +152,16 @@
   width: 100%;
 }
 .widgets {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
+  column-count: 2;
+  column-gap: 30px;
 }
 .widget {
+  width: 100%;
+  display: inline-block;
+  box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.06), 4px 4px 4px rgba(0, 0, 0, 0.06);
   margin-bottom: 36px;
   padding: 30px;
-  width: $widgetBase;
   border-top: 2px solid $clDarkBorder;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.06);
   box-sizing: border-box;
   background-color: #fff;
 

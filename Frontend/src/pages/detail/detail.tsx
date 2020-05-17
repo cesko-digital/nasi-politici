@@ -139,7 +139,7 @@ const Detail: React.FC<Props> = props => {
               </div>
             </div>
             <div className={styles.detail}>
-              <div id="overview" className={styles.section}>
+              <div id="overview" className={classnames(styles.section, styles.overview)}>
                 <div className={styles.titleWrapper}>
                   <h1 className={styles.title}>Přehled</h1>
                   <Divider className={styles.titleDivider} />
@@ -162,8 +162,8 @@ const Detail: React.FC<Props> = props => {
                     {!props.description && <NoData />}
                     {!!props.description && <div className={styles.description}>{props.description}</div>}
                   </div>
-                  <DemagogWidget />
                   <ContactsWidget />
+                  <DemagogWidget />
                 </div>
               </div>
               <div id="career" className={styles.section}>
@@ -173,8 +173,8 @@ const Detail: React.FC<Props> = props => {
                 </div>
                 <div className={styles.widgets}>
                   <RolesWidget />
-                  <DonationsWidget />
                   <InsolvencyWidget />
+                  <DonationsWidget />
                   <NotificationsWidget />
                 </div>
               </div>
