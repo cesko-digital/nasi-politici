@@ -84,7 +84,7 @@ const Notification: React.FC<NotificationProps> = ({officialsId, notification}) 
             )
           })}
         <div className={styles.linkWrapper}>
-          <a className={styles.link} href={linkToRegister}>Peněžité příjmy nebo jiné majet. výhody a dary</a>
+          <a className={styles.link} href={linkToRegister} rel="noopener noreferrer" target="_blank">Peněžité příjmy nebo jiné majet. výhody a dary</a>
           <RedirectBtn className={styles.redirectBtn} />
         </div>
       </div>
