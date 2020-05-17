@@ -37,8 +37,7 @@
     background-color: $clPrimaryLight;
   }
   .tagname {
-    margin-left: 4px;
-    color: $clPrimaryText;
+    @include tag;
 	}
 	.stats {
 		padding: 0 30px 0 20px;
@@ -49,8 +48,7 @@
 		padding: 20px 30px;
 		border-top: 1px solid $clBorder;
 		.link {
-			@include linkBtn;
-			color: $clPrimary;
+			@include linkBtnPrimary;
     }
     .redirectBtn {
       margin-left: 6px;
@@ -66,11 +64,7 @@
 }
 
 .reportBtnWrapper {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-	background-color: #F2F2F2;
-	cursor: pointer;
+  @include reportBtn;
 }
 .reportBtn {
   transform: scale(.6);

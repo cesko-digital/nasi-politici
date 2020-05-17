@@ -13,11 +13,6 @@
   @include condensedTitle;
 }
 .link {
-  @include linkBtn;
+  @include linkBtnPrimary;
   margin: 24px 0 72px;
-  color: $clPrimary;
-
-		&:after {
-			background-color: $clPrimary;
-		}
 }

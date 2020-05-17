@@ -36,9 +36,12 @@
   align-items: center;
 }
 .socialLink {
-  @include regularText;
+  @include linkBtn;
   margin-left: 10px;
   color: #fff;
+  &:after {
+    background-color: #fff;
+  }
 }
 .sponsor {
   font-weight: 600;

@@ -37,8 +37,7 @@
     background-color: $clPrimaryLight;
   }
   .tagname {
-    margin-left: 4px;
-    color: $clPrimaryText;
+    @include tag;
   }
   .subtitleWrapper {
     margin-bottom: 10px;
@@ -57,9 +56,8 @@
   }
 }
 .link {
-  @include linkBtn;
+  @include linkBtnPrimary;
   margin-top: 20px;
-  color: $clPrimary;
 }
 .itemDesignation {
   margin: 16px 0 10px;
@@ -78,8 +76,7 @@
   display: flex;
   align-items: center;
   .link {
-    @include linkBtn;
-    color: $clPrimary;
+    @include linkBtnPrimary;
   }
   .redirectBtn {
     margin-top: 15px;
@@ -88,11 +85,7 @@
   }
 }
 .reportBtnWrapper {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-	background-color: #F2F2F2;
-	cursor: pointer;
+  @include reportBtn;
 }
 .reportBtn {
   transform: scale(.6);
@@ -105,12 +98,7 @@
 }
 .more,
 .less {
-  @include linkBtn;
-  color: $clPrimary;
-
-  &:after {
-    background-color: $clPrimary;
-  }
+  @include linkBtnPrimary;
 
   &:before {
     content: '';

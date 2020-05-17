@@ -37,8 +37,7 @@
     background-color: $clPrimaryLight;
   }
   .tagname {
-    margin-left: 4px;
-    color: $clPrimaryText;
+    @include tag;
   }
 }
 .widgetWithTable {
@@ -63,12 +62,7 @@
 }
 .more,
 .less {
-  @include linkBtn;
-  color: $clPrimary;
-
-  &:after {
-    background-color: $clPrimary;
-  }
+  @include linkBtnPrimary;
 
   &:before {
     content: '';
@@ -118,11 +112,7 @@
 }
 
 .reportBtnWrapper {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-	background-color: #F2F2F2;
-	cursor: pointer;
+  @include reportBtn;
 }
 .reportBtn {
   transform: scale(.6);

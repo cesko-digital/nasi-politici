@@ -37,24 +37,6 @@
 		@include condensedTitle;
 		margin-right: 8px;
   }
-  .tags,
-  .tag {
-    display: flex;
-  }
-  .tags {
-    align-self: flex-start;
-  }
-  .tag {
-    margin-right: 10px;
-    padding: 0 8px;
-    align-items: center;
-    border-radius: 50px;
-    background-color: $clPrimaryLight;
-  }
-  .tagname {
-    margin-left: 4px;
-    color: $clPrimaryText;
-	}
 	.subtitleWrapper {
 		margin-bottom: 10px;
 		padding: 0 20px 0 30px;

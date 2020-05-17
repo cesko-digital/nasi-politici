@@ -40,6 +40,10 @@
   font-size: 21px;
   line-height: 24px;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1), inset 0px 2px 3px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  &:hover {
+    background-color: #2e8ee5;
+  }
 }
 .result-list {
   display: flex;

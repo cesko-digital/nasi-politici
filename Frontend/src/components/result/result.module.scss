@@ -9,6 +9,14 @@
   box-shadow: inset 0 1px 0 #e5e5e5;
   text-decoration: none;
 
+  &:hover {
+    .link {
+      &:after {
+        opacity: 1;
+      }
+    }
+  }
+
   &:nth-child(odd) {
     background-color: $clTableRow;
   }
@@ -35,15 +43,10 @@
 }
 
 .link {
-  @include linkBtn;
+  @include linkBtnPrimary;
   height: 39px;
   line-height: 53px;
-  color: $clPrimary;
   white-space: nowrap;
-
-  &:after {
-    background-color: $clPrimary;
-  }
 }
 
 .count, .emptyTitle {
@@ -77,13 +80,8 @@
   }
 
 	.text {
-		@include linkBtn;
+		@include linkBtnPrimary;
 		margin-left: 10px;
-		color: $clPrimary;
-
-		&:after {
-			background-color: $clPrimary;
-		}
 	}
 }
 
