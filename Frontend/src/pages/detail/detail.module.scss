@@ -1,6 +1,7 @@
 @import 'assets/styles/mixins';
 
 .detail {
+  width: 100%;
   background-color: $clBackground;
 }
 
@@ -266,8 +267,8 @@
 }
 
 @media screen and (max-width: 650px) {
-  .widget {
-    width: $widgetFluid;
+  .widgets {
+    column-count: 1;
   }
   .personal {
     @include smallText;
