@@ -14,11 +14,11 @@ const notificationType = (type: string) => {
     case 'INGOING':
       return 'Vstupní oznámení'
     case 'ONGOING':
-      return 'Průběžná oznámení'
+      return 'Průběžné oznámení'
     case 'OUTGOING':
       return 'Výstupní oznámení'
     default:
-      return 'Oznámení'
+      return 'Neveřejné oznámení'
   }
 }
 
@@ -42,6 +42,7 @@ interface NotificationProps {
         name: string,
       }
     }>,
+    Visibility?: string,
   }
 }
 
@@ -51,8 +52,11 @@ const Notification: React.FC<NotificationProps> = ({officialsId, notification}) 
 
   const date = new Date(notification.FromDate)
   const notificationId = notification.Id
-  const linkToRegister = `https://cro.justice.cz/verejnost/funkcionari/${officialsId}/oznameni/${notificationId}`
-
+  const notificationOnRequest = notification.Visibility === "REQUEST"
+  const linkToRegisterPublic = `https://cro.justice.cz/verejnost/funkcionari/${officialsId}/oznameni/${notificationId}`
+  const linkToRegisterNotPublic = `https://cro.justice.cz/verejnost/funkcionari/form/${officialsId}`
+  const linkToRegister = notificationOnRequest ? linkToRegisterNotPublic : linkToRegisterPublic
+  console.log(notification)
   return (
     <div className={styles.notification}>
       <div className={styles.subtitleWrapper} onClick={() => collapse()}>
@@ -84,8 +88,9 @@ const Notification: React.FC<NotificationProps> = ({officialsId, notification}) 
             )
           })}
         <div className={styles.linkWrapper}>
-          <a className={styles.link} href={linkToRegister} rel="noopener noreferrer" target="_blank">Peněžité příjmy nebo jiné majet. výhody a dary</a>
-          <RedirectBtn className={styles.redirectBtn} />
+          <a className={styles.link} href={linkToRegister} rel="noopener noreferrer" target="_blank">
+            Peněžité příjmy nebo jiné majet. výhody a dary</a>
+            <RedirectBtn className={classnames(styles.redirectBtn, notificationOnRequest && styles.disabled)} href={linkToRegister} />
         </div>
       </div>
     </div>

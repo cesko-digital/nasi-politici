@@ -143,6 +143,17 @@ $clGray: #999999;
   }
 }
 
+@mixin disabledlinkBtnPrimary {
+  user-select: none;
+  pointer-events: none;
+  opacity: .45;
+  cursor: default;
+
+  &:after {
+    content: none !important;
+  }
+}
+
 @mixin tag {
   margin-left: 4px;
   color: $clPrimaryText;
