@@ -56,7 +56,6 @@ const Notification: React.FC<NotificationProps> = ({officialsId, notification}) 
   const linkToRegisterPublic = `https://cro.justice.cz/verejnost/funkcionari/${officialsId}/oznameni/${notificationId}`
   const linkToRegisterNotPublic = `https://cro.justice.cz/verejnost/funkcionari/form/${officialsId}`
   const linkToRegister = notificationOnRequest ? linkToRegisterNotPublic : linkToRegisterPublic
-  console.log(notification)
   return (
     <div className={styles.notification}>
       <div className={styles.subtitleWrapper} onClick={() => collapse()}>
