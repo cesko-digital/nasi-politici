@@ -139,6 +139,16 @@
 }
 
 @media screen and (max-width: 650px) {
+  .header {
+    .tags {
+      margin: 12px 0;
+    }
+  }
+  .headerTitleWrapper {
+    .title {
+      margin-bottom: 0;
+    }
+  }
   .linkWrapper {
     .link {
       font-size: 14px;
