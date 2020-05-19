@@ -50,6 +50,7 @@ export interface Detail {
   currentParty: string
   deathDate: string | null
   description: string
+  hasPhoto: boolean
   id: string
   insolvencyCompany: Insolvency
   insolvencyPerson: Insolvency

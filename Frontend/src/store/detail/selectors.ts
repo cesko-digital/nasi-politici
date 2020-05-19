@@ -7,6 +7,7 @@ import { dummyFormatDateShort } from 'utils/date'
 
 export const getDetailData = (store: AppState): Detail => store.detail.detail
 export const isDetailLoading = (store: AppState): boolean => store.detail.loadingDetail
+export const getHasPhoto = (store: AppState): boolean => getDetailData(store).hasPhoto
 export const getPhotoUrl = (store: AppState): string => getDetailData(store).photo
 export const getLastUpdate = (store: AppState): string =>
   getDetailData(store).lastUpdate ? dummyFormatDateShort(new Date(getDetailData(store).lastUpdate)) : ''

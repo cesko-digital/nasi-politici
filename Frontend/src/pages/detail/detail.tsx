@@ -35,6 +35,7 @@ interface Props {
   description: string
   engagement: string
   fullname: string
+  hasPhoto: boolean
   isLoading: boolean
   lastUpdate: string
   loadDetail: (id: string) => void
@@ -49,6 +50,7 @@ interface Props {
 
 const Detail: React.FC<Props> = props => {
   const {
+    hasPhoto,
     loadDetail,
     match: {
       params: { id },
@@ -76,7 +78,10 @@ const Detail: React.FC<Props> = props => {
           </Helmet>
           <div className={styles.heading}>
             <div className={styles.wrapper}>
-              <ProfilePicture src={props.photoUrl} name={props.fullname} customClassName={styles.photo} />
+              {!!hasPhoto &&
+                <ProfilePicture src={props.photoUrl} name={props.fullname} customClassName={styles.photo} />}
+              {!hasPhoto &&
+                <div className={classnames(styles.photo, styles.face)} />}
               <div className={styles.initials}>
                 <div className={styles.initialsWrapper}>
                   <div className={styles.fullname}>{props.fullname}</div>

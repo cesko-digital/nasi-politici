@@ -28,6 +28,7 @@ const intialDetail: Detail = {
   currentParty: '',
   deathDate: '',
   description: '',
+  hasPhoto: false,
   id: '',
   insolvencyCompany: initialInsolvency,
   insolvencyPerson: initialInsolvency,

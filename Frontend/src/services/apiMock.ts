@@ -82,6 +82,7 @@ const api: API = {
     notificationRegisterId: '',
     notificationRegisterStatements: [],
     surname: 'Babiš',
+    hasPhoto: true,
     lastUpdate: '2020-04-01T00:00:00',
     birthDate: '1954-09-02T00:00:00',
     deathDate: null,
