@@ -49,6 +49,25 @@ interface Props {
   isValid?: boolean
 }
 
+const MenuBar: React.FC = () => {
+  return (
+    <React.Fragment>
+      <ScrollIntoView selector="#overview" smooth>
+        <div className={styles.link}>Přehled</div>
+      </ScrollIntoView>
+      <ScrollIntoView selector="#career" smooth>
+        <div className={styles.link}>Kariéra politika</div>
+      </ScrollIntoView>
+      <ScrollIntoView selector="#engagement" smooth>
+        <div className={styles.link}>Angažovanost</div>
+      </ScrollIntoView>
+      <ScrollIntoView selector="#media" smooth>
+        <div className={styles.link}>Mediální obraz</div>
+      </ScrollIntoView>
+    </React.Fragment>
+  )
+}
+
 const Detail: React.FC<Props> = props => {
   const {
     loadDetail,
@@ -126,22 +145,11 @@ const Detail: React.FC<Props> = props => {
           <div className={styles.body}>
             <div className={styles.menuWrapper}>
               <div className={styles.menu}>
-                <ScrollIntoView selector="#prehled">
-                  <a className={styles.link} href="#prehled">Přehled</a>
-                </ScrollIntoView>
-                <ScrollIntoView selector="#kariera">
-                  <a className={styles.link} href="#kariera">Kariéra politika</a>
-                </ScrollIntoView>
-                <ScrollIntoView selector="#angazovanost">
-                  <a className={styles.link} href="#angazovanost">Angažovanost</a>
-                </ScrollIntoView>
-                <ScrollIntoView selector="#media">
-                  <a className={styles.link} href="#media">Mediální obraz</a>
-                </ScrollIntoView>
+                <MenuBar />
               </div>
             </div>
             <div className={styles.detail}>
-              <div id="prehled" className={classnames(styles.section, styles.overview)}>
+              <div id="overview" className={classnames(styles.section, styles.overview)}>
                 <div className={styles.titleWrapper}>
                   <h1 className={styles.title}>Přehled</h1>
                   <Divider className={styles.titleDivider} />
@@ -168,7 +176,7 @@ const Detail: React.FC<Props> = props => {
                   <DemagogWidget />
                 </div>
               </div>
-              <div id="kariera" className={styles.section}>
+              <div id="career" className={styles.section}>
                 <div className={styles.titleWrapper}>
                   <h1 className={styles.title}>Kariéra</h1>
                   <Divider className={styles.titleDivider} />
@@ -180,7 +188,7 @@ const Detail: React.FC<Props> = props => {
                   <NotificationsWidget />
                 </div>
               </div>
-              <div id="angazovanost" className={styles.section}>
+              <div id="engagement" className={styles.section}>
                 <div className={styles.titleWrapper}>
                   <h1 className={styles.title}>Angažovanost</h1>
                   <Divider className={styles.titleDivider} />
