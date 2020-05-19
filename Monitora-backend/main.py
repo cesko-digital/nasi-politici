@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from app import create_app
-from app.data.helper import Helper
+#from app.data.helper import Helper
 from datetime import datetime
 from app.data.views.view import View
 import flask
