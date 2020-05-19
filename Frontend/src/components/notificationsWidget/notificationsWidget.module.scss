@@ -137,3 +137,11 @@
     opacity: .75;
   }
 }
+
+@media screen and (max-width: 650px) {
+  .linkWrapper {
+    .link {
+      font-size: 14px;
+    }
+  }
+}
