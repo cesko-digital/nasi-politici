@@ -1,6 +1,7 @@
 import * as React from 'react'
 import classnames from 'classnames'
 import Helmet from 'react-helmet'
+import ScrollIntoView from 'react-scroll-into-view'
 import {
   FacebookShareButton,
   FacebookIcon,
@@ -24,8 +25,9 @@ import ProfilePicture from 'components/profilePicture/profilePicture'
 import ReportModalTrigger from 'components/reportModal/reportModalTriggerConnected'
 import Error from 'pages/error/error'
 import ExplanationModal from 'components/explanationModal/explanationModal'
-import styles from './detail.module.scss'
 import EngagementChart from 'components/engagementChart/engagementChartConnected'
+
+import styles from './detail.module.scss'
 
 interface Props {
   birthYear: string
@@ -124,22 +126,22 @@ const Detail: React.FC<Props> = props => {
           <div className={styles.body}>
             <div className={styles.menuWrapper}>
               <div className={styles.menu}>
-                <a href="#overview" className={styles.link}>
-                  Přehled
-                </a>
-                <a href="#career" className={styles.link}>
-                  Kariéra politika
-                </a>
-                <a href="#engagement" className={styles.link}>
-                  Angažovanost
-                </a>
-                <a href="#media" className={styles.link}>
-                  Mediální obraz
-                </a>
+                <ScrollIntoView selector="#prehled">
+                  <a className={styles.link} href="#prehled">Přehled</a>
+                </ScrollIntoView>
+                <ScrollIntoView selector="#kariera">
+                  <a className={styles.link} href="#kariera">Kariéra politika</a>
+                </ScrollIntoView>
+                <ScrollIntoView selector="#angazovanost">
+                  <a className={styles.link} href="#angazovanost">Angažovanost</a>
+                </ScrollIntoView>
+                <ScrollIntoView selector="#media">
+                  <a className={styles.link} href="#media">Mediální obraz</a>
+                </ScrollIntoView>
               </div>
             </div>
             <div className={styles.detail}>
-              <div id="overview" className={classnames(styles.section, styles.overview)}>
+              <div id="prehled" className={classnames(styles.section, styles.overview)}>
                 <div className={styles.titleWrapper}>
                   <h1 className={styles.title}>Přehled</h1>
                   <Divider className={styles.titleDivider} />
@@ -166,7 +168,7 @@ const Detail: React.FC<Props> = props => {
                   <DemagogWidget />
                 </div>
               </div>
-              <div id="career" className={styles.section}>
+              <div id="kariera" className={styles.section}>
                 <div className={styles.titleWrapper}>
                   <h1 className={styles.title}>Kariéra</h1>
                   <Divider className={styles.titleDivider} />
@@ -178,7 +180,7 @@ const Detail: React.FC<Props> = props => {
                   <NotificationsWidget />
                 </div>
               </div>
-              <div id="engagement" className={styles.section}>
+              <div id="angazovanost" className={styles.section}>
                 <div className={styles.titleWrapper}>
                   <h1 className={styles.title}>Angažovanost</h1>
                   <Divider className={styles.titleDivider} />
