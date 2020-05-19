@@ -1,5 +1,10 @@
 @import './assets/styles/vendor';
 
+html,
+.body {
+  scroll-behavior: smooth;
+}
+
 .body {
   @include regularText;
   text-align: left;
