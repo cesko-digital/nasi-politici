@@ -63,8 +63,10 @@ class View(Resource):
                                 params={"count": 100})
         # response.encoding = 'utf-8'
         data = [{key: item[key] for key in article_keys} for item in response.json() if item["text"] is not None]
+
 #         topics = helper.process(' '.join([item["text"] for item in response.json() if item["text"] is not None]))
 #         topic_map = {}
+
         for index, item in enumerate(data):
             data[index]['perex'] = str(item['perex'].replace("<span class=\"article-hl\">", "").replace("</span>", "").replace("&quot;", "\\\""))
 #             for topic in topics:
