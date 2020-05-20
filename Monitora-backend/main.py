@@ -26,30 +26,30 @@ def after_request(response):
 @app.route("/")
 def hello():
     return "<h1 style='color:blue'>Hello There!</h1>"
-
-@app.route('/articles/<int:politician_id>', methods=['GET'])
-def articlesForPolitician(politician_id):
-    return View.articlesForPolitician(politician_id)
+#
+# @app.route('/articles/<int:politician_id>', methods=['GET'])
+# def articlesForPolitician(politician_id):
+#     return View.articlesForPolitician(politician_id)
 
 @app.route('/articles', methods=['POST'])
 def articlesForPoliticianByQuery():
     return View.articlesForPoliticianByQuery()
 
-@app.route('/topics/<int:politician_id>', methods=['GET'])
-def topicsForPoliticianById(politician_id):
-    return View.topicsForPoliticianById(politician_id)
+# @app.route('/topics/<int:politician_id>', methods=['GET'])
+# def topicsForPoliticianById(politician_id):
+#     return View.topicsForPoliticianById(politician_id)
 
-@app.route('/topics', methods=['POST'])
-def topicsForPoliticianByQuery():
-    return View.topicsForPoliticianByQuery()
+# @app.route('/topics', methods=['POST'])
+# def topicsForPoliticianByQuery():
+#     return View.topicsForPoliticianByQuery()
 
-@app.route('/topics', methods=['GET'])
-def topics():
-    return View.topics()
+# @app.route('/topics', methods=['GET'])
+# def topics():
+#     return View.topics()
 
-@app.route('/politicians', methods=['POST'])
-def addPolitician():
-    return View.addPolitician()
+# @app.route('/politicians', methods=['POST'])
+# def addPolitician():
+#     return View.addPolitician()
 
 @app.route('/politicians', methods=['GET'])
 def getPoliticians():
