@@ -48,9 +48,10 @@
   }
   .subtitle {
     @include subTitle;
+    font-weight: 400;
   }
   .line {
-    margin-left: 16px;
+    margin-left: 6px;
     flex: 1;
     height: 1px;
     background-color: $clLine;

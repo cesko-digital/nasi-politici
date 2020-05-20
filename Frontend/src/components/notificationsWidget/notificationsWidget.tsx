@@ -49,8 +49,10 @@ interface NotificationProps {
 const Notification: React.FC<NotificationProps> = ({officialsId, notification}) => {
   const [isCollapsed, setIsCollapsed] = React.useState(true)
   const collapse = (): void => setIsCollapsed(!isCollapsed)
-
-  const date = new Date(notification.FromDate)
+  const unDetermintedDate = '0001-01-01T00:00:00'
+  const unFilteredDate = new Date(notification.FromDate)
+  const localisedDate = Intl.DateTimeFormat('cs-CZ').format(unFilteredDate)
+  const date = notification.FromDate === unDetermintedDate ? 'období nezadáno' : localisedDate
   const notificationId = notification.Id
   const notificationOnRequest = notification.Visibility === "REQUEST"
   const linkToRegisterPublic = `https://cro.justice.cz/verejnost/funkcionari/${officialsId}/oznameni/${notificationId}`
@@ -60,7 +62,7 @@ const Notification: React.FC<NotificationProps> = ({officialsId, notification}) 
     <div className={styles.notification}>
       <div className={styles.subtitleWrapper} onClick={() => collapse()}>
         <span className={styles.subtitle}>{notificationType(notification.Type)}</span>
-        <strong>&nbsp;({Intl.DateTimeFormat('cs-CZ').format(date)})</strong>
+        <span className={styles.timestamp}>&nbsp;({date})</span>
         <div className={styles.line} />
       </div>
       <div className={classnames(styles.collapsable, isCollapsed && styles.collapsed)}>
