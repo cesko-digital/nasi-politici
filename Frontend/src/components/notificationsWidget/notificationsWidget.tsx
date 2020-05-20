@@ -52,7 +52,7 @@ const Notification: React.FC<NotificationProps> = ({officialsId, notification}) 
   const unDetermintedDate = '0001-01-01T00:00:00'
   const unFilteredDate = new Date(notification.FromDate)
   const localisedDate = Intl.DateTimeFormat('cs-CZ').format(unFilteredDate)
-  const date = notification.FromDate === unDetermintedDate ? 'období nezadáno' : localisedDate
+  const date = notification.FromDate === unDetermintedDate ? 'neznámé období' : localisedDate
   const notificationId = notification.Id
   const notificationOnRequest = notification.Visibility === "REQUEST"
   const linkToRegisterPublic = `https://cro.justice.cz/verejnost/funkcionari/${officialsId}/oznameni/${notificationId}`
