@@ -17,35 +17,34 @@ interface Props {
     description: string
   }>
 }
-
 const Chart: React.FC<Props> = props => {
-  const initial: {
-    [key: string]: {
-      name: string
-      color: string
-    }
-  } = {}
-  let i = 0
-  const colors = props.connections.reduce((c, connection) => {
-    if (!c[connection.description]) {
-      c[connection.description] = {
-        name: connection.description,
-        color: roleColors[i] || '#cccccc',
-      }
-      i++
-    }
-    return c
-  }, initial)
-
-  let minYear = 0,
-    maxYear = 0
-  props.connections.forEach(c => {
-    const since = new Date(c.since + '.000Z')
-    const until = c.until ? new Date(c.until + '.000Z') : new Date()
-    if (since.getUTCFullYear() < minYear || !minYear) minYear = since.getUTCFullYear()
-    if (until.getUTCFullYear() > maxYear) maxYear = until.getUTCFullYear()
-  })
   React.useEffect(() => {
+    const initial: {
+      [key: string]: {
+        name: string
+        color: string
+      }
+    } = {}
+    let i = 0
+    const colors = props.connections.reduce((c, connection) => {
+      if (!c[connection.description]) {
+        c[connection.description] = {
+          name: connection.description,
+          color: roleColors[i] || '#cccccc',
+        }
+        i++
+      }
+      return c
+    }, initial)
+
+    let minYear = 0,
+      maxYear = 0
+    props.connections.forEach(c => {
+      const since = new Date(c.since + '.000Z')
+      const until = c.until ? new Date(c.until + '.000Z') : new Date()
+      if (since.getUTCFullYear() < minYear || !minYear) minYear = since.getUTCFullYear()
+      if (until.getUTCFullYear() > maxYear) maxYear = until.getUTCFullYear()
+    })
     const data = props.connections.map(c => {
       return {
         fromDate: c.since,
@@ -105,13 +104,15 @@ const Chart: React.FC<Props> = props => {
 
     chart.scrollbarX = new am4core.Scrollbar()
     chart.scrollbarX.parent = chart.bottomAxesContainer
-  }, [props.connections, colors, maxYear, minYear])
-  if (!props.connections.length) return <NoData />
+  }, [props.connections])
   const height =
     props.connections
       .map(c => `${c.company}${c.description}`)
       .filter((name, index, self) => self.indexOf(name) === index).length * 70
   return <div id="chartdiv" style={{ height: `${height + 100}px` }}></div>
 }
-
-export default Chart
+const EngagementChart: React.FC<Props> = props => {
+  if (!props.connections.length) return <NoData />
+  return <Chart {...props} />
+}
+export default EngagementChart
