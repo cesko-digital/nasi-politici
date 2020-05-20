@@ -63,17 +63,17 @@ class View(Resource):
                                 params={"count": 100})
         # response.encoding = 'utf-8'
         data = [{key: item[key] for key in article_keys} for item in response.json() if item["text"] is not None]
-        topics = helper.process(' '.join([item["text"] for item in response.json() if item["text"] is not None]))
-        topic_map = {}
+#         topics = helper.process(' '.join([item["text"] for item in response.json() if item["text"] is not None]))
+#         topic_map = {}
         for index, item in enumerate(data):
             data[index]['perex'] = str(item['perex'].replace("<span class=\"article-hl\">", "").replace("</span>", "").replace("&quot;", "\\\""))
-            for topic in topics:
-                if topic['topic'] in item['text']:
-                    if topic['topic'] not in topic_map:
-                        topic_map[topic['topic']] = [item['id']]
-                    else:
-                        topic_map[topic['topic']].append(item['id'])
-        return json.dumps({"articles": data, "topic_map": topic_map})
+#             for topic in topics:
+#                 if topic['topic'] in item['text']:
+#                     if topic['topic'] not in topic_map:
+#                         topic_map[topic['topic']] = [item['id']]
+#                     else:
+#                         topic_map[topic['topic']].append(item['id'])
+        return json.dumps({"articles": data, "topic_map": {}})
 
 
     # @staticmethod

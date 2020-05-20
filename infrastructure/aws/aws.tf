@@ -68,6 +68,7 @@ data "aws_secretsmanager_secret_version" "secrets-version" {
 # I'll create issue as an BE improvement for it.
 locals {
   MonitoraApiUrl = jsondecode(data.aws_secretsmanager_secret_version.secrets-version.secret_string)["MonitoraApiUrl"]
+  MonitoraToken = jsondecode(data.aws_secretsmanager_secret_version.secrets-version.secret_string)["MonitoraToken"]
   HlidacAuthenticationToken = jsondecode(data.aws_secretsmanager_secret_version.secrets-version.secret_string)["HlidacAuthenticationToken"]
   CzFinToken = jsondecode(data.aws_secretsmanager_secret_version.secrets-version.secret_string)["CzFinToken"]
   MailAuthenticationToken = jsondecode(data.aws_secretsmanager_secret_version.secrets-version.secret_string)["MailAuthenticationToken"]
@@ -212,6 +213,10 @@ resource "aws_route53_zone" "private" {
 # ECS deployment to Fargate
 # ----------
 
+# ----------
+# .net Backend
+# ----------
+
 resource "aws_ecr_repository" "nasi-politici" {
   name = "nasi-politici"
   image_tag_mutability = "MUTABLE"
@@ -330,6 +335,129 @@ resource "aws_route53_record" "nasi-politici-elb" {
   alias {
     name = aws_lb.nasi-politici-elb.dns_name
     zone_id = aws_lb.nasi-politici-elb.zone_id
+    evaluate_target_health = false
+  }
+}
+
+# -------------
+# Monitora backend
+# -------------
+
+resource "aws_ecr_repository" "monitora" {
+  name = "monitora"
+  image_tag_mutability = "MUTABLE"
+
+  image_scanning_configuration {
+    scan_on_push = true
+  }
+}
+
+resource "aws_ecs_cluster" "monitora" {
+  name = "monitora"
+}
+
+resource "aws_ecs_task_definition" "monitora" {
+  family = "monitora"
+  container_definitions = templatefile("ecs/monitora.tmpl", {
+    aws_region = var.aws_region,
+    aws_repository = aws_ecr_repository.monitora.repository_url,
+    MonitoraToken = local.MonitoraToken
+  })
+  network_mode = "awsvpc"
+  execution_role_arn = aws_iam_role.ecr-task-execution-role.arn
+  task_role_arn = aws_iam_role.ecr-task-execution-role.arn
+  memory = "1024"
+  cpu = "512"
+}
+
+resource "aws_ecs_service" "monitora" {
+  name = "monitora"
+  cluster = aws_ecs_cluster.monitora.id
+  task_definition = aws_ecs_task_definition.monitora.arn
+  launch_type = "FARGATE"
+  desired_count = 1
+  deployment_minimum_healthy_percent = 100
+  deployment_maximum_percent = 200
+  health_check_grace_period_seconds = 20
+
+  network_configuration {
+    subnets = [
+      aws_subnet.private.id
+    ]
+    security_groups = [
+      aws_security_group.default-private-sg.id
+    ]
+    assign_public_ip = false
+  }
+
+  load_balancer {
+    target_group_arn = aws_lb_target_group.monitora-tg.arn
+    container_name = "monitora"
+    container_port = 8000
+  }
+
+  # Ignore external changes to desired count in Terraform, allows to switch to autoscaling group
+  lifecycle {
+    ignore_changes = [
+      #      desired_count
+    ]
+  }
+}
+
+resource "aws_cloudwatch_log_group" "monitora-lg" {
+  name = "/ecs/monitora"
+}
+
+# -----------
+# Elastic Load balancers
+# -----------
+resource "aws_lb" "monitora-elb" {
+  name = "monitora-elb"
+  internal = true
+  load_balancer_type = "network"
+  subnets = [
+    aws_subnet.private.id
+  ]
+
+  idle_timeout = 400
+
+  tags = {
+    Name = "monitora-elb"
+  }
+}
+
+resource "aws_lb_listener" "monitora-elb-listener" {
+  load_balancer_arn = aws_lb.monitora-elb.arn
+  port = "80"
+  protocol = "TCP"
+
+  default_action {
+    type = "forward"
+    target_group_arn = aws_lb_target_group.monitora-tg.arn
+  }
+}
+
+resource "aws_lb_target_group" "monitora-tg" {
+  name = "monitora-tg"
+  port = 8000
+  protocol = "TCP"
+  vpc_id = aws_vpc.vpc.id
+  target_type = "ip"
+
+  stickiness {
+    enabled = false
+    type = "lb_cookie"
+  }
+}
+
+resource "aws_route53_record" "monitora-elb" {
+  zone_id = aws_route53_zone.private.id
+  name = "monitora"
+  type = "A"
+
+  alias {
+    name = aws_lb.monitora-elb.dns_name
+    zone_id = aws_lb.monitora-elb.zone_id
     evaluate_target_health = false
   }
 }
@@ -543,6 +671,13 @@ resource "aws_cloudfront_distribution" "distribution" {
     cloudfront_default_certificate = false
     ssl_support_method = "sni-only"
     minimum_protocol_version = "TLSv1.2_2018"
+  }
+
+  custom_error_response {
+    error_code = 403
+    error_caching_min_ttl = 300
+    response_code = 200
+    response_page_path = "/index.html"
   }
 }
 

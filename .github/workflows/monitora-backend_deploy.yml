@@ -1,14 +1,14 @@
-name: 'Deploy .net core backend'
+name: 'Deploy Python Monitora backend'
 on:
   push:
     branches:
       - master
     paths:
-      - 'NasiPolitici/**'
+      - 'Monitora-backend/**'
 env:
   region: ${{ secrets.AWS_REGION }}
   repository: ${{ secrets.AWS_REPOSITORY }}
-  serviceName: 'nasi-politici'
+  serviceName: 'monitora'
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -26,7 +26,7 @@ jobs:
       - name: 'Build Docker image'
         run: |
           docker build -t ${{ env.serviceName }}
-        working-directory: 'NasiPolitici'
+        working-directory: 'Monitora-backend'
       - name: 'Push Docker image to repository'
         run: |
           docker tag ${{ env.serviceName }}:latest ${{ env.repository }}/${{ env.serviceName }}:latest
