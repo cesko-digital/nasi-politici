@@ -1,8 +1,7 @@
 @import 'assets/styles/mixins';
 
 .homepage {
-  margin: 0 auto;
-  padding-bottom: 230px;
+  margin: 25vh auto 25vh;
 }
 .wrapper {
   margin: 0 auto;
@@ -12,7 +11,7 @@
   width: 270px;
 }
 .intro {
-  margin: 230px 30px 0 30px;
+  margin: 0 30px 0 30px;
 }
 .perex {
   @include regularText;
