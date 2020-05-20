@@ -25,7 +25,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: 'Build Docker image'
         run: |
-          docker build -t ${{ env.serviceName }}
+          docker build -t ${{ env.serviceName }} .
         working-directory: 'NasiPolitici'
       - name: 'Push Docker image to repository'
         run: |
