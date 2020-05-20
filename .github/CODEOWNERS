@@ -1,3 +1,3 @@
-/infrastructure/* @martinwenisch
+/infrastructure/** @martinwenisch
 
-/.github/workflows/* @martinwenisch
+/.github/workflows/** @martinwenisch
