@@ -3,6 +3,7 @@ import {
   DetailState,
   Detail,
   Insolvency,
+  INIT_DETAIL,
   SET_DETAIL,
   SET_LOADING_DETAIL_END,
   SET_LOADING_DETAIL_START,
@@ -56,6 +57,11 @@ const initialState: DetailState = {
 
 export function detailReducer(state = initialState, action: DetailActionTypes): DetailState {
   switch (action.type) {
+    case INIT_DETAIL: {
+      return {
+        ...initialState,
+      }
+    }
     case SET_DETAIL: {
       return {
         ...state,

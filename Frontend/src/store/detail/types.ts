@@ -78,6 +78,7 @@ export interface DetailState {
   showAllNotifications: boolean
 }
 
+export const INIT_DETAIL = 'INIT'
 export const SET_DETAIL = 'SET_DETAIL'
 export const SET_LOADING_DETAIL_START = 'SET_LOADING_DETAIL_START'
 export const SET_LOADING_DETAIL_END = 'SET_LOADING_DETAIL_END'
@@ -85,6 +86,10 @@ export const TOGGLE_SHOW_ALL_DONATIONS = 'TOGGLE_SHOW_ALL_DONATIONS'
 export const TOGGLE_SHOW_ALL_NOTIFICATIONS = 'TOGGLE_SHOW_ALL_NOTIFICATIONS'
 export const TOGGLE_SHOW_ALL_ROLES = 'TOGGLE_SHOW_ALL_ROLES'
 export const LOAD_DETAIL = 'LOAD_DETAIL'
+
+interface setInitAction {
+  type: typeof INIT_DETAIL
+}
 
 interface SetDetailAction {
   type: typeof SET_DETAIL
@@ -117,6 +122,7 @@ export interface LoadDetailAction {
 }
 
 export type DetailActionTypes =
+  | setInitAction
   | SetDetailAction
   | SetLoadingDetailEndAction
   | SetLoadingDetailStartAction
