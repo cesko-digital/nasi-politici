@@ -49,10 +49,9 @@ interface NotificationProps {
 const Notification: React.FC<NotificationProps> = ({officialsId, notification}) => {
   const [isCollapsed, setIsCollapsed] = React.useState(true)
   const collapse = (): void => setIsCollapsed(!isCollapsed)
-  const unDetermintedDate = '0001-01-01T00:00:00'
-  const unFilteredDate = new Date(notification.FromDate)
-  const localisedDate = Intl.DateTimeFormat('cs-CZ').format(unFilteredDate)
-  const date = notification.FromDate === unDetermintedDate ? 'neznámé období' : localisedDate
+
+  const date = Intl.DateTimeFormat('cs-CZ').format(new Date(notification.FromDate))
+  const formatedDate = !notification.FromDate ? 'neznámé období' : date
   const notificationId = notification.Id
   const notificationOnRequest = notification.Visibility === "REQUEST"
   const linkToRegisterPublic = `https://cro.justice.cz/verejnost/funkcionari/${officialsId}/oznameni/${notificationId}`
@@ -62,7 +61,7 @@ const Notification: React.FC<NotificationProps> = ({officialsId, notification}) 
     <div className={styles.notification}>
       <div className={styles.subtitleWrapper} onClick={() => collapse()}>
         <span className={styles.subtitle}>{notificationType(notification.Type)}</span>
-        <span className={styles.timestamp}>&nbsp;({date})</span>
+        <span className={styles.timestamp}>&nbsp;({formatedDate})</span>
         <div className={styles.line} />
       </div>
       <div className={classnames(styles.collapsable, isCollapsed && styles.collapsed)}>
@@ -78,14 +77,14 @@ const Notification: React.FC<NotificationProps> = ({officialsId, notification}) 
           })
         }
         {!!notification.OrganizationMember && !!notification.OrganizationMember &&
-          notification.OrganizationMember.map((item) => {
+          notification.OrganizationMember.map((item, index) => {
             return (
-              <React.Fragment>
+              <div key={index}>
                 <div className={styles.itemDesignation}>{item.type.name}</div>
                 <div className={styles.tableRow}>
                   <div className={styles.name}>{item.legalPerson.name}</div>
                 </div>
-              </React.Fragment>
+              </div>
             )
           })}
         <div className={styles.linkWrapper}>
