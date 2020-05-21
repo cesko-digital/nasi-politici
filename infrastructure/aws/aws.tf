@@ -6,15 +6,15 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "nasi-politici-terraform-backend"
+    bucket = "production-nasi-politici-terraform-backend"
     key = "terraform.tfstate"
-    region = "eu-west-1"
+    region = "eu-central-1"
   }
 }
 
 variable "aws_region" {
   type = string
-  default = "eu-west-1"
+  default = "eu-central-1"
 }
 
 variable "codename" {
@@ -26,31 +26,27 @@ variable "codename" {
 # to comply with best practices => it ensures the internal domain names are globally unique.
 variable "codename-domain" {
   type = string
-  default = "ceskodigital.net"
+  default = "nasipolitici.cz"
 }
 
 variable "public-domain" {
   type = string
-  default = "ceskodigital.net"
+  default = "nasipolitici.cz"
 }
 
 variable "domain-certificate-arn" {
   type = string
-  default = "arn:aws:acm:us-east-1:313370994665:certificate/92346f6e-1016-4471-834a-a9c12ab70663"
+  default = "arn:aws:acm:us-east-1:377434098968:certificate/c2add764-5eec-4349-b8b2-ac30efa988e1"
 }
 
 variable "frontend-bucket-name" {
   type = string
-  default = "nasi-politici-frontend"
+  default = "production-nasi-politici-frontend"
 }
 
 provider "aws" {
   version = "~> 2.0"
   region = var.aws_region
-}
-
-data "aws_route53_zone" "public" {
-  name = "${var.public-domain}."
 }
 
 # SecretsManager, needs to be created outside of Terraform and populated with secrets.
@@ -598,9 +594,9 @@ resource "aws_cloudfront_distribution" "distribution" {
   is_ipv6_enabled = true
   default_root_object = "index.html"
 
-  aliases = [
-    "nasipolitici.${var.public-domain}"
-  ]
+//  aliases = [
+//    var.public-domain
+//  ]
 
   default_cache_behavior {
     allowed_methods = [
@@ -667,11 +663,14 @@ resource "aws_cloudfront_distribution" "distribution" {
   }
 
   viewer_certificate {
-    acm_certificate_arn = var.domain-certificate-arn
-    cloudfront_default_certificate = false
-    ssl_support_method = "sni-only"
-    minimum_protocol_version = "TLSv1.2_2018"
+    cloudfront_default_certificate = true
   }
+//  viewer_certificate {
+//    acm_certificate_arn = var.domain-certificate-arn
+//    cloudfront_default_certificate = false
+//    ssl_support_method = "sni-only"
+//    minimum_protocol_version = "TLSv1.2_2018"
+//  }
 
   custom_error_response {
     error_code = 403
@@ -679,16 +678,6 @@ resource "aws_cloudfront_distribution" "distribution" {
     response_code = 200
     response_page_path = "/index.html"
   }
-}
-
-resource "aws_route53_record" "nasipolitici" {
-  name = "nasipolitici"
-  type = "CNAME"
-  zone_id = data.aws_route53_zone.public.id
-  records = [
-    aws_cloudfront_distribution.distribution.domain_name
-  ]
-  ttl = "300"
 }
 
 
