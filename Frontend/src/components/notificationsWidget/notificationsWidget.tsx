@@ -51,8 +51,7 @@ const Notification: React.FC<NotificationProps> = ({officialsId, notification}) 
   const [isCollapsed, setIsCollapsed] = React.useState(true)
   const collapse = (): void => setIsCollapsed(!isCollapsed)
 
-  const date = notification.FromDate && dummyFormatDateShort(new Date(notification.FromDate))
-  const formatedDate = notification.FromDate ? date : 'neznámé období'
+  const date = notification.FromDate ? dummyFormatDateShort(new Date(notification.FromDate)) : 'neznámé období'
   const notificationId = notification.Id
   const notificationOnRequest = notification.Visibility === "REQUEST"
   const linkToRegisterPublic = `https://cro.justice.cz/verejnost/funkcionari/${officialsId}/oznameni/${notificationId}`
@@ -62,7 +61,7 @@ const Notification: React.FC<NotificationProps> = ({officialsId, notification}) 
     <div className={styles.notification}>
       <div className={styles.subtitleWrapper} onClick={() => collapse()}>
         <span className={styles.subtitle}>{notificationType(notification.Type)}</span>
-        <span className={styles.timestamp}>&nbsp;({formatedDate})</span>
+        <span className={styles.timestamp}>&nbsp;({date})</span>
         <div className={styles.line} />
       </div>
       <div className={classnames(styles.collapsable, isCollapsed && styles.collapsed)}>
