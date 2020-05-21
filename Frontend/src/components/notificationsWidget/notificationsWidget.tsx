@@ -6,6 +6,7 @@ import { ReactComponent as ReportBtn } from 'assets/images/report.svg'
 import { ReactComponent as RedirectBtn } from 'assets/images/redirect.svg'
 import { DEFAULT_NOTIFICATION_LIMIT } from 'constants/constants'
 import ReportModalTrigger from 'components/reportModal/reportModalTriggerConnected'
+import { dummyFormatDateShort } from 'utils/date'
 
 import styles from './notificationsWidget.module.scss'
 
@@ -50,8 +51,8 @@ const Notification: React.FC<NotificationProps> = ({officialsId, notification}) 
   const [isCollapsed, setIsCollapsed] = React.useState(true)
   const collapse = (): void => setIsCollapsed(!isCollapsed)
 
-  const date = Intl.DateTimeFormat('cs-CZ').format(new Date(notification.FromDate))
-  const formatedDate = !notification.FromDate ? 'neznámé období' : date
+  const date = notification.FromDate && dummyFormatDateShort(new Date(notification.FromDate))
+  const formatedDate = notification.FromDate ? date : 'neznámé období'
   const notificationId = notification.Id
   const notificationOnRequest = notification.Visibility === "REQUEST"
   const linkToRegisterPublic = `https://cro.justice.cz/verejnost/funkcionari/${officialsId}/oznameni/${notificationId}`
