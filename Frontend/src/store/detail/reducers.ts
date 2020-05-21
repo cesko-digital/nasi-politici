@@ -48,7 +48,7 @@ const intialDetail: Detail = {
 
 const initialState: DetailState = {
   detail: intialDetail,
-  loadingDetail: false,
+  loadingDetail: true,
   showAllDonations: false,
   showAllNotifications: false,
   showAllRoles: false,
