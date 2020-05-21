@@ -248,7 +248,7 @@ resource "aws_ecs_service" "nasi-politici" {
   cluster = aws_ecs_cluster.nasi-politici.id
   task_definition = aws_ecs_task_definition.nasi-politici.arn
   launch_type = "FARGATE"
-  desired_count = 1
+  desired_count = 2
   deployment_minimum_healthy_percent = 100
   deployment_maximum_percent = 200
   health_check_grace_period_seconds = 20
@@ -371,7 +371,7 @@ resource "aws_ecs_service" "monitora" {
   cluster = aws_ecs_cluster.monitora.id
   task_definition = aws_ecs_task_definition.monitora.arn
   launch_type = "FARGATE"
-  desired_count = 1
+  desired_count = 2
   deployment_minimum_healthy_percent = 100
   deployment_maximum_percent = 200
   health_check_grace_period_seconds = 20
@@ -614,8 +614,8 @@ resource "aws_cloudfront_distribution" "distribution" {
       }
     }
     min_ttl = 0
-    default_ttl = 0
-    max_ttl = 0
+    default_ttl = 86400
+    max_ttl = 86400
     compress = true
     viewer_protocol_policy = "redirect-to-https"
   }
@@ -647,8 +647,8 @@ resource "aws_cloudfront_distribution" "distribution" {
       }
     }
     min_ttl = 0
-    default_ttl = 0
-    max_ttl = 0
+    default_ttl = 86400
+    max_ttl = 86400
     compress = true
     smooth_streaming = true
     viewer_protocol_policy = "redirect-to-https"
