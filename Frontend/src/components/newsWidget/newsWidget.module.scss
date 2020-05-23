@@ -106,6 +106,15 @@
   transform: scale(.6);
 }
 
+@media screen and (min-width: 1169px) {
+  .multiColumn {
+    column-count: 3;
+    .article {
+      display: inline-block;
+    }
+  }
+}
+
 @media screen and (max-width: 650px) {
   .widget {
     width: $widgetFluid;

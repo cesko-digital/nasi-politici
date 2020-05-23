@@ -44,7 +44,7 @@ const Articles: React.FC<ArticlesProps> = ({ articles }) => {
   const hasMore = articles.length > DEFAULT_ARTICLES_COUNT
   return (
     <React.Fragment>
-      <div className={styles.articles}>
+      <div className={classnames(styles.articles, showAll && styles.multiColumn)}>
         {!showAll &&
           articles.slice(0, DEFAULT_ARTICLES_COUNT).map((article, index) => <Article {...article} key={index} />)}
         {showAll && articles.map((article, index) => <Article {...article} key={index} />)}
