@@ -595,7 +595,6 @@ resource "aws_cloudfront_distribution" "distribution" {
   default_root_object = "index.html"
 
   aliases = [
-    var.public-domain,
     "www.${var.public-domain}"
   ]
 
@@ -662,7 +661,7 @@ resource "aws_cloudfront_distribution" "distribution" {
       restriction_type = "none"
     }
   }
-  
+
   viewer_certificate {
     acm_certificate_arn = var.domain-certificate-arn
     cloudfront_default_certificate = false
