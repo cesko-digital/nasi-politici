@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Link } from 'react-router-dom'
 import ProfilePicture from 'components/profilePicture/profilePicture'
 import styles from './result.module.scss'
+import { ReactComponent as CrossIcon } from 'assets/images/cross.svg'
 import { ReactComponent as ReportIcon } from 'assets/images/report.svg'
 import ReportModalTrigger from 'components/reportModal/reportModalTriggerConnected'
 import { dummyPluralize as pluralize } from 'utils/string'
@@ -31,7 +32,10 @@ const ResultRow: React.FC<ResultRowProps> = ({ id, name, surname, birthYear, cur
               {birthYear && (
                 <div className={styles.birthYear}>
                   *{birthYear}
-                  {deathYear && ` - \u271D${deathYear}`}
+                  {deathYear && (
+                    <React.Fragment>
+                      &nbsp;- <CrossIcon className={styles.crossIcon}/> {deathYear}
+                    </React.Fragment>)}
                 </div>
               )}
               <div className={styles.divider} />
