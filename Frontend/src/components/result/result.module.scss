@@ -132,6 +132,10 @@
   opacity: .2;
 }
 
+.crossIcon {
+  height: 12px;
+}
+
 @media screen and (max-width: 1169px) {
   .results {
     margin: 0 20px;
@@ -162,5 +166,8 @@
   .pictureWrapper {
     display: flex;
     align-items: center;
+  }
+  .crossIcon {
+    height: 10px;
   }
 }
