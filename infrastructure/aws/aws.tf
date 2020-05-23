@@ -662,10 +662,7 @@ resource "aws_cloudfront_distribution" "distribution" {
       restriction_type = "none"
     }
   }
-
-  viewer_certificate {
-    cloudfront_default_certificate = true
-  }
+  
   viewer_certificate {
     acm_certificate_arn = var.domain-certificate-arn
     cloudfront_default_certificate = false
