@@ -239,8 +239,8 @@ resource "aws_ecs_task_definition" "nasi-politici" {
   network_mode = "awsvpc"
   execution_role_arn = aws_iam_role.ecr-task-execution-role.arn
   task_role_arn = aws_iam_role.ecr-task-execution-role.arn
-  memory = "1024"
-  cpu = "512"
+  memory = "512"
+  cpu = "256"
 }
 
 resource "aws_ecs_service" "nasi-politici" {
@@ -248,7 +248,7 @@ resource "aws_ecs_service" "nasi-politici" {
   cluster = aws_ecs_cluster.nasi-politici.id
   task_definition = aws_ecs_task_definition.nasi-politici.arn
   launch_type = "FARGATE"
-  desired_count = 2
+  desired_count = 1
   deployment_minimum_healthy_percent = 100
   deployment_maximum_percent = 200
   health_check_grace_period_seconds = 20
@@ -362,8 +362,8 @@ resource "aws_ecs_task_definition" "monitora" {
   network_mode = "awsvpc"
   execution_role_arn = aws_iam_role.ecr-task-execution-role.arn
   task_role_arn = aws_iam_role.ecr-task-execution-role.arn
-  memory = "1024"
-  cpu = "512"
+  memory = "512"
+  cpu = "256"
 }
 
 resource "aws_ecs_service" "monitora" {
@@ -371,7 +371,7 @@ resource "aws_ecs_service" "monitora" {
   cluster = aws_ecs_cluster.monitora.id
   task_definition = aws_ecs_task_definition.monitora.arn
   launch_type = "FARGATE"
-  desired_count = 2
+  desired_count = 1
   deployment_minimum_healthy_percent = 100
   deployment_maximum_percent = 200
   health_check_grace_period_seconds = 20

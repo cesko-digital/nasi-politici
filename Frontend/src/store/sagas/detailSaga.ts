@@ -4,7 +4,7 @@ import { SagaIterator } from 'redux-saga'
 import { LOAD_DETAIL } from 'store/detail/types'
 import { LOAD_ARTICLES } from 'store/articles/types'
 
-import { setDetail, loadingDetailEnded, loadingDetailStarted, loadDetail } from 'store/detail/actions'
+import { setDetail, loadingDetailEnded, loadingDetailStarted, loadDetail, setInitAction } from 'store/detail/actions'
 import { getDetailData } from 'store/detail/selectors'
 import { setDemagogData, resetDemagogData } from 'store/demagog/actions'
 import { setArticles, resetArticles, loadingArticlesEnded, loadingArticlesStarted } from 'store/articles/actions'
@@ -48,6 +48,7 @@ function* loadDemagog(id: string): SagaIterator {
 
 function* handleLoadDetail(action: ReturnType<typeof loadDetail>): SagaIterator {
   yield put(loadingDetailStarted())
+  yield put(setInitAction())
   try {
     const detail: Detail = yield call(api.fetchDetail, action.payload)
     yield put(setDetail(detail))

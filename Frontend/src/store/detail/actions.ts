@@ -1,5 +1,6 @@
 import {
   Detail,
+  INIT_DETAIL,
   SET_DETAIL,
   SET_LOADING_DETAIL_END,
   SET_LOADING_DETAIL_START,
@@ -14,6 +15,10 @@ import {
 export const setDetail = (detail: Detail): DetailActionTypes => ({
   type: SET_DETAIL,
   payload: detail,
+})
+
+export const setInitAction = (): DetailActionTypes => ({
+  type: INIT_DETAIL,
 })
 
 export const loadingDetailStarted = (): DetailActionTypes => ({
