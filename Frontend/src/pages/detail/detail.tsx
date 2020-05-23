@@ -10,6 +10,7 @@ import {
   LinkedinIcon,
   LinkedinShareButton,
 } from 'react-share'
+import { ReactComponent as CrossIcon } from 'assets/images/cross.svg'
 import { ReactComponent as ReportBtn } from 'assets/images/report.svg'
 import { ReactComponent as Divider } from 'assets/images/detailDivider.svg'
 import NoData from 'components/emptyStates/noData/noData'
@@ -106,7 +107,10 @@ const Detail: React.FC<Props> = props => {
                       {props.birthYear && (
                         <div className={styles.birthYear}>
                           *{props.birthYear}
-                          {props.deathYear && ` - \u271D${props.deathYear}`}
+                          {props.deathYear && (
+                            <React.Fragment>
+                              &nbsp;- <CrossIcon className={styles.crossIcon}/> {props.deathYear}
+                            </React.Fragment>)}
                         </div>
                       )}
                       {props.currentParty && (
@@ -221,7 +225,7 @@ const Detail: React.FC<Props> = props => {
                   <h1 className={styles.title}>Mediální obraz</h1>
                   <Divider className={styles.titleDivider} />
                 </div>
-                <div className={styles.widgets}>
+                <div className={classnames(styles.widgets, styles.news)}>
                   <NewsWidget />
                 </div>
               </div>

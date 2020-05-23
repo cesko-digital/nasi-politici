@@ -177,6 +177,15 @@
 .widgets {
   column-count: 2;
   column-gap: 30px;
+
+  // column-count needs this code to work properly
+  & > * {
+    display: inline-block;
+    width: 100%;
+    -webkit-column-break-inside: avoid;
+    -moz-column-break-inside: avoid;
+    break-inside: avoid;
+  }
 }
 .widget {
   width: 100%;
@@ -261,6 +270,17 @@
   transform: scale(.6);
 }
 
+.crossIcon {
+  height: 12px;
+}
+
+@media screen and (min-width: 1169px) {
+  .news {
+    display: flex;
+    column-count: initial;
+  }
+}
+
 @media screen and (max-width: 1169px) {
   .body {
     width: $resFluid;
@@ -323,7 +343,10 @@
 		.lastUpdateLabelShort {
 			display: inline;
 		}
-	}
+  }
+  .crossIcon {
+    height: 10px;
+  }
 }
 
 @media screen and (max-width: 479px) {
