@@ -594,9 +594,10 @@ resource "aws_cloudfront_distribution" "distribution" {
   is_ipv6_enabled = true
   default_root_object = "index.html"
 
-//  aliases = [
-//    var.public-domain
-//  ]
+  aliases = [
+    var.public-domain,
+    "www.${var.public-domain}"
+  ]
 
   default_cache_behavior {
     allowed_methods = [
@@ -665,12 +666,12 @@ resource "aws_cloudfront_distribution" "distribution" {
   viewer_certificate {
     cloudfront_default_certificate = true
   }
-//  viewer_certificate {
-//    acm_certificate_arn = var.domain-certificate-arn
-//    cloudfront_default_certificate = false
-//    ssl_support_method = "sni-only"
-//    minimum_protocol_version = "TLSv1.2_2018"
-//  }
+  viewer_certificate {
+    acm_certificate_arn = var.domain-certificate-arn
+    cloudfront_default_certificate = false
+    ssl_support_method = "sni-only"
+    minimum_protocol_version = "TLSv1.2_2018"
+  }
 
   custom_error_response {
     error_code = 403
