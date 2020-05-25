@@ -4,6 +4,7 @@ import { connectRouter } from 'connected-react-router'
 import createSagaMiddleware from 'redux-saga'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { routerMiddleware } from 'connected-react-router'
+import ReactGA from 'react-ga'
 
 import { articlesReducer } from './articles/reducers'
 import { demagogReducer } from './demagog/reducers'
@@ -27,15 +28,30 @@ const createRootReducer = (history: History) =>
 
 const rootReducer = createRootReducer(history)
 
+const trackPage = (page: string): void => {
+  ReactGA.pageview(page)
+}
+
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-explicit-any
+const gaTrackingMiddleware = () => (next: (action: any) => void) => (action: any) => {
+  if (action.type === '@@router/LOCATION_CHANGE') {
+    const nextPage = `${action.payload.location.pathname}${action.payload.location.search}`
+    trackPage(nextPage)
+  }
+  return next(action)
+}
+
 export type AppState = ReturnType<typeof rootReducer>
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export default function configureStore() {
   const sagaMiddleware = createSagaMiddleware()
-  const store = createStore(
-    createRootReducer(history),
-    composeWithDevTools(applyMiddleware(routerMiddleware(history), sagaMiddleware)),
-  )
+  let middlewares = [routerMiddleware(history), sagaMiddleware]
+  if (process.env.REACT_APP_GA) {
+    ReactGA.initialize(process.env.REACT_APP_GA, { debug: true })
+    middlewares = [...middlewares, gaTrackingMiddleware]
+  }
+  const store = createStore(createRootReducer(history), composeWithDevTools(applyMiddleware(...middlewares)))
   sagaMiddleware.run(rootSaga)
   return store
 }
