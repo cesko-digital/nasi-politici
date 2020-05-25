@@ -8,6 +8,7 @@ on:
 env:
   region: ${{ secrets.AWS_REGION }}
   REACT_APP_BASE_API_URL: ${{ secrets.REACT_APP_BASE_API_URL }}
+  REACT_APP_GA: ${{ secrets.REACT_APP_GA }}
   bucketName: ${{ secrets.AWS_FRONTEND_BUCKET_NAME }}
   cloudFrontDeploymentId: ${{ secrets.AWS_CLOUDFRONT_DEPLOYMENT_ID }}
 jobs:
