@@ -32,11 +32,16 @@ const trackPage = (page: string): void => {
   ReactGA.pageview(page)
 }
 
+let currentPage = ''
+
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-explicit-any
 const gaTrackingMiddleware = () => (next: (action: any) => void) => (action: any) => {
   if (action.type === '@@router/LOCATION_CHANGE') {
     const nextPage = `${action.payload.location.pathname}${action.payload.location.search}`
-    trackPage(nextPage)
+    if (currentPage !== nextPage) {
+      currentPage = nextPage
+      trackPage(nextPage)
+    }
   }
   return next(action)
 }
