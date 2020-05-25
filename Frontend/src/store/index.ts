@@ -48,7 +48,7 @@ export default function configureStore() {
   const sagaMiddleware = createSagaMiddleware()
   let middlewares = [routerMiddleware(history), sagaMiddleware]
   if (process.env.REACT_APP_GA) {
-    ReactGA.initialize(process.env.REACT_APP_GA, { debug: true })
+    ReactGA.initialize(process.env.REACT_APP_GA)
     middlewares = [...middlewares, gaTrackingMiddleware]
   }
   const store = createStore(createRootReducer(history), composeWithDevTools(applyMiddleware(...middlewares)))
