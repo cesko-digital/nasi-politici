@@ -7,6 +7,7 @@ import { ReactComponent as RedirectBtn } from 'assets/images/redirect.svg'
 import { DEFAULT_NOTIFICATION_LIMIT } from 'constants/constants'
 import ReportModalTrigger from 'components/reportModal/reportModalTriggerConnected'
 import { dummyFormatDateShort } from 'utils/date'
+import ExplanationModal from 'components/explanationModal/explanationModal'
 
 import styles from './notificationsWidget.module.scss'
 
@@ -24,36 +25,36 @@ const notificationType = (type: string) => {
 }
 
 interface NotificationProps {
-  key: number,
-  officialsId: string,
+  key: number
+  officialsId: string
   notification: {
-    Id: string,
-    Type: string,
-    FromDate: string,
+    Id: string
+    Type: string
+    FromDate: string
     LegalBusinessAssociates: Array<{
       legalPerson: {
-        name: string,
-      },
-    }>,
+        name: string
+      }
+    }>
     OrganizationMember: Array<{
       type: {
-        name: string,
-      },
-      legalPerson: {
-        name: string,
+        name: string
       }
-    }>,
-    Visibility?: string,
+      legalPerson: {
+        name: string
+      }
+    }>
+    Visibility?: string
   }
 }
 
-const Notification: React.FC<NotificationProps> = ({officialsId, notification}) => {
+const Notification: React.FC<NotificationProps> = ({ officialsId, notification }) => {
   const [isCollapsed, setIsCollapsed] = React.useState(true)
   const collapse = (): void => setIsCollapsed(!isCollapsed)
 
   const date = notification.FromDate ? dummyFormatDateShort(new Date(notification.FromDate)) : 'neznámé období'
   const notificationId = notification.Id
-  const notificationOnRequest = notification.Visibility === "REQUEST"
+  const notificationOnRequest = notification.Visibility === 'REQUEST'
   const linkToRegisterPublic = `https://cro.justice.cz/verejnost/funkcionari/${officialsId}/oznameni/${notificationId}`
   const linkToRegisterNotPublic = `https://cro.justice.cz/verejnost/funkcionari/form/${officialsId}`
   const linkToRegister = notificationOnRequest ? linkToRegisterNotPublic : linkToRegisterPublic
@@ -65,18 +66,20 @@ const Notification: React.FC<NotificationProps> = ({officialsId, notification}) 
         <div className={styles.line} />
       </div>
       <div className={classnames(styles.collapsable, isCollapsed && styles.collapsed)}>
-        {!!notification.LegalBusinessAssociates && !!notification.LegalBusinessAssociates.length && 
-          <div className={styles.itemDesignation}>Společník nebo člen podnikající právnické osoby</div>}
-        {!!notification.LegalBusinessAssociates && !!notification.LegalBusinessAssociates.length &&
+        {!!notification.LegalBusinessAssociates && !!notification.LegalBusinessAssociates.length && (
+          <div className={styles.itemDesignation}>Společník nebo člen podnikající právnické osoby</div>
+        )}
+        {!!notification.LegalBusinessAssociates &&
+          !!notification.LegalBusinessAssociates.length &&
           notification.LegalBusinessAssociates.map((item, index) => {
             return (
               <div key={index} className={styles.tableRow}>
                 <div className={styles.name}>{item.legalPerson.name}</div>
               </div>
             )
-          })
-        }
-        {!!notification.OrganizationMember && !!notification.OrganizationMember &&
+          })}
+        {!!notification.OrganizationMember &&
+          !!notification.OrganizationMember &&
           notification.OrganizationMember.map((item, index) => {
             return (
               <div key={index}>
@@ -89,8 +92,12 @@ const Notification: React.FC<NotificationProps> = ({officialsId, notification}) 
           })}
         <div className={styles.linkWrapper}>
           <a className={styles.link} href={linkToRegister} rel="noopener noreferrer" target="_blank">
-            Peněžité příjmy nebo jiné majet. výhody a dary</a>
-            <RedirectBtn className={classnames(styles.redirectBtn, notificationOnRequest && styles.disabled)} href={linkToRegister} />
+            Peněžité příjmy nebo jiné majet. výhody a dary
+          </a>
+          <RedirectBtn
+            className={classnames(styles.redirectBtn, notificationOnRequest && styles.disabled)}
+            href={linkToRegister}
+          />
         </div>
       </div>
     </div>
@@ -100,40 +107,46 @@ const Notification: React.FC<NotificationProps> = ({officialsId, notification}) 
 interface NotificationsProps {
   officialsId: string
   notificationRegistryData: Array<{
-    Id: string,
-    Type: string,
-    FromDate: string,
+    Id: string
+    Type: string
+    FromDate: string
     LegalBusinessAssociates: Array<{
       legalPerson: {
-        name: string,
-      },
-    }>,
+        name: string
+      }
+    }>
     OrganizationMember: Array<{
       type: {
-        name: string,
-      },
-      legalPerson: {
-        name: string,
+        name: string
       }
-    }>,
+      legalPerson: {
+        name: string
+      }
+    }>
   }>
   showAll: boolean
   toggleShowAll: () => void
   notificationsCount: number
 }
 
-const Notifications: React.FC<NotificationsProps> = ({ notificationsCount, officialsId, notificationRegistryData, toggleShowAll, showAll }) => {
+const Notifications: React.FC<NotificationsProps> = ({
+  notificationsCount,
+  officialsId,
+  notificationRegistryData,
+  toggleShowAll,
+  showAll,
+}) => {
   const hasMore = notificationsCount > DEFAULT_NOTIFICATION_LIMIT
   return (
     <React.Fragment>
       {notificationRegistryData.map((notification, index) => {
-        return (
-          <Notification key={index} notification={notification} officialsId={officialsId} />
-        )
+        return <Notification key={index} notification={notification} officialsId={officialsId} />
       })}
       {hasMore && (
         <div className={styles.showMore} onClick={toggleShowAll}>
-          {!showAll && <div className={styles.more}>Zobrazit {notificationsCount - DEFAULT_NOTIFICATION_LIMIT} dalších</div>}
+          {!showAll && (
+            <div className={styles.more}>Zobrazit {notificationsCount - DEFAULT_NOTIFICATION_LIMIT} dalších</div>
+          )}
           {showAll && <div className={styles.less}>Zobrazit méně</div>}
         </div>
       )}
@@ -145,7 +158,14 @@ interface Props extends NotificationsProps {
   fullName: string
 }
 
-const NotificationsWidget: React.FC<Props> = ({ notificationsCount, officialsId, notificationRegistryData, fullName, toggleShowAll, showAll }) => {
+const NotificationsWidget: React.FC<Props> = ({
+  notificationsCount,
+  officialsId,
+  notificationRegistryData,
+  fullName,
+  toggleShowAll,
+  showAll,
+}) => {
   const rolesWidgetCustomClassNames = classnames(
     styles.widget,
     styles.widgetWithTable,
@@ -158,13 +178,24 @@ const NotificationsWidget: React.FC<Props> = ({ notificationsCount, officialsId,
       <div className={styles.header}>
         <div className={styles.headerTitleWrapper}>
           <h2 className={styles.title}>CENTRÁLNÍ REGISTR OZNÁMENÍ</h2>
+          <ExplanationModal title="Centrální registr oznámení">
+            Většina politiků a političek musí při zvolení, v průběhu funkce a při jejím ukončení vkládat své majetkové
+            přiznání do oficiálního registru. Dozvíte se tak, zda je politik či politička vůbec odevzdala, kolik jich
+            bylo, a co obsahují. Informací může být hodně, tak jsme se rozhodli Vám poskytnout základní přehled rovnou v
+            roletce, ale detailnější informace přímo z Centrální evidence oznámení máte jen na dosah kliku.
+            <br />
+            Povinnost odevzdávat majetkové přiznání se vztahuje na členy Parlamentu ČR a na radní, jak na krajské, tak
+            komunální úrovni. Na zastupitele se tato povinnost nevztahuje.
+          </ExplanationModal>
         </div>
         {!!notificationRegistryData.length && (
           <div className={styles.tags}>
             <div className={styles.tag}>
               <LinkBtn />
               <div className={styles.tagname}>
-                <a href="https://www.hlidacstatu.cz/" rel="noopener noreferrer" target="_blank">hlidacstatu.cz</a>
+                <a href="https://www.hlidacstatu.cz/" rel="noopener noreferrer" target="_blank">
+                  hlidacstatu.cz
+                </a>
               </div>
             </div>
             <ReportModalTrigger className={styles.reportBtnWrapper} modalTitle={`${fullName}, CRO`}>
