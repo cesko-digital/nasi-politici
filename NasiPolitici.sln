@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitFiles", "GitFiles", "{A1
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NasiPolitici.Test", "NasiPolitici.Test\NasiPolitici.Test.csproj", "{D55B983A-24CF-41F3-959F-201482830F80}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,6 +24,10 @@ Global
 		{68EA3107-69E6-4247-BD93-1415BF1D42B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68EA3107-69E6-4247-BD93-1415BF1D42B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68EA3107-69E6-4247-BD93-1415BF1D42B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D55B983A-24CF-41F3-959F-201482830F80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D55B983A-24CF-41F3-959F-201482830F80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D55B983A-24CF-41F3-959F-201482830F80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D55B983A-24CF-41F3-959F-201482830F80}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

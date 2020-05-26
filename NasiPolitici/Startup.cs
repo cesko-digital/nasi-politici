@@ -24,7 +24,7 @@ namespace HlidacStatu.NasiPolitici
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHttpClient<IPoliticianService, PoliticianService>(config =>
+            services.AddHttpClient<IPoliticianService, PoliticianServiceV2>(config =>
             {
                 config.BaseAddress = new Uri(Configuration.GetValue<string>("HlidacApiUrl"));
                 config.DefaultRequestHeaders.Authorization =
@@ -73,6 +73,7 @@ namespace HlidacStatu.NasiPolitici
             {
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
+                app.UseHttpsRedirection();
             }
 
             app.UseCors(config => 
@@ -82,7 +83,6 @@ namespace HlidacStatu.NasiPolitici
                 config.AllowAnyMethod();
             });
 
-            app.UseHttpsRedirection();
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
