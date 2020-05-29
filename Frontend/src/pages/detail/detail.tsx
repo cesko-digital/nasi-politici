@@ -125,8 +125,8 @@ const Detail: React.FC<Props> = props => {
                       <div className={styles.lastUpdate}>
                         {props.lastUpdate &&
                           <React.Fragment>
-                            <div className={styles.lastUpdateLabel}>Aktualizováno&nbsp;</div>
-                            <div className={styles.lastUpdateLabelShort}>Aktual.&nbsp;</div>
+                            <div className={styles.lastUpdateLabel}>Zkontrolováno&nbsp;</div>
+                            <div className={styles.lastUpdateLabelShort}>Zkont.&nbsp;</div>
                             &nbsp;{props.lastUpdate}
                           </React.Fragment>
                         }
