@@ -9,37 +9,40 @@ import { dummyPluralize as pluralize } from 'utils/string'
 
 interface ResultRowProps {
   id: string
-  name: string
-  surname: string
-  birthYear: string
-  deathYear: string | null
+  shortName: string
+  fullName: string
+  birthYear: number
+  deathYear: number | null
   currentParty: string | null
 }
 
-const ResultRow: React.FC<ResultRowProps> = ({ id, name, surname, birthYear, currentParty, deathYear }) => {
+const ResultRow: React.FC<ResultRowProps> = ({ id, shortName, birthYear, currentParty, deathYear }) => {
   return (
     <Link className={styles.resultRow} to={`/detail/${id}`}>
       <div className={styles.resultItem}>
         <div className={styles.pictureWrapper}>
-          <ProfilePicture src={`https://www.hlidacstatu.cz/Photo/${id}`} name={surname} />
+          <ProfilePicture src={`https://www.hlidacstatu.cz/Photo/${id}`} name={shortName} />
         </div>
         <div className={styles.dataWrapper}>
           <div className={styles.nameWrapper}>
-            <div className={styles.name}>
-              {name} {surname}
-            </div>
+            <div className={styles.name}>{shortName}</div>
             <div className={styles.initialsWrapper}>
               {birthYear && (
                 <div className={styles.birthYear}>
                   *{birthYear}
                   {deathYear && (
                     <React.Fragment>
-                      &nbsp;- <CrossIcon className={styles.crossIcon}/> {deathYear}
-                    </React.Fragment>)}
+                      &nbsp;- <CrossIcon className={styles.crossIcon} /> {deathYear}
+                    </React.Fragment>
+                  )}
                 </div>
               )}
-              <div className={styles.divider} />
-              {currentParty && <div className={styles.currentParty}>{currentParty}</div>}
+              {currentParty && (
+                <React.Fragment>
+                  <div className={styles.divider} />
+                  <div className={styles.currentParty}>{currentParty}</div>
+                </React.Fragment>
+              )}
             </div>
           </div>
           <div className={styles.linkWrapper}>
