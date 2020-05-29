@@ -9,9 +9,9 @@ import {
   ON_HOMEPAGE_ENTER,
 } from './types'
 
-export const setSearchQuery = (query: string): SearchActionTypes => ({
+export const setSearchQuery = (query: string, instantSearch: boolean): SearchActionTypes => ({
   type: SET_SEARCH_QUERY,
-  payload: query,
+  payload: { query, instantSearch },
 })
 
 export const resetSearchQuery = (): SearchActionTypes => ({

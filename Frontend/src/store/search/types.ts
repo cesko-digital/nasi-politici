@@ -32,7 +32,10 @@ interface SetProfilesCountAction {
 
 interface SetSearchQueryAction {
   type: typeof SET_SEARCH_QUERY
-  payload: string
+  payload: {
+    query: string
+    instantSearch: boolean
+  }
 }
 
 interface ResetSearchQueryAction {

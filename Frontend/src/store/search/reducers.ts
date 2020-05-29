@@ -19,7 +19,7 @@ export function searchReducer(state = initialState, action: SearchActionTypes): 
     case SET_SEARCH_QUERY: {
       return {
         ...state,
-        query: action.payload,
+        query: action.payload.query,
       }
     }
     case SET_SEARCH_RESULTS: {
