@@ -9,8 +9,8 @@ export const getDetailData = (store: AppState): Detail => store.detail.detail
 export const isDetailLoading = (store: AppState): boolean => store.detail.loadingDetail
 export const getHasPhoto = (store: AppState): boolean => getDetailData(store).hasPhoto
 export const getPhotoUrl = (store: AppState): string => getDetailData(store).photo
-export const getLastUpdate = (store: AppState): string =>
-  getDetailData(store).lastUpdate ? dummyFormatDateShort(new Date(getDetailData(store).lastUpdate)) : ''
+export const getLastManualUpdate = (store: AppState): string | null =>  
+  getDetailData(store).lastManualUpdate ? dummyFormatDateShort(new Date(getDetailData(store).lastManualUpdate)) : null
 export const getShowAllDonations = (store: AppState): boolean => store.detail.showAllDonations
 export const getShowAllNotifications = (store: AppState): boolean => store.detail.showAllNotifications
 export const getShowAllRoles = (store: AppState): boolean => store.detail.showAllRoles

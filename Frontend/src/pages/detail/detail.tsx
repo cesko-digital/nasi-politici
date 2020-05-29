@@ -38,7 +38,7 @@ interface Props {
   engagement: string
   fullname: string
   isLoading: boolean
-  lastUpdate: string
+  lastUpdate: string | null
   loadDetail: (id: string) => void
   match: {
     params: {
@@ -119,15 +119,20 @@ const Detail: React.FC<Props> = props => {
                         </>
                       )}
                     </div>
-                    {props.lastUpdate && (
-                      <div className={styles.lastUpdateWrapper}>
-                        <div className={styles.divider}></div>
-                        <div className={styles.lastUpdate}>
-                          <div className={styles.lastUpdateLabel}>Aktualizováno&nbsp;</div>
-                          <div className={styles.lastUpdateLabelShort}>Aktual.&nbsp;</div> {props.lastUpdate}
-                        </div>
+                    <div className={styles.lastUpdateWrapper}>
+                      <div className={styles.divider}></div>
+                      <div className={styles.lastUpdate}>
+                        {props.lastUpdate &&
+                          <React.Fragment>
+                            <div className={styles.lastUpdateLabel}>Zkontrolováno&nbsp;</div>
+                            <div className={styles.lastUpdateLabelShort}>Zkont.&nbsp;</div>
+                            &nbsp;{props.lastUpdate}
+                          </React.Fragment>
+                        }
+                        {!props.lastUpdate &&
+                          <div className={styles.lastUpdateLabel}>Čeká na kontrolu</div>}
                       </div>
-                    )}
+                    </div>
                   </div>
                 </div>
                 <div className={styles.shareWrapper}>
