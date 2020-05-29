@@ -25,7 +25,6 @@ import ContactsWidget from 'components/contactsWidget/contactsWidgetConnected'
 import ProfilePicture from 'components/profilePicture/profilePicture'
 import ReportModalTrigger from 'components/reportModal/reportModalTriggerConnected'
 import Error from 'pages/error/error'
-import ExplanationModal from 'components/explanationModal/explanationModal'
 import EngagementChart from 'components/engagementChart/engagementChartConnected'
 
 import styles from './detail.module.scss'
@@ -85,7 +84,6 @@ const Detail: React.FC<Props> = props => {
     })
   })
 
-  const engageWidgetCustomClassNames = classnames(styles.widget, styles.engage, !props.engagement && styles.noData)
   const aboutWidgetCustomClassNames = classnames(styles.widget, !props.description && styles.noData)
   return (
     <div className={styles.detail}>
@@ -109,8 +107,9 @@ const Detail: React.FC<Props> = props => {
                           *{props.birthYear}
                           {props.deathYear && (
                             <React.Fragment>
-                              &nbsp;- <CrossIcon className={styles.crossIcon}/> {props.deathYear}
-                            </React.Fragment>)}
+                              &nbsp;- <CrossIcon className={styles.crossIcon} /> {props.deathYear}
+                            </React.Fragment>
+                          )}
                         </div>
                       )}
                       {props.currentParty && (
@@ -197,28 +196,7 @@ const Detail: React.FC<Props> = props => {
                   <h1 className={styles.title}>Angažovanost</h1>
                   <Divider className={styles.titleDivider} />
                 </div>
-                <div className={engageWidgetCustomClassNames}>
-                  <div className={styles.header}>
-                    <div className={styles.headerTitleWrapper}>
-                      <h2 className={styles.title}>Angažovanost</h2>
-                      <ExplanationModal title="Angažovanost">
-                        Ne každý máme rádi pavouky. Ale majetkové a personální pavouky musí mít rád každý. Přehledným
-                        způsobem Vám totiž ukazují, kam až sahá napojení politiků. Tyhle pavučiny ale jsou spředeny z
-                        otevřených zdrojů, tudíž nemusí ukazovat úplně všechny existující vazby, ale zobrazují ty
-                        potvrzené.
-                      </ExplanationModal>
-                    </div>
-                    <div className={styles.tags}>
-                      <ReportModalTrigger
-                        className={styles.reportBtnWrapper}
-                        modalTitle={`${props.fullname}, angažovanost`}
-                      >
-                        <ReportBtn className={styles.reportBtn} />
-                      </ReportModalTrigger>
-                    </div>
-                  </div>
-                  <EngagementChart />
-                </div>
+                <EngagementChart />
               </div>
               <div id="media" className={styles.section}>
                 <div className={styles.titleWrapper}>

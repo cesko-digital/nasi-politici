@@ -28,10 +28,11 @@
     display: flex;
   }
   .tags {
+		flex-direction: column; // todo add media queries
     align-self: flex-start;
   }
   .tag {
-    margin-right: 4px;
+    margin-bottom: 4px;
     padding: 0 8px;
     align-items: center;
     border-radius: 50px;
@@ -86,6 +87,7 @@
   }
 }
 .reportBtnWrapper {
+	align-self: flex-end;
   @include reportBtn;
 }
 .reportBtn {
