@@ -7,10 +7,10 @@ import { AppState } from 'store'
 interface StateProps {
   results: Array<{
     id: string
-    name: string
-    surname: string
-    birthYear: string
-    deathYear: string | null
+    shortName: string
+    fullName: string
+    birthYear: number
+    deathYear: number | null
     currentParty: string | null
   }>
   wasSearched: boolean
