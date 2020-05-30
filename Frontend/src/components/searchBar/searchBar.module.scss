@@ -27,7 +27,13 @@
   border-right: 0;
   border-radius: 30px 0 0 30px;
   box-sizing: border-box;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1), inset 0px 2px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.1);
+  &:focus {
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1), inset 0px 2px 3px rgba(0, 0, 0, 0.05);
+    +.searchBtn {
+      box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1), inset 0px 2px 3px rgba(0, 0, 0, 0.05);
+    }
+  }
 }
 .searchBtn {
   padding: 8px 55px;
@@ -39,7 +45,7 @@
   color: #ffffff;
   font-size: 21px;
   line-height: 24px;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1), inset 0px 2px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   &:hover {
     background-color: #2e8ee5;
