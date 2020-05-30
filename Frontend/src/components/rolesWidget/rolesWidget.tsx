@@ -51,7 +51,7 @@ const Roles: React.FC<RolesProps> = ({ rolesGroups, showAll, rolesCount, toggleS
         return (
           <div className={styles.tableSection} key={index}>
             <div className={styles.subtitleWrapper}>
-              <h3 className={styles.subtitle}>{group.year === 9999 ? 'Dosud' : group.year}</h3>
+              <h3 className={styles.subtitle}>{group.year === 9999 ? 'Dosud' : `Do ${group.year}`}</h3>
               <div className={styles.line} />
             </div>
             {group.items.map((item, index) => (
