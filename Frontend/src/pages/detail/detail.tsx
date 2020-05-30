@@ -89,10 +89,16 @@ const Detail: React.FC<Props> = props => {
           </Helmet>
           <div className={styles.heading}>
             <div className={styles.wrapper}>
-              <ProfilePicture src={props.photoUrl} name={props.fullname} customClassName={styles.photo} />
+              <ProfilePicture
+                src={props.photoUrl}
+                name={props.fullname}
+                customClassName={classnames(styles.photo, { [styles.photoDeath]: props.deathYear })}
+              />
               <div className={styles.initials}>
                 <div className={styles.initialsWrapper}>
-                  <div className={styles.fullname}>{props.fullname}</div>
+                  <div className={classnames(styles.fullname, { [styles.fulnameDeath]: props.deathYear })}>
+                    {props.fullname}
+                  </div>
                   <div className={styles.additionalWrapper}>
                     <div className={styles.personal}>
                       {props.birthYear && (
