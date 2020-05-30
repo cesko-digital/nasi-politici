@@ -111,9 +111,18 @@ resource "aws_internet_gateway" "internet-gateway" {
   }
 }
 
+resource "aws_eip" "nat-gateway-ip" {
+  vpc = true
+}
+
+resource "aws_nat_gateway" "nat-gateway" {
+  subnet_id = aws_subnet.public.id
+  allocation_id = aws_eip.nat-gateway-ip.id
+}
+
 # Routing table settings, we have 2 routing tables
 # 1. public -> have access directly to internet gateway
-# 2. private -> have access directly to internet gateway too (to save cost on NAT)
+# 2. private -> is routed to internet via NAT Gateway
 #
 # There is default table (set as main) without access to internet, only for local routes. Which is good default.
 resource "aws_route_table" "public-routes" {
@@ -134,7 +143,7 @@ resource "aws_route_table" "private-routes" {
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.internet-gateway.id
+    nat_gateway_id = aws_nat_gateway.nat-gateway.id
   }
 
   tags = {
