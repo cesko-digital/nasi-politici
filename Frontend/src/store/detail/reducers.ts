@@ -34,6 +34,7 @@ const intialDetail: Detail = {
   insolvencyCompany: initialInsolvency,
   insolvencyPerson: initialInsolvency,
   lastUpdate: '',
+  lastManualUpdate: '',
   name: '',
   namePrefix: '',
   nameSuffix: '',

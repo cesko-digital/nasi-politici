@@ -1,8 +1,13 @@
 import * as React from 'react'
+import classnames from 'classnames'
 import NoData from 'components/emptyStates/noData/noData'
 import * as am4core from '@amcharts/amcharts4/core'
 import * as am4charts from '@amcharts/amcharts4/charts'
 import am4themesAnimated from '@amcharts/amcharts4/themes/animated'
+import styles from './engagementChart.module.scss'
+import ExplanationModal from 'components/explanationModal/explanationModal'
+import ReportModalTrigger from 'components/reportModal/reportModalTriggerConnected'
+import { ReactComponent as ReportBtn } from 'assets/images/report.svg'
 
 am4core.useTheme(am4themesAnimated)
 
@@ -16,8 +21,10 @@ interface Props {
     until: string | null
     description: string
   }>
+  fullName: string
 }
 const Chart: React.FC<Props> = props => {
+  const [chartInstance, setChart] = React.useState<null | am4charts.XYChart>(null)
   React.useEffect(() => {
     const initial: {
       [key: string]: {
@@ -104,7 +111,15 @@ const Chart: React.FC<Props> = props => {
 
     chart.scrollbarX = new am4core.Scrollbar()
     chart.scrollbarX.parent = chart.bottomAxesContainer
+    setChart(chart)
   }, [props.connections])
+
+  React.useEffect(() => {
+    return (): void => {
+      if (chartInstance) chartInstance.dispose()
+    }
+  })
+
   const height =
     props.connections
       .map(c => `${c.company}${c.description}`)
@@ -112,7 +127,30 @@ const Chart: React.FC<Props> = props => {
   return <div id="chartdiv" style={{ height: `${height + 100}px` }}></div>
 }
 const EngagementChart: React.FC<Props> = props => {
-  if (!props.connections.length) return <NoData />
-  return <Chart {...props} />
+  return (
+    <div className={classnames(styles.widget, styles.engage, !props.connections.length && styles.noData)}>
+      <div className={styles.header}>
+        <div className={styles.headerTitleWrapper}>
+          <h2 className={styles.title}>Angažovanost</h2>
+          <ExplanationModal title="Angažovanost">
+            Ne každý máme rádi pavouky. Pro zobrazení majetkových sítí jsme proto radši zvolili časové osy. Přehledným
+            způsobem Vám totiž ukazují, kam až sahá napojení politiků a političek chronologicky. Tyto osy jsou ale
+            poskládané z otevřených zdrojů, tudíž nemusí ukazovat úplně všechny existující vazby, zobrazují však ty
+            potvrzené.
+          </ExplanationModal>
+        </div>
+        {!!props.connections.length && (
+          <div className={styles.tags}>
+            <ReportModalTrigger className={styles.reportBtnWrapper} modalTitle={`${props.fullName}, angažovanost`}>
+              <ReportBtn className={styles.reportBtn} />
+            </ReportModalTrigger>
+          </div>
+        )}
+      </div>
+      {!props.connections.length && <NoData />}
+      {!!props.connections.length && <Chart {...props} />}
+    </div>
+  )
 }
+
 export default EngagementChart

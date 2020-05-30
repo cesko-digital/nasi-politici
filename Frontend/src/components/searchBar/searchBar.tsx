@@ -9,7 +9,7 @@ export interface Props {
   form?: string
   query: string
   search: () => void
-  setSearchQuery: (query: string) => void
+  setSearchQuery: (query: string, instantSearch: boolean) => void
   wrapperClassname?: string
 }
 
@@ -24,9 +24,9 @@ const SearchBar: React.FC<Props> = ({ form, setSearchQuery, search, query, wrapp
   )
   const onChange = useCallback(
     event => {
-      setSearchQuery(event.target.value)
+      setSearchQuery(event.target.value, !matchDetail)
     },
-    [setSearchQuery],
+    [setSearchQuery, matchDetail],
   )
   return (
     <form className={form} onSubmit={onSubmit}>

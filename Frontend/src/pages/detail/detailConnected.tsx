@@ -8,7 +8,7 @@ import {
   getDescription,
   getFullName,
   getIsValid,
-  getLastUpdate,
+  getLastManualUpdate,
   getPhotoUrl,
   getHasPhoto,
   isDetailLoading,
@@ -26,7 +26,7 @@ interface StateProps {
   hasPhoto: boolean
   isLoading: boolean
   isValid?: boolean
-  lastUpdate: string
+  lastUpdate: string | null
   photoUrl: string
 }
 
@@ -39,7 +39,7 @@ const mapStateToProps = createStructuredSelector<AppState, StateProps>({
   hasPhoto: getHasPhoto,
   isLoading: isDetailLoading,
   isValid: getIsValid,
-  lastUpdate: getLastUpdate,
+  lastUpdate: getLastManualUpdate,
   photoUrl: getPhotoUrl,
 })
 

@@ -1,7 +1,7 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects'
 import { SagaIterator } from 'redux-saga'
 
-import { SEARCH, SET_SEARCH_QUERY, ON_HOMEPAGE_ENTER, Result } from 'store/search/types'
+import { SEARCH, SET_SEARCH_QUERY, ON_HOMEPAGE_ENTER, Result, SearchActionTypes } from 'store/search/types'
 import { setSearchResults, setProfilesCount } from 'store/search/actions'
 import { getSearchQuery } from 'store/search/selectors'
 import API from 'services/api'
@@ -24,7 +24,8 @@ function mapSearchResults(searchResults: SearchResult[]): Result[] {
   })
 }
 
-function* handleSearch(): SagaIterator {
+function* handleSearch(action: SearchActionTypes): SagaIterator {
+  if (action.type === SET_SEARCH_QUERY && !action.payload.instantSearch) return
   const query = yield select(getSearchQuery)
   if (!query) {
     yield put(setSearchResults([], false))

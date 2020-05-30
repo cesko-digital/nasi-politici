@@ -93,6 +93,7 @@ const api: API = {
     surname: 'Babiš',
     hasPhoto: true,
     lastUpdate: '2020-04-01T00:00:00',
+    lastManualUpdate: '',
     birthDate: '1954-09-02T00:00:00',
     deathDate: null,
     status: 'Politik',

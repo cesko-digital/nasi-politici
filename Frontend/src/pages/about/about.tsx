@@ -67,11 +67,22 @@ const AboutUs: React.FC = () => {
           nachází v insolvenci, mohl by mít nejenom motivaci ideovou, ale i finanční, rozhodovat se určitým způsobem. A
           to ať už přímo či nepřímo. Proto se v téhle škatulce můžete přesvědčit, jak to s ní doopravdy je.
         </p>
+        <h2 className={styles.subTitle}>Centrální registr oznámení</h2>
+        <p className={styles.textBlock}>
+          Většina politiků a političek musí při zvolení, v průběhu funkce a při jejím ukončení vkládat své majetkové
+          přiznání do oficiálního registru. Dozvíte se tak, zda je politik či politička vůbec odevzdala, kolik jich
+          bylo, a co obsahují. Informací může být hodně, tak jsme se rozhodli Vám poskytnout základní přehled rovnou v
+          roletce, ale detailnější informace přímo z Centrální evidence oznámení máte jen na dosah kliku.
+          <br />
+          Povinnost odevzdávat majetkové přiznání se vztahuje na členy Parlamentu ČR a na radní, jak na krajské, tak
+          komunální úrovni. Na zastupitele se tato povinnost nevztahuje.
+        </p>
         <h2 className={styles.subTitle}>Angažovanost</h2>
         <p className={styles.textBlock}>
-          Ne každý máme rádi pavouky. Ale majetkové a personální pavouky musí mít rád každý. Přehledným způsobem Vám
-          totiž ukazují, kam až sahá napojení politiků. Tyhle pavučiny ale jsou spředeny z otevřených zdrojů, tudíž
-          nemusí ukazovat úplně všechny existující vazby, ale zobrazují ty potvrzené.
+          Ne každý máme rádi pavouky. Pro zobrazení majetkových sítí jsme proto radši zvolili časové osy. Přehledným
+          způsobem Vám totiž ukazují, kam až sahá napojení politiků a političek chronologicky. Tyto osy jsou ale
+          poskládané z otevřených zdrojů, tudíž nemusí ukazovat úplně všechny existující vazby, zobrazují však ty
+          potvrzené.
         </p>
         <h2 className={styles.subTitle}>V médiích</h2>
         <p className={styles.textBlock}>
