@@ -70,12 +70,16 @@ export interface Detail {
 }
 
 export interface SearchResult {
-  id: string
-  name: string
-  surname: string
-  birthYear: string
-  deathYear: string | null
-  currentParty: string | null
+  NameId: string
+  ShortName: string
+  FullName: string
+  BirthYear: number
+  DeathYear: number | null
+  PoliticalFunctions: string[]
+  PoliticalParty: string | null
+  StatusText: string
+  Status: number
+  PhotoUrl: string | null
 }
 
 interface Speaker {

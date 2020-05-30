@@ -1,7 +1,7 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects'
 import { SagaIterator } from 'redux-saga'
 
-import { SEARCH, SET_SEARCH_QUERY, ON_HOMEPAGE_ENTER, SearchActionTypes } from 'store/search/types'
+import { SEARCH, SET_SEARCH_QUERY, ON_HOMEPAGE_ENTER, Result, SearchActionTypes } from 'store/search/types'
 import { setSearchResults, setProfilesCount } from 'store/search/actions'
 import { getSearchQuery } from 'store/search/selectors'
 import API from 'services/api'
@@ -10,6 +10,19 @@ import { push } from 'connected-react-router'
 import { SearchResult } from 'services/apiTypes'
 
 const api = process.env.REACT_APP_USE_API_MOCK ? API_MOCK : API
+
+function mapSearchResults(searchResults: SearchResult[]): Result[] {
+  return searchResults.map(r => {
+    return {
+      id: r.NameId,
+      shortName: r.ShortName,
+      fullName: r.FullName,
+      birthYear: r.BirthYear,
+      deathYear: r.DeathYear,
+      currentParty: r.PoliticalParty,
+    }
+  })
+}
 
 function* handleSearch(action: SearchActionTypes): SagaIterator {
   if (action.type === SET_SEARCH_QUERY && !action.payload.instantSearch) return
@@ -21,7 +34,7 @@ function* handleSearch(action: SearchActionTypes): SagaIterator {
   yield put(push('/'))
   try {
     const persons: SearchResult[] = yield call(api.search, query)
-    yield put(setSearchResults(persons, true))
+    yield put(setSearchResults(mapSearchResults(persons), true))
   } catch (error) {
     yield put(setSearchResults([], true))
     // TODO asi vymyslet nejaky jednotny error handling idealne i s designem

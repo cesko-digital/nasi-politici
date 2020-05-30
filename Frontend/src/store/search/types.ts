@@ -1,9 +1,9 @@
 export interface Result {
   id: string
-  name: string
-  surname: string
-  birthYear: string
-  deathYear: string | null
+  shortName: string
+  fullName: string
+  birthYear: number
+  deathYear: number | null
   currentParty: string | null
 }
 
