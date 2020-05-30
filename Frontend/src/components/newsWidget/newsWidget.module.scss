@@ -29,9 +29,11 @@
   margin-bottom: 20px;
   padding-top: 20px;
   border-top: 1px solid $clBorder;
+  break-inside: avoid;
 }
 .articles {
   padding: 0 30px;
+  column-gap: 2em;
 }
 .sources {
   @include smallText;
@@ -107,11 +109,14 @@
 }
 
 @media screen and (min-width: 1169px) {
-  .multiColumn {
+  .columns1 {
+    column-count: 1;
+  }
+  .columns2 {
+    column-count: 2;
+  }
+  .multicolumn {
     column-count: 3;
-    .article {
-      display: inline-block;
-    }
   }
 }
 

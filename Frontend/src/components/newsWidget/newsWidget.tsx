@@ -8,7 +8,7 @@ import ExplanationModal from 'components/explanationModal/explanationModal'
 
 import styles from './newsWidget.module.scss'
 
-const DEFAULT_ARTICLES_COUNT = 2
+const DEFAULT_ARTICLES_COUNT = 3
 
 interface ArticleProps {
   perex: string
@@ -42,9 +42,14 @@ interface ArticlesProps {
 const Articles: React.FC<ArticlesProps> = ({ articles }) => {
   const [showAll, setShowAll] = React.useState(false)
   const hasMore = articles.length > DEFAULT_ARTICLES_COUNT
+  const articlesLength = articles.length
   return (
     <React.Fragment>
-      <div className={classnames(styles.articles, showAll && styles.multiColumn)}>
+      <div className={classnames(
+        styles.articles,
+        articlesLength < 3 && styles['columns' + articlesLength],
+        articlesLength >= 3 && styles.multicolumn,
+        )}>
         {!showAll &&
           articles.slice(0, DEFAULT_ARTICLES_COUNT).map((article, index) => <Article {...article} key={index} />)}
         {showAll && articles.map((article, index) => <Article {...article} key={index} />)}
