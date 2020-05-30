@@ -2,14 +2,7 @@ import * as React from 'react'
 import classnames from 'classnames'
 import Helmet from 'react-helmet'
 import ScrollIntoView from 'react-scroll-into-view'
-import {
-  FacebookShareButton,
-  FacebookIcon,
-  TwitterIcon,
-  TwitterShareButton,
-  LinkedinIcon,
-  LinkedinShareButton,
-} from 'react-share'
+import { FacebookShareButton, FacebookIcon, TwitterIcon, TwitterShareButton } from 'react-share'
 import { ReactComponent as CrossIcon } from 'assets/images/cross.svg'
 import { ReactComponent as ReportBtn } from 'assets/images/report.svg'
 import { ReactComponent as Divider } from 'assets/images/detailDivider.svg'
@@ -122,15 +115,14 @@ const Detail: React.FC<Props> = props => {
                     <div className={styles.lastUpdateWrapper}>
                       <div className={styles.divider}></div>
                       <div className={styles.lastUpdate}>
-                        {props.lastUpdate &&
+                        {props.lastUpdate && (
                           <React.Fragment>
                             <div className={styles.lastUpdateLabel}>Zkontrolováno&nbsp;</div>
                             <div className={styles.lastUpdateLabelShort}>Zkont.&nbsp;</div>
                             &nbsp;{props.lastUpdate}
                           </React.Fragment>
-                        }
-                        {!props.lastUpdate &&
-                          <div className={styles.lastUpdateLabel}>Čeká na kontrolu</div>}
+                        )}
+                        {!props.lastUpdate && <div className={styles.lastUpdateLabel}>Čeká na kontrolu</div>}
                       </div>
                     </div>
                   </div>
@@ -143,9 +135,6 @@ const Detail: React.FC<Props> = props => {
                   <TwitterShareButton className={styles.shareBtn} url={window.location.href}>
                     <TwitterIcon round size={30} />
                   </TwitterShareButton>
-                  <LinkedinShareButton className={styles.shareBtn} url={window.location.href}>
-                    <LinkedinIcon round size={30} />
-                  </LinkedinShareButton>
                 </div>
               </div>
             </div>
