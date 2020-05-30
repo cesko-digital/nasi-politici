@@ -16,39 +16,3 @@ html,
   text-align: left;
   flex: 1;
 }
-
-.banner-beta {
-  @include subTitle;
-  padding: 6px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 64px;
-  width: 100%;
-  font-weight: 600;
-  background-color: #FFF1CD;
-  color: #B28612;
-}
-
-@media screen and (max-width: 650px) {
-  .banner-beta {
-    @include smallText;
-    height: 48px;
-    font-weight: 600;
-    color: #B28612;
-  }
-}
-
-// TODO: decide what to do with this idea
-// html, body, #root, .App {
-//   height: 100%;
-// }
-
-// .App {
-//   display: flex;
-//   flex-direction: column;
-// }
-
-// .body {
-//   flex: 1;
-// }

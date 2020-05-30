@@ -17,7 +17,6 @@ const App: React.FC = () => {
       <Helmet>
         <title>Naši Politici</title>
       </Helmet>
-      <div className="banner-beta">Jedná se o testovací web s testovacími daty.</div>
       <Header />
       <div className="body">
         <Switch>
