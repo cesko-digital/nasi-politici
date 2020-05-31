@@ -62,6 +62,9 @@ const MenuBar: React.FC = () => {
 }
 
 const Detail: React.FC<Props> = props => {
+  const detailWrapper = React.useRef<HTMLDivElement>(null)
+  const stickyHeader = styles.sticky
+  const topHeaderHeight = 64
   const {
     loadDetail,
     match: {
@@ -76,10 +79,21 @@ const Detail: React.FC<Props> = props => {
       top: document.body.scrollTop,
     })
   })
+  window.addEventListener('scroll', () => {
+    if (!detailWrapper.current) {
+      return
+    }
+    if (window.scrollY > topHeaderHeight && !detailWrapper.current.classList.contains(stickyHeader)) {
+      detailWrapper.current.classList.add(stickyHeader)
+    }
+    else if (window.scrollY <= topHeaderHeight && detailWrapper.current.classList.contains(stickyHeader)) {
+      detailWrapper.current.classList.remove(stickyHeader)
+    }
+  })
 
   const aboutWidgetCustomClassNames = classnames(styles.widget, !props.description && styles.noData)
   return (
-    <div className={styles.detail}>
+    <div className={styles.detail} ref={detailWrapper}>
       {props.isLoading && <LoadingBar />}
       {!props.isLoading && !props.isValid && <Error />}
       {!props.isLoading && props.isValid && (
