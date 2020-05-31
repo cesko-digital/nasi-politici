@@ -6,6 +6,7 @@
   padding: 0 20px;
   max-width: $componentBase;
   box-sizing: content-box;
+  color: rgba(0, 0, 0, 0.75);
 }
 .title {
   @include headerTitle;

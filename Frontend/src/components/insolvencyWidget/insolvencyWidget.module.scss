@@ -56,10 +56,6 @@
       background-color: $clTableRow;
     }
   }
-  .name {
-    max-width: 40%;
-    min-width: 40%;
-  }
   .tableSection {
     margin-bottom: 20px;
   }
@@ -81,9 +77,7 @@
 }
 
 .noData {
-  border-top: 1px solid $clComponentBorder;
-  background-color: #f0f0f0;
-  box-shadow: none;
+  @include boxNoData;
 }
 
 .reportBtnWrapper {

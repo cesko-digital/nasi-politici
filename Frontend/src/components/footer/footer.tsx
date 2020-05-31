@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
     <div className={styles.footer}>
       <div className={styles.top}>
         <div className={classnames(styles.column, styles.social)}>
-          <h3 className={styles.header}>V síti</h3>
+          <h3 className={styles.header}>Sociální sítě</h3>
           <div className={styles.socialWrapper}>
             <FBLogo />
             <a
