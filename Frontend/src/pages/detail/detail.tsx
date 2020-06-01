@@ -139,13 +139,7 @@ const Detail: React.FC<Props> = (props) => {
                     <div className={styles.lastUpdateWrapper}>
                       <div className={styles.divider}></div>
                       <div className={styles.lastUpdate}>
-                        {props.lastUpdate && (
-                          <React.Fragment>
-                            <div className={styles.lastUpdateLabel}>Zkontrolováno&nbsp;</div>
-                            <div className={styles.lastUpdateLabelShort}>Zkont.&nbsp;</div>
-                            &nbsp;{props.lastUpdate}
-                          </React.Fragment>
-                        )}
+                        {props.lastUpdate && <div className={styles.lastUpdateLabel}>Zkontrolováno {props.lastUpdate}</div>}
                         {!props.lastUpdate && <div className={styles.lastUpdateEmpty}>Čeká na kontrolu</div>}
                       </div>
                     </div>
