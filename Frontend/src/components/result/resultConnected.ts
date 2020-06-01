@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { getSearchResults, getSearchQuery, wasSearched } from 'store/search/selectors'
+import { getSearchResults, getSearchQuery, wasSearched, isLoading } from 'store/search/selectors'
 import Result from './result'
 import { AppState } from 'store'
 
@@ -15,12 +15,14 @@ interface StateProps {
   }>
   wasSearched: boolean
   query: string
+  isLoading: boolean
 }
 
 const mapStateToProps = createStructuredSelector<AppState, StateProps>({
   results: getSearchResults,
   query: getSearchQuery,
   wasSearched,
+  isLoading,
 })
 
 export default connect(mapStateToProps)(Result)

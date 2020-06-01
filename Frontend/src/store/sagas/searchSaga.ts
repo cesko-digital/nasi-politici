@@ -2,7 +2,7 @@ import { call, put, select, takeLatest } from 'redux-saga/effects'
 import { SagaIterator } from 'redux-saga'
 
 import { SEARCH, SET_SEARCH_QUERY, ON_HOMEPAGE_ENTER, Result, SearchActionTypes } from 'store/search/types'
-import { setSearchResults, setProfilesCount } from 'store/search/actions'
+import { setSearchResults, setProfilesCount, setSearchLoading } from 'store/search/actions'
 import { getSearchQuery } from 'store/search/selectors'
 import API from 'services/api'
 import API_MOCK from 'services/apiMock'
@@ -12,7 +12,7 @@ import { SearchResult } from 'services/apiTypes'
 const api = process.env.REACT_APP_USE_API_MOCK ? API_MOCK : API
 
 function mapSearchResults(searchResults: SearchResult[]): Result[] {
-  return searchResults.map(r => {
+  return searchResults.map((r) => {
     return {
       id: r.NameId,
       shortName: r.ShortName,
@@ -24,8 +24,7 @@ function mapSearchResults(searchResults: SearchResult[]): Result[] {
   })
 }
 
-function* handleSearch(action: SearchActionTypes): SagaIterator {
-  if (action.type === SET_SEARCH_QUERY && !action.payload.instantSearch) return
+function* search(): SagaIterator {
   const query = yield select(getSearchQuery)
   if (!query) {
     yield put(setSearchResults([], false))
@@ -40,6 +39,15 @@ function* handleSearch(action: SearchActionTypes): SagaIterator {
     // TODO asi vymyslet nejaky jednotny error handling idealne i s designem
   }
 }
+function* handleSetSearchQuery(action: SearchActionTypes): SagaIterator {
+  if (action.type === SET_SEARCH_QUERY && !action.payload.instantSearch) return
+  yield call(search)
+}
+function* handleSearch(): SagaIterator {
+  yield put(setSearchLoading(true))
+  yield call(search)
+  yield put(setSearchLoading(false))
+}
 
 function* handleHomepageEnter(): SagaIterator {
   try {
@@ -52,7 +60,8 @@ function* handleHomepageEnter(): SagaIterator {
 }
 
 function* searchSaga(): SagaIterator {
-  yield takeLatest([SEARCH, SET_SEARCH_QUERY], handleSearch)
+  yield takeLatest([SET_SEARCH_QUERY], handleSetSearchQuery)
+  yield takeLatest([SEARCH], handleSearch)
   yield takeLatest([ON_HOMEPAGE_ENTER], handleHomepageEnter)
 }
 

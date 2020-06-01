@@ -12,6 +12,7 @@ export interface SearchState {
   results: Result[]
   wasSearched: boolean
   profilesCount: number
+  isLoading: boolean
 }
 
 export const SET_SEARCH_QUERY = 'SET_SEARCH_QUERY'
@@ -20,6 +21,7 @@ export const SET_SEARCH_RESULTS = 'SET_SEARCH_RESULTS'
 export const RESET_SEARCH_QUERY = 'RESET_SEARCH_QUERY'
 export const ON_HOMEPAGE_ENTER = 'ON_HOMEPAGE_ENTER'
 export const SET_PROFILES_COUNT = 'SET_PROFILES_COUNT'
+export const SET_SEARCH_LOADING = 'SET_SEARCH_LOADING'
 
 interface OnEnterAction {
   type: typeof ON_HOMEPAGE_ENTER
@@ -54,6 +56,11 @@ interface SetSearchResultsAction {
   }
 }
 
+interface SetSearchLoading {
+  type: typeof SET_SEARCH_LOADING
+  payload: boolean
+}
+
 export type SearchActionTypes =
   | SetSearchQueryAction
   | SearchAction
@@ -61,3 +68,4 @@ export type SearchActionTypes =
   | ResetSearchQueryAction
   | OnEnterAction
   | SetProfilesCountAction
+  | SetSearchLoading

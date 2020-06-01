@@ -5,6 +5,7 @@ import {
   SET_PROFILES_COUNT,
   SearchState,
   SearchActionTypes,
+  SET_SEARCH_LOADING,
 } from './types'
 
 const initialState: SearchState = {
@@ -12,6 +13,7 @@ const initialState: SearchState = {
   results: [],
   wasSearched: false,
   profilesCount: 0,
+  isLoading: false,
 }
 
 export function searchReducer(state = initialState, action: SearchActionTypes): SearchState {
@@ -40,6 +42,12 @@ export function searchReducer(state = initialState, action: SearchActionTypes): 
       return {
         ...state,
         profilesCount: action.payload,
+      }
+    }
+    case SET_SEARCH_LOADING: {
+      return {
+        ...state,
+        isLoading: action.payload,
       }
     }
     default:
