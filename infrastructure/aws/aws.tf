@@ -36,7 +36,7 @@ variable "public-domain" {
 
 variable "domain-certificate-arn" {
   type = string
-  default = "arn:aws:acm:us-east-1:377434098968:certificate/c2add764-5eec-4349-b8b2-ac30efa988e1"
+  default = "arn:aws:acm:us-east-1:377434098968:certificate/1413156e-2b02-4236-9986-cdb717965969"
 }
 
 variable "frontend-bucket-name" {
@@ -68,6 +68,7 @@ locals {
   HlidacAuthenticationToken = jsondecode(data.aws_secretsmanager_secret_version.secrets-version.secret_string)["HlidacAuthenticationToken"]
   CzFinToken = jsondecode(data.aws_secretsmanager_secret_version.secrets-version.secret_string)["CzFinToken"]
   MailAuthenticationToken = jsondecode(data.aws_secretsmanager_secret_version.secrets-version.secret_string)["MailAuthenticationToken"]
+  MailApiUrl = jsondecode(data.aws_secretsmanager_secret_version.secrets-version.secret_string)["MailApiUrl"]
 }
 
 # ----------------
@@ -115,14 +116,39 @@ resource "aws_eip" "nat-gateway-ip" {
   vpc = true
 }
 
-resource "aws_nat_gateway" "nat-gateway" {
+resource "aws_eip" "nat-ip" {
+  vpc = true
+}
+
+data "aws_ami" "nat-gateway" {
+  owners = [
+    "amazon"]
+  name_regex = "^amzn-ami-vpc-nat-2018.03.0.20190826-x86_64-ebs"
+}
+
+resource "aws_eip_association" "nat-gateway" {
+  instance_id = aws_instance.nat-gateway.id
+  allocation_id = aws_eip.nat-ip.id
+}
+
+resource "aws_instance" "nat-gateway" {
+  ami = data.aws_ami.nat-gateway.id
+  instance_type = "t2.micro"
   subnet_id = aws_subnet.public.id
-  allocation_id = aws_eip.nat-gateway-ip.id
+  source_dest_check = false
+  disable_api_termination = false
+  availability_zone = "${var.aws_region}a"
+  vpc_security_group_ids = [
+    aws_security_group.default-private-sg.id]
+
+  tags = {
+    Name = "NAT"
+  }
 }
 
 # Routing table settings, we have 2 routing tables
 # 1. public -> have access directly to internet gateway
-# 2. private -> is routed to internet via NAT Gateway
+# 2. private -> is routed to internet via NAT Gateway instance
 #
 # There is default table (set as main) without access to internet, only for local routes. Which is good default.
 resource "aws_route_table" "public-routes" {
@@ -143,7 +169,7 @@ resource "aws_route_table" "private-routes" {
 
   route {
     cidr_block = "0.0.0.0/0"
-    nat_gateway_id = aws_nat_gateway.nat-gateway.id
+    instance_id = aws_instance.nat-gateway.id
   }
 
   tags = {
@@ -234,7 +260,8 @@ resource "aws_ecs_task_definition" "nasi-politici" {
     MailAuthenticationToken = local.MailAuthenticationToken,
     MonitoraApiUrl = local.MonitoraApiUrl,
     CzFinToken = local.CzFinToken,
-    HlidacAuthenticationToken = local.HlidacAuthenticationToken
+    HlidacAuthenticationToken = local.HlidacAuthenticationToken,
+    MailApiUrl = local.MailApiUrl
   })
   network_mode = "awsvpc"
   execution_role_arn = aws_iam_role.ecr-task-execution-role.arn
@@ -595,7 +622,8 @@ resource "aws_cloudfront_distribution" "distribution" {
   default_root_object = "index.html"
 
   aliases = [
-    "www.${var.public-domain}"
+    "www.${var.public-domain}",
+    var.public-domain
   ]
 
   default_cache_behavior {

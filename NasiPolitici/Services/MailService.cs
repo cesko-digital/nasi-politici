@@ -10,8 +10,8 @@ namespace HlidacStatu.NasiPolitici.Services
     {
         private readonly HttpClient _httpClient;
 
-        private const string From = "nasipolitici@hlidacstatu.cz";
-        private const string To = "nasipolitici@hlidacstatu.cz";
+        private const string From = "martin.wenisch@cesko.digital";
+        private const string To = "martin.wenisch@cesko.digital";
 
         public MailService(HttpClient httpClient)
         {
