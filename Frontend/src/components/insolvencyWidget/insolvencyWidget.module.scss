@@ -41,6 +41,13 @@
     @include tag;
   }
 }
+.wrapper {
+  padding-bottom: 24px;
+  
+  &:last-child {
+    padding-bottom: 0;
+  }
+}
 .widgetWithTable {
   .tableRow {
     margin: 0 -10px;

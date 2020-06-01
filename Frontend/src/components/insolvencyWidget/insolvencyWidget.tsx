@@ -18,7 +18,7 @@ interface RowProps {
 
 const InsolvencyRow: React.FC<RowProps> = ({ title, personalCount, companyCount }) => {
   return (
-    <div>
+    <div className={styles.wrapper}>
       <div className={styles.subtitleWrapper}>
         <h3 className={styles.subtitle}>je {title}</h3>
         <div className={styles.line} />
