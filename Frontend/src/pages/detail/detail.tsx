@@ -142,7 +142,7 @@ const Detail: React.FC<Props> = props => {
                             &nbsp;{props.lastUpdate}
                           </React.Fragment>
                         )}
-                        {!props.lastUpdate && <div className={styles.lastUpdateLabel}>Čeká na kontrolu</div>}
+                        {!props.lastUpdate && <div className={styles.lastUpdateEmpty}>Čeká na kontrolu</div>}
                       </div>
                     </div>
                   </div>
