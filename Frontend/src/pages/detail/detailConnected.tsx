@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { loadDetail } from 'store/detail/actions'
+import { loadDetail, setInitAction } from 'store/detail/actions'
 import {
   getBirthYear,
   getCurrentParty,
@@ -43,4 +43,9 @@ const mapStateToProps = createStructuredSelector<AppState, StateProps>({
   photoUrl: getPhotoUrl,
 })
 
-export default connect(mapStateToProps, { loadDetail })(Detail)
+const dispatchProps = {
+  loadDetail,
+  onDispose: setInitAction,
+}
+
+export default connect(mapStateToProps, dispatchProps)(Detail)

@@ -6,6 +6,7 @@ import { ReactComponent as CrossIcon } from 'assets/images/cross.svg'
 import { ReactComponent as ReportIcon } from 'assets/images/report.svg'
 import ReportModalTrigger from 'components/reportModal/reportModalTriggerConnected'
 import { dummyPluralize as pluralize } from 'utils/string'
+import LoadingBar from 'components/loadingBar/loadingBar'
 
 interface ResultRowProps {
   id: string
@@ -83,25 +84,27 @@ interface Props {
   results: ResultRowProps[]
   query: string
   wasSearched: boolean
+  isLoading: boolean
 }
 
-const Result: React.FC<Props> = ({ results, query, wasSearched }) => {
+const Result: React.FC<Props> = ({ results, query, wasSearched, isLoading }) => {
   return (
     <React.Fragment>
       {wasSearched && results && results.length === 0 && <EmptyState query={query} />}
-      {results && !!results.length && (
+      {!isLoading && results && !!results.length && (
         <div>
           <div className={styles.count}>
             {pluralize(results.length, 'Nalezen', 'Nalezeni', 'Nalezeno')} {results.length}{' '}
             {pluralize(results.length, 'politik', 'politici', 'politiků')}
           </div>
           <div className={styles.results}>
-            {results.map(result => (
+            {results.map((result) => (
               <ResultRow {...result} key={result.id} />
             ))}
           </div>
         </div>
       )}
+      {isLoading && <LoadingBar />}
     </React.Fragment>
   )
 }

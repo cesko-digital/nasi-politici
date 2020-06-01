@@ -7,6 +7,7 @@ import {
   SearchActionTypes,
   SET_PROFILES_COUNT,
   ON_HOMEPAGE_ENTER,
+  SET_SEARCH_LOADING,
 } from './types'
 
 export const setSearchQuery = (query: string, instantSearch: boolean): SearchActionTypes => ({
@@ -34,4 +35,9 @@ export const onEnter = (): SearchActionTypes => ({
 export const setProfilesCount = (count: number): SearchActionTypes => ({
   type: SET_PROFILES_COUNT,
   payload: count,
+})
+
+export const setSearchLoading = (isLoading: boolean): SearchActionTypes => ({
+  type: SET_SEARCH_LOADING,
+  payload: isLoading,
 })

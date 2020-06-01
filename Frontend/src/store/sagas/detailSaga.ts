@@ -47,8 +47,8 @@ function* loadDemagog(id: string): SagaIterator {
 }
 
 function* handleLoadDetail(action: ReturnType<typeof loadDetail>): SagaIterator {
-  yield put(loadingDetailStarted())
   yield put(setInitAction())
+  yield put(loadingDetailStarted())
   try {
     const detail: Detail = yield call(api.fetchDetail, action.payload)
     yield put(setDetail(detail))

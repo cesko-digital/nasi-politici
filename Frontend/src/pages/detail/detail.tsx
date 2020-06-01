@@ -33,6 +33,7 @@ interface Props {
   isLoading: boolean
   lastUpdate: string | null
   loadDetail: (id: string) => void
+  onDispose: () => void
   match: {
     params: {
       id: string
@@ -61,7 +62,7 @@ const MenuBar: React.FC = () => {
   )
 }
 
-const Detail: React.FC<Props> = props => {
+const Detail: React.FC<Props> = (props) => {
   const detailWrapper = React.useRef<HTMLDivElement>(null)
   const stickyHeader = styles.sticky
   const topHeaderHeight = 64
@@ -70,10 +71,14 @@ const Detail: React.FC<Props> = props => {
     match: {
       params: { id },
     },
+    onDispose,
   } = props
   React.useEffect(() => {
     loadDetail(id)
-  }, [loadDetail, id])
+    return (): void => {
+      onDispose()
+    }
+  }, [loadDetail, id, onDispose])
   React.useEffect(() => {
     window.scrollTo({
       top: document.body.scrollTop,
@@ -85,8 +90,7 @@ const Detail: React.FC<Props> = props => {
     }
     if (window.scrollY > topHeaderHeight && !detailWrapper.current.classList.contains(stickyHeader)) {
       detailWrapper.current.classList.add(stickyHeader)
-    }
-    else if (window.scrollY <= topHeaderHeight && detailWrapper.current.classList.contains(stickyHeader)) {
+    } else if (window.scrollY <= topHeaderHeight && detailWrapper.current.classList.contains(stickyHeader)) {
       detailWrapper.current.classList.remove(stickyHeader)
     }
   })
