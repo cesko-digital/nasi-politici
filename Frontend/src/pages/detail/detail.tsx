@@ -170,7 +170,8 @@ const Detail: React.FC<Props> = (props) => {
               </div>
             </div>
             <div className={styles.detail}>
-              <div id="overview" className={classnames(styles.section, styles.overview)}>
+              <div className={classnames(styles.section, styles.overview)}>
+                <div id="overview" className={styles.anchor} />
                 <div className={styles.titleWrapper}>
                   <h1 className={styles.title}>Přehled</h1>
                   <Divider className={styles.titleDivider} />
@@ -197,7 +198,8 @@ const Detail: React.FC<Props> = (props) => {
                   <DemagogWidget />
                 </div>
               </div>
-              <div id="career" className={styles.section}>
+              <div className={styles.section}>
+                <div id="career" className={styles.anchor} />
                 <div className={styles.titleWrapper}>
                   <h1 className={styles.title}>Kariéra</h1>
                   <Divider className={styles.titleDivider} />
@@ -209,14 +211,16 @@ const Detail: React.FC<Props> = (props) => {
                   <NotificationsWidget />
                 </div>
               </div>
-              <div id="engagement" className={styles.section}>
+              <div className={styles.section}>
+                <div id="engagement" className={styles.anchor} />
                 <div className={styles.titleWrapper}>
                   <h1 className={styles.title}>Angažovanost</h1>
                   <Divider className={styles.titleDivider} />
                 </div>
                 <EngagementChart />
               </div>
-              <div id="media" className={styles.section}>
+              <div className={styles.section}>
+                <div id="media" className={styles.anchor} />
                 <div className={styles.titleWrapper}>
                   <h1 className={styles.title}>Mediální obraz</h1>
                   <Divider className={styles.titleDivider} />
