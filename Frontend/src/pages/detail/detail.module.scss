@@ -146,6 +146,12 @@
     @include linkBtn;
     margin-bottom: 25px;
     color: #000;
+    &:hover {
+      color: $clPrimaryText;
+      &:after {
+        background-color: $clPrimaryText;
+      }
+    }
   }
 }
 
@@ -160,7 +166,12 @@
   display: flex;
   align-items: center;
 }
+.anchor {
+  position: absolute;
+  top: -112px;
+}
 .section {
+  position: relative;
   display: flex;
   flex-direction: column;
   .title {
