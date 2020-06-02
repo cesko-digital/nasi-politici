@@ -4,7 +4,8 @@ import { ContactService } from 'store/detail/types'
 import { ReactComponent as FBLogo } from 'assets/images/social-fb.svg'
 import { ReactComponent as TWLogo } from 'assets/images/social-tw.svg'
 import { ReactComponent as IGLogo } from 'assets/images/social-ig.svg'
-import { ReactComponent as WebLogo } from 'assets/images/social-web.svg'
+import { ReactComponent as WebLogo } from 'assets/images/icon-globe.svg'
+import { ReactComponent as Logo } from 'assets/images/social-web.svg'
 
 import styles from './contactsWidget.module.scss'
 
@@ -25,7 +26,7 @@ const ContactIcon: React.FC<IconProps> = props => {
     case ContactService.WWW:
       return <WebLogo className={styles.icon} />
     default:
-      return <WebLogo className={styles.icon} />
+      return <Logo className={styles.icon} />
   }
 }
 
