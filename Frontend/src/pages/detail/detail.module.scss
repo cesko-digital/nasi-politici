@@ -76,9 +76,6 @@
 		text-transform: none;
 		display: flex;
 	}
-	.lastUpdateLabelShort {
-		display: none;
-	}
   .personal,
   .lastUpdateWrapper {
     display: flex;
@@ -367,12 +364,6 @@
 		}
 		.lastUpdate {
 			margin-left: 0;
-		}
-		.lastUpdateLabel {
-			display: none;
-		}
-		.lastUpdateLabelShort {
-			display: inline;
 		}
   }
   .crossIcon {
