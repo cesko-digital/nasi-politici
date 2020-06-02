@@ -19,8 +19,8 @@
 	}
   .title {
 		@include condensedTitle;
-		margin-right: 2px;
-    margin-bottom: 24px;
+    margin-right: 8px;
+    margin-bottom: 12px;
     line-height: 24px;
   }
   .tags,
@@ -28,11 +28,13 @@
     display: flex;
   }
   .tags {
-		flex-direction: column; // todo add media queries
     align-self: flex-start;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: center;
   }
   .tag {
-    margin-bottom: 4px;
+    margin-right: 10px;
     padding: 0 8px;
     align-items: center;
     border-radius: 50px;
