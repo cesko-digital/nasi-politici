@@ -2,6 +2,11 @@ import * as React from 'react'
 import styles from './about.module.scss'
 
 const AboutUs: React.FC = () => {
+  React.useEffect(() => {
+    window.scrollTo({
+      top: document.body.scrollTop,
+    })
+  })
   return (
     <div>
       <div className={styles.about}>

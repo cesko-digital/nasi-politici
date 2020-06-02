@@ -30,6 +30,10 @@
   padding-top: 20px;
   border-top: 1px solid $clBorder;
   break-inside: avoid;
+  display: inline-block;
+  &:nth-child(2) {
+    display: block;
+  }
 }
 .articles {
   padding: 0 30px;
