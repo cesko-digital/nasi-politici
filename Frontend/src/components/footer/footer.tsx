@@ -100,7 +100,7 @@ const Footer: React.FC = () => {
       </div>
       <div className={styles.bottom}>
         <div className={styles.bottomWrapper}>
-          <Link to="/o-projektu" className={styles.aboutUsLink}>
+          <Link to="/o-projektu#" className={styles.aboutUsLink}>
             O projektu
           </Link>
           <LogoNP className={classnames(styles.logoNP, styles.logo)} />

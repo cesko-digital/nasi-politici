@@ -20,6 +20,12 @@
 .searchWrapper {
   margin: 45px 30px;
 }
+.profilesCount {
+  visibility: hidden;
+}
+.profilesCountLoaded {
+  visibility: visible;
+}
 
 @media screen and (max-width: 979px) {
   .wrapper,

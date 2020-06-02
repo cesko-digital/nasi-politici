@@ -375,6 +375,7 @@
   .heading {
     .fullname {
       @include subTitle;
+      margin-bottom: 6px;
     }
   }
   .photo {

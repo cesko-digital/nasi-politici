@@ -1,3 +1,4 @@
+import classnames from 'classnames'
 import React from 'react'
 import SearchBar from 'components/searchBar/searchBarConnected'
 import Result from 'components/result/resultConnected'
@@ -14,6 +15,7 @@ export interface Props {
 
 const Homepage: React.FC<Props> = props => {
   const { onEnter, profilesCount } = props
+  const profilesCountClass = classnames(styles.profilesCount, !!profilesCount && styles.profilesCountLoaded)
   React.useEffect(() => {
     !profilesCount && onEnter()
   }, [onEnter, profilesCount])
@@ -25,7 +27,7 @@ const Homepage: React.FC<Props> = props => {
             <img src={logo} alt={logo} className={styles.logo} />
             <div className={styles.perex}>
               Největší otevřená databáze českých politiků a političek. Zjistěte si, kdo vám vládne.
-              {!!profilesCount && <div>Aktuálně zde najdete {profilesCount} profilů.</div>}
+              <div className={profilesCountClass}>Aktuálně zde najdete {profilesCount} profilů.</div>
             </div>
           </div>
         )}
