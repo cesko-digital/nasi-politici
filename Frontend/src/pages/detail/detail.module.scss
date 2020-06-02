@@ -320,6 +320,17 @@
   }
 }
 
+@media screen and (min-width: 979px) {
+  .sticky {
+    .initialsWrapper{
+      transform: translateX(-120px);
+    }
+    .photo {
+      transform: translate(-66px, -66px) scale(.3);
+    }
+  }
+}
+
 @media screen and (max-width: 979px) {
   .heading {
     padding: 10px 20px;
