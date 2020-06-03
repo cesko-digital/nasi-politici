@@ -18,9 +18,9 @@ const AboutUs: React.FC = () => {
         </p>
         <p className={styles.textBlock}>
           Spojující filozofií projektu je otevřenost a nezávislost. Nejen prosazovaná otevřenost ohledně politiků, která
-          je nosnou myšlenkou celého projektu, ale také otevřenost celé databáze. NP jsou tzv. “open source” sestavený
-          na základě nezávislých dat. Pokud máte dojem, že víte o zdroji informací, který by byl relevantní, nebo Vám
-          nějaký zdroj informací chybí? Napište nám a rádi se na to podíváme.
+          je nosnou myšlenkou celého projektu, ale také otevřenost celé databáze. NP jsou open source projekt sestavený
+          na základě nezávislých dat. Pokud máte dojem, že víte o zdroji informací, který by byl relevantní, nebo vám
+          nějaký zdroj informací chybí, napište nám a rádi se na to podíváme.
         </p>
         <p className={styles.textBlock}>
           NP vznikli původně jako projekt stejnojmenného sdružení Naši politici, o.s. v roce 2008. Po deset let se
@@ -30,8 +30,8 @@ const AboutUs: React.FC = () => {
         </p>
         <p className={styles.textBlock}>
           Proto TI s vizí vytvoření funkční a aktualizované databáze spojila síly s IT profesionály na otevřené zdroje z
-          Hlídače státu a komunitou špičkových vývojářů, designérů a produkťáků z česko.digital. Díky této jedinečné
-          spolupráci jsme reinkarnovali projekt, který by měl být místem, kde najdete ověřené informace o Vámi volených
+          Hlídače státu a komunitou špičkových vývojářů, designérů a produkťáků z Česko.Digital. Díky této jedinečné
+          spolupráci jsme reinkarnovali projekt, který by měl být místem, kde najdete ověřené informace o vámi volených
           zástupcích.
         </p>
         <h1 className={styles.title}>Jak číst jednotlivé datové zdroje?</h1>
@@ -39,14 +39,14 @@ const AboutUs: React.FC = () => {
         <p className={styles.textBlock}>
           Výroky naznačují, jak pravdivě či nepravdivě se vyjadřuje politik/politička, kterého hledáte. Jedná se o data
           organizace Demagog.cz, která ověřuje výroky politiků (tzv. factchecking) a snaží se tak kultivovat veřejnou
-          debatu. Nehodnotí se politická prohlášení, hodnotící soudy a predikce dopadů nějakých opatření (např.:
-          Opatření vlády XY je dobré, neboť způsobí růst zaměstnanosti.), jednoduše proto, že to není možné ověřit:
-          budoucnost neznáme nikdo a u hodnotových soudů nelze nalézt jedinou „správnou“ pozici. Více o metodologii dat
-          se dočtete na stránkách Demagog.cz.
+          debatu. Nehodnotí se politická prohlášení, hodnotící soudy a predikce dopadů nějakých opatření („opatření
+          vlády XY je dobré, neboť způsobí růst zaměstnanosti“), jednoduše proto, že je není možné ověřit – budoucnost
+          neznáme nikdo a u hodnotových soudů nelze nalézt jedinou „správnou“ pozici. Více o metodice dat se dočtete
+          <a href="https://demagog.cz/stranka/jak-hodnotime-metodika">na stránkách Demagog.cz</a>.
         </p>
         <h2 className={styles.subTitle}>Kontakty</h2>
         <p className={styles.textBlock}>
-          Chcete se s politikem/političkou spojit? Chcete si ověřit, které jsou oficiální profily? Tak jste v téhle
+          Chcete se s politikem/političkou spojit? Chcete si ověřit, které profily jsou oficiální? Tak jste v téhle
           škatulce správně! Najdete zde sesbírané kontakty z veřejných zdrojů, ať už z osobních stránek, stránek
           institucí, kde politik/politička působí, sociálních sítí, a dalších. Pokud víte o kontaktu, který nám unikl,
           klikněte na vlaječku a pošlete nám upozornění.
@@ -54,10 +54,10 @@ const AboutUs: React.FC = () => {
         <h2 className={styles.subTitle}>Role</h2>
         <p className={styles.textBlock}>
           Politik/politička za svou kariéru vystřídá velkou řádku rolí. A ty nejdůležitější by měly být přímo tady.
-          Kterými stranami prošel, jestli byl jen řadovým politikem nebo se dostal výš, nebo zda byl aktivním politikem
-          před rokem 1989. Tyto informace sbíráme ručně, proto Vás žádáme o shovívavost, pokud nám nějaká unikne. Právě
+          Kterými stranami prošel, jestli byl jen řadovým politikem, nebo se dostal výš, nebo zda byl aktivním politikem
+          před rokem 1989. Tyto informace sbíráme ručně, proto vás žádáme o shovívavost, pokud nám nějaká unikne. Právě
           proto tu máme ikonku vlaječky, díky které nám případnou nepřesnost můžete nahlásit a my budeme informaci
-          fact-checkovat dále.
+          ověřit lépe.
         </p>
         <h2 className={styles.subTitle}>Sponzorství</h2>
         <p className={styles.textBlock}>
@@ -67,17 +67,17 @@ const AboutUs: React.FC = () => {
         </p>
         <h2 className={styles.subTitle}>Insolvence</h2>
         <p className={styles.textBlock}>
-          Ne všechno se vždycky daří podle představ a někdy to znamená být v červených číslech. Jenomže veřejně činná
+          Ne všechno se vždycky daří podle představ – a někdy to znamená být v červených číslech. Jenomže veřejně činná
           osoba by mohla být kvůli podobným peripetiím vydíratelná. A pokud se tato osoba nebo na ni napojené firmy
-          nachází v insolvenci, mohl by mít nejenom motivaci ideovou, ale i finanční, rozhodovat se určitým způsobem. A
-          to ať už přímo či nepřímo. Proto se v téhle škatulce můžete přesvědčit, jak to s ní doopravdy je.
+          nachází v insolvenci, mohou mít jasnou finanční motivaci rozhodovat určitým způsobem bez ohledu na veřejný
+          zájem. Proto se v téhle škatulce můžete přesvědčit, jak to doopravdy je.
         </p>
         <h2 className={styles.subTitle}>Centrální registr oznámení</h2>
         <p className={styles.textBlock}>
           Většina politiků a političek musí při zvolení, v průběhu funkce a při jejím ukončení vkládat své majetkové
           přiznání do oficiálního registru. Dozvíte se tak, zda je politik či politička vůbec odevzdala, kolik jich
-          bylo, a co obsahují. Informací může být hodně, tak jsme se rozhodli Vám poskytnout základní přehled rovnou v
-          roletce, ale detailnější informace přímo z Centrální evidence oznámení máte jen na dosah kliku.
+          bylo, a co obsahují. Informací může být hodně, a tak jsme se rozhodli vám poskytnout základní přehled rovnou v
+          roletce – ale detailnější informace přímo z Centrální evidence oznámení máte na jedno další kliknutí.
           <br />
           Povinnost odevzdávat majetkové přiznání se vztahuje na členy Parlamentu ČR a na radní, jak na krajské, tak
           komunální úrovni. Na zastupitele se tato povinnost nevztahuje.
@@ -85,18 +85,18 @@ const AboutUs: React.FC = () => {
         <h2 className={styles.subTitle}>Angažovanost</h2>
         <p className={styles.textBlock}>
           Ne každý máme rádi pavouky. Pro zobrazení majetkových sítí jsme proto radši zvolili časové osy. Přehledným
-          způsobem Vám totiž ukazují, kam až sahá napojení politiků a političek chronologicky. Tyto osy jsou ale
+          způsobem vám totiž ukazují, kam až sahá napojení politiků a političek chronologicky. Tyto osy jsou ale
           poskládané z otevřených zdrojů, tudíž nemusí ukazovat úplně všechny existující vazby, zobrazují však ty
           potvrzené.
         </p>
         <h2 className={styles.subTitle}>V médiích</h2>
         <p className={styles.textBlock}>
-          Mediální obraz politika Vám může leccos napovědět. Je k tomu potřeba přistupovat kriticky, jako ke všem
-          ostatním informacím, ale mít přehled, co se v poslední době o politikovi napsalo, obzvlášť před volbami, se
-          vždycky hodí. V našem přehledu je zobrazená doba určena jako 90 dní, a protože například takový Jan Novák je
+          Mediální obraz politika vám může leccos napovědět. Je k tomu potřeba přistupovat kriticky, jako ke všem
+          ostatním informacím – ale mít přehled, co se v poslední době o politikovi napsalo, obzvlášť před volbami, se
+          vždycky hodí. V našem přehledu je zobrazená doba určena na 90 dní, a protože například takový Jan Novák je
           jako politik složitě vyhledatelný, kombinujeme jméno politika s jeho příslušností k aktuální straně. I tak se
           může stát, že nám se do přehledu dostane článek, který o tomto politikovi nepojednává. Pokud takový článek
-          uvidíte, klikněte, prosím, na vlaječku a dejte nám o něm vědět, abychom ho mohli odstranit.
+          uvidíte, klikněte prosím na vlaječku a dejte nám o něm vědět, abychom ho mohli odstranit.
         </p>
         <h1 className={styles.title}>Zpracování údajů</h1>
         <p className={styles.textBlock}>
