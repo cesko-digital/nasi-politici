@@ -40,6 +40,6 @@ Ve složce Frontend je třeba spusti nejdříve `yarn install`, který nainstalu
 Prohlížeč by se měl sám otevřít a zobrazit úvodní stránku.
 
 ## Monitora (volitelné)
-Služba Monitora slouží k získávání mediálního obsahu o politicích. Je v adresáři `Monitora-backend`. Není to nutné, ale obecně je lepší si pro vývoj vytvořit virtuální prostředí - [virtualenv](https://docs.python.org/3/library/venv.html). Potom je třeba nainstalovat závislosti pomocí `pip install -r requirements.txt`. Pak stačí aplikaci spustit příkazem `python main.py`. 
+Služba Monitora slouží k dohledávání online článků o politicích. Je v adresáři `Monitora-backend`. Není to nutné, ale obecně je lepší si pro vývoj vytvořit virtuální prostředí - [virtualenv](https://docs.python.org/3/library/venv.html). Potom je třeba nainstalovat závislosti pomocí `pip install -r requirements.txt`. Pak stačí aplikaci spustit příkazem `python main.py`. 
 
 *POZOR*: Monitora ke svému fungování potřebuje token, který není veřejný. Pokud potřebujete vyvíjet něco na této části, ozvěte se na [Slacku](https://cesko-digital.slack.com/archives/CK0ER8UBG).
