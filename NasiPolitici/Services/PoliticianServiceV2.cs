@@ -15,7 +15,7 @@ namespace HlidacStatu.NasiPolitici.Services
         private readonly HttpClient _httpClient;
         private readonly IMemoryCache _cache;
 
-        private readonly TimeSpan CacheDuration = TimeSpan.FromHours(4);
+        private readonly TimeSpan CacheDuration = TimeSpan.FromHours(2);
         private readonly string _peopleCacheKey = "_PeopleCacheKey";
         public PoliticianServiceV2(HttpClient httpClient, IMemoryCache cache)
         {

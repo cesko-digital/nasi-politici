@@ -47,15 +47,8 @@ namespace HlidacStatu.NasiPolitici
                 config.BaseAddress = new Uri(Configuration.GetValue<string>("MonitoraApiUrl"));
             });
 
-            services.AddHttpClient<IMailService, MailService>(config =>
-            {
-                config.BaseAddress = new Uri(Configuration.GetValue<string>("MailApiUrl"));
-                string authToken = Configuration.GetValue<string>("MailAuthenticationToken");
-                string authTokenBase64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(authToken));
-                config.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue("Basic", authTokenBase64);
-
-            });
+            services.Configure<MailConfiguration>(Configuration.GetSection("MailConfiguration"));
+            services.AddTransient<IMailService, MailService>();
 
             services.AddMemoryCache();
 
