@@ -1,43 +1,36 @@
-﻿using Microsoft.Extensions.Configuration;
-using System.Collections.Generic;
-using System.Net.Http;
+﻿using Microsoft.Extensions.Options;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace HlidacStatu.NasiPolitici.Services
 {
     public class MailService : IMailService
     {
-        private readonly HttpClient _httpClient;
+        private readonly MailConfiguration _mailConfiguration;
 
-        private const string From = "martin.wenisch@cesko.digital";
-        private const string To = "martin.wenisch@cesko.digital";
-
-        public MailService(HttpClient httpClient)
+        public MailService(IOptions<MailConfiguration> options)
         {
-            _httpClient = httpClient;
+            _mailConfiguration = options.Value;
         }
 
         public async Task<string> SendMail(string text, string subject)
         {
-            var emailData = new List<KeyValuePair<string, string>>
+            
+            var client = new SendGridClient(_mailConfiguration.ApiKey);
+            var msg = new SendGridMessage()
             {
-                { new KeyValuePair<string, string>("from", From) },
-                { new KeyValuePair<string, string>("to", To) },
-                { new KeyValuePair<string, string>("subject", subject) },
-                { new KeyValuePair<string, string>("text", text) }
+                From = new EmailAddress(_mailConfiguration.From),
+                Subject = subject,
+                PlainTextContent = text
             };
-
-            var content = new FormUrlEncodedContent(emailData);
-            var response = await _httpClient.PostAsync("messages", content);
-
-            if (response.IsSuccessStatusCode)
+            foreach(string recipient in _mailConfiguration.Tos.Split(";"))
             {
-                var result = await response.Content.ReadAsStringAsync();
-                return result;
+                msg.AddTo(new EmailAddress(recipient));
             }
-
-            return "error occured while sending email";
+            var response = await client.SendEmailAsync(msg).ConfigureAwait(false);
+            return await response.Body.ReadAsStringAsync().ConfigureAwait(false);
+            
         }
     }
 }
