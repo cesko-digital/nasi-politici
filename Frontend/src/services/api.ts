@@ -15,13 +15,9 @@ const api: API = {
     return response.data
   },
   fetchNews: async (fullName, party, searchQuery) => {
-    const response = await axios.post(`${process.env.REACT_APP_BASE_API_URL}/api/v1/news/monitora`, {
-      data: {
-        name: fullName,
-        party: party,
-        search_query: searchQuery, // eslint-disable-line @typescript-eslint/camelcase
-      },
-    })
+    const response = await axios.get(
+      `${process.env.REACT_APP_BASE_API_URL}/api/v1/news/monitora?name=${fullName}&party=${party}&search_query=${searchQuery}`,
+    )
     return response.data
   },
   fetchDemagog: async id => {
