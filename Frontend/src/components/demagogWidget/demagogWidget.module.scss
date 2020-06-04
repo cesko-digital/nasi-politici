@@ -9,15 +9,15 @@
   .header {
     display: flex;
     justify-content: space-between;
-		flex-wrap: wrap;
-		padding: 30px 30px 0 30px;
-	}
-	.titleWrapper {
-		display: flex;
-	}
+    flex-wrap: wrap;
+    padding: 30px 30px 0 30px;
+  }
+  .titleWrapper {
+    display: flex;
+  }
   .title {
-		@include condensedTitle;
-		margin-right: 8px;
+    @include condensedTitle;
+    margin-right: 8px;
     margin-bottom: 24px;
     line-height: 24px;
   }
@@ -37,23 +37,26 @@
   }
   .tagname {
     @include tag;
-	}
-	.stats {
-		padding: 0 30px 0 20px;
-	}
-	.linkWrapper {
-		display: flex;
-		justify-content: flex-end;
-		padding: 20px 30px;
-		border-top: 1px solid $clBorder;
-		.link {
-			@include linkBtnPrimary;
+  }
+  .stats {
+    padding: 0 30px 0 20px;
+  }
+  .linkWrapper {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px 30px;
+    border-top: 1px solid $clBorder;
+    .link {
+      @include linkBtnPrimary;
     }
     .redirectBtn {
       margin-left: 6px;
       cursor: pointer;
     }
-	}
+  }
+  .explanationLink {
+    @include linkBtn;
+  }
 }
 
 .noData {
@@ -64,88 +67,88 @@
   @include reportBtn;
 }
 .reportBtn {
-  transform: scale(.6);
+  transform: scale(0.6);
 }
 
 .sum {
-	margin-bottom: 17px;
-	padding: 0 30px;
+  margin-bottom: 17px;
+  padding: 0 30px;
 }
 
 .itemsWrapper {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .count {
-	display: flex;
-	justify-content: space-between;
-	line-height: 40px;
-	margin: 0 0 10px 10px;
-	.number {
-		display: flex;
-		align-items: center;
-		.icon {
+  display: flex;
+  justify-content: space-between;
+  line-height: 40px;
+  margin: 0 0 10px 10px;
+  .number {
+    display: flex;
+    align-items: center;
+    .icon {
       padding: 6px;
-			width: 30px;
-			height: 30px;
-			border-radius: 50%;
-			margin-right: 10px;
-		}
-	}
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+  }
 }
 
 .percBar {
-	height: 40px;
-	margin-bottom: -40px;
+  height: 40px;
+  margin-bottom: -40px;
 }
 
 .true {
-	color: $clPrimaryText;
-	.percBar {
-		background-color: $clBlue;
-    opacity: .1;
-	}
-	.icon {
-		background-color: $clPrimaryText;
-	}
+  color: $clPrimaryText;
+  .percBar {
+    background-color: $clBlue;
+    opacity: 0.1;
+  }
+  .icon {
+    background-color: $clPrimaryText;
+  }
 }
 
 .untrue {
-	color: $clError;
-	.percBar {
-		background-color: $clErrorBg;
-	}
-	.icon {
-		background-color: $clError;
-	}
+  color: $clError;
+  .percBar {
+    background-color: $clErrorBg;
+  }
+  .icon {
+    background-color: $clError;
+  }
 }
 
 .misleading {
-	color: $clYellow;
-	.percBar {
+  color: $clYellow;
+  .percBar {
     background-color: $clYellow;
-    opacity: .1;
-	}
-	.icon {
-		background-color: $clYellow;
-	}
+    opacity: 0.1;
+  }
+  .icon {
+    background-color: $clYellow;
+  }
 }
 
 .unverifiable {
-	margin-bottom: 0;
-	color: $clDark;
-	.percBar {
-		background-color: $clGray;
-    opacity: .1;
-	}
-	.icon {
-		background-color: $clDark;
-	}
+  margin-bottom: 0;
+  color: $clDark;
+  .percBar {
+    background-color: $clGray;
+    opacity: 0.1;
+  }
+  .icon {
+    background-color: $clDark;
+  }
 }
 
 .percent {
-	color: $clDark;
+  color: $clDark;
 }
 
 @media screen and (max-width: 650px) {

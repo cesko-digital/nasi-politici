@@ -41,8 +41,17 @@ const AboutUs: React.FC = () => {
           organizace Demagog.cz, která ověřuje výroky politiků (tzv. factchecking) a snaží se tak kultivovat veřejnou
           debatu. Nehodnotí se politická prohlášení, hodnotící soudy a predikce dopadů nějakých opatření („opatření
           vlády XY je dobré, neboť způsobí růst zaměstnanosti“), jednoduše proto, že je není možné ověřit – budoucnost
-          neznáme nikdo a u hodnotových soudů nelze nalézt jedinou „správnou“ pozici. Více o metodice dat se dočtete
-          <a href="https://demagog.cz/stranka/jak-hodnotime-metodika">na stránkách Demagog.cz</a>.
+          neznáme nikdo a u hodnotových soudů nelze nalézt jedinou „správnou“ pozici. Více o metodice dat se&nbsp;
+          dočtete na stránkách&nbsp;
+          <a
+            className={styles.link}
+            href="https://demagog.cz/stranka/jak-hodnotime-metodika"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Demagog.cz
+          </a>
+          .
         </p>
         <h2 className={styles.subTitle}>Kontakty</h2>
         <p className={styles.textBlock}>

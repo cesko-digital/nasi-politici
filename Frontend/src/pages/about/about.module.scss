@@ -19,6 +19,10 @@
 .textBlock {
   margin-bottom: 50px;
 }
+.link {
+  @include linkBtn;
+  font-size: 21px;
+}
 
 @media screen and (max-width: 1169px) {
   .about {

@@ -43,9 +43,18 @@ const DemagogWidget: React.FC<Props> = ({ data, fullname }) => {
             Výroky naznačují, jak pravdivě či nepravdivě se vyjadřuje politik/politička, kterého hledáte. Jedná se o
             data organizace Demagog.cz, která ověřuje výroky politiků (tzv. factchecking) a snaží se tak kultivovat
             veřejnou debatu. Nehodnotí se politická prohlášení, hodnotící soudy a predikce dopadů nějakých opatření
-            (např.: Opatření vlády XY je dobré, neboť způsobí růst zaměstnanosti.), jednoduše proto, že to není možné
-            ověřit: budoucnost neznáme nikdo a u hodnotových soudů nelze nalézt jedinou „správnou“ pozici. Více o
-            metodologii dat se dočtete na stránkách Demagog.cz.
+            („opatření vlády XY je dobré, neboť způsobí růst zaměstnanosti“), jednoduše proto, že je není možné ověřit –
+            budoucnost neznáme nikdo a u hodnotových soudů nelze nalézt jedinou „správnou“ pozici. Více o metodice dat
+            se dočtete na stránkách&nbsp;
+            <a
+              className={styles.explanationLink}
+              href="https://demagog.cz/stranka/jak-hodnotime-metodika"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Demagog.cz
+            </a>
+            .
           </ExplanationModal>
         </div>
         {!!data.id && (
