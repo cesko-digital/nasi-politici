@@ -20,13 +20,15 @@ namespace HlidacStatu.NasiPolitici.Controllers
         }
 
         [HttpGet("monitora")]
-        public async Task<IActionResult> GetMonitoraArticles()
+        public async Task<IActionResult> GetMonitoraArticles(string name, string party, string search_query)
         {
-            string body = "";
-            using (var reader = new StreamReader(Request.Body))
-            {
-                body = await reader.ReadToEndAsync();
-            }
+            string body = $@"{{
+                ""data"": {{
+                    ""name"": ""{name}"",
+                    ""party"": ""{party}"",
+                    ""search_query"": ""{search_query}""
+                }}
+            }}";
             
             var result = _monitoraService.GetArticles(body);
 
