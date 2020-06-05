@@ -1,5 +1,5 @@
 # NasiPolitici
-Aplikace je tvořena třemi samostatnými službami - NasiPolitici (backend, .NET), Frontend (React) a Monitora-backend (služba poskytující články z médií, Python). Pro lokální prostředí je třeba zprovoznit minimálně backend a frontend. 
+Aplikace je tvořena třemi samostatnými službami - NasiPolitici (backend, .NET), Frontend (React) a Media-backend (služba poskytující články z médií, Python). Pro lokální prostředí je třeba zprovoznit minimálně backend a frontend. 
 
 Následující návod popisuje nutné kroky ke zprovoznění celé aplikace. V jednotlivých adresářích jsou potom samostatná README s detaily pro konkrétní služby.
 ## Prerekvizity
@@ -8,7 +8,7 @@ Pokud chcete upravovat projekt, tak poté bude zapotřebí si nainstalovat [.NET
 
 Pro instalaci a spuštění frontendu je potřeba mít nainstalovaný [Yarn](https://yarnpkg.com/).
 
-Pro spuštění Monitory je potřeba [Python3](https://www.python.org/). 
+Pro spuštění Media je potřeba [Python3](https://www.python.org/). 
 
 ## Způsob spuštění
 Prvním krokem je naklonování repozitáře:
@@ -39,7 +39,7 @@ Ve složce Frontend je třeba spusti nejdříve `yarn install`, který nainstalu
 
 Prohlížeč by se měl sám otevřít a zobrazit úvodní stránku.
 
-## Monitora (volitelné)
-Služba Monitora slouží k dohledávání online článků o politicích. Je v adresáři `Monitora-backend`. Není to nutné, ale obecně je lepší si pro vývoj vytvořit virtuální prostředí - [virtualenv](https://docs.python.org/3/library/venv.html). Potom je třeba nainstalovat závislosti pomocí `pip install -r requirements.txt`. Pak stačí aplikaci spustit příkazem `python main.py`. 
+## Media (volitelné)
+Služba Media slouží k dohledávání online článků o politicích. Je v adresáři `Media-backend`. Není to nutné, ale obecně je lepší si pro vývoj vytvořit virtuální prostředí - [virtualenv](https://docs.python.org/3/library/venv.html). Potom je třeba nainstalovat závislosti pomocí `pip install -r requirements.txt`. Pak stačí aplikaci spustit příkazem `python main.py`. 
 
-*POZOR*: Monitora ke svému fungování potřebuje token, který není veřejný. Pokud potřebujete vyvíjet něco na této části, ozvěte se na [Slacku](https://cesko-digital.slack.com/archives/CK0ER8UBG).
+*POZOR*: Media ke svému fungování potřebuje token, který není veřejný. Pokud potřebujete vyvíjet něco na této části, ozvěte se na [Slacku](https://cesko-digital.slack.com/archives/CK0ER8UBG).
