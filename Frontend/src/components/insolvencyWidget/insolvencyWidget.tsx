@@ -53,6 +53,7 @@ interface InsolvencyData {
 interface Props {
   companyInsolvency: InsolvencyData
   fullname: string
+  source: string
   hasInsolvency: boolean
   hasInsolvencyData: boolean
   personalInsolvency: InsolvencyData
@@ -62,6 +63,7 @@ const InsolvencyWidget: React.FC<Props> = ({
   personalInsolvency,
   companyInsolvency,
   fullname,
+  source,
   hasInsolvency,
   hasInsolvencyData,
 }) => {
@@ -89,7 +91,7 @@ const InsolvencyWidget: React.FC<Props> = ({
             <div className={styles.tag}>
               <LinkBtn />
               <div className={styles.tagname}>
-                <a href="https://www.hlidacstatu.cz/" rel="noopener noreferrer" target="_blank">
+                <a href={source} rel="noopener noreferrer" target="_blank">
                   hlidacstatu.cz
                 </a>
               </div>

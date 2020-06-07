@@ -6,6 +6,7 @@ import {
   getFullName,
   hasInsolvency,
   hasInsolvencyData,
+  getInsolvencySource,
 } from 'store/detail/selectors'
 
 import InsolvencyWidget from './insolvencyWidget'
@@ -22,6 +23,7 @@ interface InsolvencyData {
 
 interface StateProps {
   companyInsolvency: InsolvencyData
+  source: string
   fullname: string
   hasInsolvency: boolean
   hasInsolvencyData: boolean
@@ -31,6 +33,7 @@ interface StateProps {
 const mapStateToProps = createStructuredSelector<AppState, StateProps>({
   companyInsolvency: getCompanyInsolvency,
   fullname: getFullName,
+  source: getInsolvencySource,
   hasInsolvency: hasInsolvency,
   hasInsolvencyData: hasInsolvencyData,
   personalInsolvency: getPersonalInsolvency,

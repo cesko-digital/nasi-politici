@@ -9,7 +9,7 @@ export const getDetailData = (store: AppState): Detail => store.detail.detail
 export const isDetailLoading = (store: AppState): boolean => store.detail.loadingDetail
 export const getHasPhoto = (store: AppState): boolean => getDetailData(store).hasPhoto
 export const getPhotoUrl = (store: AppState): string => getDetailData(store).photo
-export const getLastManualUpdate = (store: AppState): string | null =>  
+export const getLastManualUpdate = (store: AppState): string | null =>
   getDetailData(store).lastManualUpdate ? dummyFormatDateShort(new Date(getDetailData(store).lastManualUpdate)) : null
 export const getShowAllDonations = (store: AppState): boolean => store.detail.showAllDonations
 export const getShowAllNotifications = (store: AppState): boolean => store.detail.showAllNotifications
@@ -124,16 +124,21 @@ export const getConnections = (store: AppState): Connection[] => store.detail.de
 
 export const getOfficialsRegisterId = (store: AppState): string => store.detail.detail.notificationRegisterId || ''
 
-export const getNotificatonRegistryData = (store: AppState): [] => store.detail.detail.notificationRegisterStatements || []
+export const getNotificatonRegistryData = (store: AppState): [] =>
+  store.detail.detail.notificationRegisterStatements || []
 
 export const getNotificationsCount = (store: AppState): number => getNotificatonRegistryData(store).length
 
-export const getNotifications = createSelector(getNotificatonRegistryData, getShowAllNotifications, (notifications, showAll) => {
-  if (!showAll) {
-    return notifications.slice(0, DEFAULT_NOTIFICATION_LIMIT)
-  }
-  return notifications
-})
+export const getNotifications = createSelector(
+  getNotificatonRegistryData,
+  getShowAllNotifications,
+  (notifications, showAll) => {
+    if (!showAll) {
+      return notifications.slice(0, DEFAULT_NOTIFICATION_LIMIT)
+    }
+    return notifications
+  },
+)
 
 export const hasContacts = (store: AppState): boolean =>
   !!store.detail.detail.contacts && !!store.detail.detail.contacts.length
@@ -150,3 +155,8 @@ export const getSocialNetworksContacts = createSelector(getContacts, contacts =>
 export const getWebContacts = createSelector(getContacts, contacts => {
   return contacts.filter(contact => contact.Service === ContactService.WWW).map(mapContact)
 })
+
+export const getRolesSource = (state: AppState): string => getDetailData(state).sourceRoles
+export const getDonationsSource = (state: AppState): string => getDetailData(state).sourceSponzor
+export const getInsolvencySource = (state: AppState): string => getDetailData(state).sourceInsolvency
+export const getRegisterStatementsSource = (state: AppState): string => getDetailData(state).sourceRegisterStatements

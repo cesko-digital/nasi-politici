@@ -74,9 +74,10 @@ const Roles: React.FC<RolesProps> = ({ rolesGroups, showAll, rolesCount, toggleS
 
 interface Props extends RolesProps {
   fullname: string
+  source: string
 }
 
-const RolesWidget: React.FC<Props> = ({ rolesGroups, showAll, toggleShowAllRoles, rolesCount, fullname }) => {
+const RolesWidget: React.FC<Props> = ({ rolesGroups, showAll, toggleShowAllRoles, rolesCount, fullname, source }) => {
   const rolesWidgetCustomClassNames = classnames(
     styles.widget,
     styles.widgetWithTable,
@@ -105,7 +106,7 @@ const RolesWidget: React.FC<Props> = ({ rolesGroups, showAll, toggleShowAllRoles
           <div className={styles.tag}>
             <LinkBtn />
             <div className={styles.tagname}>
-              <a href="https://www.hlidacstatu.cz/" rel="noopener noreferrer" target="_blank">
+              <a href={source} rel="noopener noreferrer" target="_blank">
                 hlidacstatu.cz
               </a>
             </div>
