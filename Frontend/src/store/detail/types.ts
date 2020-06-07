@@ -65,6 +65,10 @@ export interface Detail {
   photo: string
   roles: Role[]
   source: string
+  sourceInsolvency: string
+  sourceSponzor: string
+  sourceRegisterStatements: string
+  sourceRoles: string
   sponsor: Sponsor[]
   status: string
   surname: string
@@ -88,7 +92,7 @@ export const TOGGLE_SHOW_ALL_NOTIFICATIONS = 'TOGGLE_SHOW_ALL_NOTIFICATIONS'
 export const TOGGLE_SHOW_ALL_ROLES = 'TOGGLE_SHOW_ALL_ROLES'
 export const LOAD_DETAIL = 'LOAD_DETAIL'
 
-interface setInitAction {
+interface SetInitAction {
   type: typeof INIT_DETAIL
 }
 
@@ -123,7 +127,7 @@ export interface LoadDetailAction {
 }
 
 export type DetailActionTypes =
-  | setInitAction
+  | SetInitAction
   | SetDetailAction
   | SetLoadingDetailEndAction
   | SetLoadingDetailStartAction

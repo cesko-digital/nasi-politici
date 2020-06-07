@@ -156,6 +156,7 @@ const Notifications: React.FC<NotificationsProps> = ({
 
 interface Props extends NotificationsProps {
   fullName: string
+  source: string
 }
 
 const NotificationsWidget: React.FC<Props> = ({
@@ -163,6 +164,7 @@ const NotificationsWidget: React.FC<Props> = ({
   officialsId,
   notificationRegistryData,
   fullName,
+  source,
   toggleShowAll,
   showAll,
 }) => {
@@ -193,7 +195,7 @@ const NotificationsWidget: React.FC<Props> = ({
             <div className={styles.tag}>
               <LinkBtn />
               <div className={styles.tagname}>
-                <a href="https://www.hlidacstatu.cz/" rel="noopener noreferrer" target="_blank">
+                <a href={source} rel="noopener noreferrer" target="_blank">
                   hlidacstatu.cz
                 </a>
               </div>

@@ -64,6 +64,10 @@ export interface Detail {
   photo: string
   roles: Role[]
   source: string
+  sourceInsolvency: string
+  sourceSponzor: string
+  sourceRegisterStatements: string
+  sourceRoles: string
   sponsor: Sponsor[]
   status: string
   surname: string

@@ -71,9 +71,17 @@ const Donations: React.FC<DonationsProps> = ({ donationsGroups, toggleShowAll, s
 
 interface Props extends DonationsProps {
   fullname: string
+  source: string
 }
 
-const DonationsWidget: React.FC<Props> = ({ donationsGroups, showAll, toggleShowAll, donationsCount, fullname }) => {
+const DonationsWidget: React.FC<Props> = ({
+  donationsGroups,
+  showAll,
+  toggleShowAll,
+  donationsCount,
+  fullname,
+  source,
+}) => {
   const donationWidgetCustomClassNames = classnames(styles.widget, styles.widgetWithTable)
 
   return (
@@ -92,7 +100,7 @@ const DonationsWidget: React.FC<Props> = ({ donationsGroups, showAll, toggleShow
             <div className={styles.tag}>
               <LinkBtn />
               <div className={styles.tagname}>
-                <a href="https://www.hlidacstatu.cz/" rel="noopener noreferrer" target="_blank">
+                <a href={source} rel="noopener noreferrer" target="_blank">
                   hlidacstatu.cz
                 </a>
               </div>

@@ -6,39 +6,42 @@ import {
   getNotificationsCount,
   getShowAllNotifications,
   getNotifications,
+  getRegisterStatementsSource,
 } from 'store/detail/selectors'
-import { toggleShowAllNotifications as toggleShowAll} from 'store/detail/actions'
+import { toggleShowAllNotifications as toggleShowAll } from 'store/detail/actions'
 
 import NotificationsWidget from './notificationsWidget'
 import { AppState } from 'store'
 
 interface StateProps {
-  fullName: string,
-  notificationsCount: number,
+  fullName: string
+  notificationsCount: number
   notificationRegistryData: Array<{
-    Id: string,
-    Type: string,
-    FromDate: string,
+    Id: string
+    Type: string
+    FromDate: string
     LegalBusinessAssociates: Array<{
       legalPerson: {
-        name: string,
-      },
-    }>,
+        name: string
+      }
+    }>
     OrganizationMember: Array<{
       type: {
-        name: string,
-      },
-      legalPerson: {
-        name: string,
+        name: string
       }
-    }>,
+      legalPerson: {
+        name: string
+      }
+    }>
   }>
-  officialsId: string,
-  showAll: boolean,
+  officialsId: string
+  showAll: boolean
+  source: string
 }
 
 const mapStateToProps = createStructuredSelector<AppState, StateProps>({
   fullName: getFullName,
+  source: getRegisterStatementsSource,
   officialsId: getOfficialsRegisterId,
   notificationRegistryData: getNotifications,
   notificationsCount: getNotificationsCount,

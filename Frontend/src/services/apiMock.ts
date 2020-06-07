@@ -176,6 +176,11 @@ const api: API = {
       bailiffLink: 'https://www.hlidacstatu.cz/insolvence/hledat?Q=osobaidspravce:andrej-babis',
     },
     source: 'https://www.hlidacstatu.cz/osoba/andrej-babis',
+    sourceInsolvency: 'https://www.hlidacstatu.cz/insolvence/hledat?Q=osobaid:andrej-babis',
+    sourceSponzor: 'https://www.hlidacstatu.cz/osoba/andrej-babis',
+    sourceRegisterStatements:
+      'https://www.hlidacstatu.cz/data/Detail/centralniregistroznameni/e03d2a9c-044f-42c8-93ff-30d2fc439e54',
+    sourceRoles: 'https://www.hlidacstatu.cz/osoba/andrej-babis',
     sponsor: [
       { party: 'ANO 2011', donatedAmount: 50000.0, year: 2015, source: null },
       { party: 'ANO 2011', donatedAmount: 50000.0, year: 2014, source: null },
