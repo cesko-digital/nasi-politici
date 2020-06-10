@@ -2,7 +2,7 @@
 
 namespace HlidacStatu.NasiPolitici.Services
 {
-    public interface IMonitoraService
+    public interface IMediaService
     {
         Task<string> GetArticles(string json);
     }

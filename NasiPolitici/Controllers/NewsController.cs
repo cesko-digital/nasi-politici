@@ -10,17 +10,17 @@ namespace HlidacStatu.NasiPolitici.Controllers
     [Route("api/v1/news")]
     public class NewsController : Controller
     {
-        private readonly IMonitoraService _monitoraService;
+        private readonly IMediaService _mediaService;
         private readonly INewsService _newsService;
 
-        public NewsController(IMonitoraService monitoraService, INewsService newsService)
+        public NewsController(IMediaService mediaService, INewsService newsService)
         {
-            _monitoraService = monitoraService;
+            _mediaService = mediaService;
             _newsService = newsService;
         }
 
-        [HttpGet("monitora")]
-        public async Task<IActionResult> GetMonitoraArticles(string name, string party, string search_query)
+        [HttpGet("media")]
+        public async Task<IActionResult> GetMediaArticles(string name, string party, string search_query)
         {
             string body = $@"{{
                 ""data"": {{
@@ -30,7 +30,7 @@ namespace HlidacStatu.NasiPolitici.Controllers
                 }}
             }}";
             
-            var result = _monitoraService.GetArticles(body);
+            var result = _mediaService.GetArticles(body);
 
             return Content(await result, MediaTypeNames.Application.Json);
         }

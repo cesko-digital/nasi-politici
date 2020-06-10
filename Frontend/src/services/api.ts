@@ -16,7 +16,7 @@ const api: API = {
   },
   fetchNews: async (fullName, party, searchQuery) => {
     const response = await axios.get(
-      `${process.env.REACT_APP_BASE_API_URL}/api/v1/news/monitora?name=${fullName}&party=${party}&search_query=${searchQuery}`,
+      `${process.env.REACT_APP_BASE_API_URL}/api/v1/news/media?name=${fullName}&party=${party}&search_query=${searchQuery}`,
     )
     return response.data
   },

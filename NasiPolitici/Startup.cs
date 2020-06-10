@@ -42,9 +42,9 @@ namespace HlidacStatu.NasiPolitici
                 config.BaseAddress = new Uri(Configuration.GetValue<string>("DemagogApiUrl"));
             });
 
-            services.AddHttpClient<IMonitoraService, MonitoraService>(config =>
+            services.AddHttpClient<IMediaService, MediaService>(config =>
             {
-                config.BaseAddress = new Uri(Configuration.GetValue<string>("MonitoraApiUrl"));
+                config.BaseAddress = new Uri(Configuration.GetValue<string>("MediaApiUrl"));
             });
 
             services.Configure<MailConfiguration>(Configuration.GetSection("MailConfiguration"));

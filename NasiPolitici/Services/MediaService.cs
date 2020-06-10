@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace HlidacStatu.NasiPolitici.Services
 {
-    public class MonitoraService : IMonitoraService
+    public class MediaService : IMediaService
     {
         private readonly HttpClient _httpClient;
 
-        public MonitoraService(HttpClient httpClient)
+        public MediaService(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }
@@ -25,7 +25,7 @@ namespace HlidacStatu.NasiPolitici.Services
                 var result = await response.Content.ReadAsStringAsync();
                 return result;
             }
-            throw new HttpRequestException($"Monitora responded with statusCode=[{response.StatusCode}].");
+            throw new HttpRequestException($"Media responded with statusCode=[{response.StatusCode}].");
         }
 
     }
