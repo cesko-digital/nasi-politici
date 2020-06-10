@@ -21,17 +21,17 @@ politician_keys = ['id', 'name','search_query', 'party']
 
 
 class View(Resource):
-    root = 'https://api.monitora.cz/transparency/'
     @staticmethod
     def politicians():
-        response = requests.get(View.root + 'politicians/', headers={'Authorization': token_string})
+        response = requests.get(media_url + 'politicians/', headers={'Authorization': token_string})
         response.encoding = 'utf-8'
+        print(response.json())
         data = [{key: item[key] for key in politician_keys} for item in response.json()]
         return json.dumps(data)
 
     # @staticmethod
     # def articlesForPolitician(id):
-    #     response = requests.get(View.root + 'articles/' + str(id), headers={'Authorization': token_string}, params={"count": 100})
+    #     response = requests.get(media_url + 'articles/' + str(id), headers={'Authorization': token_string}, params={"count": 100})
     #     #response.encoding = 'utf-8'
     #     data = [{key: item[key] for key in article_keys} for item in response.json()]
     #     topics = helper.process(' '.join([item["text"] for item in response.json()]))
@@ -52,15 +52,16 @@ class View(Resource):
         politician_dict = raw_dict['data']
         id = View.searchPoliticianByName(politician_dict["name"])
         if id is None:
-            # Monitora requires party to be filled, empty string is for no party
+            # Media requires party to be filled, empty string is for no party
             if politician_dict['party'] is None:
                politician_dict['party'] = '' 
-            requests.post(View.root + 'politicians/',
+            requests.post(media_url + 'politicians/',
                           json=politician_dict,
                           headers={'Authorization': token_string})
         id = View.searchPoliticianByName(politician_dict["name"])
-        response = requests.get(View.root + 'articles/' + str(id), headers={'Authorization': token_string},
+        response = requests.get(media_url + 'articles/' + str(id), headers={'Authorization': token_string},
                                 params={"count": 100})
+        print(response.json())
         # response.encoding = 'utf-8'
         data = [{key: item[key] for key in article_keys} for item in response.json() if item["text"] is not None]
 
@@ -93,11 +94,11 @@ class View(Resource):
     #     politician_dict = raw_dict['data']
     #     id = View.searchPoliticianByName(politician_dict["name"])
     #     if id is None:
-    #         requests.post(View.root + 'politicians/',
+    #         requests.post(media_url + 'politicians/',
     #                              json=politician_dict,
     #                              headers={'Authorization': token_string})
     #     id = View.searchPoliticianByName(politician_dict["name"])
-    #     response = requests.get(View.root + 'articles/' + str(id), headers={'Authorization': token_string}, params={"count": 100})
+    #     response = requests.get(media_url + 'articles/' + str(id), headers={'Authorization': token_string}, params={"count": 100})
     #     #response.encoding = 'utf-8'
     #     data = helper.process(' '.join([item["text"] for item in response.json()]))
     #     return json.dumps(data)
@@ -105,7 +106,7 @@ class View(Resource):
 
     # @staticmethod
     # def topicsForPoliticianById(id):
-    #     response = requests.get(View.root + 'articles/' + str(id), headers={'Authorization': token_string}, params={"count": 100})
+    #     response = requests.get(media_url + 'articles/' + str(id), headers={'Authorization': token_string}, params={"count": 100})
     #     #response.encoding = 'utf-8'
     #     data = helper.process(' '.join([item["text"] for item in response.json()]))
     #     return json.dumps(data)
@@ -114,7 +115,7 @@ class View(Resource):
     # def addPolitician():
     #     raw_dict = request.get_json(force=True)
     #     politician_dict = raw_dict['data']
-    #     response = requests.post(View.root + 'politicians/',
+    #     response = requests.post(media_url + 'politicians/',
     #                             json={"name": "Martin Charvát", "party": "ODS"},
     #                             headers={'Authorization': token_string})
     #     return View.politicians()

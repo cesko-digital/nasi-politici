@@ -63,12 +63,14 @@ data "aws_secretsmanager_secret_version" "secrets-version" {
 # ECS container pass it as single JSON object, which needs to be parsed on Backend.
 # I'll create issue as an BE improvement for it.
 locals {
-  MonitoraApiUrl = jsondecode(data.aws_secretsmanager_secret_version.secrets-version.secret_string)["MonitoraApiUrl"]
-  MonitoraToken = jsondecode(data.aws_secretsmanager_secret_version.secrets-version.secret_string)["MonitoraToken"]
+  MediaApiUrl = jsondecode(data.aws_secretsmanager_secret_version.secrets-version.secret_string)["MediaApiUrl"]
   HlidacAuthenticationToken = jsondecode(data.aws_secretsmanager_secret_version.secrets-version.secret_string)["HlidacAuthenticationToken"]
   CzFinToken = jsondecode(data.aws_secretsmanager_secret_version.secrets-version.secret_string)["CzFinToken"]
   MailAuthenticationToken = jsondecode(data.aws_secretsmanager_secret_version.secrets-version.secret_string)["MailAuthenticationToken"]
   MailApiUrl = jsondecode(data.aws_secretsmanager_secret_version.secrets-version.secret_string)["MailApiUrl"]
+  MailConfiguration__ApiKey = jsondecode(data.aws_secretsmanager_secret_version.secrets-version.secret_string)["MailConfiguration__ApiKey"]
+  MailConfiguration__From = jsondecode(data.aws_secretsmanager_secret_version.secrets-version.secret_string)["MailConfiguration__From"]
+  MailConfiguration__Tos = jsondecode(data.aws_secretsmanager_secret_version.secrets-version.secret_string)["MailConfiguration__Tos"]
 }
 
 # ----------------
@@ -110,10 +112,6 @@ resource "aws_internet_gateway" "internet-gateway" {
   tags = {
     Name = "${var.codename}-internet-gateway"
   }
-}
-
-resource "aws_eip" "nat-gateway-ip" {
-  vpc = true
 }
 
 resource "aws_eip" "nat-ip" {
@@ -258,10 +256,13 @@ resource "aws_ecs_task_definition" "nasi-politici" {
     aws_region = var.aws_region,
     aws_repository = aws_ecr_repository.nasi-politici.repository_url,
     MailAuthenticationToken = local.MailAuthenticationToken,
-    MonitoraApiUrl = local.MonitoraApiUrl,
+    MediaApiUrl = local.MediaApiUrl,
     CzFinToken = local.CzFinToken,
     HlidacAuthenticationToken = local.HlidacAuthenticationToken,
-    MailApiUrl = local.MailApiUrl
+    MailApiUrl = local.MailApiUrl,
+    MailConfiguration__ApiKey = local.MailConfiguration__ApiKey,
+    MailConfiguration__From = local.MailConfiguration__From,
+    MailConfiguration__Tos = local.MailConfiguration__Tos
   })
   network_mode = "awsvpc"
   execution_role_arn = aws_iam_role.ecr-task-execution-role.arn
@@ -358,129 +359,6 @@ resource "aws_route53_record" "nasi-politici-elb" {
   alias {
     name = aws_lb.nasi-politici-elb.dns_name
     zone_id = aws_lb.nasi-politici-elb.zone_id
-    evaluate_target_health = false
-  }
-}
-
-# -------------
-# Monitora backend
-# -------------
-
-resource "aws_ecr_repository" "monitora" {
-  name = "monitora"
-  image_tag_mutability = "MUTABLE"
-
-  image_scanning_configuration {
-    scan_on_push = true
-  }
-}
-
-resource "aws_ecs_cluster" "monitora" {
-  name = "monitora"
-}
-
-resource "aws_ecs_task_definition" "monitora" {
-  family = "monitora"
-  container_definitions = templatefile("ecs/monitora.tmpl", {
-    aws_region = var.aws_region,
-    aws_repository = aws_ecr_repository.monitora.repository_url,
-    MonitoraToken = local.MonitoraToken
-  })
-  network_mode = "awsvpc"
-  execution_role_arn = aws_iam_role.ecr-task-execution-role.arn
-  task_role_arn = aws_iam_role.ecr-task-execution-role.arn
-  memory = "512"
-  cpu = "256"
-}
-
-resource "aws_ecs_service" "monitora" {
-  name = "monitora"
-  cluster = aws_ecs_cluster.monitora.id
-  task_definition = aws_ecs_task_definition.monitora.arn
-  launch_type = "FARGATE"
-  desired_count = 1
-  deployment_minimum_healthy_percent = 100
-  deployment_maximum_percent = 200
-  health_check_grace_period_seconds = 20
-
-  network_configuration {
-    subnets = [
-      aws_subnet.private.id
-    ]
-    security_groups = [
-      aws_security_group.default-private-sg.id
-    ]
-    assign_public_ip = false
-  }
-
-  load_balancer {
-    target_group_arn = aws_lb_target_group.monitora-tg.arn
-    container_name = "monitora"
-    container_port = 8000
-  }
-
-  # Ignore external changes to desired count in Terraform, allows to switch to autoscaling group
-  lifecycle {
-    ignore_changes = [
-      #      desired_count
-    ]
-  }
-}
-
-resource "aws_cloudwatch_log_group" "monitora-lg" {
-  name = "/ecs/monitora"
-}
-
-# -----------
-# Elastic Load balancers
-# -----------
-resource "aws_lb" "monitora-elb" {
-  name = "monitora-elb"
-  internal = true
-  load_balancer_type = "network"
-  subnets = [
-    aws_subnet.private.id
-  ]
-
-  idle_timeout = 400
-
-  tags = {
-    Name = "monitora-elb"
-  }
-}
-
-resource "aws_lb_listener" "monitora-elb-listener" {
-  load_balancer_arn = aws_lb.monitora-elb.arn
-  port = "80"
-  protocol = "TCP"
-
-  default_action {
-    type = "forward"
-    target_group_arn = aws_lb_target_group.monitora-tg.arn
-  }
-}
-
-resource "aws_lb_target_group" "monitora-tg" {
-  name = "monitora-tg"
-  port = 8000
-  protocol = "TCP"
-  vpc_id = aws_vpc.vpc.id
-  target_type = "ip"
-
-  stickiness {
-    enabled = false
-    type = "lb_cookie"
-  }
-}
-
-resource "aws_route53_record" "monitora-elb" {
-  zone_id = aws_route53_zone.private.id
-  name = "monitora"
-  type = "A"
-
-  alias {
-    name = aws_lb.monitora-elb.dns_name
-    zone_id = aws_lb.monitora-elb.zone_id
     evaluate_target_health = false
   }
 }

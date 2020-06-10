@@ -23,8 +23,8 @@ ${jsonencode([
     "cpu": 0,
     "environment": [
     {
-      "name": "ASPNETCORE_MonitoraApiUrl",
-      "value": "${MonitoraApiUrl}"
+      "name": "ASPNETCORE_MediaApiUrl",
+      "value": "${MediaApiUrl}"
     },
     {
       "name": "ASPNETCORE_HlidacAuthenticationToken",
@@ -41,7 +41,19 @@ ${jsonencode([
     {
       "name": "ASPNETCORE_MailApiUrl",
       "value": "${MailApiUrl}"
-    }
+    },
+    {
+      "name": "ASPNETCORE_MailConfiguration__ApiKey",
+      "value": "${MailConfiguration__ApiKey}"
+    },
+     {
+       "name": "ASPNETCORE_MailConfiguration__From",
+       "value": "${MailConfiguration__From}"
+     },
+      {
+        "name": "ASPNETCORE_MailConfiguration__Tos",
+        "value": "${MailConfiguration__Tos}"
+      }
     ],
     "resourceRequirements": null,
     "ulimits": null,

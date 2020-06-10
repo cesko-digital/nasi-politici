@@ -3,7 +3,8 @@
 #### Struktura:
 
 - Pro spravu infrastruktury se pouziva Terraform
-- Backend (.net core a Python) se deployuje na ECS
+- Backend (.net core) se deployuje na ECS
+- Backend (Python) se deployuje na AWS Lambda
 - Frontend a staticke assety se deployuji na S3
 - Pro cache se pouziva CloudFront, ktery propojuje API se statickym obsahem
 - Vse se Terraformuje a deplyuje automaticky pri push do master branch.
@@ -21,10 +22,15 @@ pouziva "eu-west-1" jako priklad.
 a ulozte tam vsechny API klice a dalsi nastaveni. Struktura viz nize.
     ```json
     {
-      "MonitoraApiUrl": "",
+      "MediaApiUrl": "",
+      "MediaToken": "",
+      "MediaUrl": "",
       "HlidacAuthenticationToken": "",
       "CzFinToken": "",
-      "MailAuthenticationToken": ""
+      "MailAuthenticationToken": "",
+      "MailConfiguration__ApiKey": "",
+      "MailConfiguration__From": "",
+      "MailConfiguration__Tos": ""
     }
     ```
 3. V zone "eu-east-1" (N. Virginia) vytvorte certifikat pro public domenu, na
