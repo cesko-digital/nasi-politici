@@ -8,6 +8,7 @@ import requests
 import unidecode
 import unicodedata
 from app.data.token import token_string
+from app.data.token import media_url
 
 import json
 from decimal import Decimal
