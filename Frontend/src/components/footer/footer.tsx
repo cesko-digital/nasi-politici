@@ -7,6 +7,7 @@ import { ReactComponent as LogoNP } from 'assets/images/logo-np.svg'
 import { ReactComponent as LogoCD } from 'assets/images/logo-cd.svg'
 import { ReactComponent as LogoHS } from 'assets/images/logo-hs.svg'
 import { ReactComponent as LogoTI } from 'assets/images/logo-ti.svg'
+import { ReactComponent as LogoIM } from 'assets/images/logo-im.svg'
 
 import styles from './footer.module.scss'
 
@@ -94,6 +95,11 @@ const Footer: React.FC = () => {
             </a>
             <a href="https://cesko.digital/" rel="noopener noreferrer" target="_blank">
               <LogoCD className={classnames(styles.logoCD, styles.logo)} />
+            </a>
+          </div>
+          <div className={styles.logosBttm}>
+            <a href="https://imper.cz/" rel="noopener noreferrer" target="_blank">
+              <LogoIM className={classnames(styles.logoIM, styles.logo)} />
             </a>
           </div>
         </div>
