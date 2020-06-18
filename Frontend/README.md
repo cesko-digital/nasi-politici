@@ -16,3 +16,4 @@ You can **start the application in 2 ways:
 docker build -t nasi-politici .
 docker run -ti --rm -p 5001:5001 nasi-politici
 ```
+
