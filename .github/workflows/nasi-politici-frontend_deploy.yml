@@ -7,6 +7,7 @@ on:
       - 'Frontend/**'
 env:
   region: ${{ secrets.AWS_REGION }}
+  REACT_APP_BASE_API_URL: ${{ secrets.REACT_APP_BASE_API_URL }}
   REACT_APP_GA: ${{ secrets.REACT_APP_GA }}
   GENERATE_SOURCEMAP: false
   bucketName: ${{ secrets.AWS_FRONTEND_BUCKET_NAME }}
