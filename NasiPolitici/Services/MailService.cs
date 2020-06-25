@@ -19,10 +19,15 @@ namespace HlidacStatu.NasiPolitici.Services
             
             var client = new SendGridClient(_mailConfiguration.ApiKey);
 
-            var trackingSettings = new TrackingSettings();
-            trackingSettings.ClickTracking.Enable = false;
-            trackingSettings.ClickTracking.EnableText = false;
-
+            var trackingSettings = new TrackingSettings()
+            {
+                ClickTracking = new ClickTracking()
+                {
+                    Enable = false,
+                    EnableText = false
+                }
+            };
+            
             var msg = new SendGridMessage()
             {
                 From = new EmailAddress(_mailConfiguration.From),
