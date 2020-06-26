@@ -3,12 +3,12 @@ Frontend created with [Create React App](https://github.com/facebook/create-reac
 [Readme for Create React App](./README_CREATE_APP.md)
 
 You can **start the application in 2 ways:
-* To use **live server**, create a .env file with `REACT_APP_BASE_API_URL` (e.g. `REACT_APP_BASE_API_URL=http://localhost:5001`)
-* You can specify google analytics tracking id in .env file as `REACT_APP_GA`
+* To use **live server**, create a .env file with `REACT_APP_BASE_API_URL` (e.g. `REACT_APP_BASE_API_URL=http://localhost:5001`).
+* You can specify google analytics tracking id in .env file as `REACT_APP_GA`.
 
 **OR**
 
-* To use **mock data**, set up your .evn file with `REACT_APP_USE_API_MOCK=1`
+* To use **mock data**, set up your .evn file with `REACT_APP_USE_API_MOCK=1`.
 
 **OR by Docker**
 
