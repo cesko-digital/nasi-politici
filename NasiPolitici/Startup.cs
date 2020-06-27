@@ -29,7 +29,13 @@ namespace HlidacStatu.NasiPolitici
                 config.BaseAddress = new Uri(Configuration.GetValue<string>("HlidacApiUrl"));
                 config.DefaultRequestHeaders.Authorization =
                     new AuthenticationHeaderValue("Token", Configuration.GetValue<string>("HlidacAuthenticationToken"));
-
+                
+                string hlidacHttpTimeoutConfig = Configuration.GetValue<string>("HlidacHttpTimeout");
+                
+                if (double.TryParse(hlidacHttpTimeoutConfig, out double hlidacHttpTimeout))
+                {
+                    config.Timeout = TimeSpan.FromMinutes(hlidacHttpTimeout);
+                }
             });
 
             services.AddHttpClient<INewsService, NewsService>(config =>
