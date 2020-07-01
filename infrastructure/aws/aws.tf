@@ -528,6 +528,35 @@ resource "aws_cloudfront_distribution" "distribution" {
 
   # Cache behavior with precedence 0
   ordered_cache_behavior {
+    path_pattern = "/api/v1/person/*"
+    allowed_methods = [
+      "GET",
+      "HEAD",
+      "OPTIONS",
+      "PUT",
+      "POST",
+      "PATCH",
+      "DELETE"]
+    cached_methods = [
+      "GET",
+      "HEAD"]
+    target_origin_id = aws_api_gateway_deployment.api.id
+
+    forwarded_values {
+      query_string = true
+      cookies {
+        forward = "all"
+      }
+    }
+    min_ttl = 0
+    default_ttl = 14400
+    max_ttl = 14400
+    compress = true
+    smooth_streaming = true
+    viewer_protocol_policy = "redirect-to-https"
+  }
+
+  ordered_cache_behavior {
     path_pattern = "/api/v1/*"
     allowed_methods = [
       "GET",
@@ -544,10 +573,6 @@ resource "aws_cloudfront_distribution" "distribution" {
 
     forwarded_values {
       query_string = true
-      headers = [
-        "Authorization",
-        "Content-Type",
-        "X-ApplicationId"]
       cookies {
         forward = "all"
       }
