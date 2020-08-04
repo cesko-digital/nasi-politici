@@ -6,7 +6,7 @@
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  background: #1E1E1E;
+  background: #1e1e1e;
   color: #fff;
   text-align: left;
 }
@@ -85,6 +85,11 @@
 }
 .logoHS {
   width: 60px;
+}
+.logoIM {
+  path {
+    fill: #fff;
+  }
 }
 .logosBttm {
   margin-top: 20px;
