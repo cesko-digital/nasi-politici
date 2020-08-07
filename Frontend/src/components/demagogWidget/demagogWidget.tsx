@@ -76,8 +76,12 @@ const DemagogWidget: React.FC<Props> = ({ data, fullname }) => {
       {!!data.id && (
         <React.Fragment>
           <div className={styles.sum}>
-            Politik má celkem {data.count}{' '}
-            {pluralize(data.count, 'hodnocený výrok', 'hodnocené výroky', 'hodnocených výroků')}, z toho:
+            {!!data.count &&
+              <React.Fragment>
+                Politik má celkem {data.count}{' '}
+                {pluralize(data.count, 'hodnocený výrok', 'hodnocené výroky', 'hodnocených výroků')}, z toho:
+              </React.Fragment>}
+            {!data.count && <span>Politik zatím nemá žádné hodnocené výroky.</span>}
           </div>
           <div className={styles.stats}>
             <div className={styles.itemsWrapper}>
@@ -122,7 +126,8 @@ const DemagogWidget: React.FC<Props> = ({ data, fullname }) => {
               rel="noopener noreferrer"
               target="_blank"
             >
-              Zdůvodnění hodnocení zde
+              {!!data.count && <span>Zdůvodnění hodnocení zde</span>}
+              {!data.count && <span>Zobrazit profil na demagog.cz</span>}
             </a>
             <RedirectBtn className={styles.redirectBtn} />
           </div>
