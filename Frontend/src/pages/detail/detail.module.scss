@@ -149,6 +149,10 @@
         background-color: $clPrimaryText;
       }
     }
+
+    &.selected {
+      color: $clPrimaryText;
+    }
   }
 }
 
