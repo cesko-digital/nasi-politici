@@ -1,8 +1,8 @@
-import * as React from 'react'
 import classnames from 'classnames'
+import React, { Fragment, useState, useEffect, useRef } from 'react'
 import Helmet from 'react-helmet'
-import ScrollIntoView from 'react-scroll-into-view'
 import { FacebookShareButton, FacebookIcon, TwitterIcon, TwitterShareButton } from 'react-share'
+
 import { ReactComponent as CrossIcon } from 'assets/images/cross.svg'
 import { ReactComponent as ReportBtn } from 'assets/images/report.svg'
 import { ReactComponent as Divider } from 'assets/images/detailDivider.svg'
@@ -14,11 +14,11 @@ import RolesWidget from 'components/rolesWidget/rolesWidgetConnected'
 import NotificationsWidget from 'components/notificationsWidget/notificationsWidgetConnected'
 import InsolvencyWidget from 'components/insolvencyWidget/insolvencyWidgetConnected'
 import DemagogWidget from 'components/demagogWidget/demagogWidgetConnected'
+import EngagementChart from 'components/engagementChart/engagementChartConnected'
 import ContactsWidget from 'components/contactsWidget/contactsWidgetConnected'
 import ProfilePicture from 'components/profilePicture/profilePicture'
 import ReportModalTrigger from 'components/reportModal/reportModalTriggerConnected'
 import Error from 'pages/error/error'
-import EngagementChart from 'components/engagementChart/engagementChartConnected'
 
 import styles from './detail.module.scss'
 
@@ -43,27 +43,39 @@ interface Props {
   isValid?: boolean
 }
 
-const MenuBar: React.FC = () => {
-  return (
-    <React.Fragment>
-      <ScrollIntoView selector="#overview" smooth>
-        <div className={styles.link}>Přehled</div>
-      </ScrollIntoView>
-      <ScrollIntoView selector="#career" smooth>
-        <div className={styles.link}>Kariéra politika</div>
-      </ScrollIntoView>
-      <ScrollIntoView selector="#engagement" smooth>
-        <div className={styles.link}>Angažovanost</div>
-      </ScrollIntoView>
-      <ScrollIntoView selector="#media" smooth>
-        <div className={styles.link}>Mediální obraz</div>
-      </ScrollIntoView>
-    </React.Fragment>
-  )
+const scrollTo = (element: any) => {
+  element.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start',
+  })
+}
+
+const getDimensions = (element: any) => {
+  const { height } = element.getBoundingClientRect()
+  const offsetTop = element.offsetTop
+  const offsetBottom = offsetTop + height
+
+  return {
+    height,
+    offsetBottom,
+    offsetTop,
+  }
 }
 
 const Detail: React.FC<Props> = (props) => {
-  const detailWrapper = React.useRef<HTMLDivElement>(null)
+  const [visibleSection, setVisibleSection] = useState('')
+  const overviewRef = useRef(null)
+  const careerRef = useRef(null)
+  const engageRef = useRef(null)
+  const mediaRef = useRef(null)
+  const headerRef = useRef(null)
+  const sectionRefs = [
+    {section: 'Overview', ref: overviewRef},
+    {section: 'Career', ref: careerRef},
+    {section: 'Engagement', ref: engageRef},
+    {section: 'Media', ref: mediaRef},
+  ]
+  const detailWrapper = useRef<HTMLDivElement>(null)
   const stickyHeader = styles.sticky
   const topHeaderHeight = 64
   const {
@@ -73,17 +85,48 @@ const Detail: React.FC<Props> = (props) => {
     },
     onDispose,
   } = props
-  React.useEffect(() => {
+  const aboutWidgetCustomClassNames = classnames(styles.widget, !props.description && styles.noData)
+
+  useEffect(() => {
     loadDetail(id)
     return (): void => {
       onDispose()
     }
   }, [loadDetail, id, onDispose])
-  React.useEffect(() => {
-    window.scrollTo({
-      top: document.body.scrollTop,
-    })
-  })
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const header = headerRef.current
+      let scrollPosition = 0
+      if (header) {
+        const { height: headerHeight } = getDimensions(header)
+        scrollPosition = window.scrollY + headerHeight
+      } else {
+        scrollPosition = window.scrollY
+      }
+
+      const selected = sectionRefs.find(({ section, ref }) => {
+        const element = ref.current
+        if (element) {
+          const { offsetBottom, offsetTop } = getDimensions(element)
+          return scrollPosition > offsetTop && scrollPosition < offsetBottom
+        }
+        return false
+      })
+
+      if (selected && selected.section !== visibleSection) {
+        setVisibleSection(selected.section)
+      } else if (!selected && visibleSection) {
+        setVisibleSection('')
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [visibleSection, sectionRefs, headerRef])
+  
   window.addEventListener('scroll', () => {
     if (!detailWrapper.current) {
       return
@@ -95,17 +138,39 @@ const Detail: React.FC<Props> = (props) => {
     }
   })
 
-  const aboutWidgetCustomClassNames = classnames(styles.widget, !props.description && styles.noData)
+  const MenuBar: React.FC = () => {
+    return (
+      <Fragment>
+        <div className={classnames(styles.link, visibleSection === 'Overview' ? styles.selected : '')}
+          onClick={() => {scrollTo(overviewRef.current)}}>
+          Přehled
+        </div>
+        <div className={classnames(styles.link, visibleSection === 'Career' ? styles.selected : '')}
+          onClick={() => {scrollTo(careerRef.current)}}>
+          Kariéra politika
+        </div>
+        <div className={classnames(styles.link, visibleSection === 'Engagement' ? styles.selected : '')}
+          onClick={() => {scrollTo(engageRef.current)}}>
+          Angažovanost
+        </div>
+        <div className={classnames(styles.link, visibleSection === 'Media' ? styles.selected : '')}
+          onClick={() => {scrollTo(mediaRef.current)}}>
+          Mediální obraz
+        </div>
+      </Fragment>
+    )
+  }
+
   return (
     <div className={styles.detail} ref={detailWrapper}>
       {props.isLoading && <LoadingBar />}
       {!props.isLoading && !props.isValid && <Error />}
       {!props.isLoading && props.isValid && (
-        <React.Fragment>
+        <Fragment>
           <Helmet>
             <title>{props.fullname} | Naši Politici</title>
           </Helmet>
-          <div className={styles.heading}>
+          <div className={styles.heading} ref={headerRef}>
             <div className={styles.wrapper}>
               <ProfilePicture
                 src={props.photoUrl}
@@ -123,9 +188,9 @@ const Detail: React.FC<Props> = (props) => {
                         <div className={styles.birthYear}>
                           *{props.birthYear}
                           {props.deathYear && (
-                            <React.Fragment>
+                            <Fragment>
                               &nbsp;- <CrossIcon className={styles.crossIcon} /> {props.deathYear}
-                            </React.Fragment>
+                            </Fragment>
                           )}
                         </div>
                       )}
@@ -164,8 +229,7 @@ const Detail: React.FC<Props> = (props) => {
               </div>
             </div>
             <div className={styles.detail}>
-              <div className={classnames(styles.section, styles.overview)}>
-                <div id="overview" className={styles.anchor} />
+              <div id='Overview' ref={overviewRef} className={styles.section}>
                 <div className={styles.titleWrapper}>
                   <h1 className={styles.title}>Přehled</h1>
                   <Divider className={styles.titleDivider} />
@@ -192,8 +256,7 @@ const Detail: React.FC<Props> = (props) => {
                   <DemagogWidget />
                 </div>
               </div>
-              <div className={styles.section}>
-                <div id="career" className={styles.anchor} />
+              <div id='Career' ref={careerRef} className={styles.section}>
                 <div className={styles.titleWrapper}>
                   <h1 className={styles.title}>Kariéra</h1>
                   <Divider className={styles.titleDivider} />
@@ -205,16 +268,14 @@ const Detail: React.FC<Props> = (props) => {
                   <NotificationsWidget />
                 </div>
               </div>
-              <div className={styles.section}>
-                <div id="engagement" className={styles.anchor} />
+              <div id='Engagement' ref={engageRef} className={styles.section}>
                 <div className={styles.titleWrapper}>
                   <h1 className={styles.title}>Angažovanost</h1>
                   <Divider className={styles.titleDivider} />
                 </div>
                 <EngagementChart />
               </div>
-              <div className={styles.section}>
-                <div id="media" className={styles.anchor} />
+              <div id='Media' ref={mediaRef} className={styles.section}>
                 <div className={styles.titleWrapper}>
                   <h1 className={styles.title}>Mediální obraz</h1>
                   <Divider className={styles.titleDivider} />
@@ -225,7 +286,7 @@ const Detail: React.FC<Props> = (props) => {
               </div>
             </div>
           </div>
-        </React.Fragment>
+        </Fragment>
       )}
     </div>
   )
