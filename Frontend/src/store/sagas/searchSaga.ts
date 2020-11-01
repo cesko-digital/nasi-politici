@@ -12,7 +12,7 @@ import { SearchResult } from 'services/apiTypes'
 const api = process.env.REACT_APP_USE_API_MOCK ? API_MOCK : API
 
 function mapSearchResults(searchResults: SearchResult[]): Result[] {
-  return searchResults.map((r) => {
+  return searchResults.map(r => {
     return {
       id: r.NameId,
       shortName: r.ShortName,
