@@ -19,10 +19,23 @@ namespace HlidacStatu.NasiPolitici.Controllers
         [Route("{osobaId}")]
         public async Task<IActionResult> GetStats(string osobaId)
         {
-            var result = _demagogService.GetStats(osobaId);
+            var uid = new UniversalId()
+            {
+                OsobaId = osobaId
+            };
+            var result = _demagogService.GetStats(uid);
 
             return Content(await result, MediaTypeNames.Application.Json);
         }
-        
+
+        [HttpPost]
+        public async Task<IActionResult> GetStatsV2(UniversalId universalId)
+        {
+            var result = _demagogService.GetStats(universalId);
+
+            return Content(await result, MediaTypeNames.Application.Json);
+        }
+
     }
+        
 }

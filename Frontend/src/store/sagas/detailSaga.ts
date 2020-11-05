@@ -31,9 +31,9 @@ function* handleLoadArticles(): SagaIterator {
   yield put(loadingArticlesEnded())
 }
 
-function* loadDemagog(id: string): SagaIterator {
+function* loadDemagog(id: string, wikiId: string): SagaIterator {
   try {
-    const { data: demagog }: DemagogResponse = yield call(api.fetchDemagog, id)
+    const { data: demagog }: DemagogResponse = yield call(api.fetchDemagog, id, wikiId)
     const speaker = demagog.speakers[0]
     if (speaker) {
       yield put(setDemagogData({ id: speaker.id, ...speaker.stats }))
@@ -52,7 +52,7 @@ function* handleLoadDetail(action: ReturnType<typeof loadDetail>): SagaIterator 
   try {
     const detail: Detail = yield call(api.fetchDetail, action.payload)
     yield put(setDetail(detail))
-    yield call(loadDemagog, action.payload)
+    yield call(loadDemagog, action.payload, detail.wikiId)
   } catch (error) {
     // TODO asi vymyslet nejaky jednotny error handling idealne i s designem
   }

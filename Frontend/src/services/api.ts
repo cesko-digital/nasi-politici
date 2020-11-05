@@ -20,8 +20,8 @@ const api: API = {
     )
     return response.data
   },
-  fetchDemagog: async id => {
-    const response = await axios.get(`${process.env.REACT_APP_BASE_API_URL}/api/v1/demagog/${id}`)
+  fetchDemagog: async (id, wikiId) => {
+    const response = await axios.post(`${process.env.REACT_APP_BASE_API_URL}/api/v1/demagog/`, { osobaId: id, wikiId })
     return response.data
   },
   sendEmail: async (subject: string, text: string) => {

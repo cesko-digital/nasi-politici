@@ -4,6 +4,6 @@ namespace HlidacStatu.NasiPolitici.Services
 {
     public interface IDemagogService
     {
-        Task<string> GetStats(string osobaId);
+        Task<string> GetStats(UniversalId osobaId);
     }
 }

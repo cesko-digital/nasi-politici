@@ -209,9 +209,10 @@ const api: API = {
     ],
     valid: true,
     currentParty: 'KSČ',
+    wikiId: 'Q10819807',
   }),
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  fetchDemagog: id => ({
+  fetchDemagog: (id, wikiId) => ({
     data: {
       speakers: [
         {
