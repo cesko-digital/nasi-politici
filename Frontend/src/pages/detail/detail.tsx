@@ -43,14 +43,17 @@ interface Props {
   isValid?: boolean
 }
 
-const scrollTo = (element: any) => {
+const scrollTo = (element: HTMLElement | null) => {
+  if (!element) {
+    return
+  }
   element.scrollIntoView({
     behavior: 'smooth',
     block: 'start',
   })
 }
 
-const getDimensions = (element: any) => {
+const getDimensions = (element: HTMLElement) => {
   const { height } = element.getBoundingClientRect()
   const offsetTop = element.offsetTop
   const offsetBottom = offsetTop + height
@@ -64,11 +67,11 @@ const getDimensions = (element: any) => {
 
 const Detail: React.FC<Props> = props => {
   const [visibleSection, setVisibleSection] = useState('')
-  const overviewRef = useRef(null)
-  const careerRef = useRef(null)
-  const engageRef = useRef(null)
-  const mediaRef = useRef(null)
-  const headerRef = useRef(null)
+  const overviewRef = useRef<HTMLDivElement>(null)
+  const careerRef = useRef<HTMLDivElement>(null)
+  const engageRef = useRef<HTMLDivElement>(null)
+  const mediaRef = useRef<HTMLDivElement>(null)
+  const headerRef = useRef<HTMLDivElement>(null)
   const sectionRefs = [
     { section: 'Overview', ref: overviewRef },
     { section: 'Career', ref: careerRef },
@@ -143,33 +146,25 @@ const Detail: React.FC<Props> = props => {
       <Fragment>
         <div
           className={classnames(styles.link, visibleSection === 'Overview' ? styles.selected : '')}
-          onClick={() => {
-            scrollTo(overviewRef.current)
-          }}
+          onClick={() => scrollTo(overviewRef.current)}
         >
           Přehled
         </div>
         <div
           className={classnames(styles.link, visibleSection === 'Career' ? styles.selected : '')}
-          onClick={() => {
-            scrollTo(careerRef.current)
-          }}
+          onClick={() => scrollTo(careerRef.current)}
         >
           Kariéra politika
         </div>
         <div
           className={classnames(styles.link, visibleSection === 'Engagement' ? styles.selected : '')}
-          onClick={() => {
-            scrollTo(engageRef.current)
-          }}
+          onClick={() => scrollTo(engageRef.current)}
         >
           Angažovanost
         </div>
         <div
           className={classnames(styles.link, visibleSection === 'Media' ? styles.selected : '')}
-          onClick={() => {
-            scrollTo(mediaRef.current)
-          }}
+          onClick={() => scrollTo(mediaRef.current)}
         >
           Mediální obraz
         </div>
@@ -212,13 +207,13 @@ const Detail: React.FC<Props> = props => {
                       )}
                       {props.currentParty && (
                         <>
-                          <div className={styles.divider}></div>
+                          <div className={styles.divider} />
                           <div className={styles.currentParty}>{props.currentParty}</div>
                         </>
                       )}
                     </div>
                     <div className={styles.lastUpdateWrapper}>
-                      <div className={styles.divider}></div>
+                      <div className={styles.divider} />
                       <div className={styles.lastUpdate}>
                         {props.lastUpdate && (
                           <div className={styles.lastUpdateLabel}>Zkontrolováno {props.lastUpdate}</div>
