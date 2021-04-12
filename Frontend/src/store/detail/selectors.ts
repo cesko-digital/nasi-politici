@@ -40,11 +40,15 @@ export const getIsValid = createSelector(getDetailData, detail => {
   return !!detail.source
 })
 
-export const getFullName = (store: AppState): string => {
-  const detail = getDetailData(store)
+export function getFullNameString(detail: Detail) {
   const prefix = detail.namePrefix ? `${detail.namePrefix} ` : ''
   const suffix = detail.nameSuffix ? ` ${detail.nameSuffix}` : ''
   return `${prefix}${detail.name} ${detail.surname}${suffix}`.trim() // TODO lip naformatovat
+}
+
+export const getFullName = (store: AppState): string => {
+  const detail = getDetailData(store)
+  return getFullNameString(detail)
 }
 
 export const getBirthYear = (store: AppState): string => {
