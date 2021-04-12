@@ -11,13 +11,13 @@ import { ContactList } from './contactList'
 import { useSelector } from 'react-redux'
 import { AppState } from '../../store'
 import { ContactService } from '../../services/apiTypes'
+import { getFullNameString } from '../../store/detail/selectors'
 
-interface Props {
-  fullname: string
-}
-
-export function ContactsWidget({ fullname }: Props) {
-  const { contacts } = useSelector((state: AppState) => state.detail.detail)
+export function ContactsWidget() {
+  const {
+    detail,
+    detail: { contacts },
+  } = useSelector((state: AppState) => state.detail)
   const socialNetworksContacts = contacts.filter(contact => contact.Network !== ContactService.WWW)
   const webContacts = contacts.filter(contact => contact.Network === ContactService.WWW)
   const hasContacts = contacts.length > 0
@@ -37,7 +37,10 @@ export function ContactsWidget({ fullname }: Props) {
         </div>
         {hasContacts && (
           <div>
-            <ReportModalTrigger className={styles.reportBtnWrapper} modalTitle={`${fullname}, kontakty`}>
+            <ReportModalTrigger
+              className={styles.reportBtnWrapper}
+              modalTitle={`${getFullNameString(detail)}, kontakty`}
+            >
               <ReportBtn className={styles.reportBtn} />
             </ReportModalTrigger>
           </div>

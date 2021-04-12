@@ -15,7 +15,7 @@ import NotificationsWidget from 'components/notificationsWidget/notificationsWid
 import InsolvencyWidget from 'components/insolvencyWidget/insolvencyWidgetConnected'
 import DemagogWidget from 'components/demagogWidget/demagogWidgetConnected'
 import EngagementChart from 'components/engagementChart/engagementChartConnected'
-import ContactsWidget from 'components/contactsWidget/contactsWidgetConnected'
+import { ContactsWidget } from 'components/contactsWidget/contactsWidget'
 import ProfilePicture from 'components/profilePicture/profilePicture'
 import ReportModalTrigger from 'components/reportModal/reportModalTriggerConnected'
 import Error from 'pages/error/error'
@@ -62,7 +62,7 @@ const getDimensions = (element: any) => {
   }
 }
 
-const Detail: React.FC<Props> = (props) => {
+const Detail: React.FC<Props> = props => {
   const [visibleSection, setVisibleSection] = useState('')
   const overviewRef = useRef(null)
   const careerRef = useRef(null)
@@ -70,10 +70,10 @@ const Detail: React.FC<Props> = (props) => {
   const mediaRef = useRef(null)
   const headerRef = useRef(null)
   const sectionRefs = [
-    {section: 'Overview', ref: overviewRef},
-    {section: 'Career', ref: careerRef},
-    {section: 'Engagement', ref: engageRef},
-    {section: 'Media', ref: mediaRef},
+    { section: 'Overview', ref: overviewRef },
+    { section: 'Career', ref: careerRef },
+    { section: 'Engagement', ref: engageRef },
+    { section: 'Media', ref: mediaRef },
   ]
   const detailWrapper = useRef<HTMLDivElement>(null)
   const stickyHeader = styles.sticky
@@ -126,7 +126,7 @@ const Detail: React.FC<Props> = (props) => {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [visibleSection, sectionRefs, headerRef])
-  
+
   window.addEventListener('scroll', () => {
     if (!detailWrapper.current) {
       return
@@ -141,20 +141,36 @@ const Detail: React.FC<Props> = (props) => {
   const MenuBar: React.FC = () => {
     return (
       <Fragment>
-        <div className={classnames(styles.link, visibleSection === 'Overview' ? styles.selected : '')}
-          onClick={() => {scrollTo(overviewRef.current)}}>
+        <div
+          className={classnames(styles.link, visibleSection === 'Overview' ? styles.selected : '')}
+          onClick={() => {
+            scrollTo(overviewRef.current)
+          }}
+        >
           Přehled
         </div>
-        <div className={classnames(styles.link, visibleSection === 'Career' ? styles.selected : '')}
-          onClick={() => {scrollTo(careerRef.current)}}>
+        <div
+          className={classnames(styles.link, visibleSection === 'Career' ? styles.selected : '')}
+          onClick={() => {
+            scrollTo(careerRef.current)
+          }}
+        >
           Kariéra politika
         </div>
-        <div className={classnames(styles.link, visibleSection === 'Engagement' ? styles.selected : '')}
-          onClick={() => {scrollTo(engageRef.current)}}>
+        <div
+          className={classnames(styles.link, visibleSection === 'Engagement' ? styles.selected : '')}
+          onClick={() => {
+            scrollTo(engageRef.current)
+          }}
+        >
           Angažovanost
         </div>
-        <div className={classnames(styles.link, visibleSection === 'Media' ? styles.selected : '')}
-          onClick={() => {scrollTo(mediaRef.current)}}>
+        <div
+          className={classnames(styles.link, visibleSection === 'Media' ? styles.selected : '')}
+          onClick={() => {
+            scrollTo(mediaRef.current)
+          }}
+        >
           Mediální obraz
         </div>
       </Fragment>
@@ -204,7 +220,9 @@ const Detail: React.FC<Props> = (props) => {
                     <div className={styles.lastUpdateWrapper}>
                       <div className={styles.divider}></div>
                       <div className={styles.lastUpdate}>
-                        {props.lastUpdate && <div className={styles.lastUpdateLabel}>Zkontrolováno {props.lastUpdate}</div>}
+                        {props.lastUpdate && (
+                          <div className={styles.lastUpdateLabel}>Zkontrolováno {props.lastUpdate}</div>
+                        )}
                         {!props.lastUpdate && <div className={styles.lastUpdateEmpty}>Čeká na kontrolu</div>}
                       </div>
                     </div>
@@ -229,7 +247,7 @@ const Detail: React.FC<Props> = (props) => {
               </div>
             </div>
             <div className={styles.detail}>
-              <div id='Overview' ref={overviewRef} className={styles.section}>
+              <div id="Overview" ref={overviewRef} className={styles.section}>
                 <div className={styles.titleWrapper}>
                   <h1 className={styles.title}>Přehled</h1>
                   <Divider className={styles.titleDivider} />
@@ -256,7 +274,7 @@ const Detail: React.FC<Props> = (props) => {
                   <DemagogWidget />
                 </div>
               </div>
-              <div id='Career' ref={careerRef} className={styles.section}>
+              <div id="Career" ref={careerRef} className={styles.section}>
                 <div className={styles.titleWrapper}>
                   <h1 className={styles.title}>Kariéra</h1>
                   <Divider className={styles.titleDivider} />
@@ -268,14 +286,14 @@ const Detail: React.FC<Props> = (props) => {
                   <NotificationsWidget />
                 </div>
               </div>
-              <div id='Engagement' ref={engageRef} className={styles.section}>
+              <div id="Engagement" ref={engageRef} className={styles.section}>
                 <div className={styles.titleWrapper}>
                   <h1 className={styles.title}>Angažovanost</h1>
                   <Divider className={styles.titleDivider} />
                 </div>
                 <EngagementChart />
               </div>
-              <div id='Media' ref={mediaRef} className={styles.section}>
+              <div id="Media" ref={mediaRef} className={styles.section}>
                 <div className={styles.titleWrapper}>
                   <h1 className={styles.title}>Mediální obraz</h1>
                   <Divider className={styles.titleDivider} />
