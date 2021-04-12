@@ -108,18 +108,19 @@ export interface DemagogResponse {
   }
 }
 
-interface Article {
+export type Article = {
   id: number
   perex: string
   published: string
   shares: number
   source: string
-  text: string
+  text?: string
   title: string
   url: string
+  is_fake_news?: boolean //TODO ještě není API
 }
 
-export interface ArticleResponse {
+export type ArticleResponse = {
   articles: Article[]
   topic_map: { [key: string]: number[] }
 }

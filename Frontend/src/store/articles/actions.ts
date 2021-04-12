@@ -1,5 +1,4 @@
 import {
-  Article,
   SET_ARTICLES,
   RESET_ARTICLES,
   ArticlesActionTypes,
@@ -7,6 +6,7 @@ import {
   SET_LOADING_ARTICLES_END,
   LOAD_ARTICLES,
 } from './types'
+import { Article } from '../../services/apiTypes'
 
 export const setArticles = (articles: Article[]): ArticlesActionTypes => ({
   type: SET_ARTICLES,

@@ -1,4 +1,4 @@
-import { API } from './apiTypes'
+import { API, ArticleResponse } from './apiTypes'
 import axios from 'axios'
 
 const api: API = {
@@ -15,8 +15,8 @@ const api: API = {
     return response.data
   },
   fetchNews: async (fullName, party, searchQuery) => {
-    const response = await axios.get(
-      `${process.env.REACT_APP_BASE_API_URL}/api/v1/news/media?name=${fullName}&party=${party}&search_query=${searchQuery}`,
+    const response = await axios.get<ArticleResponse>(
+      `${process.env.REACT_APP_BASE_API_URL}/api/v1/news/media?name=${fullName}&party=${party}&search_query=${searchQuery}&with_text=false`,
     )
     return response.data
   },
