@@ -28,6 +28,7 @@ export enum ContactService {
   Twitter = 'Twitter',
   Instagram = 'Instagram',
   WWW = 'WWW',
+  Youtube = 'Youtube',
 }
 
 export type Contact = {

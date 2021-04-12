@@ -22,12 +22,14 @@ function getLink(contact: Contact) {
   }
 }
 
-export function ContactLink({ contact }: Props) {
-  const { Contact } = contact
+function getLinkText(contact: Contact) {
+  return contact.Network === ContactService.Youtube ? contact.NetworkText : contact.Contact
+}
 
+export function ContactLink({ contact }: Props) {
   return (
     <a className={styles.link} href={getLink(contact)} rel="noopener noreferrer" target="_blank">
-      {Contact}
+      {getLinkText(contact)}
     </a>
   )
 }
