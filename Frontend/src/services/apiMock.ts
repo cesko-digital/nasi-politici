@@ -87,6 +87,7 @@ const api: API = {
     namePrefix: '',
     nameSuffix: '',
     connections: [],
+    contacts: [],
     name: 'Andrej',
     notificationRegisterId: '',
     notificationRegisterStatements: [],

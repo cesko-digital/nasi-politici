@@ -1,6 +1,5 @@
 import * as React from 'react'
 
-import { ContactService } from 'store/detail/types'
 import { ReactComponent as FBLogo } from 'assets/images/social-fb.svg'
 import { ReactComponent as TWLogo } from 'assets/images/social-tw.svg'
 import { ReactComponent as IGLogo } from 'assets/images/social-ig.svg'
@@ -8,13 +7,14 @@ import { ReactComponent as WebLogo } from 'assets/images/icon-globe.svg'
 import { ReactComponent as Logo } from 'assets/images/social-web.svg'
 
 import styles from './contactsWidget.module.scss'
+import { ContactService } from '../../services/apiTypes'
 
-interface IconProps {
+type Props = {
   service: ContactService
 }
 
-const ContactIcon: React.FC<IconProps> = props => {
-  switch (props.service) {
+export function ContactIcon({ service }: Props) {
+  switch (service) {
     case ContactService.Facebook:
     case ContactService.FacebookPage:
     case ContactService.FacebookProfile:
@@ -29,5 +29,3 @@ const ContactIcon: React.FC<IconProps> = props => {
       return <Logo className={styles.icon} />
   }
 }
-
-export default ContactIcon

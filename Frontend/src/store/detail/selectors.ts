@@ -2,7 +2,7 @@ import { createSelector } from 'reselect'
 
 import { AppState } from 'store'
 import { DEFAULT_DONATIONS_LIMIT, DEFAULT_NOTIFICATION_LIMIT, DEFAULT_ROLES_LIMIT } from 'constants/constants'
-import { ContactService, Contact, Connection, Role, Sponsor, Detail, Insolvency } from './types'
+import { Connection, Role, Sponsor, Detail, Insolvency } from './types'
 import { dummyFormatDateShort } from 'utils/date'
 
 export const getDetailData = (store: AppState): Detail => store.detail.detail
@@ -119,7 +119,7 @@ export const getRoles = createSelector(getRolesRaw, getShowAllRoles, (roles, sho
   return groupByYear(rolesMap)
 })
 
-export const getContacts = (store: AppState): Contact[] => store.detail.detail.contacts || []
+export const getContacts = (store: AppState) => store.detail.detail.contacts || []
 export const getConnections = (store: AppState): Connection[] => store.detail.detail.connections || []
 
 export const getOfficialsRegisterId = (store: AppState): string => store.detail.detail.notificationRegisterId || ''
@@ -139,22 +139,6 @@ export const getNotifications = createSelector(
     return notifications
   },
 )
-
-export const hasContacts = (store: AppState): boolean =>
-  !!store.detail.detail.contacts && !!store.detail.detail.contacts.length
-
-const mapContact = (contact: Contact): { service: ContactService; contact: string } => ({
-  service: contact.Service,
-  contact: contact.Contact,
-})
-
-export const getSocialNetworksContacts = createSelector(getContacts, contacts => {
-  return contacts.filter(contact => contact.Service !== ContactService.WWW).map(mapContact)
-})
-
-export const getWebContacts = createSelector(getContacts, contacts => {
-  return contacts.filter(contact => contact.Service === ContactService.WWW).map(mapContact)
-})
 
 export const getRolesSource = (state: AppState): string => getDetailData(state).sourceRoles
 export const getDonationsSource = (state: AppState): string => getDetailData(state).sourceSponzor

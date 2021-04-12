@@ -22,6 +22,7 @@ interface Sponsor {
 }
 
 export enum ContactService {
+  Facebook = 'Facebook',
   FacebookPage = 'Facebook_page',
   FacebookProfile = 'Facebook_profile',
   Twitter = 'Twitter',
@@ -29,9 +30,10 @@ export enum ContactService {
   WWW = 'WWW',
 }
 
-export interface Contact {
-  Service: ContactService
+export type Contact = {
   Contact: string
+  Network: ContactService
+  NetworkText: string
 }
 
 export interface Connection {
@@ -44,7 +46,7 @@ export interface Connection {
 
 export interface Detail {
   birthDate: string
-  contacts?: Contact[] // TODO odebrat ? az zacne chodit z API
+  contacts: Contact[]
   connections: Connection[]
   companyConnection: string
   currentParty: string

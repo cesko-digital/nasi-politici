@@ -1,36 +1,33 @@
 import * as React from 'react'
 
-import { ContactService } from 'store/detail/types'
-
 import styles from './contactsWidget.module.scss'
+import { Contact, ContactService } from '../../services/apiTypes'
 
-interface Props {
-  contact: string
-  service: ContactService
+type Props = {
+  contact: Contact
 }
 
-const ContactLink: React.FC<Props> = props => {
-  let href = ''
-  switch (props.service) {
+function getLink(contact: Contact) {
+  const { Contact, Network } = contact
+  switch (Network) {
     case ContactService.FacebookPage:
     case ContactService.FacebookProfile:
-      href = `https://facebook.com/${props.contact}`
-      break
+      return `https://facebook.com/${Contact}`
     case ContactService.Twitter:
-      href = `https://twitter.com/${props.contact}`
-      break
+      return `https://twitter.com/${Contact}`
     case ContactService.Instagram:
-      href = `https://instagram.com/${props.contact}`
-      break
-    case ContactService.WWW:
-      href = props.contact
-      break
+      return `https://instagram.com/${Contact}`
+    default:
+      return Contact
   }
+}
+
+export function ContactLink({ contact }: Props) {
+  const { Contact } = contact
+
   return (
-    <a className={styles.link} href={href} rel="noopener noreferrer" target="_blank">
-      {props.contact}
+    <a className={styles.link} href={getLink(contact)} rel="noopener noreferrer" target="_blank">
+      {Contact}
     </a>
   )
 }
-
-export default ContactLink
