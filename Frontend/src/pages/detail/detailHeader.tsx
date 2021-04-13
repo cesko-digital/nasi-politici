@@ -26,7 +26,7 @@ export const DetailHeader = React.forwardRef(({ detail }: Props, ref: Ref<HTMLDi
         />
         <div className={styles.initials}>
           <div className={styles.initialsWrapper}>
-            <div className={classnames(styles.fullname, { [styles.fulnameDeath]: deathDate })}>{fullName}</div>
+            <div className={classnames(styles.fullname, { [styles.fullnameDeath]: deathDate })}>{fullName}</div>
             <div className={styles.additionalWrapper}>
               <div className={styles.personal}>
                 {birthDate && (
