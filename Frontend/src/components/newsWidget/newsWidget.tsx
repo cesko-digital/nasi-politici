@@ -11,64 +11,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { loadArticles } from '../../store/articles/actions'
 import { AppState } from '../../store'
 import { getFullNameString } from '../../store/detail/selectors'
-import { Article as ArticleType } from '../../services/apiTypes'
-
-const DEFAULT_ARTICLES_COUNT = 3
-
-interface ArticleProps {
-  article: ArticleType
-}
-
-function Article({ article }: ArticleProps) {
-  const { perex, title, published, source, url } = article
-  return (
-    <div className={styles.article}>
-      <div className={styles.sources}>
-        <div className={styles.source}>{source}</div>
-        <div>, {published}</div>
-      </div>
-      <div>
-        <a href={url} target="_blank" rel="noopener noreferrer" className={styles.headline}>
-          {title}
-        </a>
-      </div>
-      <div className={styles.perex}>{perex}</div>
-    </div>
-  )
-}
-
-interface ArticlesProps {
-  articles: ArticleType[]
-}
-
-function Articles({ articles }: ArticlesProps) {
-  const [showAll, setShowAll] = React.useState(false)
-  const hasMore = articles.length > DEFAULT_ARTICLES_COUNT
-  const articlesLength = articles.length
-  return (
-    <React.Fragment>
-      <div
-        className={classnames(
-          styles.articles,
-          articlesLength < DEFAULT_ARTICLES_COUNT && styles['columns' + articlesLength],
-          articlesLength >= DEFAULT_ARTICLES_COUNT && styles.multicolumn,
-        )}
-      >
-        {!showAll &&
-          articles.slice(0, DEFAULT_ARTICLES_COUNT).map(article => <Article key={article.id} article={article} />)}
-        {showAll && articles.map(article => <Article key={article.id} article={article} />)}
-      </div>
-      {hasMore && (
-        <div className={styles.showMore} onClick={() => setShowAll(prev => !prev)}>
-          {!showAll && hasMore && (
-            <div className={styles.more}>Zobrazit {articles.length - DEFAULT_ARTICLES_COUNT} dalších</div>
-          )}
-          {showAll && <div className={styles.less}>Zobrazit méně</div>}
-        </div>
-      )}
-    </React.Fragment>
-  )
-}
+import { Articles } from './articles'
 
 export function NewsWidget() {
   const dispatch = useDispatch()
