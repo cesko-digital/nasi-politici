@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import React, { Fragment, useState, useEffect, useRef } from 'react'
+import React, { Fragment, useState, useEffect, useRef, useMemo } from 'react'
 import Helmet from 'react-helmet'
 
 import { ReactComponent as ReportBtn } from 'assets/images/report.svg'
@@ -38,12 +38,15 @@ export function Detail() {
   const engageRef = useRef<HTMLDivElement>(null)
   const mediaRef = useRef<HTMLDivElement>(null)
   const headerRef = useRef<HTMLDivElement>(null)
-  const sectionRefs = [
-    { section: DetailSections.OVERVIEW, ref: overviewRef },
-    { section: DetailSections.CAREER, ref: careerRef },
-    { section: DetailSections.ENGAGEMENT, ref: engageRef },
-    { section: DetailSections.MEDIA, ref: mediaRef },
-  ]
+  const sectionRefs = useMemo(
+    () => [
+      { section: DetailSections.OVERVIEW, ref: overviewRef },
+      { section: DetailSections.CAREER, ref: careerRef },
+      { section: DetailSections.ENGAGEMENT, ref: engageRef },
+      { section: DetailSections.MEDIA, ref: mediaRef },
+    ],
+    [],
+  )
   const detailWrapper = useRef<HTMLDivElement>(null)
   const stickyHeader = styles.sticky
   const topHeaderHeight = 64
@@ -70,7 +73,7 @@ export function Detail() {
         scrollPosition = window.scrollY
       }
 
-      const selected = sectionRefs.find(({ section, ref }) => {
+      const selected = sectionRefs.find(({ ref }) => {
         const element = ref.current
         if (element) {
           const { offsetBottom, offsetTop } = getDimensions(element)
