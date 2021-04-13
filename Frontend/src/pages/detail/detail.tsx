@@ -1,9 +1,7 @@
 import classnames from 'classnames'
 import React, { Fragment, useState, useEffect, useRef } from 'react'
 import Helmet from 'react-helmet'
-import { FacebookShareButton, FacebookIcon, TwitterIcon, TwitterShareButton } from 'react-share'
 
-import { ReactComponent as CrossIcon } from 'assets/images/cross.svg'
 import { ReactComponent as ReportBtn } from 'assets/images/report.svg'
 import { ReactComponent as Divider } from 'assets/images/detailDivider.svg'
 import NoData from 'components/emptyStates/noData/noData'
@@ -16,7 +14,6 @@ import InsolvencyWidget from 'components/insolvencyWidget/insolvencyWidgetConnec
 import DemagogWidget from 'components/demagogWidget/demagogWidgetConnected'
 import EngagementChart from 'components/engagementChart/engagementChartConnected'
 import { ContactsWidget } from 'components/contactsWidget/contactsWidget'
-import ProfilePicture from 'components/profilePicture/profilePicture'
 import ReportModalTrigger from 'components/reportModal/reportModalTriggerConnected'
 import Error from 'pages/error/error'
 
@@ -29,17 +26,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { loadDetail, setInitAction } from '../../store/detail/actions'
 import { AppState } from '../../store'
 import { getFullNameString } from '../../store/detail/selectors'
-import { dummyFormatDateShort, getYear } from '../../utils/date'
+import { DetailHeader } from './detailHeader'
 
-interface Props {
-  birthYear: string
-  deathYear: string
-}
-
-export function Detail(props: Props) {
+export function Detail() {
   const dispatch = useDispatch()
   const { detail, loadingDetail: isLoading } = useSelector((state: AppState) => state.detail)
-  const { currentParty, description, source, photo, lastManualUpdate, birthDate, deathDate } = detail
+  const { description, source } = detail
   const [visibleSection, setVisibleSection] = useState<DetailSections | null>(null)
   const overviewRef = useRef<HTMLDivElement>(null)
   const careerRef = useRef<HTMLDivElement>(null)
@@ -120,61 +112,7 @@ export function Detail(props: Props) {
           <Helmet>
             <title>{fullName} | Naši Politici</title>
           </Helmet>
-          <div className={styles.heading} ref={headerRef}>
-            <div className={styles.wrapper}>
-              <ProfilePicture
-                src={photo}
-                name={fullName}
-                customClassName={classnames(styles.photo, { [styles.photoDeath]: deathDate })}
-              />
-              <div className={styles.initials}>
-                <div className={styles.initialsWrapper}>
-                  <div className={classnames(styles.fullname, { [styles.fulnameDeath]: deathDate })}>{fullName}</div>
-                  <div className={styles.additionalWrapper}>
-                    <div className={styles.personal}>
-                      {birthDate && (
-                        <div className={styles.birthYear}>
-                          *{getYear(birthDate)}
-                          {deathDate && (
-                            <Fragment>
-                              &nbsp;- <CrossIcon className={styles.crossIcon} /> {getYear(deathDate)}
-                            </Fragment>
-                          )}
-                        </div>
-                      )}
-                      {currentParty && (
-                        <>
-                          <div className={styles.divider} />
-                          <div className={styles.currentParty}>{currentParty}</div>
-                        </>
-                      )}
-                    </div>
-                    <div className={styles.lastUpdateWrapper}>
-                      <div className={styles.divider} />
-                      <div className={styles.lastUpdate}>
-                        {lastManualUpdate ? (
-                          <div className={styles.lastUpdateLabel}>
-                            Zkontrolováno {dummyFormatDateShort(new Date(detail.lastManualUpdate))}
-                          </div>
-                        ) : (
-                          <div className={styles.lastUpdateEmpty}>Čeká na kontrolu</div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className={styles.shareWrapper}>
-                  <div className={styles.shareText}>Sdílet</div>
-                  <FacebookShareButton className={styles.shareBtn} url={window.location.href}>
-                    <FacebookIcon round size={30} />
-                  </FacebookShareButton>
-                  <TwitterShareButton className={styles.shareBtn} url={window.location.href}>
-                    <TwitterIcon round size={30} />
-                  </TwitterShareButton>
-                </div>
-              </div>
-            </div>
-          </div>
+          <DetailHeader detail={detail} ref={headerRef} />
           <div className={styles.body}>
             <div className={styles.menuWrapper}>
               <div className={styles.menu}>
