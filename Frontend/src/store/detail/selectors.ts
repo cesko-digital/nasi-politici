@@ -128,13 +128,13 @@ export const getConnections = (store: AppState): Connection[] => store.detail.de
 
 export const getOfficialsRegisterId = (store: AppState): string => store.detail.detail.notificationRegisterId || ''
 
-export const getNotificatonRegistryData = (store: AppState): [] =>
+export const getNotificationRegistryData = (store: AppState): [] =>
   store.detail.detail.notificationRegisterStatements || []
 
-export const getNotificationsCount = (store: AppState): number => getNotificatonRegistryData(store).length
+export const getNotificationsCount = (store: AppState): number => getNotificationRegistryData(store).length
 
 export const getNotifications = createSelector(
-  getNotificatonRegistryData,
+  getNotificationRegistryData,
   getShowAllNotifications,
   (notifications, showAll) => {
     if (!showAll) {
