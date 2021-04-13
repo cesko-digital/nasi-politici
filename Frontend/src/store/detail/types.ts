@@ -71,6 +71,13 @@ export interface DetailState {
   showAllNotifications: boolean
 }
 
+export enum DetailSections {
+  OVERVIEW = 'OVERVIEW',
+  CAREER = 'CAREER',
+  ENGAGEMENT = 'ENGAGEMENT',
+  MEDIA = 'MEDIA',
+}
+
 export const INIT_DETAIL = 'INIT'
 export const SET_DETAIL = 'SET_DETAIL'
 export const SET_LOADING_DETAIL_START = 'SET_LOADING_DETAIL_START'

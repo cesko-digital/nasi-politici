@@ -21,6 +21,9 @@ import ReportModalTrigger from 'components/reportModal/reportModalTriggerConnect
 import Error from 'pages/error/error'
 
 import styles from './detail.module.scss'
+import { getDimensions, scrollTo } from '../../utils/display'
+import { DetailSections } from '../../store/detail/types'
+import { MenuBar } from './menuBar'
 
 interface Props {
   birthYear: string
@@ -43,40 +46,18 @@ interface Props {
   isValid?: boolean
 }
 
-const scrollTo = (element: HTMLElement | null) => {
-  if (!element) {
-    return
-  }
-  element.scrollIntoView({
-    behavior: 'smooth',
-    block: 'start',
-  })
-}
-
-const getDimensions = (element: HTMLElement) => {
-  const { height } = element.getBoundingClientRect()
-  const offsetTop = element.offsetTop
-  const offsetBottom = offsetTop + height
-
-  return {
-    height,
-    offsetBottom,
-    offsetTop,
-  }
-}
-
 const Detail: React.FC<Props> = props => {
-  const [visibleSection, setVisibleSection] = useState('')
+  const [visibleSection, setVisibleSection] = useState<DetailSections | null>(null)
   const overviewRef = useRef<HTMLDivElement>(null)
   const careerRef = useRef<HTMLDivElement>(null)
   const engageRef = useRef<HTMLDivElement>(null)
   const mediaRef = useRef<HTMLDivElement>(null)
   const headerRef = useRef<HTMLDivElement>(null)
   const sectionRefs = [
-    { section: 'Overview', ref: overviewRef },
-    { section: 'Career', ref: careerRef },
-    { section: 'Engagement', ref: engageRef },
-    { section: 'Media', ref: mediaRef },
+    { section: DetailSections.OVERVIEW, ref: overviewRef },
+    { section: DetailSections.CAREER, ref: careerRef },
+    { section: DetailSections.ENGAGEMENT, ref: engageRef },
+    { section: DetailSections.MEDIA, ref: mediaRef },
   ]
   const detailWrapper = useRef<HTMLDivElement>(null)
   const stickyHeader = styles.sticky
@@ -120,7 +101,7 @@ const Detail: React.FC<Props> = props => {
       if (selected && selected.section !== visibleSection) {
         setVisibleSection(selected.section)
       } else if (!selected && visibleSection) {
-        setVisibleSection('')
+        setVisibleSection(null)
       }
     }
 
@@ -140,37 +121,6 @@ const Detail: React.FC<Props> = props => {
       detailWrapper.current.classList.remove(stickyHeader)
     }
   })
-
-  const MenuBar: React.FC = () => {
-    return (
-      <Fragment>
-        <div
-          className={classnames(styles.link, visibleSection === 'Overview' ? styles.selected : '')}
-          onClick={() => scrollTo(overviewRef.current)}
-        >
-          Přehled
-        </div>
-        <div
-          className={classnames(styles.link, visibleSection === 'Career' ? styles.selected : '')}
-          onClick={() => scrollTo(careerRef.current)}
-        >
-          Kariéra politika
-        </div>
-        <div
-          className={classnames(styles.link, visibleSection === 'Engagement' ? styles.selected : '')}
-          onClick={() => scrollTo(engageRef.current)}
-        >
-          Angažovanost
-        </div>
-        <div
-          className={classnames(styles.link, visibleSection === 'Media' ? styles.selected : '')}
-          onClick={() => scrollTo(mediaRef.current)}
-        >
-          Mediální obraz
-        </div>
-      </Fragment>
-    )
-  }
 
   return (
     <div className={styles.detail} ref={detailWrapper}>
@@ -238,7 +188,13 @@ const Detail: React.FC<Props> = props => {
           <div className={styles.body}>
             <div className={styles.menuWrapper}>
               <div className={styles.menu}>
-                <MenuBar />
+                <MenuBar
+                  visibleSection={visibleSection}
+                  onOverviewClick={() => scrollTo(overviewRef.current)}
+                  onCareerClick={() => scrollTo(careerRef.current)}
+                  onEngagementClick={() => scrollTo(engageRef.current)}
+                  onMediaClick={() => scrollTo(mediaRef.current)}
+                />
               </div>
             </div>
             <div className={styles.detail}>
