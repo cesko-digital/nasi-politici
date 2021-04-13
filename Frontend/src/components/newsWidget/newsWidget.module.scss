@@ -111,6 +111,24 @@
   transform: scale(.6);
 }
 
+.articleTags {
+  display: flex;
+  margin-bottom: 9px;
+}
+
+.articleTag {
+  padding: 5px 6px;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 14px;
+  background: $clBorder;
+}
+
+.articleTagRed {
+  background: $tagBackgroundRed;
+  color: $tagColorRed;
+}
+
 @media screen and (min-width: 1169px) {
   .columns1 {
     column-count: 1;
