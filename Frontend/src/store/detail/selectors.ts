@@ -3,14 +3,8 @@ import { createSelector } from 'reselect'
 import { AppState } from 'store'
 import { DEFAULT_DONATIONS_LIMIT, DEFAULT_NOTIFICATION_LIMIT, DEFAULT_ROLES_LIMIT } from 'constants/constants'
 import { Connection, Role, Sponsor, Detail, Insolvency } from './types'
-import { dummyFormatDateShort } from 'utils/date'
 
 export const getDetailData = (store: AppState): Detail => store.detail.detail
-export const isDetailLoading = (store: AppState): boolean => store.detail.loadingDetail
-export const getHasPhoto = (store: AppState): boolean => getDetailData(store).hasPhoto
-export const getPhotoUrl = (store: AppState): string => getDetailData(store).photo
-export const getLastManualUpdate = (store: AppState): string | null =>
-  getDetailData(store).lastManualUpdate ? dummyFormatDateShort(new Date(getDetailData(store).lastManualUpdate)) : null
 export const getShowAllDonations = (store: AppState): boolean => store.detail.showAllDonations
 export const getShowAllNotifications = (store: AppState): boolean => store.detail.showAllNotifications
 export const getShowAllRoles = (store: AppState): boolean => store.detail.showAllRoles
@@ -51,26 +45,6 @@ export const getFullName = (store: AppState): string => {
   return getFullNameString(detail)
 }
 
-export const getBirthYear = (store: AppState): string => {
-  const { birthDate } = getDetailData(store)
-  if (!birthDate) return ''
-  return new Date(birthDate).getFullYear().toString()
-}
-
-export const getDeathYear = (store: AppState): string => {
-  const { deathDate } = getDetailData(store)
-  if (!deathDate) return ''
-  return new Date(deathDate).getFullYear().toString()
-}
-
-export const getCurrentParty = (store: AppState): string => {
-  const { currentParty } = getDetailData(store)
-  return currentParty
-}
-
-export const getDescription = (store: AppState): string => {
-  return getDetailData(store).description
-}
 export const getRolesRaw = (store: AppState): Role[] => getDetailData(store).roles || []
 export const getRolesCount = (store: AppState): number => getRolesRaw(store).length
 

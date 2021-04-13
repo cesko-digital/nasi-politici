@@ -24,29 +24,22 @@ import styles from './detail.module.scss'
 import { getDimensions, scrollTo } from '../../utils/display'
 import { DetailSections } from '../../store/detail/types'
 import { MenuBar } from './menuBar'
+import { useParams } from 'react-router'
+import { useDispatch, useSelector } from 'react-redux'
+import { loadDetail, setInitAction } from '../../store/detail/actions'
+import { AppState } from '../../store'
+import { getFullNameString } from '../../store/detail/selectors'
+import { dummyFormatDateShort, getYear } from '../../utils/date'
 
 interface Props {
   birthYear: string
   deathYear: string
-  contact: string
-  currentParty: string
-  description: string
-  engagement: string
-  fullname: string
-  isLoading: boolean
-  lastUpdate: string | null
-  loadDetail: (id: string) => void
-  onDispose: () => void
-  match: {
-    params: {
-      id: string
-    }
-  }
-  photoUrl: string
-  isValid?: boolean
 }
 
-const Detail: React.FC<Props> = props => {
+export function Detail(props: Props) {
+  const dispatch = useDispatch()
+  const { detail, loadingDetail: isLoading } = useSelector((state: AppState) => state.detail)
+  const { currentParty, description, source, photo, lastManualUpdate, birthDate, deathDate } = detail
   const [visibleSection, setVisibleSection] = useState<DetailSections | null>(null)
   const overviewRef = useRef<HTMLDivElement>(null)
   const careerRef = useRef<HTMLDivElement>(null)
@@ -62,21 +55,17 @@ const Detail: React.FC<Props> = props => {
   const detailWrapper = useRef<HTMLDivElement>(null)
   const stickyHeader = styles.sticky
   const topHeaderHeight = 64
-  const {
-    loadDetail,
-    match: {
-      params: { id },
-    },
-    onDispose,
-  } = props
-  const aboutWidgetCustomClassNames = classnames(styles.widget, !props.description && styles.noData)
+  const { id } = useParams<{ id: string }>()
+  const fullName = getFullNameString(detail)
+  const isValid = !!source
+  const aboutWidgetCustomClassNames = classnames(styles.widget, !description && styles.noData)
 
   useEffect(() => {
-    loadDetail(id)
-    return (): void => {
-      onDispose()
+    dispatch(loadDetail(id))
+    return () => {
+      dispatch(setInitAction())
     }
-  }, [loadDetail, id, onDispose])
+  }, [dispatch, id])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -124,51 +113,52 @@ const Detail: React.FC<Props> = props => {
 
   return (
     <div className={styles.detail} ref={detailWrapper}>
-      {props.isLoading && <LoadingBar />}
-      {!props.isLoading && !props.isValid && <Error />}
-      {!props.isLoading && props.isValid && (
+      {isLoading && <LoadingBar />}
+      {!isLoading && !isValid && <Error />}
+      {!isLoading && isValid && (
         <Fragment>
           <Helmet>
-            <title>{props.fullname} | Naši Politici</title>
+            <title>{fullName} | Naši Politici</title>
           </Helmet>
           <div className={styles.heading} ref={headerRef}>
             <div className={styles.wrapper}>
               <ProfilePicture
-                src={props.photoUrl}
-                name={props.fullname}
-                customClassName={classnames(styles.photo, { [styles.photoDeath]: props.deathYear })}
+                src={photo}
+                name={fullName}
+                customClassName={classnames(styles.photo, { [styles.photoDeath]: deathDate })}
               />
               <div className={styles.initials}>
                 <div className={styles.initialsWrapper}>
-                  <div className={classnames(styles.fullname, { [styles.fulnameDeath]: props.deathYear })}>
-                    {props.fullname}
-                  </div>
+                  <div className={classnames(styles.fullname, { [styles.fulnameDeath]: deathDate })}>{fullName}</div>
                   <div className={styles.additionalWrapper}>
                     <div className={styles.personal}>
-                      {props.birthYear && (
+                      {birthDate && (
                         <div className={styles.birthYear}>
-                          *{props.birthYear}
-                          {props.deathYear && (
+                          *{getYear(birthDate)}
+                          {deathDate && (
                             <Fragment>
-                              &nbsp;- <CrossIcon className={styles.crossIcon} /> {props.deathYear}
+                              &nbsp;- <CrossIcon className={styles.crossIcon} /> {getYear(deathDate)}
                             </Fragment>
                           )}
                         </div>
                       )}
-                      {props.currentParty && (
+                      {currentParty && (
                         <>
                           <div className={styles.divider} />
-                          <div className={styles.currentParty}>{props.currentParty}</div>
+                          <div className={styles.currentParty}>{currentParty}</div>
                         </>
                       )}
                     </div>
                     <div className={styles.lastUpdateWrapper}>
                       <div className={styles.divider} />
                       <div className={styles.lastUpdate}>
-                        {props.lastUpdate && (
-                          <div className={styles.lastUpdateLabel}>Zkontrolováno {props.lastUpdate}</div>
+                        {lastManualUpdate ? (
+                          <div className={styles.lastUpdateLabel}>
+                            Zkontrolováno {dummyFormatDateShort(new Date(detail.lastManualUpdate))}
+                          </div>
+                        ) : (
+                          <div className={styles.lastUpdateEmpty}>Čeká na kontrolu</div>
                         )}
-                        {!props.lastUpdate && <div className={styles.lastUpdateEmpty}>Čeká na kontrolu</div>}
                       </div>
                     </div>
                   </div>
@@ -207,19 +197,19 @@ const Detail: React.FC<Props> = props => {
                   <div className={aboutWidgetCustomClassNames}>
                     <div className={styles.header}>
                       <h2 className={styles.title}>Ve Zkratce</h2>
-                      {!!props.description && (
+                      {!!description && (
                         <div className={styles.tags}>
                           <ReportModalTrigger
                             className={styles.reportBtnWrapper}
-                            modalTitle={`${props.fullname}, ve zkratce`}
+                            modalTitle={`${fullName}, ve zkratce`}
                           >
                             <ReportBtn className={styles.reportBtn} />
                           </ReportModalTrigger>
                         </div>
                       )}
                     </div>
-                    {!props.description && <NoData />}
-                    {!!props.description && <div className={styles.description}>{props.description}</div>}
+                    {!description && <NoData />}
+                    {!!description && <div className={styles.description}>{description}</div>}
                   </div>
                   <ContactsWidget />
                   <DemagogWidget />
@@ -260,5 +250,3 @@ const Detail: React.FC<Props> = props => {
     </div>
   )
 }
-
-export default Detail
