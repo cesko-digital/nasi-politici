@@ -3,7 +3,7 @@ import classnames from 'classnames'
 import styles from './detail.module.scss'
 import { DetailSections } from '../../store/detail/types'
 
-type Props = {
+interface Props {
   visibleSection: DetailSections | null
   onOverviewClick: () => void
   onCareerClick: () => void

@@ -4,7 +4,7 @@ import styles from './newsWidget.module.scss'
 
 import { Article as ArticleType } from '../../services/apiTypes'
 
-type Props = {
+interface Props {
   article: ArticleType
 }
 

@@ -3,7 +3,7 @@ import * as React from 'react'
 import styles from './contactsWidget.module.scss'
 import { Contact, ContactService } from '../../services/apiTypes'
 
-type Props = {
+interface Props {
   contact: Contact
 }
 

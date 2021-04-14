@@ -8,7 +8,7 @@ import { ReactComponent as CrossIcon } from '../../assets/images/cross.svg'
 import { FacebookIcon, FacebookShareButton, TwitterIcon, TwitterShareButton } from 'react-share'
 import { getFullNameString } from '../../store/detail/selectors'
 
-type Props = {
+interface Props {
   detail: Detail
 }
 

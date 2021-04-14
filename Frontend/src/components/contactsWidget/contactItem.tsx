@@ -5,7 +5,7 @@ import { ContactLink } from './contactLink'
 import { ContactIcon } from './contactIcon'
 import { Contact } from '../../services/apiTypes'
 
-type Props = {
+interface Props {
   contact: Contact
 }
 

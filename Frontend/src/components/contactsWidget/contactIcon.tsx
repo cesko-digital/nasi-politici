@@ -9,7 +9,7 @@ import { ReactComponent as Logo } from 'assets/images/social-web.svg'
 import styles from './contactsWidget.module.scss'
 import { ContactService } from '../../services/apiTypes'
 
-type Props = {
+interface Props {
   service: ContactService
 }
 

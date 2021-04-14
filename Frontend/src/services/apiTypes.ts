@@ -31,7 +31,7 @@ export enum ContactService {
   Youtube = 'Youtube',
 }
 
-export type Contact = {
+export interface Contact {
   Contact: string
   Network: ContactService
   NetworkText: string
@@ -108,7 +108,7 @@ export interface DemagogResponse {
   }
 }
 
-export type Article = {
+export interface Article {
   id: number
   perex: string
   published: string
@@ -120,7 +120,7 @@ export type Article = {
   is_fake_news?: boolean //TODO ještě není API
 }
 
-export type ArticleResponse = {
+export interface ArticleResponse {
   articles: Article[]
   topic_map: { [key: string]: number[] }
 }

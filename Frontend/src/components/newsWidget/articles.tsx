@@ -7,7 +7,7 @@ import { Article } from './article'
 
 const DEFAULT_ARTICLES_COUNT = 3
 
-type Props = {
+interface Props {
   articles: ArticleType[]
 }
 
