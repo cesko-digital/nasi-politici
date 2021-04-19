@@ -12,13 +12,14 @@ import { ReactComponent as LogoIM } from 'assets/images/logo-im.svg'
 import styles from './footer.module.scss'
 
 const Footer: React.FC = () => {
+  const logoProps = { width: 30, height: 30 }
   return (
     <div className={styles.footer}>
       <div className={styles.top}>
         <div className={classnames(styles.column, styles.social)}>
           <h3 className={styles.header}>Sociální sítě</h3>
           <div className={styles.socialWrapper}>
-            <FBLogo />
+            <FBLogo {...logoProps} />
             <a
               href="https://www.facebook.com/NasiPolitici.cz"
               rel="noopener noreferrer"
@@ -29,7 +30,7 @@ const Footer: React.FC = () => {
             </a>
           </div>
           <div className={styles.socialWrapper}>
-            <TWLogo />
+            <TWLogo {...logoProps} />
             <a
               href="https://twitter.com/nasipolitici"
               rel="noopener noreferrer"
