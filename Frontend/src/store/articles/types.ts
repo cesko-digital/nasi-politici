@@ -1,13 +1,4 @@
-export interface Article {
-  id: number
-  perex: string
-  published: string
-  shares: number
-  source: string
-  text: string
-  title: string
-  url: string
-}
+import { Article } from '../../services/apiTypes'
 
 export interface ArticlesState {
   articles: Article[]

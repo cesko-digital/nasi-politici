@@ -1,98 +1,66 @@
 import classnames from 'classnames'
-import React, { Fragment, useState, useEffect, useRef } from 'react'
+import React, { Fragment, useState, useEffect, useRef, useMemo } from 'react'
 import Helmet from 'react-helmet'
-import { FacebookShareButton, FacebookIcon, TwitterIcon, TwitterShareButton } from 'react-share'
 
-import { ReactComponent as CrossIcon } from 'assets/images/cross.svg'
 import { ReactComponent as ReportBtn } from 'assets/images/report.svg'
 import { ReactComponent as Divider } from 'assets/images/detailDivider.svg'
 import NoData from 'components/emptyStates/noData/noData'
 import LoadingBar from 'components/loadingBar/loadingBar'
-import NewsWidget from 'components/newsWidget/newsWidgetConnected'
+import { NewsWidget } from 'components/newsWidget/newsWidget'
 import DonationsWidget from 'components/donationsWidget/donationsWidgetConnected'
 import RolesWidget from 'components/rolesWidget/rolesWidgetConnected'
 import NotificationsWidget from 'components/notificationsWidget/notificationsWidgetConnected'
 import InsolvencyWidget from 'components/insolvencyWidget/insolvencyWidgetConnected'
 import DemagogWidget from 'components/demagogWidget/demagogWidgetConnected'
 import EngagementChart from 'components/engagementChart/engagementChartConnected'
-import ContactsWidget from 'components/contactsWidget/contactsWidgetConnected'
-import ProfilePicture from 'components/profilePicture/profilePicture'
+import { ContactsWidget } from 'components/contactsWidget/contactsWidget'
 import ReportModalTrigger from 'components/reportModal/reportModalTriggerConnected'
 import Error from 'pages/error/error'
 
 import styles from './detail.module.scss'
+import { getDimensions, scrollTo } from '../../utils/display'
+import { DetailSections } from '../../store/detail/types'
+import { MenuBar } from './menuBar'
+import { useParams } from 'react-router'
+import { useDispatch, useSelector } from 'react-redux'
+import { loadDetail, setInitAction } from '../../store/detail/actions'
+import { AppState } from '../../store'
+import { getFullNameString } from '../../store/detail/selectors'
+import { DetailHeader } from './detailHeader'
 
-interface Props {
-  birthYear: string
-  deathYear: string
-  contact: string
-  currentParty: string
-  description: string
-  engagement: string
-  fullname: string
-  isLoading: boolean
-  lastUpdate: string | null
-  loadDetail: (id: string) => void
-  onDispose: () => void
-  match: {
-    params: {
-      id: string
-    }
-  }
-  photoUrl: string
-  isValid?: boolean
-}
-
-const scrollTo = (element: any) => {
-  element.scrollIntoView({
-    behavior: 'smooth',
-    block: 'start',
-  })
-}
-
-const getDimensions = (element: any) => {
-  const { height } = element.getBoundingClientRect()
-  const offsetTop = element.offsetTop
-  const offsetBottom = offsetTop + height
-
-  return {
-    height,
-    offsetBottom,
-    offsetTop,
-  }
-}
-
-const Detail: React.FC<Props> = (props) => {
-  const [visibleSection, setVisibleSection] = useState('')
-  const overviewRef = useRef(null)
-  const careerRef = useRef(null)
-  const engageRef = useRef(null)
-  const mediaRef = useRef(null)
-  const headerRef = useRef(null)
-  const sectionRefs = [
-    {section: 'Overview', ref: overviewRef},
-    {section: 'Career', ref: careerRef},
-    {section: 'Engagement', ref: engageRef},
-    {section: 'Media', ref: mediaRef},
-  ]
+export function Detail() {
+  const dispatch = useDispatch()
+  const { detail, loadingDetail: isLoading } = useSelector((state: AppState) => state.detail)
+  const { description, source } = detail
+  const [visibleSection, setVisibleSection] = useState<DetailSections | null>(null)
+  const overviewRef = useRef<HTMLDivElement>(null)
+  const careerRef = useRef<HTMLDivElement>(null)
+  const engageRef = useRef<HTMLDivElement>(null)
+  const mediaRef = useRef<HTMLDivElement>(null)
+  const headerRef = useRef<HTMLDivElement>(null)
+  const sectionRefs = useMemo(
+    () => [
+      { section: DetailSections.OVERVIEW, ref: overviewRef },
+      { section: DetailSections.CAREER, ref: careerRef },
+      { section: DetailSections.ENGAGEMENT, ref: engageRef },
+      { section: DetailSections.MEDIA, ref: mediaRef },
+    ],
+    [],
+  )
   const detailWrapper = useRef<HTMLDivElement>(null)
   const stickyHeader = styles.sticky
   const topHeaderHeight = 64
-  const {
-    loadDetail,
-    match: {
-      params: { id },
-    },
-    onDispose,
-  } = props
-  const aboutWidgetCustomClassNames = classnames(styles.widget, !props.description && styles.noData)
+  const { id } = useParams<{ id: string }>()
+  const fullName = getFullNameString(detail)
+  const isValid = !!source
+  const aboutWidgetCustomClassNames = classnames(styles.widget, !description && styles.noData)
 
   useEffect(() => {
-    loadDetail(id)
-    return (): void => {
-      onDispose()
+    dispatch(loadDetail(id))
+    return () => {
+      dispatch(setInitAction())
     }
-  }, [loadDetail, id, onDispose])
+  }, [dispatch, id])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -105,7 +73,7 @@ const Detail: React.FC<Props> = (props) => {
         scrollPosition = window.scrollY
       }
 
-      const selected = sectionRefs.find(({ section, ref }) => {
+      const selected = sectionRefs.find(({ ref }) => {
         const element = ref.current
         if (element) {
           const { offsetBottom, offsetTop } = getDimensions(element)
@@ -117,7 +85,7 @@ const Detail: React.FC<Props> = (props) => {
       if (selected && selected.section !== visibleSection) {
         setVisibleSection(selected.section)
       } else if (!selected && visibleSection) {
-        setVisibleSection('')
+        setVisibleSection(null)
       }
     }
 
@@ -126,7 +94,7 @@ const Detail: React.FC<Props> = (props) => {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [visibleSection, sectionRefs, headerRef])
-  
+
   window.addEventListener('scroll', () => {
     if (!detailWrapper.current) {
       return
@@ -138,98 +106,30 @@ const Detail: React.FC<Props> = (props) => {
     }
   })
 
-  const MenuBar: React.FC = () => {
-    return (
-      <Fragment>
-        <div className={classnames(styles.link, visibleSection === 'Overview' ? styles.selected : '')}
-          onClick={() => {scrollTo(overviewRef.current)}}>
-          Přehled
-        </div>
-        <div className={classnames(styles.link, visibleSection === 'Career' ? styles.selected : '')}
-          onClick={() => {scrollTo(careerRef.current)}}>
-          Kariéra politika
-        </div>
-        <div className={classnames(styles.link, visibleSection === 'Engagement' ? styles.selected : '')}
-          onClick={() => {scrollTo(engageRef.current)}}>
-          Angažovanost
-        </div>
-        <div className={classnames(styles.link, visibleSection === 'Media' ? styles.selected : '')}
-          onClick={() => {scrollTo(mediaRef.current)}}>
-          Mediální obraz
-        </div>
-      </Fragment>
-    )
-  }
-
   return (
     <div className={styles.detail} ref={detailWrapper}>
-      {props.isLoading && <LoadingBar />}
-      {!props.isLoading && !props.isValid && <Error />}
-      {!props.isLoading && props.isValid && (
+      {isLoading && <LoadingBar />}
+      {!isLoading && !isValid && <Error />}
+      {!isLoading && isValid && (
         <Fragment>
           <Helmet>
-            <title>{props.fullname} | Naši Politici</title>
+            <title>{fullName} | Naši Politici</title>
           </Helmet>
-          <div className={styles.heading} ref={headerRef}>
-            <div className={styles.wrapper}>
-              <ProfilePicture
-                src={props.photoUrl}
-                name={props.fullname}
-                customClassName={classnames(styles.photo, { [styles.photoDeath]: props.deathYear })}
-              />
-              <div className={styles.initials}>
-                <div className={styles.initialsWrapper}>
-                  <div className={classnames(styles.fullname, { [styles.fulnameDeath]: props.deathYear })}>
-                    {props.fullname}
-                  </div>
-                  <div className={styles.additionalWrapper}>
-                    <div className={styles.personal}>
-                      {props.birthYear && (
-                        <div className={styles.birthYear}>
-                          *{props.birthYear}
-                          {props.deathYear && (
-                            <Fragment>
-                              &nbsp;- <CrossIcon className={styles.crossIcon} /> {props.deathYear}
-                            </Fragment>
-                          )}
-                        </div>
-                      )}
-                      {props.currentParty && (
-                        <>
-                          <div className={styles.divider}></div>
-                          <div className={styles.currentParty}>{props.currentParty}</div>
-                        </>
-                      )}
-                    </div>
-                    <div className={styles.lastUpdateWrapper}>
-                      <div className={styles.divider}></div>
-                      <div className={styles.lastUpdate}>
-                        {props.lastUpdate && <div className={styles.lastUpdateLabel}>Zkontrolováno {props.lastUpdate}</div>}
-                        {!props.lastUpdate && <div className={styles.lastUpdateEmpty}>Čeká na kontrolu</div>}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className={styles.shareWrapper}>
-                  <div className={styles.shareText}>Sdílet</div>
-                  <FacebookShareButton className={styles.shareBtn} url={window.location.href}>
-                    <FacebookIcon round size={30} />
-                  </FacebookShareButton>
-                  <TwitterShareButton className={styles.shareBtn} url={window.location.href}>
-                    <TwitterIcon round size={30} />
-                  </TwitterShareButton>
-                </div>
-              </div>
-            </div>
-          </div>
+          <DetailHeader detail={detail} ref={headerRef} />
           <div className={styles.body}>
             <div className={styles.menuWrapper}>
               <div className={styles.menu}>
-                <MenuBar />
+                <MenuBar
+                  visibleSection={visibleSection}
+                  onOverviewClick={() => scrollTo(overviewRef.current)}
+                  onCareerClick={() => scrollTo(careerRef.current)}
+                  onEngagementClick={() => scrollTo(engageRef.current)}
+                  onMediaClick={() => scrollTo(mediaRef.current)}
+                />
               </div>
             </div>
             <div className={styles.detail}>
-              <div id='Overview' ref={overviewRef} className={styles.section}>
+              <div id="Overview" ref={overviewRef} className={styles.section}>
                 <div className={styles.titleWrapper}>
                   <h1 className={styles.title}>Přehled</h1>
                   <Divider className={styles.titleDivider} />
@@ -238,25 +138,25 @@ const Detail: React.FC<Props> = (props) => {
                   <div className={aboutWidgetCustomClassNames}>
                     <div className={styles.header}>
                       <h2 className={styles.title}>Ve Zkratce</h2>
-                      {!!props.description && (
+                      {!!description && (
                         <div className={styles.tags}>
                           <ReportModalTrigger
                             className={styles.reportBtnWrapper}
-                            modalTitle={`${props.fullname}, ve zkratce`}
+                            modalTitle={`${fullName}, ve zkratce`}
                           >
                             <ReportBtn className={styles.reportBtn} />
                           </ReportModalTrigger>
                         </div>
                       )}
                     </div>
-                    {!props.description && <NoData />}
-                    {!!props.description && <div className={styles.description}>{props.description}</div>}
+                    {!description && <NoData />}
+                    {!!description && <div className={styles.description}>{description}</div>}
                   </div>
                   <ContactsWidget />
                   <DemagogWidget />
                 </div>
               </div>
-              <div id='Career' ref={careerRef} className={styles.section}>
+              <div id="Career" ref={careerRef} className={styles.section}>
                 <div className={styles.titleWrapper}>
                   <h1 className={styles.title}>Kariéra</h1>
                   <Divider className={styles.titleDivider} />
@@ -268,14 +168,14 @@ const Detail: React.FC<Props> = (props) => {
                   <NotificationsWidget />
                 </div>
               </div>
-              <div id='Engagement' ref={engageRef} className={styles.section}>
+              <div id="Engagement" ref={engageRef} className={styles.section}>
                 <div className={styles.titleWrapper}>
                   <h1 className={styles.title}>Angažovanost</h1>
                   <Divider className={styles.titleDivider} />
                 </div>
                 <EngagementChart />
               </div>
-              <div id='Media' ref={mediaRef} className={styles.section}>
+              <div id="Media" ref={mediaRef} className={styles.section}>
                 <div className={styles.titleWrapper}>
                   <h1 className={styles.title}>Mediální obraz</h1>
                   <Divider className={styles.titleDivider} />
@@ -291,5 +191,3 @@ const Detail: React.FC<Props> = (props) => {
     </div>
   )
 }
-
-export default Detail

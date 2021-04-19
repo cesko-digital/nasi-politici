@@ -21,7 +21,7 @@ const initialInsolvency: Insolvency = {
   debtorLink: '',
 }
 
-const intialDetail: Detail = {
+const initialDetail: Detail = {
   birthDate: '',
   contacts: [],
   connections: [],
@@ -53,7 +53,7 @@ const intialDetail: Detail = {
 }
 
 const initialState: DetailState = {
-  detail: intialDetail,
+  detail: initialDetail,
   loadingDetail: true,
   showAllDonations: false,
   showAllNotifications: false,

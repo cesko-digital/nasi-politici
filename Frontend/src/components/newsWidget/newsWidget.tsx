@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useEffect } from 'react'
 import classnames from 'classnames'
 import NoData from 'components/emptyStates/noData/noData'
 import LoadingData from 'components/emptyStates/loadingData/loadingData'
@@ -7,77 +7,22 @@ import { ReactComponent as ReportBtn } from 'assets/images/report.svg'
 import ExplanationModal from 'components/explanationModal/explanationModal'
 
 import styles from './newsWidget.module.scss'
+import { useDispatch, useSelector } from 'react-redux'
+import { loadArticles } from '../../store/articles/actions'
+import { AppState } from '../../store'
+import { getFullNameString } from '../../store/detail/selectors'
+import { Articles } from './articles'
 
-const DEFAULT_ARTICLES_COUNT = 3
+export function NewsWidget() {
+  const dispatch = useDispatch()
+  const { articles, loading } = useSelector((state: AppState) => state.articles)
+  const { detail } = useSelector((state: AppState) => state.detail)
+  const newsWidgetCustomClassNames = classnames(styles.widget, !articles.length && styles.noData)
 
-interface ArticleProps {
-  perex: string
-  published: string
-  source: string
-  title: string
-  url: string
-}
+  useEffect(() => {
+    dispatch(loadArticles())
+  }, [dispatch])
 
-const Article: React.FC<ArticleProps> = ({ source, published, url, title, perex }) => {
-  return (
-    <div className={styles.article}>
-      <div className={styles.sources}>
-        <div className={styles.source}>{source}</div>
-        <div>, {published}</div>
-      </div>
-      <div>
-        <a href={url} target="_blank" rel="noopener noreferrer" className={styles.headline}>
-          {title}
-        </a>
-      </div>
-      <div className={styles.perex}>{perex}</div>
-    </div>
-  )
-}
-
-interface ArticlesProps {
-  articles: ArticleProps[]
-}
-
-const Articles: React.FC<ArticlesProps> = ({ articles }) => {
-  const [showAll, setShowAll] = React.useState(false)
-  const hasMore = articles.length > DEFAULT_ARTICLES_COUNT
-  const articlesLength = articles.length
-  return (
-    <React.Fragment>
-      <div className={classnames(
-        styles.articles,
-        articlesLength < 3 && styles['columns' + articlesLength],
-        articlesLength >= 3 && styles.multicolumn,
-        )}>
-        {!showAll &&
-          articles.slice(0, DEFAULT_ARTICLES_COUNT).map((article, index) => <Article {...article} key={index} />)}
-        {showAll && articles.map((article, index) => <Article {...article} key={index} />)}
-      </div>
-      {hasMore && (
-        <div className={styles.showMore} onClick={(): void => setShowAll(!showAll)}>
-          {!showAll && hasMore && (
-            <div className={styles.more}>Zobrazit {articles.length - DEFAULT_ARTICLES_COUNT} dalších</div>
-          )}
-          {showAll && <div className={styles.less}>Zobrazit méně</div>}
-        </div>
-      )}
-    </React.Fragment>
-  )
-}
-
-interface Props {
-  news: ArticleProps[]
-  loadNews: () => void
-  isLoading: boolean
-  fullname: string
-}
-
-const NewsWidget: React.FC<Props> = ({ news, fullname, loadNews, isLoading }) => {
-  const newsWidgetCustomClassNames = classnames(styles.widget, !news.length && styles.noData)
-  React.useEffect(() => {
-    loadNews()
-  }, [loadNews])
   return (
     <React.Fragment>
       <div className={newsWidgetCustomClassNames}>
@@ -94,20 +39,21 @@ const NewsWidget: React.FC<Props> = ({ news, fullname, loadNews, isLoading }) =>
               odstranit.
             </ExplanationModal>
           </div>
-          {!!news.length && (
+          {!!articles.length && (
             <div className={styles.tags}>
-              <ReportModalTrigger className={styles.reportBtnWrapper} modalTitle={`${fullname}, v médiích`}>
+              <ReportModalTrigger
+                className={styles.reportBtnWrapper}
+                modalTitle={`${getFullNameString(detail)}, v médiích`}
+              >
                 <ReportBtn className={styles.reportBtn} />
               </ReportModalTrigger>
             </div>
           )}
         </div>
-        {!isLoading && !!news.length && <Articles articles={news} />}
-        {!isLoading && !news.length && <NoData />}
-        {isLoading && <LoadingData />}
+        {!loading && !!articles.length && <Articles articles={articles} />}
+        {!loading && !articles.length && <NoData />}
+        {loading && <LoadingData />}
       </div>
     </React.Fragment>
   )
 }
-
-export default NewsWidget

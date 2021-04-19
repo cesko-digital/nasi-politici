@@ -1,3 +1,5 @@
+import { Contact } from '../../services/apiTypes'
+
 export interface Insolvency {
   bailiffCount: number
   bailiffLink: string
@@ -21,20 +23,6 @@ export interface Sponsor {
   year: number
 }
 
-export enum ContactService {
-  FacebookPage = 'Facebook_page',
-  FacebookProfile = 'Facebook_profile',
-  Facebook = 'Facebook',
-  Twitter = 'Twitter',
-  Instagram = 'Instagram',
-  WWW = 'WWW',
-}
-
-export interface Contact {
-  Service: ContactService
-  Contact: string
-}
-
 export interface Connection {
   company: string
   ico: string
@@ -45,7 +33,7 @@ export interface Connection {
 
 export interface Detail {
   birthDate: string
-  contacts?: Contact[] // TODO odebrat ? az zacne chodit z API
+  contacts: Contact[]
   companyConnection: string
   connections: Connection[]
   currentParty: string
@@ -81,6 +69,13 @@ export interface DetailState {
   showAllRoles: boolean
   showAllDonations: boolean
   showAllNotifications: boolean
+}
+
+export enum DetailSections {
+  OVERVIEW = 'OVERVIEW',
+  CAREER = 'CAREER',
+  ENGAGEMENT = 'ENGAGEMENT',
+  MEDIA = 'MEDIA',
 }
 
 export const INIT_DETAIL = 'INIT'
