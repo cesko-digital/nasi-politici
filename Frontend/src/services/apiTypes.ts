@@ -22,16 +22,19 @@ interface Sponsor {
 }
 
 export enum ContactService {
+  Facebook = 'Facebook',
   FacebookPage = 'Facebook_page',
   FacebookProfile = 'Facebook_profile',
   Twitter = 'Twitter',
   Instagram = 'Instagram',
   WWW = 'WWW',
+  Youtube = 'Youtube',
 }
 
 export interface Contact {
-  Service: ContactService
   Contact: string
+  Network: ContactService
+  NetworkText: string
 }
 
 export interface Connection {
@@ -44,7 +47,7 @@ export interface Connection {
 
 export interface Detail {
   birthDate: string
-  contacts?: Contact[] // TODO odebrat ? az zacne chodit z API
+  contacts: Contact[]
   connections: Connection[]
   companyConnection: string
   currentParty: string
@@ -105,15 +108,16 @@ export interface DemagogResponse {
   }
 }
 
-interface Article {
+export interface Article {
   id: number
   perex: string
   published: string
   shares: number
   source: string
-  text: string
+  text?: string
   title: string
   url: string
+  is_fake_news?: boolean //TODO ještě není API
 }
 
 export interface ArticleResponse {

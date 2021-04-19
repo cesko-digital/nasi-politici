@@ -7,18 +7,21 @@ import NoData from 'components/emptyStates/noData/noData'
 import ExplanationModal from 'components/explanationModal/explanationModal'
 
 import styles from './contactsWidget.module.scss'
-import { Contact as ContactType } from './contact'
-import ContactsList from './contactList'
+import { ContactList } from './contactList'
+import { useSelector } from 'react-redux'
+import { AppState } from '../../store'
+import { ContactService } from '../../services/apiTypes'
+import { getFullNameString } from '../../store/detail/selectors'
 
-interface Props {
-  fullname: string
-  hasContacts: boolean
-  socialNetworksContacts: ContactType[]
-  webContacts: ContactType[]
-}
-
-const ContactsWidget: React.FC<Props> = props => {
-  const contactsWidgetCustomClassNames = classnames(styles.widget, !props.hasContacts && styles.noData)
+export function ContactsWidget() {
+  const {
+    detail,
+    detail: { contacts },
+  } = useSelector((state: AppState) => state.detail)
+  const socialNetworksContacts = contacts.filter(contact => contact.Network !== ContactService.WWW)
+  const webContacts = contacts.filter(contact => contact.Network === ContactService.WWW)
+  const hasContacts = contacts.length > 0
+  const contactsWidgetCustomClassNames = classnames(styles.widget, !hasContacts && styles.noData)
 
   return (
     <div className={contactsWidgetCustomClassNames}>
@@ -32,23 +35,24 @@ const ContactsWidget: React.FC<Props> = props => {
             klikněte na vlaječku a pošlete nám upozornění.
           </ExplanationModal>
         </div>
-        {props.hasContacts && (
+        {hasContacts && (
           <div>
-            <ReportModalTrigger className={styles.reportBtnWrapper} modalTitle={`${props.fullname}, kontakty`}>
+            <ReportModalTrigger
+              className={styles.reportBtnWrapper}
+              modalTitle={`${getFullNameString(detail)}, kontakty`}
+            >
               <ReportBtn className={styles.reportBtn} />
             </ReportModalTrigger>
           </div>
         )}
       </div>
-      {!props.hasContacts && <NoData />}
-      {props.hasContacts && (
+      {!hasContacts && <NoData />}
+      {hasContacts && (
         <React.Fragment>
-          <ContactsList title="Socialní sítě" contacts={props.socialNetworksContacts} />
-          <ContactsList title="Web" contacts={props.webContacts} />
+          <ContactList title="Socialní sítě" contacts={socialNetworksContacts} />
+          <ContactList title="Web" contacts={webContacts} />
         </React.Fragment>
       )}
     </div>
   )
 }
-
-export default ContactsWidget

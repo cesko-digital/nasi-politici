@@ -13,12 +13,22 @@ module.exports = {
       jsx: true,
     },
   },
+  plugins: ['@typescript-eslint', 'react', 'react-hooks', 'import', 'prettier'],
   settings: {
     react: {
       version: 'detect',
     },
-	},
-	rules: {
-		"react/prop-types": 0,
-	},
-};
+  },
+  rules: {
+    'react/prop-types': 0,
+    'react/display-name': 0,
+
+    // React-hooks
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
+
+    // Typescript
+    '@typescript-eslint/no-explicit-any': ['error'], // highway to hell
+    '@typescript-eslint/explicit-function-return-type': 0,
+  },
+}

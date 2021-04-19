@@ -1,28 +1,30 @@
 import * as React from 'react'
 
 import styles from './contactsWidget.module.scss'
-import Contact, { Contact as ContactType } from './contact'
+import { ContactItem } from './contactItem'
+import { Contact } from '../../services/apiTypes'
 
-interface Contacts {
-  contacts: ContactType[]
+interface Props {
+  contacts: Contact[]
   title: string
 }
 
-const ContactList: React.FC<Contacts> = props => {
-  if (props.contacts.length === 0) return null
+export function ContactList({ contacts, title }: Props) {
+  if (contacts.length === 0) {
+    return null
+  }
+
   return (
     <React.Fragment>
       <div className={styles.subtitleWrapper}>
-        <h3 className={styles.subtitle}>{props.title}</h3>
+        <h3 className={styles.subtitle}>{title}</h3>
         <div className={styles.line} />
       </div>
       <div className={styles.contactsWrapper}>
-        {props.contacts.map((contact, index) => {
-          return <Contact key={index} {...contact} />
+        {contacts.map((contact, index) => {
+          return <ContactItem key={index} contact={contact} />
         })}
       </div>
     </React.Fragment>
   )
 }
-
-export default ContactList

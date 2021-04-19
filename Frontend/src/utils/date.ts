@@ -3,3 +3,7 @@ export const dummyFormatDate = (date: Date): string =>
 
 export const dummyFormatDateShort = (date: Date): string =>
   date.toLocaleDateString('cs-CZ', { day: 'numeric', month: 'numeric', year: 'numeric' })
+
+export function getYear(date: string) {
+  return new Date(date).getFullYear()
+}

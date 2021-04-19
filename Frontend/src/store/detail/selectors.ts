@@ -2,15 +2,9 @@ import { createSelector } from 'reselect'
 
 import { AppState } from 'store'
 import { DEFAULT_DONATIONS_LIMIT, DEFAULT_NOTIFICATION_LIMIT, DEFAULT_ROLES_LIMIT } from 'constants/constants'
-import { ContactService, Contact, Connection, Role, Sponsor, Detail, Insolvency } from './types'
-import { dummyFormatDateShort } from 'utils/date'
+import { Connection, Role, Sponsor, Detail, Insolvency } from './types'
 
 export const getDetailData = (store: AppState): Detail => store.detail.detail
-export const isDetailLoading = (store: AppState): boolean => store.detail.loadingDetail
-export const getHasPhoto = (store: AppState): boolean => getDetailData(store).hasPhoto
-export const getPhotoUrl = (store: AppState): string => getDetailData(store).photo
-export const getLastManualUpdate = (store: AppState): string | null =>
-  getDetailData(store).lastManualUpdate ? dummyFormatDateShort(new Date(getDetailData(store).lastManualUpdate)) : null
 export const getShowAllDonations = (store: AppState): boolean => store.detail.showAllDonations
 export const getShowAllNotifications = (store: AppState): boolean => store.detail.showAllNotifications
 export const getShowAllRoles = (store: AppState): boolean => store.detail.showAllRoles
@@ -40,33 +34,17 @@ export const getIsValid = createSelector(getDetailData, detail => {
   return !!detail.source
 })
 
-export const getFullName = (store: AppState): string => {
-  const detail = getDetailData(store)
+export function getFullNameString(detail: Detail) {
   const prefix = detail.namePrefix ? `${detail.namePrefix} ` : ''
   const suffix = detail.nameSuffix ? ` ${detail.nameSuffix}` : ''
   return `${prefix}${detail.name} ${detail.surname}${suffix}`.trim() // TODO lip naformatovat
 }
 
-export const getBirthYear = (store: AppState): string => {
-  const { birthDate } = getDetailData(store)
-  if (!birthDate) return ''
-  return new Date(birthDate).getFullYear().toString()
+export const getFullName = (store: AppState): string => {
+  const detail = getDetailData(store)
+  return getFullNameString(detail)
 }
 
-export const getDeathYear = (store: AppState): string => {
-  const { deathDate } = getDetailData(store)
-  if (!deathDate) return ''
-  return new Date(deathDate).getFullYear().toString()
-}
-
-export const getCurrentParty = (store: AppState): string => {
-  const { currentParty } = getDetailData(store)
-  return currentParty
-}
-
-export const getDescription = (store: AppState): string => {
-  return getDetailData(store).description
-}
 export const getRolesRaw = (store: AppState): Role[] => getDetailData(store).roles || []
 export const getRolesCount = (store: AppState): number => getRolesRaw(store).length
 
@@ -119,18 +97,18 @@ export const getRoles = createSelector(getRolesRaw, getShowAllRoles, (roles, sho
   return groupByYear(rolesMap)
 })
 
-export const getContacts = (store: AppState): Contact[] => store.detail.detail.contacts || []
+export const getContacts = (store: AppState) => store.detail.detail.contacts || []
 export const getConnections = (store: AppState): Connection[] => store.detail.detail.connections || []
 
 export const getOfficialsRegisterId = (store: AppState): string => store.detail.detail.notificationRegisterId || ''
 
-export const getNotificatonRegistryData = (store: AppState): [] =>
+export const getNotificationRegistryData = (store: AppState): [] =>
   store.detail.detail.notificationRegisterStatements || []
 
-export const getNotificationsCount = (store: AppState): number => getNotificatonRegistryData(store).length
+export const getNotificationsCount = (store: AppState): number => getNotificationRegistryData(store).length
 
 export const getNotifications = createSelector(
-  getNotificatonRegistryData,
+  getNotificationRegistryData,
   getShowAllNotifications,
   (notifications, showAll) => {
     if (!showAll) {
@@ -139,22 +117,6 @@ export const getNotifications = createSelector(
     return notifications
   },
 )
-
-export const hasContacts = (store: AppState): boolean =>
-  !!store.detail.detail.contacts && !!store.detail.detail.contacts.length
-
-const mapContact = (contact: Contact): { service: ContactService; contact: string } => ({
-  service: contact.Service,
-  contact: contact.Contact,
-})
-
-export const getSocialNetworksContacts = createSelector(getContacts, contacts => {
-  return contacts.filter(contact => contact.Service !== ContactService.WWW).map(mapContact)
-})
-
-export const getWebContacts = createSelector(getContacts, contacts => {
-  return contacts.filter(contact => contact.Service === ContactService.WWW).map(mapContact)
-})
 
 export const getRolesSource = (state: AppState): string => getDetailData(state).sourceRoles
 export const getDonationsSource = (state: AppState): string => getDetailData(state).sourceSponzor

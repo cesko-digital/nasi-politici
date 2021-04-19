@@ -21,6 +21,7 @@
   background: #fff;
   z-index: 1;
   box-shadow: 3px 3px 9px #dadada;
+
   .wrapper {
     position: relative;
     margin: 0 auto;
@@ -30,6 +31,7 @@
     max-width: $resBase;
     width: 970px;
     box-sizing: content-box;
+
     .face {
       width: 170px;
       height: 170px;
@@ -63,7 +65,7 @@
     @include headerTitle;
     text-transform: capitalize;
 	}
-	.fulnameDeath {
+	.fullnameDeath {
 		color: #808080;
 	}
 	.currentParty {
