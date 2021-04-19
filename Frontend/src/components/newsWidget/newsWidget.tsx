@@ -12,12 +12,14 @@ import { loadArticles } from '../../store/articles/actions'
 import { AppState } from '../../store'
 import { getFullNameString } from '../../store/detail/selectors'
 import { Articles } from './articles'
+import { getEnhancedArticles } from '../../utils/articles'
 
 export function NewsWidget() {
   const dispatch = useDispatch()
   const { articles, loading } = useSelector((state: AppState) => state.articles)
   const { detail } = useSelector((state: AppState) => state.detail)
-  const newsWidgetCustomClassNames = classnames(styles.widget, !articles.length && styles.noData)
+  const enhancedArticles = getEnhancedArticles(articles)
+  const newsWidgetCustomClassNames = classnames(styles.widget, !enhancedArticles.length && styles.noData)
 
   useEffect(() => {
     dispatch(loadArticles())
@@ -39,7 +41,7 @@ export function NewsWidget() {
               odstranit.
             </ExplanationModal>
           </div>
-          {!!articles.length && (
+          {!!enhancedArticles.length && (
             <div className={styles.tags}>
               <ReportModalTrigger
                 className={styles.reportBtnWrapper}
@@ -50,8 +52,8 @@ export function NewsWidget() {
             </div>
           )}
         </div>
-        {!loading && !!articles.length && <Articles articles={articles} />}
-        {!loading && !articles.length && <NoData />}
+        {!loading && !!enhancedArticles.length && <Articles articles={enhancedArticles} />}
+        {!loading && !enhancedArticles.length && <NoData />}
         {loading && <LoadingData />}
       </div>
     </React.Fragment>
