@@ -11,8 +11,8 @@ const api: API = {
       DeathYear: null,
       PhotoUrl: 'https://www.hlidacstatu.cz/Photo/pavel-andrejkiv',
       PoliticalParty: null,
-      Status: 3,
       StatusText: '',
+      Status: 3,
       PoliticalFunctions: [],
     },
     {
