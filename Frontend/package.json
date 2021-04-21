@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@amcharts/amcharts4": "^4.9.23",
+    "@elgorditosalsero/react-gtm-hook": "^2.0.3",
     "@types/classnames": "^2.2.9",
     "@types/history": "^4.7.3",
     "@types/jest": "^24.0.25",

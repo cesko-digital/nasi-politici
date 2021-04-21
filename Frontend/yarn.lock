@@ -1072,6 +1072,11 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-9.0.1.tgz#c27b391d8457d1e893f1eddeaf5e5412d12ffbb5"
   integrity sha512-6It2EVfGskxZCQhuykrfnALg7oVeiI6KclWSmGDqB0AiInVrTGB9Jp9i4/Ad21u9Jde/voVQz6eFX/eSg/UsPA==
 
+"@elgorditosalsero/react-gtm-hook@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@elgorditosalsero/react-gtm-hook/-/react-gtm-hook-2.0.3.tgz#b8bde2d201c9a2e6f4ec8a683d10af865e9a7033"
+  integrity sha512-WGQYpvRM7WOhSDDWCEA8tt5ro2AGH1cl7gD70BG5HvWkQr4JB+HCMksKFQj4LMCzENfVa62j13cmUJdbIucpWg==
+
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"
