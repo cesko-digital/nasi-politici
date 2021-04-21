@@ -9,6 +9,7 @@ env:
   region: ${{ secrets.AWS_REGION }}
   REACT_APP_BASE_API_URL: ''
   REACT_APP_GA: ${{ secrets.REACT_APP_GA }}
+  REACT_APP_GTM_ID: ${{ secrets.REACT_APP_GTM_ID }}
   GENERATE_SOURCEMAP: false
   bucketName: ${{ secrets.AWS_FRONTEND_BUCKET_NAME }}
   cloudFrontDeploymentId: ${{ secrets.AWS_CLOUDFRONT_DEPLOYMENT_ID }}
