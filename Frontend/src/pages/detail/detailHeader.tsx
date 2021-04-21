@@ -5,7 +5,9 @@ import { Detail } from '../../store/detail/types'
 import ProfilePicture from '../../components/profilePicture/profilePicture'
 import { dummyFormatDateShort, getYear } from '../../utils/date'
 import { ReactComponent as CrossIcon } from '../../assets/images/cross.svg'
-import { FacebookIcon, FacebookShareButton, TwitterIcon, TwitterShareButton } from 'react-share'
+import { FacebookShareButton, TwitterShareButton } from 'react-share'
+import { ReactComponent as FBLogo } from 'assets/images/social-fb.svg'
+import { ReactComponent as TWLogo } from 'assets/images/social-tw.svg'
 import { getFullNameString } from '../../store/detail/selectors'
 
 interface Props {
@@ -15,6 +17,7 @@ interface Props {
 export const DetailHeader = React.forwardRef(({ detail }: Props, ref: Ref<HTMLDivElement>) => {
   const { deathDate, photo, birthDate, currentParty, lastManualUpdate } = detail
   const fullName = getFullNameString(detail)
+  const iconProps = { width: 30, height: 30 }
 
   return (
     <div className={styles.heading} ref={ref}>
@@ -63,10 +66,10 @@ export const DetailHeader = React.forwardRef(({ detail }: Props, ref: Ref<HTMLDi
           <div className={styles.shareWrapper}>
             <div className={styles.shareText}>Sdílet</div>
             <FacebookShareButton className={styles.shareBtn} url={window.location.href}>
-              <FacebookIcon round size={30} />
+              <FBLogo {...iconProps} />
             </FacebookShareButton>
             <TwitterShareButton className={styles.shareBtn} url={window.location.href}>
-              <TwitterIcon round size={30} />
+              <TWLogo {...iconProps} />
             </TwitterShareButton>
           </div>
         </div>

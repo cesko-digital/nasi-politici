@@ -20,7 +20,7 @@ const App: React.FC = () => {
     const { REACT_APP_GTM_ID } = process.env
 
     if (REACT_APP_GTM_ID) init({ id: REACT_APP_GTM_ID })
-    else console.warn('GTM id not set.')
+    else console.error('GTM id not set.')
   }, [init])
 
   return (
