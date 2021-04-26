@@ -8,7 +8,10 @@ const NoData: React.FC = () => {
       <div className={styles.circle}>
         <NoDataImg className={styles.image} />
       </div>
-      <div className={styles.title}>Pro tuto kategorii zatím nemáme ověřená data :/</div>
+      <div className={styles.title}>
+        Data nejsou dostupná z důvodu znepřístupnění registru Ministerstvem spravedlnosti na základě rozhodnutí
+        Ústavního soudu.
+      </div>
     </div>
   )
 }
