@@ -122,7 +122,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
 
   .shareText {
     @include regularText;
@@ -387,6 +386,10 @@
   }
   .crossIcon {
     height: 10px;
+  }
+
+  .shareWrapper {
+    flex-wrap: wrap;
   }
 }
 
