@@ -119,14 +119,15 @@
   opacity: .2;
 }
 .shareWrapper {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	.shareText {
-		@include regularText;
-		color: $clDark;
-		text-transform: none;
-	}
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .shareText {
+    @include regularText;
+    color: $clDark;
+    text-transform: none;
+  }
 }
 
 .shareBtn {
@@ -385,6 +386,10 @@
   }
   .crossIcon {
     height: 10px;
+  }
+
+  .shareWrapper {
+    flex-wrap: wrap;
   }
 }
 
