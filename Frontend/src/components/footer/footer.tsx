@@ -43,6 +43,9 @@ const Footer: React.FC = () => {
         </div>
         <div className={classnames(styles.column, styles.contacts)}>
           <h3 className={styles.header}>Kontakt</h3>
+          <a href="mailto:info@nasipolitici.cz " className={styles.link}>
+            info@nasipolitici.cz
+          </a> <br /> <br />
           <div className={styles.sponsor}>
             Transparency International —<br />
             Česká republika, o.p.s.
@@ -56,7 +59,10 @@ const Footer: React.FC = () => {
                 180 00, Praha 8<br />
                 +420 224 240 895/6
                 <br />
-                <div className={styles.link}>posta@transparency.cz</div>
+                <a href="mailto:posta@transparency.cz" className={styles.link}>
+                  posta@transparency.cz
+                </a>
+
                 <br />
               </div>
               <br />
@@ -67,6 +73,8 @@ const Footer: React.FC = () => {
                 <br />
                 Datová schránka: 8vzj3s2
                 <br />
+                <br />
+
               </div>
             </div>
             <div>
@@ -83,6 +91,7 @@ const Footer: React.FC = () => {
                 TI není plátcem DPH.
               </div>
             </div>
+            <div></div>
           </div>
         </div>
         <div className={styles.column}>
