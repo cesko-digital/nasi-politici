@@ -215,7 +215,9 @@ const NotificationsWidget: React.FC<Props> = ({
           notificationsCount={notificationsCount}
         />
       )}
-      {!notificationRegistryData.length && <NoData />}
+      {!notificationRegistryData.length && (
+        <NoData text="Data nejsou dostupná z důvodu znepřístupnění registru Ministerstvem spravedlnosti na základě rozhodnutí Ústavního soudu" />
+      )}
     </div>
   )
 }
