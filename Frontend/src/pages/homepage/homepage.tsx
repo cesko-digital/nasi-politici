@@ -1,6 +1,7 @@
 import classnames from 'classnames'
 import React from 'react'
 import SearchBar from 'components/searchBar/searchBarConnected'
+import Filters from 'components/filters/filtersConnected'
 import Result from 'components/result/resultConnected'
 
 import styles from './homepage.module.scss'
@@ -34,6 +35,9 @@ const Homepage: React.FC<Props> = props => {
         <div className={styles.searchWrapper}>
           <SearchBar />
         </div>
+
+        <Filters />
+
         <Result />
       </div>
     </div>
