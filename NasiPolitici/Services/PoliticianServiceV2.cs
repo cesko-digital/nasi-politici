@@ -23,25 +23,47 @@ namespace HlidacStatu.NasiPolitici.Services
             _cache = cache;
         }
 
-        public async Task<string> SearchPeople(string text)
+        public async Task<string> SearchPeople(string text, string place, string function, string party)
         {
             var people = await GetCachedPeople();
 
-            var wholeSearchAccented = people
+            var peopleFiltered = people;
+
+            if (!string.IsNullOrWhiteSpace(place))
+            {
+                peopleFiltered = peopleFiltered
+                    .Where(p => p.PoliticalFunctions.Any(f => f.Organisation.Contains(place)));
+            }
+            if (!string.IsNullOrWhiteSpace(function))
+            {
+                peopleFiltered = peopleFiltered
+                    .Where(p => p.PoliticalFunctions.Any(f => f.Name.StartsWith(function)));
+            }
+            if (!string.IsNullOrWhiteSpace(party))
+            {
+                peopleFiltered = peopleFiltered
+                    .Where(p => p.PoliticalFunctions.Any(f => f.Organisation.StartsWith(party)));
+            }
+            
+            var peopleFilteredList = peopleFiltered.ToList();
+                
+                
+
+            var wholeSearchAccented = peopleFilteredList
                 .Where(p =>
                     p.ShortName.ToLower().StartsWith(text.ToLower())
                 )
                 .OrderByDescending(p => p.PoliticalFunctions.Length)
                 .Take(50);
 
-            var wholeSearch = people
+            var wholeSearch = peopleFilteredList
                 .Where(p =>
                     p.ShortName.ToLower().RemoveAccents().StartsWith(text.ToLower().RemoveAccents())
                 )
                 .OrderByDescending(p => p.PoliticalFunctions.Length)
                 .Take(50);
 
-            var tokenAllSearch = people
+            var tokenAllSearch = peopleFilteredList
                 .Where(p =>
                     text.ToLower().KeepLettersNumbersAndSpace().Split(" ").All(txt=> 
                         p.SearchTokens.Any(tok => tok.StartsWith(txt)))
@@ -49,7 +71,7 @@ namespace HlidacStatu.NasiPolitici.Services
                 .OrderByDescending(p => p.PoliticalFunctions.Length)
                 .Take(50);
 
-            var tokenAllSearchWithoutAccents = people
+            var tokenAllSearchWithoutAccents = peopleFilteredList
                 .Where(p =>
                     text.ToLower().KeepLettersNumbersAndSpace().RemoveAccents().Split(" ").All(txt =>
                         p.SearchTokensAscii.Any(tok => tok.StartsWith(txt)))
@@ -57,7 +79,7 @@ namespace HlidacStatu.NasiPolitici.Services
                 .OrderByDescending(p => p.PoliticalFunctions.Length)
                 .Take(50);
 
-            var tokenAnySearch = people
+            var tokenAnySearch = peopleFilteredList
                 .Where(p =>
                     text.ToLower().KeepLettersNumbersAndSpace().Split(" ").Any(txt =>
                         p.SearchTokens.Any(tok => tok.StartsWith(txt)))
@@ -65,7 +87,7 @@ namespace HlidacStatu.NasiPolitici.Services
                 .OrderByDescending(p => p.PoliticalFunctions.Length)
                 .Take(50);
 
-            var tokenAnySearchWithoutAccents = people
+            var tokenAnySearchWithoutAccents = peopleFilteredList
                 .Where(p =>
                     text.ToLower().KeepLettersNumbersAndSpace().RemoveAccents().Split(" ").Any(txt =>
                         p.SearchTokensAscii.Any(tok => tok.StartsWith(txt)))
@@ -83,6 +105,7 @@ namespace HlidacStatu.NasiPolitici.Services
 
             return JsonConvert.SerializeObject(totalResult);
         }
+
 
         public async Task<int> GetPeopleCount()
         {
