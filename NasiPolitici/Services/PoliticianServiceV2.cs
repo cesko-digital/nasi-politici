@@ -124,7 +124,7 @@ namespace HlidacStatu.NasiPolitici.Services
             public string FullName { get; set; }
             public int? BirthYear { get; set; }
             public int? DeathYear { get; set; }
-            public string[] PoliticalFunctions { get; set; }
+            public PoliticalFunction[] PoliticalFunctions { get; set; }
             public string PoliticalParty { get; set; }
             public string StatusText { get; set; }
             public int Status { get; set; }
@@ -144,6 +144,12 @@ namespace HlidacStatu.NasiPolitici.Services
                     return ShortName.ToLower().RemoveAccents().KeepLettersNumbersAndSpace().Split(" ");
                 }
             }
+        }
+        
+        public class PoliticalFunction
+        {
+            public string Name { get; set; }
+            public string Organisation { get; set; }
         }
     }
 
