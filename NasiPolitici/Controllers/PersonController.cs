@@ -31,9 +31,12 @@ namespace HlidacStatu.NasiPolitici.Controllers
         }
 
         [Route("search/{query}")]
-        public async Task<IActionResult> Search(string query)
+        public async Task<IActionResult> Search(string query, 
+            [FromQuery]string place, 
+            [FromQuery]string function, 
+            [FromQuery]string party)
         {
-            var result = await _politicianService.SearchPeople(query);
+            var result = await _politicianService.SearchPeople(query, place, function, party);
 
             return Content(result, MediaTypeNames.Application.Json);
         }
