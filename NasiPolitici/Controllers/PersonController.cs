@@ -36,6 +36,9 @@ namespace HlidacStatu.NasiPolitici.Controllers
             [FromQuery]string function, 
             [FromQuery]string party)
         {
+            if (query.Equals("*"))
+                query = "";
+            
             var result = await _politicianService.SearchPeople(query, place, function, party);
 
             return Content(result, MediaTypeNames.Application.Json);
