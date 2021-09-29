@@ -22,6 +22,7 @@ const Select: React.FC<Props & RSProps<OptionType>> = ({ control, name, defaultV
   const [value, setValue] = useState<OnChangeValue<OptionType, false> | null>(defaultOption)
   const {
     field: { ref, onChange, ...inputProps },
+    formState,
   } = useController({
     name,
     control,

@@ -28,9 +28,9 @@ function* search(): SagaIterator {
   const query = yield select(getSearchQuery)
   const filters = yield select(getFilters)
   const searchParams = new URLSearchParams(filters).toString()
-  const completeQuery = `${query || '*?'}${searchParams}`
+  const completeQuery = `${query || (searchParams && '*?')}${searchParams}`
 
-  if (!query) {
+  if (!completeQuery) {
     yield put(setSearchResults([], false))
     return
   }
@@ -44,7 +44,8 @@ function* search(): SagaIterator {
   }
 }
 function* handleSetSearchQuery(action: SearchActionTypes): SagaIterator {
-  if (action.type === SET_SEARCH_QUERY && !action.payload.instantSearch) return
+  console.log({action})
+  if ((action.type === SET_SEARCH_QUERY || action.type === SET_FILTERS) && !action.payload.instantSearch) return
   yield call(search)
 }
 function* handleSearch(): SagaIterator {
