@@ -14,6 +14,7 @@ const initialState: SearchState = {
   wasSearched: false,
   profilesCount: 0,
   isLoading: false,
+  filters: {},
 }
 
 export function searchReducer(state = initialState, action: SearchActionTypes): SearchState {

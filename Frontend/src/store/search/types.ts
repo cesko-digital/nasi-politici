@@ -13,6 +13,7 @@ export interface SearchState {
   wasSearched: boolean
   profilesCount: number
   isLoading: boolean
+  filters: FiltersValues
 }
 
 export const SET_SEARCH_QUERY = 'SET_SEARCH_QUERY'
@@ -22,6 +23,9 @@ export const RESET_SEARCH_QUERY = 'RESET_SEARCH_QUERY'
 export const ON_HOMEPAGE_ENTER = 'ON_HOMEPAGE_ENTER'
 export const SET_PROFILES_COUNT = 'SET_PROFILES_COUNT'
 export const SET_SEARCH_LOADING = 'SET_SEARCH_LOADING'
+export const FILTER = 'FILTER'
+export const SET_FILTERS = 'SET_FILTERS'
+export const RESET_FILTERS = 'RESET_FILTERS'
 
 interface OnEnterAction {
   type: typeof ON_HOMEPAGE_ENTER
@@ -61,6 +65,32 @@ interface SetSearchLoading {
   payload: boolean
 }
 
+export enum Filters {
+  PLACE = 'place',
+  FUNCTION = 'function',
+  PARTY = 'party',
+}
+
+export type FiltersValues = {
+  [key in keyof typeof Filters]?: string
+}
+
+interface SetFiltersAction {
+  type: typeof SET_FILTERS
+  payload: {
+    filters: FiltersValues
+    instantSearch: boolean
+  }
+}
+
+interface ResetFiltersAction {
+  type: typeof RESET_SEARCH_QUERY
+}
+
+interface FilterAction {
+  type: typeof FILTER
+}
+
 export type SearchActionTypes =
   | SetSearchQueryAction
   | SearchAction
@@ -69,3 +99,6 @@ export type SearchActionTypes =
   | OnEnterAction
   | SetProfilesCountAction
   | SetSearchLoading
+  | FilterAction
+  | SetFiltersAction
+  | ResetFiltersAction
