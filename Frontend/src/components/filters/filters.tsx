@@ -10,10 +10,11 @@ export interface Props {
   setFilters: (values: FiltersValues, instantSearch: boolean) => void
 }
 
-const Filters: React.FC<Props> = ({}) => {
+const Filters: React.FC<Props> = ({ setFilters }) => {
   const methods = useForm()
   const onSubmit = useCallback(data => {
     console.log('form data', data)
+    setFilters(data, true)
   }, [])
 
   const mapToOptions = (values: string[]) => values.map(value => ({ value, label: value }))
@@ -25,7 +26,12 @@ const Filters: React.FC<Props> = ({}) => {
           <h3>Nebo vyberte z následujících atributů</h3>
           <div className={styles.filters}>
             <div className={styles.filter}>
-              <Select control={methods.control} placeholder="Zvolte kraj..." name="place" options={mapToOptions(['Pardubice', 'Praha'])} />
+              <Select
+                control={methods.control}
+                placeholder="Zvolte kraj..."
+                name="place"
+                options={mapToOptions(['Pardubice', 'Praha'])}
+              />
             </div>
             <button type="submit">Filtrovat</button>
           </div>

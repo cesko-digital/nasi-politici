@@ -84,7 +84,7 @@ interface SetFiltersAction {
 }
 
 interface ResetFiltersAction {
-  type: typeof RESET_SEARCH_QUERY
+  type: typeof RESET_FILTERS
 }
 
 interface FilterAction {
