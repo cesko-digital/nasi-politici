@@ -1,10 +1,8 @@
 import React, { useCallback } from 'react'
-import { useRouteMatch } from 'react-router-dom'
-import classnames from 'classnames'
-import { ReactComponent as Search } from 'assets/images/search.svg'
 import { useForm, FormProvider } from 'react-hook-form'
 import { FiltersValues } from 'store/search/types'
 import styles from './filters.module.scss'
+import Select from 'components/select/select'
 
 export interface Props {
   filters: FiltersValues
@@ -14,13 +12,23 @@ export interface Props {
 
 const Filters: React.FC<Props> = ({}) => {
   const methods = useForm()
-  const onSubmit = useCallback(data => {}, [])
+  const onSubmit = useCallback(data => {
+    console.log('form data', data)
+  }, [])
+
+  const mapToOptions = (values: string[]) => values.map(value => ({ value, label: value }))
 
   return (
     <div>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <h3>Nebo vyberte z následujících atributů</h3>
+          <div className={styles.filters}>
+            <div className={styles.filter}>
+              <Select control={methods.control} placeholder="Zvolte kraj..." name="place" options={mapToOptions(['Pardubice', 'Praha'])} />
+            </div>
+            <button type="submit">Filtrovat</button>
+          </div>
         </form>
       </FormProvider>
     </div>
