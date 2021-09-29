@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
-		"target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-			"esnext",
-    ],
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -16,11 +12,10 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-		"noEmit": true,
-		"baseUrl": "src",
+    "noEmit": true,
+    "baseUrl": "src",
     "jsx": "react"
   },
-  "include": [
-		"src",
-  ]
+  "include": ["src"],
+  "exclude": ["node_modules", "./node_modules", "./node_modules/*", "Frontend/node_modules", "**/node_modules"]
 }
