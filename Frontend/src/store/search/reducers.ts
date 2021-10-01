@@ -3,6 +3,7 @@ import {
   RESET_SEARCH_QUERY,
   SearchActionTypes,
   SearchState,
+  SET_FILTER,
   SET_FILTERS,
   SET_PROFILES_COUNT,
   SET_SEARCH_LOADING,
@@ -57,6 +58,16 @@ export function searchReducer(state = initialState, action: SearchActionTypes): 
       return {
         ...state,
         filters: action.payload.filters,
+      }
+    }
+    case SET_FILTER: {
+      const { name, value } = action.payload
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          [name]: value,
+        },
       }
     }
     case RESET_FILTERS: {

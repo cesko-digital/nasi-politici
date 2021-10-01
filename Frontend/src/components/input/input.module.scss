@@ -1,0 +1,21 @@
+@import 'assets/styles/mixins';
+
+.input {
+  flex: 1;
+  padding: 16px 14px 15px;
+  height: 100%;
+  width: 100%;
+  border: 1px solid $clInputBorder;
+  box-sizing: border-box;
+  border-radius: 8px;
+  font-size: 16px;
+  line-height: 1;
+  max-width: unset;
+
+  &:focus {
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1), inset 0px 2px 3px rgba(0, 0, 0, 0.05);
+    +.searchBtn {
+      box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1), inset 0px 2px 3px rgba(0, 0, 0, 0.05);
+    }
+  }
+}

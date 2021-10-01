@@ -5,7 +5,7 @@ import {
   RESET_SEARCH_QUERY,
   Result,
   SEARCH,
-  SearchActionTypes,
+  SearchActionTypes, SET_FILTER,
   SET_FILTERS,
   SET_PROFILES_COUNT,
   SET_SEARCH_LOADING,
@@ -52,6 +52,11 @@ export const filter = (): SearchActionTypes => ({
 export const setFilters = (filters: FiltersValues, instantSearch: boolean): SearchActionTypes => ({
   type: SET_FILTERS,
   payload: { filters, instantSearch },
+})
+
+export const setFilter = (name: string, value: string | null, instantSearch: boolean): SearchActionTypes => ({
+  type: SET_FILTER,
+  payload: { name, value, instantSearch },
 })
 
 export const resetFilters = (): SearchActionTypes => ({

@@ -25,6 +25,7 @@ export const SET_PROFILES_COUNT = 'SET_PROFILES_COUNT'
 export const SET_SEARCH_LOADING = 'SET_SEARCH_LOADING'
 export const FILTER = 'FILTER'
 export const SET_FILTERS = 'SET_FILTERS'
+export const SET_FILTER = 'SET_FILTER'
 export const RESET_FILTERS = 'RESET_FILTERS'
 
 interface OnEnterAction {
@@ -83,6 +84,15 @@ interface SetFiltersAction {
   }
 }
 
+interface SetFilterAction {
+  type: typeof SET_FILTER
+  payload: {
+    name: string
+    value: string | null
+    instantSearch: boolean
+  }
+}
+
 interface ResetFiltersAction {
   type: typeof RESET_FILTERS
 }
@@ -102,3 +112,4 @@ export type SearchActionTypes =
   | FilterAction
   | SetFiltersAction
   | ResetFiltersAction
+  | SetFilterAction

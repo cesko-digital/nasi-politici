@@ -4,6 +4,8 @@ import classnames from 'classnames'
 import { ReactComponent as Search } from 'assets/images/search.svg'
 
 import styles from './searchBar.module.scss'
+import Filters from 'components/filters/filtersConnected'
+import Input from 'components/input/input'
 
 export interface Props {
   form?: string
@@ -29,15 +31,16 @@ const SearchBar: React.FC<Props> = ({ form, setSearchQuery, search, query, wrapp
     [setSearchQuery, matchDetail],
   )
   return (
-    <form className={form} onSubmit={onSubmit}>
+    <form className={classnames(styles.form, form)} onSubmit={onSubmit}>
       <div className={classnames(styles.wrapper, wrapperClassname)}>
-        <input
+        <Input
           autoFocus={!matchDetail}
-          className={styles.input}
+          className={styles.searchInput}
           onChange={onChange}
           value={query}
-          placeholder="jméno příjmení"
-        ></input>
+          placeholder="Jméno a příjmení"
+        ></Input>
+        <Filters />
         <button type="submit" className={styles.searchBtn}>
           <Search className={styles.icon} />
           <span className={styles.noIcon}>Hledat</span>

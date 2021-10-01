@@ -1,7 +1,15 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects'
 import { SagaIterator } from 'redux-saga'
 
-import { ON_HOMEPAGE_ENTER, Result, SEARCH, SearchActionTypes, SET_FILTERS, SET_SEARCH_QUERY } from 'store/search/types'
+import {
+  ON_HOMEPAGE_ENTER,
+  Result,
+  SEARCH,
+  SearchActionTypes,
+  SET_FILTER,
+  SET_FILTERS,
+  SET_SEARCH_QUERY
+} from 'store/search/types'
 import { setProfilesCount, setSearchLoading, setSearchResults } from 'store/search/actions'
 import { getSearchQuery, getFilters } from 'store/search/selectors'
 import API from 'services/api'
@@ -64,14 +72,10 @@ function* handleHomepageEnter(): SagaIterator {
   }
 }
 
-function* handleSetFilters(action: SearchActionTypes): SagaIterator {
-  if (action.type === SET_FILTERS && !action.payload.instantSearch) return
-  yield call(search)
-}
-
 function* searchSaga(): SagaIterator {
   yield takeLatest([SET_SEARCH_QUERY], handleSetSearchQuery)
   yield takeLatest([SET_FILTERS], handleSetSearchQuery)
+  yield takeLatest([SET_FILTER], handleSetSearchQuery)
   yield takeLatest([SEARCH], handleSearch)
   yield takeLatest([ON_HOMEPAGE_ENTER], handleHomepageEnter)
 }

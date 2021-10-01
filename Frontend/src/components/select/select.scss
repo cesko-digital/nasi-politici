@@ -1,0 +1,43 @@
+@import 'assets/styles/mixins';
+
+.politics-select {
+  font-size: 16px;
+  line-height: 1;
+
+  &__control {
+    padding: 16px 14px 15px;
+    height: 100%;
+    width: 100%;
+    border: 1px solid $clInputBorder !important;
+    box-sizing: border-box;
+    border-radius: 8px !important;
+
+    [class*="DummyInput"] {
+      position: absolute;
+    }
+  }
+
+  &__indicatorSeparator {
+    display: none;
+  }
+
+  &__input {
+    margin: 0;
+    padding: 0;
+  }
+
+  &__value-container {
+    padding: 0 !important;
+    margin: 0;
+  }
+
+  &__dropdown-indicator {
+    padding: 0 !important;
+  }
+
+  &__placeholder {
+    line-height: 1;
+  }
+
+
+}

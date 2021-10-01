@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { setFilters, filter } from 'store/search/actions'
+import { setFilter, filter } from 'store/search/actions'
 import { getFilters } from 'store/search/selectors'
 
 import Filters from './filters'
@@ -15,4 +15,4 @@ const mapStateToProps = createStructuredSelector<AppState, StateProps>({
   filters: getFilters,
 })
 
-export default connect(mapStateToProps, { setFilters, filter })(Filters)
+export default connect(mapStateToProps, { setFilter, filter })(Filters)

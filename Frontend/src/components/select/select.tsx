@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import ReactSelect, { components, Props as RSProps, OnChangeValue } from 'react-select'
-import { useController, Control } from 'react-hook-form'
+import ReactSelect, { Props as RSProps, OnChangeValue, components } from 'react-select'
+import { ReactComponent as ArrowDown } from 'assets/images/arrow-down.svg'
 
 import './select.scss'
 
@@ -10,38 +10,50 @@ type OptionType = {
 }
 
 interface Props {
-  control: Control
   name: string
   defaultValue?: string | null
+  onChange: (name: string, value: string | null) => void
 }
 
-const Select: React.FC<Props & RSProps<OptionType>> = ({ control, name, defaultValue = null, ...restProps }) => {
-  const { options } = restProps
+const DropdownIndicator = (props: never) => (
+  <components.DropdownIndicator {...props}>
+    <ArrowDown />
+  </components.DropdownIndicator>
+)
+
+type P = Props & Omit<RSProps<OptionType>, 'onChange'>
+
+const Select: React.FC<P> = ({ onChange, defaultValue = null, ...restProps }) => {
+  const { options, name } = restProps
   const foundOption = options?.find(option => 'value' in option && option.value === defaultValue)
   const defaultOption = foundOption && 'value' in foundOption ? foundOption : null
   const [value, setValue] = useState<OnChangeValue<OptionType, false> | null>(defaultOption)
-  const {
-    field: { ref, onChange, ...inputProps },
-    formState,
-  } = useController({
-    name,
-    control,
-    defaultValue,
-  })
 
   return (
     <ReactSelect
-      {...inputProps}
       {...restProps}
       onChange={valueType => {
         if (valueType && 'value' in valueType) {
-          onChange(valueType?.value)
+          onChange(name, valueType?.value)
           setValue(valueType)
         }
       }}
       value={value}
-      ref={ref}
-      styles={{}}
+      classNamePrefix="politics-select"
+      components={{ DropdownIndicator }}
+      styles={{
+        control: provided => ({
+          ...provided,
+        }),
+        indicatorSeparator: () => ({}),
+        input: () => ({}),
+
+        /*  menu: () => ({}),
+        option: () => ({}),
+        dropdownIndicator: () => ({}),
+
+        */
+      }}
     />
   )
 }
