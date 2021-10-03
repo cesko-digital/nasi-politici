@@ -50,18 +50,10 @@ const Select: React.FC<P> = ({ onChange, defaultValue = null, ...restProps }) =>
       classNamePrefix="politics-select"
       components={{ DropdownIndicator }}
       styles={{
-        control: provided => ({
-          ...provided,
-        }),
+        control: () => ({}),
         indicatorSeparator: () => ({}),
         input: () => ({}),
         dropdownIndicator: () => ({}),
-
-        /*  menu: () => ({}),
-        option: () => ({}),
-
-
-        */
       }}
     />
   )

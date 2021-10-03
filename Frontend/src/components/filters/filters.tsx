@@ -1,6 +1,5 @@
 import React, { useCallback, useMemo } from 'react'
 import { FiltersValues } from 'store/search/types'
-import styles from './filters.module.scss'
 import Select from 'components/select/select'
 import { useRouteMatch } from 'react-router-dom'
 import { partyData, functionData } from 'components/filters/filterData'
@@ -13,10 +12,13 @@ export interface Props {
 }
 
 const filterDataToOptions = (data: { [key: string]: string }) =>
-  Object.keys(data).map(key => ({
-    value: key,
-    label: data[key],
-  }))
+  Object.keys(data).map(key => {
+    const label = data[key].charAt(0).toUpperCase() + data[key].slice(1) // capitalize first
+    return {
+      value: key,
+      label,
+    }
+  })
 
 const Filters: React.FC<Props> = ({ setFilter, filters }) => {
   const matchDetail = useRouteMatch('/detail/:id')
@@ -24,7 +26,6 @@ const Filters: React.FC<Props> = ({ setFilter, filters }) => {
   const functions = useMemo(() => filterDataToOptions(functionData), [])
   const onSelectChange = useCallback(
     (name: string, data: string | null) => {
-      console.log('changed data', data)
       setFilter(name, data, !matchDetail)
     },
     [setFilter, matchDetail],

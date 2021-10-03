@@ -2,7 +2,6 @@ import { call, put, select, takeLatest } from 'redux-saga/effects'
 import { SagaIterator } from 'redux-saga'
 
 import {
-  Filters,
   FiltersValues,
   ON_HOMEPAGE_ENTER,
   Result,

@@ -1,11 +1,13 @@
 import React, { useCallback } from 'react'
 import { useRouteMatch } from 'react-router-dom'
 import classnames from 'classnames'
-import { ReactComponent as Search } from 'assets/images/search.svg'
 
 import styles from './searchBar.module.scss'
 import Filters from 'components/filters/filtersConnected'
 import Input from 'components/input/input'
+import { Container } from 'components/container/container'
+
+import { ReactComponent as Logo } from 'assets/images/logo-icon-np.svg'
 
 export interface Props {
   form?: string
@@ -14,9 +16,18 @@ export interface Props {
   setSearchQuery: (query: string, instantSearch: boolean) => void
   wrapperClassname?: string
   showFilters?: boolean
+  wasSearched: boolean
+  asHeade?: boolean
 }
 
-const SearchBar: React.FC<Props> = ({ form, setSearchQuery, search, query, wrapperClassname, showFilters }) => {
+const SearchBar: React.FC<Props> = ({
+  form,
+  wasSearched,
+  setSearchQuery,
+  search,
+  query,
+  wrapperClassname,
+}) => {
   const matchDetail = useRouteMatch('/detail/:id')
   const onSubmit = useCallback(
     e => {
@@ -32,11 +43,14 @@ const SearchBar: React.FC<Props> = ({ form, setSearchQuery, search, query, wrapp
     [setSearchQuery, matchDetail],
   )
 
-
-
   return (
-    <form className={classnames(styles.form, form)} onSubmit={onSubmit}>
-      <div className={classnames(styles.wrapper, wrapperClassname)}>
+    <form className={classnames(styles.form, form, { [styles.isSearched]: wasSearched })} onSubmit={onSubmit}>
+      <Container className={classnames(styles.wrapper, wrapperClassname)}>
+        {wasSearched && (
+          <div className={styles.searchedLogo}>
+            <Logo />
+          </div>
+        )}
         <Input
           autoFocus={!matchDetail}
           className={styles.searchInput}
@@ -48,7 +62,7 @@ const SearchBar: React.FC<Props> = ({ form, setSearchQuery, search, query, wrapp
         <button type="submit" className={styles.searchBtn}>
           Hledat
         </button>
-      </div>
+      </Container>
     </form>
   )
 }
