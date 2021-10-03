@@ -2,13 +2,15 @@ import { call, put, select, takeLatest } from 'redux-saga/effects'
 import { SagaIterator } from 'redux-saga'
 
 import {
+  Filters,
+  FiltersValues,
   ON_HOMEPAGE_ENTER,
   Result,
   SEARCH,
   SearchActionTypes,
   SET_FILTER,
   SET_FILTERS,
-  SET_SEARCH_QUERY
+  SET_SEARCH_QUERY,
 } from 'store/search/types'
 import { setProfilesCount, setSearchLoading, setSearchResults } from 'store/search/actions'
 import { getSearchQuery, getFilters } from 'store/search/selectors'
@@ -34,7 +36,7 @@ function mapSearchResults(searchResults: SearchResult[]): Result[] {
 
 function* search(): SagaIterator {
   const query = yield select(getSearchQuery)
-  const filters = yield select(getFilters)
+  const filters: FiltersValues = yield select(getFilters)
   const searchParams = new URLSearchParams(filters).toString()
   const completeQuery = `${query || (searchParams && '*?')}${searchParams}`
 
@@ -52,7 +54,6 @@ function* search(): SagaIterator {
   }
 }
 function* handleSetSearchQuery(action: SearchActionTypes): SagaIterator {
-  console.log({action})
   if ((action.type === SET_SEARCH_QUERY || action.type === SET_FILTERS) && !action.payload.instantSearch) return
   yield call(search)
 }

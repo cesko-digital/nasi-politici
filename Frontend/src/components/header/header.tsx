@@ -38,7 +38,7 @@ const Header: React.FC<Props> = props => {
                     <div onClick={(): void => setOpenSearch(false)} className={styles.cancel}>
                       Zrušit
                     </div>
-                    <SearchBar form={styles.form} wrapperClassname={styles.headerSearchBar} />
+                    <SearchBar form={styles.form} wrapperClassname={styles.headerSearchBar} showFilters={false} />
                     <div onClick={showMobileSearch} className={styles.searchIconWrapper}>
                       <Search className={styles.searchIcon} />
                     </div>

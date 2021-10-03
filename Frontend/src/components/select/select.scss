@@ -1,6 +1,8 @@
 @import 'assets/styles/mixins';
 
 .politics-select {
+  $this: &;
+
   font-size: 16px;
   line-height: 1;
 
@@ -11,9 +13,16 @@
     border: 1px solid $clInputBorder !important;
     box-sizing: border-box;
     border-radius: 8px !important;
+    box-shadow: none;
 
     [class*="DummyInput"] {
       position: absolute;
+    }
+
+    &--menu-is-open {
+      #{$this}__dropdown-indicator {
+        transform: rotate(180deg);
+      }
     }
   }
 
@@ -33,11 +42,14 @@
 
   &__dropdown-indicator {
     padding: 0 !important;
+    transition: .2s all ease;
   }
 
   &__placeholder {
     line-height: 1;
   }
 
-
+  &__menu {
+    border-radius: $brRadius !important;
+  }
 }

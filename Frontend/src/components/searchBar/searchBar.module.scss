@@ -7,27 +7,40 @@
 .wrapper {
   position: relative;
   width: 100%;
-  justify-content: space-between;
   display: grid;
-  grid-template-columns: 320px 1fr 1fr 1fr 110px;
+  grid-template-columns: 320px repeat(3, 1fr) 110px;
   grid-template-rows: 1fr;
-  gap: 0px 16px;
-  grid-template-areas:". . . .";
+  gap: 10px 16px;
+
+
+  @media screen and (max-width: 1169px) and (min-width: 650px) {
+    grid-template-columns: repeat(2, 50%);
+    grid-template-rows: auto;
+    grid-auto-flow: row dense;
+
+    > *:first-child {
+      grid-column: span 2;
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    grid-template-columns: auto;
+    grid-template-rows: repeat(5, 1fr);
+  }
 }
 .searchInput {
 
 }
 .searchBtn {
-  display: flex;
-  align-items: center;
   padding: 16px 14px 15px;
   background: $clBlueButton;
-  border-radius: 8px;
+  border-radius: $brRadius;
   color: #ffffff;
   font-weight: 600;
   font-size: 16px;
   line-height: 1;
   cursor: pointer;
+  text-align: center;
 
   &:hover {
     background-color: $clBlue;

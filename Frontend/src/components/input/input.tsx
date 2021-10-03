@@ -1,12 +1,14 @@
 import React from 'react'
 import classnames from 'classnames'
 import styles from './input.module.scss'
+import { DebounceInput, DebounceInputProps } from 'react-debounce-input'
 
-type Props = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
+
+type Props = DebounceInputProps<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>;
 
 export const Input: React.FC<Props> = props => (
   <div>
-    <input {...props} className={classnames(props.className, styles.input)} />
+    <DebounceInput debounceTimeout={0} {...props} className={classnames(props.className, styles.input)} />
   </div>
 )
 

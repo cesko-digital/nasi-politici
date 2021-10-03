@@ -13,9 +13,10 @@ export interface Props {
   search: () => void
   setSearchQuery: (query: string, instantSearch: boolean) => void
   wrapperClassname?: string
+  showFilters?: boolean
 }
 
-const SearchBar: React.FC<Props> = ({ form, setSearchQuery, search, query, wrapperClassname }) => {
+const SearchBar: React.FC<Props> = ({ form, setSearchQuery, search, query, wrapperClassname, showFilters }) => {
   const matchDetail = useRouteMatch('/detail/:id')
   const onSubmit = useCallback(
     e => {
@@ -30,6 +31,9 @@ const SearchBar: React.FC<Props> = ({ form, setSearchQuery, search, query, wrapp
     },
     [setSearchQuery, matchDetail],
   )
+
+
+
   return (
     <form className={classnames(styles.form, form)} onSubmit={onSubmit}>
       <div className={classnames(styles.wrapper, wrapperClassname)}>
@@ -40,10 +44,9 @@ const SearchBar: React.FC<Props> = ({ form, setSearchQuery, search, query, wrapp
           value={query}
           placeholder="Jméno a příjmení"
         ></Input>
-        <Filters />
+        {!matchDetail && <Filters />}
         <button type="submit" className={styles.searchBtn}>
-          <Search className={styles.icon} />
-          <span className={styles.noIcon}>Hledat</span>
+          Hledat
         </button>
       </div>
     </form>

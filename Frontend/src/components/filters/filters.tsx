@@ -32,7 +32,10 @@ const Filters: React.FC<Props> = ({ setFilter, filters }) => {
 
   const onInputChange = useCallback(
     event => {
-      setFilter(event.target.name, event.target.value, !matchDetail)
+      const { value } = event.target
+      if (value) {
+        setFilter(event.target.name, event.target.value, !matchDetail)
+      }
     },
     [setFilter, matchDetail],
   )
@@ -40,7 +43,7 @@ const Filters: React.FC<Props> = ({ setFilter, filters }) => {
   return (
     <>
       <Select onChange={onSelectChange} placeholder="Strana" name="party" options={parties} isSearchable={false} />
-      <Input onChange={onInputChange} name="place" placeholder="Místo" />
+      <Input onChange={onInputChange} name="place" placeholder="Místo" debounceTimeout={500} />
       <Select onChange={onSelectChange} placeholder="Funkce" name="function" options={functions} isSearchable={false} />
     </>
   )

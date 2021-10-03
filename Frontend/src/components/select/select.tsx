@@ -1,5 +1,11 @@
-import React, { useState } from 'react'
-import ReactSelect, { Props as RSProps, OnChangeValue, components } from 'react-select'
+import React, { useState, PropsWithChildren } from 'react'
+import ReactSelect, {
+  Props as RSProps,
+  OnChangeValue,
+  components,
+  DropdownIndicatorProps,
+  GroupBase,
+} from 'react-select'
 import { ReactComponent as ArrowDown } from 'assets/images/arrow-down.svg'
 
 import './select.scss'
@@ -15,7 +21,9 @@ interface Props {
   onChange: (name: string, value: string | null) => void
 }
 
-const DropdownIndicator = (props: never) => (
+const DropdownIndicator = (
+  props: PropsWithChildren<DropdownIndicatorProps<OptionType, boolean, GroupBase<OptionType>>>,
+) => (
   <components.DropdownIndicator {...props}>
     <ArrowDown />
   </components.DropdownIndicator>
@@ -47,10 +55,11 @@ const Select: React.FC<P> = ({ onChange, defaultValue = null, ...restProps }) =>
         }),
         indicatorSeparator: () => ({}),
         input: () => ({}),
+        dropdownIndicator: () => ({}),
 
         /*  menu: () => ({}),
         option: () => ({}),
-        dropdownIndicator: () => ({}),
+
 
         */
       }}
