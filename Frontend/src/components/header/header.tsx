@@ -8,7 +8,7 @@ import { ReactComponent as Search } from 'assets/images/searchIcon.svg'
 import styles from './header.module.scss'
 
 interface Props {
-  onLogoClick: () => {}
+  onLogoClick: () => void
 }
 
 const Header: React.FC<Props> = props => {

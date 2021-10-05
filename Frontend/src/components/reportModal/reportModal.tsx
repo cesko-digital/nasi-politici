@@ -45,8 +45,8 @@ const Form: React.FC<PropsForm> = ({ onSubmit, validation, bindDescription, bind
 export interface Props {
   title: string
   isReportModalOpen: boolean
-  closeReportModal: () => {}
-  submit: (data: { description: string; email: string; title: string }) => {}
+  closeReportModal: () => void
+  submit: (data: { description: string; email: string; title: string }) => void
 }
 
 const ReportModal: React.FC<Props> = ({ title, isReportModalOpen, closeReportModal, submit }) => {

@@ -9,9 +9,7 @@ interface Props {
 }
 
 export function Article({ article }: Props) {
-  // eslint-disable-next-line @typescript-eslint/camelcase
   const { perex, title, published, source, url, is_fake_news } = article
-  // eslint-disable-next-line @typescript-eslint/camelcase
   const hasTags = !!is_fake_news
   return (
     <div className={styles.article}>

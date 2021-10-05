@@ -265,7 +265,7 @@ const api: API = {
         text: 'text',
       },
     ],
-    topic_map: { test: [73331083] }, // eslint-disable-line @typescript-eslint/camelcase
+    topic_map: { test: [73331083] },
   }),
 }
 
