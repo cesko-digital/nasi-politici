@@ -49,7 +49,8 @@ export interface Detail {
   namePrefix: string
   nameSuffix: string
   notificationRegisterId: string
-  notificationRegisterStatements: []
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  notificationRegisterStatements: any[]
   photo: string
   roles: Role[]
   source: string

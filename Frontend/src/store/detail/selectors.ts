@@ -102,7 +102,8 @@ export const getConnections = (store: AppState): Connection[] => store.detail.de
 
 export const getOfficialsRegisterId = (store: AppState): string => store.detail.detail.notificationRegisterId || ''
 
-export const getNotificationRegistryData = (store: AppState): [] =>
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export const getNotificationRegistryData = (store: AppState): any[] =>
   store.detail.detail.notificationRegisterStatements || []
 
 export const getNotificationsCount = (store: AppState): number => getNotificationRegistryData(store).length
