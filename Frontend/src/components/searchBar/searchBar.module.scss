@@ -31,6 +31,7 @@
     grid-template-columns: auto;
     grid-template-rows: repeat(5, 1fr);
     height: auto;
+    justify-content: stretch;
   }
 }
 .wrapperDetail {
@@ -52,6 +53,13 @@
 
   &:hover {
     background-color: $clBlue;
+  }
+
+  @media screen and (max-width: 1024px) {
+    padding: 10px;
+  }
+  @media screen and (max-width: 650px) {
+    padding: 4px 10px;
   }
 }
 .result-list {

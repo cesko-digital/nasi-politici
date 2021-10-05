@@ -33,12 +33,12 @@ const Filters: React.FC<Props> = ({ setFilter, filters }) => {
 
   const onInputChange = useCallback(
     event => {
-      const { value } = event.target
-      if (value) {
+      const { value, name } = event.target
+      if (value || name in filters) {
         setFilter(event.target.name, event.target.value, !matchDetail)
       }
     },
-    [setFilter, matchDetail],
+    [setFilter, matchDetail, filters],
   )
 
   return (

@@ -172,17 +172,6 @@
 }
 
 @media screen and (max-width: 650px) {
-  .resultRow {
-    padding: 20px 0;
-  }
-  .dataWrapper {
-    padding-top: 0;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .count {
-    margin: 0 0 17px 20px;
-  }
   .name {
     @include subTitle;
   }
@@ -196,4 +185,5 @@
   .crossIcon {
     height: 10px;
   }
+
 }

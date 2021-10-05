@@ -18,18 +18,9 @@ export interface Props {
   wrapperClassname?: string
   showFilters?: boolean
   wasSearched: boolean
-  inHeader?: boolean
 }
 
-const SearchBar: React.FC<Props> = ({
-  form,
-  wasSearched,
-  setSearchQuery,
-  search,
-  query,
-  wrapperClassname,
-  inHeader,
-}) => {
+const SearchBar: React.FC<Props> = ({ form, wasSearched, setSearchQuery, search, query, wrapperClassname }) => {
   const matchDetail = useRouteMatch('/detail/:id')
   const onSubmit = useCallback(
     e => {
@@ -44,8 +35,6 @@ const SearchBar: React.FC<Props> = ({
     },
     [setSearchQuery, matchDetail],
   )
-
-  console.log({ inHeader })
 
   return (
     <form
