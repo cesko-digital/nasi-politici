@@ -4,7 +4,7 @@ export const partyData = {
   'kdu-čsl': 'KDU-ČSL',
   ksčm: 'KSČM',
   spd: 'SPD',
-  'občanská demokratická aliance': 'Občanská demokratická aliance',
+  oda: 'Občanská demokratická aliance',
   realisté: 'REALISTÉ',
   ods: 'ODS',
   'věci veřejné': 'Věci veřejné',
