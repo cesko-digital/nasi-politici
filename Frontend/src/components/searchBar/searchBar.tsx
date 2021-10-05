@@ -16,7 +16,6 @@ export interface Props {
   search: () => void
   setSearchQuery: (query: string, instantSearch: boolean) => void
   wrapperClassname?: string
-  showFilters?: boolean
   wasSearched: boolean
 }
 
