@@ -37,12 +37,13 @@ namespace HlidacStatu.NasiPolitici.Services
             if (!string.IsNullOrWhiteSpace(function))
             {
                 peopleFiltered = peopleFiltered.Where(p => p.PoliticalFunctions.Any(f =>
-                    f.Name?.StartsWith(function, StringComparison.InvariantCultureIgnoreCase) ?? false));
+                    f.Name?.Trim().StartsWith(function, StringComparison.InvariantCultureIgnoreCase) ?? false));
             }
+            
             if (!string.IsNullOrWhiteSpace(party))
             {
-                peopleFiltered = peopleFiltered.Where(p => p.PoliticalFunctions.Any(f =>
-                    f.Organisation?.StartsWith(party, StringComparison.InvariantCultureIgnoreCase) ?? false));
+                peopleFiltered = peopleFiltered.Where(p =>
+                    p.PoliticalParty?.Trim().StartsWith(party, StringComparison.InvariantCultureIgnoreCase) ?? false);
             }
             
             var peopleFilteredList = peopleFiltered.ToList();
