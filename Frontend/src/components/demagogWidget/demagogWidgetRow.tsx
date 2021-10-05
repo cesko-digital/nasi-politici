@@ -8,7 +8,7 @@ interface Props {
   value: number
   valuePerc: number
   iconComponent: React.ElementType
-  titleForms: [string, string, string]
+  titleForms: string[]
 }
 
 const DemagogWidgetRow: React.FC<Props> = ({ value, valuePerc, iconComponent, titleForms }) => {
