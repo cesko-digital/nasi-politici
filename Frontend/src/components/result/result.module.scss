@@ -1,13 +1,26 @@
 @import 'assets/styles/mixins';
 
 .results {
-  display: flex;
-  flex-direction: column
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 40px;
+
+  @media screen and (max-width: 1024px) and (min-width: 650px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (max-width: 650px) {
+    grid-template-columns: 1fr;
+  }
 }
 .resultRow {
-  padding: 30px;
-  box-shadow: inset 0 1px 0 #e5e5e5;
+  padding: 28px 32px 86px;
+  background: $clTableRow;
+  border: 1px solid $clBorder;
+  box-sizing: border-box;
+  border-radius: 8px;
   text-decoration: none;
+  position: relative;
 
   &:hover {
     .link {
@@ -18,12 +31,13 @@
   }
 
   &:nth-child(odd) {
-    background-color: $clTableRow;
+
   }
 }
 .resultItem {
-  display: flex;
+
 }
+
 .nameWrapper {
   margin-right: 12px;
   max-width: 250px;
@@ -33,13 +47,15 @@
 }
 .pictureWrapper {
   margin-right: 30px;
+  width: 80px;
 }
 .dataWrapper {
-  padding-top: 30px;
+  padding-top: 20px;
   display: flex;
   justify-content: space-between;
   flex: 1 1 auto;
   flex-wrap: wrap;
+  flex-direction: column;
 }
 
 .link {
@@ -47,20 +63,22 @@
   height: 39px;
   line-height: 53px;
   white-space: nowrap;
+  position: absolute;
+  bottom: 28px;
 }
 
-.count, .emptyTitle {
+.count,
+.emptyTitle {
   @include condensedTitle;
   margin: 0 0 17px 30px;
 }
 
 .explanationWrapper {
-	@include regularText;
-	text-align: center;
-	margin: 0 30px;
-	padding: 45px 0;
-	box-shadow: inset 0 1px 0 #e5e5e5;
-
+  @include regularText;
+  text-align: center;
+  margin: 0 30px;
+  padding: 45px 0;
+  box-shadow: inset 0 1px 0 #e5e5e5;
 }
 
 .usage {
@@ -69,28 +87,28 @@
 }
 
 .report {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-top: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 14px;
   color: $clPrimary;
 
   svg g {
     stroke: $clPrimary;
   }
 
-	.text {
-		@include linkBtnPrimary;
-		margin-left: 10px;
-	}
+  .text {
+    @include linkBtnPrimary;
+    margin-left: 10px;
+  }
 }
 
 .face {
   position: relative;
-	width: 170px;
-	height: 170px;
-	background-color: #e7e7e7;
-	border-radius: 50%;
+  width: 170px;
+  height: 170px;
+  background-color: #e7e7e7;
+  border-radius: 50%;
   margin: 45px auto 0 auto;
 
   &:after {
@@ -129,16 +147,24 @@
   height: 6px;
   background-color: #000;
   border-radius: 50%;
-  opacity: .2;
+  opacity: 0.2;
 }
 
 .crossIcon {
   height: 12px;
 }
 
+.resultPicture {
+  width: 100%;
+}
+
+.resultsContainer {
+
+}
+
 @media screen and (max-width: 1169px) {
   .results {
-    margin: 0 20px;
+
   }
   .pictureWrapper {
     flex: 0 1 20vw;
@@ -146,17 +172,6 @@
 }
 
 @media screen and (max-width: 650px) {
-  .resultRow {
-    padding: 20px 0;
-  }
-  .dataWrapper {
-    padding-top: 0;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .count {
-    margin: 0 0 17px 20px;
-  }
   .name {
     @include subTitle;
   }
@@ -170,4 +185,5 @@
   .crossIcon {
     height: 10px;
   }
+
 }

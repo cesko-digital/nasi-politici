@@ -5,8 +5,8 @@ import styles from './result.module.scss'
 import { ReactComponent as CrossIcon } from 'assets/images/cross.svg'
 import { ReactComponent as ReportIcon } from 'assets/images/report.svg'
 import ReportModalTrigger from 'components/reportModal/reportModalTriggerConnected'
-import { dummyPluralize as pluralize } from 'utils/string'
 import LoadingBar from 'components/loadingBar/loadingBar'
+import { Container } from 'components/container/container'
 
 interface ResultRowProps {
   id: string
@@ -22,7 +22,11 @@ const ResultRow: React.FC<ResultRowProps> = ({ id, shortName, birthYear, current
     <Link className={styles.resultRow} to={`/detail/${id}`}>
       <div className={styles.resultItem}>
         <div className={styles.pictureWrapper}>
-          <ProfilePicture src={`https://www.hlidacstatu.cz/Photo/${id}`} name={shortName} />
+          <ProfilePicture
+            src={`https://www.hlidacstatu.cz/Photo/${id}`}
+            name={shortName}
+            customClassName={styles.resultPicture}
+          />
         </div>
         <div className={styles.dataWrapper}>
           <div className={styles.nameWrapper}>
@@ -89,23 +93,19 @@ interface Props {
 
 const Result: React.FC<Props> = ({ results, query, wasSearched, isLoading }) => {
   return (
-    <React.Fragment>
+    <Container className={styles.resultsContainer}>
       {wasSearched && results && results.length === 0 && <EmptyState query={query} />}
       {!isLoading && results && !!results.length && (
         <div>
-          <div className={styles.count}>
-            {pluralize(results.length, 'Nalezen', 'Nalezeni', 'Nalezeno')} {results.length}{' '}
-            {pluralize(results.length, 'politik', 'politici', 'politiků')}
-          </div>
           <div className={styles.results}>
-            {results.map((result) => (
+            {results.map(result => (
               <ResultRow {...result} key={result.id} />
             ))}
           </div>
         </div>
       )}
       {isLoading && <LoadingBar />}
-    </React.Fragment>
+    </Container>
   )
 }
 

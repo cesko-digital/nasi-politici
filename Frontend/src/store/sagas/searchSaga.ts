@@ -1,9 +1,18 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects'
 import { SagaIterator } from 'redux-saga'
 
-import { SEARCH, SET_SEARCH_QUERY, ON_HOMEPAGE_ENTER, Result, SearchActionTypes } from 'store/search/types'
-import { setSearchResults, setProfilesCount, setSearchLoading } from 'store/search/actions'
-import { getSearchQuery } from 'store/search/selectors'
+import {
+  FiltersValues,
+  ON_HOMEPAGE_ENTER,
+  Result,
+  SEARCH,
+  SearchActionTypes,
+  SET_FILTER,
+  SET_FILTERS,
+  SET_SEARCH_QUERY,
+} from 'store/search/types'
+import { setProfilesCount, setSearchLoading, setSearchResults } from 'store/search/actions'
+import { getSearchQuery, getFilters } from 'store/search/selectors'
 import API from 'services/api'
 import API_MOCK from 'services/apiMock'
 import { push } from 'connected-react-router'
@@ -26,13 +35,17 @@ function mapSearchResults(searchResults: SearchResult[]): Result[] {
 
 function* search(): SagaIterator {
   const query = yield select(getSearchQuery)
-  if (!query) {
+  const filters: FiltersValues = yield select(getFilters)
+  const searchParams = new URLSearchParams(filters).toString()
+  const completeQuery = `${query || (searchParams && '*?')}${searchParams}`
+
+  if (!completeQuery) {
     yield put(setSearchResults([], false))
     return
   }
   yield put(push('/'))
   try {
-    const persons: SearchResult[] = yield call(api.search, query)
+    const persons: SearchResult[] = yield call(api.search, completeQuery)
     yield put(setSearchResults(mapSearchResults(persons), true))
   } catch (error) {
     yield put(setSearchResults([], true))
@@ -40,8 +53,10 @@ function* search(): SagaIterator {
   }
 }
 function* handleSetSearchQuery(action: SearchActionTypes): SagaIterator {
-  if (action.type === SET_SEARCH_QUERY && !action.payload.instantSearch) return
+  if ((action.type === SET_SEARCH_QUERY || action.type === SET_FILTERS) && !action.payload.instantSearch) return
+  yield put(setSearchLoading(true))
   yield call(search)
+  yield put(setSearchLoading(false))
 }
 function* handleSearch(): SagaIterator {
   yield put(setSearchLoading(true))
@@ -61,6 +76,8 @@ function* handleHomepageEnter(): SagaIterator {
 
 function* searchSaga(): SagaIterator {
   yield takeLatest([SET_SEARCH_QUERY], handleSetSearchQuery)
+  yield takeLatest([SET_FILTERS], handleSetSearchQuery)
+  yield takeLatest([SET_FILTER], handleSetSearchQuery)
   yield takeLatest([SEARCH], handleSearch)
   yield takeLatest([ON_HOMEPAGE_ENTER], handleHomepageEnter)
 }

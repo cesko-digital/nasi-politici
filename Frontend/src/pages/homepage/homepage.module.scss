@@ -3,22 +3,22 @@
 .homepage {
   margin: 25vh auto 25vh;
 }
-.wrapper {
-  margin: 0 auto;
-  max-width: $componentBase;
+.isSearched {
+  margin-top: 0;
 }
+
 .logo {
   width: 270px;
 }
 .intro {
-  margin: 0 30px 0 30px;
+
 }
 .perex {
   @include regularText;
   margin: 20px 0 50px;
 }
 .searchWrapper {
-  margin: 45px 30px;
+
 }
 .profilesCount {
   visibility: hidden;

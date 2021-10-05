@@ -1,13 +1,16 @@
 import {
-  SEARCH,
-  SET_SEARCH_RESULTS,
-  SET_SEARCH_QUERY,
+  FILTER,
+  FiltersValues,
+  ON_HOMEPAGE_ENTER,
   RESET_SEARCH_QUERY,
   Result,
-  SearchActionTypes,
+  SEARCH,
+  SearchActionTypes, SET_FILTER,
+  SET_FILTERS,
   SET_PROFILES_COUNT,
-  ON_HOMEPAGE_ENTER,
   SET_SEARCH_LOADING,
+  SET_SEARCH_QUERY,
+  SET_SEARCH_RESULTS,
 } from './types'
 
 export const setSearchQuery = (query: string, instantSearch: boolean): SearchActionTypes => ({
@@ -40,4 +43,22 @@ export const setProfilesCount = (count: number): SearchActionTypes => ({
 export const setSearchLoading = (isLoading: boolean): SearchActionTypes => ({
   type: SET_SEARCH_LOADING,
   payload: isLoading,
+})
+
+export const filter = (): SearchActionTypes => ({
+  type: FILTER,
+})
+
+export const setFilters = (filters: FiltersValues, instantSearch: boolean): SearchActionTypes => ({
+  type: SET_FILTERS,
+  payload: { filters, instantSearch },
+})
+
+export const setFilter = (name: string, value: string | null, instantSearch: boolean): SearchActionTypes => ({
+  type: SET_FILTER,
+  payload: { name, value, instantSearch },
+})
+
+export const resetFilters = (): SearchActionTypes => ({
+  type: RESET_SEARCH_QUERY,
 })

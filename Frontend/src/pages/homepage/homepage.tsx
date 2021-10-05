@@ -6,6 +6,7 @@ import Result from 'components/result/resultConnected'
 import styles from './homepage.module.scss'
 
 import logo from 'assets/images/logo-np.svg'
+import { Container } from 'components/container/container'
 
 export interface Props {
   wasSearched: boolean
@@ -14,14 +15,14 @@ export interface Props {
 }
 
 const Homepage: React.FC<Props> = props => {
-  const { onEnter, profilesCount } = props
+  const { onEnter, profilesCount, wasSearched } = props
   const profilesCountClass = classnames(styles.profilesCount, !!profilesCount && styles.profilesCountLoaded)
   React.useEffect(() => {
     !profilesCount && onEnter()
   }, [onEnter, profilesCount])
   return (
-    <div className={styles.homepage}>
-      <div className={styles.wrapper}>
+    <div className={classnames(styles.homepage, { [styles.isSearched]: wasSearched })}>
+      <Container>
         {!props.wasSearched && (
           <div className={styles.intro}>
             <img src={logo} alt={logo} className={styles.logo} />
@@ -31,11 +32,12 @@ const Homepage: React.FC<Props> = props => {
             </div>
           </div>
         )}
-        <div className={styles.searchWrapper}>
-          <SearchBar />
-        </div>
-        <Result />
+      </Container>
+      <div className={styles.searchWrapper}>
+        <SearchBar />
       </div>
+
+      <Result />
     </div>
   )
 }

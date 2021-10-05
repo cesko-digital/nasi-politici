@@ -1,0 +1,26 @@
+@import 'assets/styles/mixins';
+
+.input {
+  flex: 1;
+  padding: 0 14px;
+  height: 100%;
+  width: 100%;
+  border: 1px solid $clInputBorder;
+  box-sizing: border-box;
+  border-radius: $brRadius;
+  font-size: 16px;
+  line-height: 1;
+  max-width: unset;
+
+
+  &:focus {
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1), inset 0px 2px 3px rgba(0, 0, 0, 0.05);
+  }
+  @media screen and (max-width: 1024px) {
+    height: 40px;
+  }
+  @media screen and (max-width: 650px) {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}

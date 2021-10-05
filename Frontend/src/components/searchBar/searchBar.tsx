@@ -1,9 +1,14 @@
 import React, { useCallback } from 'react'
 import { useRouteMatch } from 'react-router-dom'
 import classnames from 'classnames'
-import { ReactComponent as Search } from 'assets/images/search.svg'
+import { Link } from 'react-router-dom'
 
 import styles from './searchBar.module.scss'
+import Filters from 'components/filters/filtersConnected'
+import Input from 'components/input/input'
+import { Container } from 'components/container/container'
+
+import { ReactComponent as Logo } from 'assets/images/logo-icon-np.svg'
 
 export interface Props {
   form?: string
@@ -11,9 +16,10 @@ export interface Props {
   search: () => void
   setSearchQuery: (query: string, instantSearch: boolean) => void
   wrapperClassname?: string
+  wasSearched: boolean
 }
 
-const SearchBar: React.FC<Props> = ({ form, setSearchQuery, search, query, wrapperClassname }) => {
+const SearchBar: React.FC<Props> = ({ form, wasSearched, setSearchQuery, search, query, wrapperClassname }) => {
   const matchDetail = useRouteMatch('/detail/:id')
   const onSubmit = useCallback(
     e => {
@@ -28,21 +34,33 @@ const SearchBar: React.FC<Props> = ({ form, setSearchQuery, search, query, wrapp
     },
     [setSearchQuery, matchDetail],
   )
+
   return (
-    <form className={form} onSubmit={onSubmit}>
-      <div className={classnames(styles.wrapper, wrapperClassname)}>
-        <input
+    <form
+      className={classnames(styles.form, form, {
+        [styles.isSearched]: wasSearched && !matchDetail,
+        [styles.formDetail]: matchDetail,
+      })}
+      onSubmit={onSubmit}
+    >
+      <Container className={classnames(styles.wrapper, wrapperClassname, { [styles.wrapperDetail]: matchDetail })}>
+        {wasSearched && !matchDetail && (
+          <Link to="/" className={styles.searchedLogo}>
+            <Logo />
+          </Link>
+        )}
+        <Input
           autoFocus={!matchDetail}
-          className={styles.input}
+          className={styles.searchInput}
           onChange={onChange}
           value={query}
-          placeholder="jméno příjmení"
-        ></input>
+          placeholder="Jméno a příjmení"
+        ></Input>
+        {!matchDetail && <Filters />}
         <button type="submit" className={styles.searchBtn}>
-          <Search className={styles.icon} />
-          <span className={styles.noIcon}>Hledat</span>
+          Hledat
         </button>
-      </div>
+      </Container>
     </form>
   )
 }
