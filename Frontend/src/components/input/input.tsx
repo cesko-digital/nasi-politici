@@ -3,8 +3,7 @@ import classnames from 'classnames'
 import styles from './input.module.scss'
 import { DebounceInput, DebounceInputProps } from 'react-debounce-input'
 
-
-type Props = DebounceInputProps<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>;
+type Props = DebounceInputProps<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>
 
 export const Input: React.FC<Props> = props => (
   <div>

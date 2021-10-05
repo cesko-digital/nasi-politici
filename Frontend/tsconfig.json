@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
-		"target": "es5",
+    "target": "es5",
     "lib": [
       "dom",
       "dom.iterable",
-			"esnext",
+      "esnext"
     ],
     "allowJs": true,
     "skipLibCheck": true,
@@ -16,11 +16,12 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-		"noEmit": true,
-		"baseUrl": "src",
-    "jsx": "react"
+    "noEmit": true,
+    "baseUrl": "src",
+    "jsx": "react",
+    "noFallthroughCasesInSwitch": true
   },
   "include": [
-		"src",
+    "src"
   ]
 }
