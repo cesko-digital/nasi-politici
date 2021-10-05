@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react'
 import { useRouteMatch } from 'react-router-dom'
 import classnames from 'classnames'
+import { Link } from 'react-router-dom'
 
 import styles from './searchBar.module.scss'
 import Filters from 'components/filters/filtersConnected'
@@ -17,7 +18,7 @@ export interface Props {
   wrapperClassname?: string
   showFilters?: boolean
   wasSearched: boolean
-  asHeade?: boolean
+  inHeader?: boolean
 }
 
 const SearchBar: React.FC<Props> = ({
@@ -27,6 +28,7 @@ const SearchBar: React.FC<Props> = ({
   search,
   query,
   wrapperClassname,
+  inHeader,
 }) => {
   const matchDetail = useRouteMatch('/detail/:id')
   const onSubmit = useCallback(
@@ -43,13 +45,21 @@ const SearchBar: React.FC<Props> = ({
     [setSearchQuery, matchDetail],
   )
 
+  console.log({ inHeader })
+
   return (
-    <form className={classnames(styles.form, form, { [styles.isSearched]: wasSearched })} onSubmit={onSubmit}>
-      <Container className={classnames(styles.wrapper, wrapperClassname)}>
-        {wasSearched && (
-          <div className={styles.searchedLogo}>
+    <form
+      className={classnames(styles.form, form, {
+        [styles.isSearched]: wasSearched && !matchDetail,
+        [styles.formDetail]: matchDetail,
+      })}
+      onSubmit={onSubmit}
+    >
+      <Container className={classnames(styles.wrapper, wrapperClassname, { [styles.wrapperDetail]: matchDetail })}>
+        {wasSearched && !matchDetail && (
+          <Link to="/" className={styles.searchedLogo}>
             <Logo />
-          </div>
+          </Link>
         )}
         <Input
           autoFocus={!matchDetail}

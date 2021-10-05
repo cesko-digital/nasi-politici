@@ -54,7 +54,9 @@ function* search(): SagaIterator {
 }
 function* handleSetSearchQuery(action: SearchActionTypes): SagaIterator {
   if ((action.type === SET_SEARCH_QUERY || action.type === SET_FILTERS) && !action.payload.instantSearch) return
+  yield put(setSearchLoading(true))
   yield call(search)
+  yield put(setSearchLoading(false))
 }
 function* handleSearch(): SagaIterator {
   yield put(setSearchLoading(true))

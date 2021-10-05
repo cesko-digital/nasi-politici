@@ -4,6 +4,14 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 40px;
+
+  @media screen and (max-width: 1024px) and (min-width: 650px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (max-width: 650px) {
+    grid-template-columns: 1fr;
+  }
 }
 .resultRow {
   padding: 28px 32px 86px;
