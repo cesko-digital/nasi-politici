@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { setSearchQuery, search } from 'store/search/actions'
+import { setSearchQuery, search, resetFilters } from 'store/search/actions'
 import { getSearchQuery, wasSearched } from 'store/search/selectors'
 
 import SearchBar from './searchBar'
@@ -16,4 +16,4 @@ const mapStateToProps = createStructuredSelector<AppState, StateProps>({
   wasSearched,
 })
 
-export default connect(mapStateToProps, { setSearchQuery, search })(SearchBar)
+export default connect(mapStateToProps, { setSearchQuery, search, resetFilters })(SearchBar)

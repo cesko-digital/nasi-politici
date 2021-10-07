@@ -67,10 +67,12 @@ interface SetSearchLoading {
 }
 
 export enum Filters {
-  PLACE = 'place',
-  FUNCTION = 'function',
-  PARTY = 'party',
+  place = 'place',
+  function = 'function',
+  party = 'party',
 }
+
+console.log({ Filters })
 
 export type FiltersValues = {
   [key in keyof typeof Filters]?: string

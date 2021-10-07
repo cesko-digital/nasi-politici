@@ -71,10 +71,9 @@ export function searchReducer(state = initialState, action: SearchActionTypes): 
       }
     }
     case RESET_FILTERS: {
-      const { filters, ...rest } = initialState
       return {
         ...state,
-        ...rest,
+        filters: {},
       }
     }
     default:

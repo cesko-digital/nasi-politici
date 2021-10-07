@@ -12,6 +12,7 @@ import {
   SET_SEARCH_LOADING,
   SET_SEARCH_QUERY,
   SET_SEARCH_RESULTS,
+  RESET_FILTERS,
 } from './types'
 
 export const setSearchQuery = (query: string, instantSearch: boolean): SearchActionTypes => ({
@@ -61,5 +62,5 @@ export const setFilter = (name: string, value: string | null, instantSearch: boo
 })
 
 export const resetFilters = (): SearchActionTypes => ({
-  type: RESET_SEARCH_QUERY,
+  type: RESET_FILTERS,
 })
