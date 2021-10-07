@@ -17,16 +17,26 @@ export interface Props {
   setSearchQuery: (query: string, instantSearch: boolean) => void
   wrapperClassname?: string
   wasSearched: boolean
+  resetFilters: () => void
 }
 
-const SearchBar: React.FC<Props> = ({ form, wasSearched, setSearchQuery, search, query, wrapperClassname }) => {
+const SearchBar: React.FC<Props> = ({
+  form,
+  wasSearched,
+  setSearchQuery,
+  search,
+  query,
+  wrapperClassname,
+  resetFilters,
+}) => {
   const matchDetail = useRouteMatch('/detail/:id')
   const onSubmit = useCallback(
     e => {
       e.preventDefault()
+      if (matchDetail) resetFilters()
       search()
     },
-    [search],
+    [search, matchDetail, resetFilters],
   )
   const onChange = useCallback(
     event => {
@@ -55,7 +65,7 @@ const SearchBar: React.FC<Props> = ({ form, wasSearched, setSearchQuery, search,
           onChange={onChange}
           value={query}
           placeholder="Jméno a příjmení"
-        ></Input>
+        />
         {!matchDetail && <Filters />}
         <button type="submit" className={styles.searchBtn}>
           Hledat

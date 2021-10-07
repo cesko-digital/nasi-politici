@@ -33,7 +33,7 @@ type P = Props & Omit<RSProps<OptionType>, 'onChange'>
 
 const Select: React.FC<P> = ({ onChange, defaultValue = null, ...restProps }) => {
   const { options, name } = restProps
-  const foundOption = options?.find(option => 'value' in option && option.value === defaultValue)
+  const foundOption = defaultValue && options?.find(option => 'value' in option && option.value === defaultValue)
   const defaultOption = foundOption && 'value' in foundOption ? foundOption : null
   const [value, setValue] = useState<OnChangeValue<OptionType, false> | null>(defaultOption)
 
