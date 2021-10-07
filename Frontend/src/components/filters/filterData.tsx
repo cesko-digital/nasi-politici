@@ -1,4 +1,5 @@
 export const partyData = {
+  '': 'Všechny',
   čssd: 'ČSSD',
   'strana zelených': 'Strana zelených',
   'kdu-čsl': 'KDU-ČSL',
@@ -23,6 +24,7 @@ export const partyData = {
 }
 
 export const functionData = {
+  '': 'Všichni',
   poslan: 'poslanec',
   senátor: 'senátor',
   zastupitel: 'zastupitel',
