@@ -39,6 +39,12 @@
   grid-template-columns: 320px 95px;
   height: 38px;
   padding: 0 !important;
+
+  @media screen and (max-width: 1024px) and (min-width: 650px) {
+    > *:first-child {
+      grid-column: 1;
+    }
+  }
 }
 .searchInput {
 

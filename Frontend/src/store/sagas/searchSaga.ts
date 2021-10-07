@@ -17,6 +17,7 @@ import API from 'services/api'
 import API_MOCK from 'services/apiMock'
 import { push } from 'connected-react-router'
 import { SearchResult } from 'services/apiTypes'
+import {filterEmptyObj} from "utils/helpers";
 
 const api = process.env.REACT_APP_USE_API_MOCK ? API_MOCK : API
 
@@ -36,7 +37,7 @@ function mapSearchResults(searchResults: SearchResult[]): Result[] {
 function* search(): SagaIterator {
   const query = yield select(getSearchQuery)
   const filters: FiltersValues = yield select(getFilters)
-  const searchParams = new URLSearchParams(filters).toString()
+  const searchParams = new URLSearchParams(filterEmptyObj(filters)).toString()
   const completeQuery = `${query || (searchParams && '*?')}${searchParams}`
 
   if (!completeQuery) {

@@ -40,9 +40,12 @@ const SearchBar: React.FC<Props> = ({
   )
   const onChange = useCallback(
     event => {
-      setSearchQuery(event.target.value, !matchDetail)
+      const { value } = event.target
+      if (value !== query) {
+        setSearchQuery(event.target.value, !matchDetail)
+      }
     },
-    [setSearchQuery, matchDetail],
+    [setSearchQuery, query, matchDetail],
   )
 
   return (
