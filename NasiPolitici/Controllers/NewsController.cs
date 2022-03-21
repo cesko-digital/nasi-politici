@@ -22,15 +22,7 @@ namespace HlidacStatu.NasiPolitici.Controllers
         [HttpGet("media")]
         public async Task<IActionResult> GetMediaArticles(string name, string party, string search_query)
         {
-            string body = $@"{{
-                ""data"": {{
-                    ""name"": ""{name}"",
-                    ""party"": ""{party}"",
-                    ""search_query"": ""{search_query}""
-                }}
-            }}";
-            
-            var result = _mediaService.GetArticles(body);
+            var result = _mediaService.GetArticles(name, party, search_query);
 
             return Content(await result, MediaTypeNames.Application.Json);
         }

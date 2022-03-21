@@ -50,7 +50,9 @@ namespace HlidacStatu.NasiPolitici
 
             services.AddHttpClient<IMediaService, MediaService>(config =>
             {
-                config.BaseAddress = new Uri(Configuration.GetValue<string>("MediaApiUrl"));
+                config.BaseAddress = new Uri(Configuration.GetValue<string>("MonitoraApiUrl"));
+                config.DefaultRequestHeaders.Authorization =
+                    new AuthenticationHeaderValue("Token", Configuration.GetValue<string>("MonitoraToken"));
             });
 
             services.Configure<MailConfiguration>(Configuration.GetSection("MailConfiguration"));
