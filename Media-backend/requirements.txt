@@ -1,13 +1,13 @@
 #alembic==0.8.3
 aniso8601==1.1.0
-Flask==0.10.1
+Flask==0.12.3
 Flask-Migrate==1.6.0
 Flask-RESTful==0.3.4
 Flask-Script==2.0.5
 #Flask-SQLAlchemy==2.1
 itsdangerous==0.24
-Jinja2==2.8
-Mako==1.0.3
+Jinja2==2.11.3
+Mako==1.2.2
 MarkupSafe==0.23
 marshmallow==2.15.1
 marshmallow-jsonapi==0.3.0
