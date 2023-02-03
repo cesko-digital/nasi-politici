@@ -8,7 +8,6 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.IO;
 using System.Net.Http.Headers;
-using System.Text;
 
 namespace HlidacStatu.NasiPolitici
 {

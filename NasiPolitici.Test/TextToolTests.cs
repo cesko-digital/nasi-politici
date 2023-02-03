@@ -1,5 +1,4 @@
 ﻿using HlidacStatu.NasiPolitici;
-using System;
 using Xunit;
 
 namespace NasiPolitici.Test

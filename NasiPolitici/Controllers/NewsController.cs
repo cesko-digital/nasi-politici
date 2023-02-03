@@ -1,6 +1,5 @@
 ﻿using HlidacStatu.NasiPolitici.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.IO;
 using System.Net.Mime;
 using System.Threading.Tasks;
 
