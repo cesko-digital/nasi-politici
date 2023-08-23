@@ -25,4 +25,5 @@ namespace HlidacStatu.NasiPolitici
                 });
         }
     }
+    //restart counter: 1
 }
