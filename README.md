@@ -20,6 +20,7 @@ $ git clone https://github.com/cesko-digital/nasi-politici
 Aplikace je ve složce `NasiPolitici` a příkazy je třeba pouštět v ní.
 
 Nejprve je třeba pustit build projektu:
+
 ```bash
 $ cd nasi-politici && dotnet publish
 ``` 
