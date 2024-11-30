@@ -17,7 +17,7 @@ pytz==2015.7
 requests==2.23.0
 six==1.10.0
 #SQLAlchemy==1.0.9
-Werkzeug==0.15.6
+Werkzeug==2.2.3
 flask-cors==3.0.4
 #pyodbc==4.0.24
 #numpy==1.17.0
